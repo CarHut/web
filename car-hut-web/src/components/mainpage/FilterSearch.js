@@ -4,13 +4,50 @@ function FilterSearch() {
     return (
         <div className='section-body'>
             <img src={require('../../images/mainpage/find_car.png')}/>
-            <div class="dropdown">
-                <button class="dropbtn">Dropdown <span class="arrow">&#9660;</span></button>
-                <div class="dropdown-content">
-                    <a href="#">Option 1</a>
-                    <a href="#">Option 2</a>
-                    <a href="#">Option 3</a>
+            <div className='right-wrapper'>
+                <div className='comboboxes'>
+                    <div className='combobox-entity'>
+                        <div className='label'>Brand</div>
+                        <div class="custom-combobox">
+                            <select id="myComboBox">
+                                <option value="option1">Option 1</option>
+                                <option value="option2">Option 2</option>
+                                <option value="option3">Option 3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div className='combobox-entity'>
+                        <div className='label'>Model</div>
+                        <div class="custom-combobox">
+                            <select id="myComboBox">
+                                <option value="option1">Option 1</option>
+                                <option value="option2">Option 2</option>
+                                <option value="option3">Option 3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div className='combobox-entity'>
+                        <div className='label'>Price</div>
+                        <div class="custom-combobox">
+                            <select id="myComboBox">
+                                <option value="option1">Option 1</option>
+                                <option value="option2">Option 2</option>
+                                <option value="option3">Option 3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div className='combobox-entity'>
+                        <div className='label'>Mileage</div>
+                        <div class="custom-combobox">
+                            <select id="myComboBox">
+                                <option value="option1">Option 1</option>
+                                <option value="option2">Option 2</option>
+                                <option value="option3">Option 3</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
+                <div className='more-filters-text'>More filters</div>
             </div>
         </div>
     );

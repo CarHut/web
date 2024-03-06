@@ -1,67 +1,85 @@
 img {
-    padding-top: 1em;
-    padding-bottom: 1em;
-    padding-left: 2em;
-}
-
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-.dropbtn {
-    background-color: #3498db;
-    color: white;
-    padding: 10px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-}
-
-.dropbtn:hover {
-    background-color: #2980b9;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown-content a:hover {
-    background-color: #f1f1f1;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-.arrow {
-    display: inline-block;
-    margin-left: 5px;
+    height: 7em;
 }
 
 .section-body {
     background-color: #181818;
-    margin: 3em 20em;
-    display: flexbox;
+    margin: 2em 20em;
+    padding: 1em 3em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-
-.section-header-text {
-    color: #ffffff;
-    font-size: 3em;
-    padding-top: 1em;
-    padding-left: 2em;
-    padding-bottom: 1em;
+.combobox-entity {
+    display: block;
+    padding: 1em;
 }
+
+.label {
+    color: #fff;
+    font-size: 1em;
+    padding-bottom: 0.4em;
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
+  
+.custom-combobox {
+    position: relative;
+    width: 13em; 
+    height: 2em;
+}
+  
+  /* Style the custom combobox arrow */
+  .custom-combobox::after {
+    content: '\25BC'; /* Unicode arrow down character */
+    color: #333; /* Adjust the color as needed */
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+  }
+  
+  /* Style the custom combobox options */
+  #myComboBox {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #000;
+    background-color: #fff;
+    height: 100%;
+    padding-left: 1em;
+  }
+  
+  /* Optional: Style the dropdown options */
+  #myComboBox option {
+    background-color: #fff;
+    color: #000;
+  }
+
+  .right-wrapper {
+    display: box;
+  }
+
+  .comboboxes {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .more-filters-text {
+    font-size: 1em;
+    color: #898989;
+    padding-left: 1em;
+  }

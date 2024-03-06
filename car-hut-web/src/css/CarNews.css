@@ -1,0 +1,108 @@
+.section-body-car-news {
+    background-color: #181818;
+    margin: 2em 20em;
+    padding: 1em 3em;
+    display: block;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.section-header-text-car-news {
+    color: #ffffff;
+    font-size: 2em;
+}
+
+.news-main-wrapper {
+    display: flex;
+    margin: 2em 0;
+    /* justify-content: center;
+    align-items: center; */
+}
+
+.img-car-news {
+    height: 100%;
+}
+
+.car-news-text-wrapper {
+    display: block;
+    margin-left: 4em;
+}
+
+.news-type-text {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #898989;
+}
+
+.header-text-car-news {
+    font-size: 2em;
+    font-weight: bold;
+    color:#ffffff
+}
+
+.news-body-text {
+    font-size: 1.7em;
+    color: #898989;
+    font-weight: normal;
+    margin-top: 1.5em;
+    margin-bottom: 1.6em;
+}
+
+.news-footer {
+    font-size: 1em;
+    color: #898989;
+    font-weight: normal;
+    bottom: 0;
+}
+
+.line-container {
+    position: relative;
+    width: 100%; /* Adjust the width of the lines container */
+    height: 2px; /* Adjust the height of the lines */
+    background-color: #898989;
+    margin-bottom: 0.3em;
+}
+
+.other-news-wrapper {
+    display: flex;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    margin-right: 10em;
+}
+
+.other-news-type-text {
+    font-size: 1em;
+    font-weight: bold;
+    color: #898989;
+}
+
+.other-header-text-car-news {
+    font-size: 1.6em;
+    font-weight: bold;
+    color:#ffffff
+}
+
+.other-news-body-text {
+    font-size: 1.3em;
+    color: #898989;
+    font-weight: normal;
+    margin-top: 1.5em;
+    margin-bottom: 1.6em;
+}
+
+.other-news-footer {
+    font-size: 1em;
+    color: #898989;
+    font-weight: normal;
+    bottom: 0;
+}
+
+.other-news-text-wrapper {
+    display: block;
+    margin-left: 2em;
+}
+
+.more-news-text {
+    color: #898989;
+    font-size: 1em;
+}
