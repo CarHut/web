@@ -51,7 +51,7 @@ select {
   }
   
   /* Style the custom combobox options */
-  #myComboBox {
+  .myComboBox {
     width: 100%;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -63,10 +63,16 @@ select {
   }
   
   /* Optional: Style the dropdown options */
-  #myComboBox option {
+  .myComboBox option {
     background-color: #fff;
     color: #000;
   }
+
+.myComboBox.disabled {
+    box-shadow: none; /* Reset shadow when disabled */
+    opacity: 0.7; /* Adjust opacity to indicate disabled state */
+    /* Add any additional styles to visually indicate disabled state */
+}
 
   .right-wrapper {
     display: box;
