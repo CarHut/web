@@ -1,39 +1,26 @@
-img {
-    height: 7em;
-}
-
-.section-body {
+.section-body-basic-data {
     background-color: #181818;
     margin: 2em 20em;
     padding: 1em 3em;
-    display: flex;
+    /* display: block;
     justify-content: space-between;
-    align-items: center;
+    align-items: center; */
 }
 
-.combobox-entity {
-    display: block;
-    padding: 1em;
+.section-header-basic-data {
+    color: #ffffff;
+    font-size: 2em;
 }
 
-.label {
-    color: #fff;
-    font-size: 1em;
-    padding-bottom: 0.4em;
+.line-container {
+    position: relative;
+    width: 100%; /* Adjust the width of the lines container */
+    height: 2px; /* Adjust the height of the lines */
+    background-color: #898989;
+    margin-bottom: 0.3em;
+    margin: 2em 0;
 }
 
-select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background: transparent;
-    border: none;
-    outline: none;
-    padding: 0;
-    margin: 0;
-    cursor: pointer;
-}
-  
 .custom-combobox {
     position: relative;
     width: 13em; 
@@ -89,3 +76,43 @@ select {
     color: #898989;
     padding-left: 1em;
   }
+
+.upper-section-wrapper {
+    display: flex;
+}
+
+.upper-section-left {
+    display: block;
+}
+
+.upper-section-right {
+    display: block;
+    padding: 1em;
+}
+
+.car-type-wrapper {
+    
+}
+
+.car-type-entity {
+    display: flex;
+}
+
+.car-type-left-wrapper {
+    display: block;
+    text-align: center;
+}
+
+.car-type-checkbox {
+
+}
+
+.car-type-img {
+
+}
+
+.car-type-bottom-label {
+    font-size: 1em;
+    color: #fff;
+    margin-top: -2em;
+}
