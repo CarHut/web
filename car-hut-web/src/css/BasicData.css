@@ -7,6 +7,12 @@
     align-items: center; */
 }
 
+.label {
+  color: #fff;
+  font-size: 1em;
+  padding-bottom: 0.4em;
+}
+
 .section-header-basic-data {
     color: #ffffff;
     font-size: 2em;
@@ -25,6 +31,11 @@
     position: relative;
     width: 13em; 
     height: 2em;
+}
+
+.combobox-entity {
+  display: block;
+  padding: 1em;
 }
   
   /* Style the custom combobox arrow */
@@ -88,14 +99,20 @@
 .upper-section-right {
     display: block;
     padding: 1em;
+    margin-left: 2em;
 }
 
 .car-type-wrapper {
-    
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .car-type-entity {
     display: flex;
+    align-items: center;
+    margin-right: 5em;
 }
 
 .car-type-left-wrapper {
@@ -103,8 +120,58 @@
     text-align: center;
 }
 
-.car-type-checkbox {
+/* Style for the custom checkbox container */
+.custom-checkbox {
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1.5;
+  margin-left: 1em;
+}
 
+/* Hide the default checkbox input */
+.custom-checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Style for the custom checkmark */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1.5em;
+  width: 1.5em;
+  background-color: #313131; /* Background color of the checkmark */
+  border: 1px solid #D9D9D9; /* Border color of the checkmark */
+}
+
+/* Style for the checkmark when the checkbox is checked */
+.custom-checkbox input:checked + .checkmark {
+  background-color: #2196F3; /* Change the background color when checked */
+  border-color: #2196F3; /* Change the border color when checked */
+}
+
+/* Style for the checkmark's appearance (in this case, a simple square) */
+.checkmark::before {
+  content: '';
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when the checkbox is checked */
+.custom-checkbox input:checked + .checkmark::before {
+  display: block;
+}
+
+/* Style for the checkmark icon (in this case, a simple tick) */
+.checkmark::before {
+  content: '\2713'; /* Unicode character for a tick (check) */
+  font-size: 1em;
+  color: #fff; /* Color of the checkmark icon */
+  text-align: center;
+  padding-left: 5px;
 }
 
 .car-type-img {
@@ -115,4 +182,48 @@
     font-size: 1em;
     color: #fff;
     margin-top: -2em;
+}
+
+.lower-section-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.lower-section-left {
+  display: block;
+}
+
+.lower-section-right {
+  display: block;
+}
+
+.lower-combobox-wrapper {
+  display: block;
+}
+
+.lower-combobox-content {
+  display: flex;
+}
+
+.custom-input-container {
+  margin-top: 1em;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Style for the custom text input */
+.custom-input {
+  font-size: 16px;
+  border: 1px solid #D9D9D9;
+  border-radius: 4px;
+  background-color: #313131;
+  color: #D9D9D9;
+  height: 1.7em;
+}
+
+/* Style for the custom text input when focused */
+.custom-input:focus {
+  outline: none;
+  border-color: #2196F3; /* Change the border color on focus */
+  box-shadow: 0 0 5px rgba(33, 150, 243, 0.7); /* Add a subtle box shadow on focus */
 }

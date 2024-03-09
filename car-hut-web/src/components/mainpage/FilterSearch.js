@@ -1,4 +1,4 @@
-import '../../css/FilterSearch.css'
+import '../../css/FilterSearch.css';
 import React, { useState, useEffect } from 'react';
 
 function FilterSearch() {
