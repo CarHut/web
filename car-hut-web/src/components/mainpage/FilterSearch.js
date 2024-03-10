@@ -33,7 +33,7 @@ function FilterSearch() {
             <img src={require('../../images/mainpage/find_car.png')}/>
             <div className='right-wrapper'>
                 <div className='comboboxes'>
-                    <div className='combobox-entity'>
+                    <div className='combobox-entity-filter-search'>
                         <div className='label'>Brand</div>
                         <div className="custom-combobox">
                             <select id="brandComboBox" className='myComboBox' value={selectedBrand} onChange={(e) => setSelectedBrand(e.target.value)}>
@@ -44,7 +44,7 @@ function FilterSearch() {
                             </select>
                         </div>
                     </div>
-                    <div className='combobox-entity'>
+                    <div className='combobox-entity-filter-search'>
                         <div className='label'>Model</div>
                         <div className="custom-combobox">
                             <select id="modelComboBox" className={`myComboBox ${!selectedBrand ? 'disabled' : ''}`} value={selectedModel} onChange={(e) => setSelectedModel(e.target.value)} disabled={!selectedBrand}>
@@ -55,7 +55,7 @@ function FilterSearch() {
                             </select>
                         </div>
                     </div>
-                    <div className='combobox-entity'>
+                    <div className='combobox-entity-filter-search'>
                         <div className='label'>Price</div>
                         <div className="custom-combobox">
                             <select id="priceComboBox" className='myComboBox'>
@@ -85,7 +85,7 @@ function FilterSearch() {
                             </select>
                         </div>
                     </div>
-                    <div className='combobox-entity'>
+                    <div className='combobox-entity-filter-search'>
                         <div className='label'>Mileage</div>
                         <div className="custom-combobox">
                             <select id="mileageComboBox" className='myComboBox'> 

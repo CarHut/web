@@ -11,6 +11,7 @@
   color: #fff;
   font-size: 1em;
   padding-bottom: 0.4em;
+  margin-top: 1em;
 }
 
 .section-header-basic-data {
@@ -35,7 +36,8 @@
 
 .combobox-entity {
   display: block;
-  padding: 1em;
+  padding-right: 1em;
+  padding-bottom: 1em;
 }
   
   /* Style the custom combobox arrow */
@@ -206,7 +208,6 @@
 }
 
 .custom-input-container {
-  margin-top: 1em;
   display: flex;
   flex-direction: column;
 }
@@ -227,3 +228,9 @@
   border-color: #2196F3; /* Change the border color on focus */
   box-shadow: 0 0 5px rgba(33, 150, 243, 0.7); /* Add a subtle box shadow on focus */
 }
+
+.checkbox-label {
+  font-size: 1em;
+  color: #fff;
+}
+
