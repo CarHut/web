@@ -1,5 +1,6 @@
 import '../../css/FilterSearch.css';
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 function FilterSearch() {
     const [brands, setBrands] = useState([]);
@@ -101,7 +102,7 @@ function FilterSearch() {
                         </div>
                     </div>
                 </div>
-                <div className='more-filters-text'>More filters</div>
+                <Link to={'/moreFiltersPage'} className='more-filters-text'>More filters</Link>
             </div>
         </div>
     );
