@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import '../../css/ClickAndPick.css';
 
 function ClickAndPick() {
@@ -37,7 +38,7 @@ function ClickAndPick() {
                         <img className='img-click-and-pick' src={require("../../images/carbrands/vw.png")} alt="vw"/>
                     </div>
                 </div>
-                <div className='more-brands-text'>More brands ...</div>
+                <Link to={"/clickAndPickPage"} className='more-brands-text'>More brands ...</Link>
             </div>
         </div>
     );

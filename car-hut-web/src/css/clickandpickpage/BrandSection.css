@@ -1,0 +1,85 @@
+.section-body-brand-section {
+    background-color: #181818;
+    margin: 2em 20em;
+    padding: 1em 3em;
+    /* display: block;
+    justify-content: space-between;
+    align-items: center; */
+}
+
+.section-header-brand-section {
+    color: #ffffff;
+    font-size: 2em;
+}
+
+.line-container {
+    position: relative;
+    width: 100%; /* Adjust the width of the lines container */
+    height: 2px; /* Adjust the height of the lines */
+    background-color: #898989;
+    margin-bottom: 0.3em;
+    margin: 2em 0;
+}
+
+.brand-wrapper {
+    display: block;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.brand-section {
+    display: block;
+    margin-top: 2em;
+}
+
+.brand-content {
+    display: flex;
+}
+
+.brand-entity {
+    width: 4em;
+    height: 4em;
+    object-fit: scale-down;
+    background-color: #ffffff;
+    border: 1px solid #313131;
+    border-radius: 5px;
+    margin-right: 1em;
+    margin-top: 1em;
+}
+
+.click-and-pick-progress-bar {
+    display: block;
+    margin-top: 2em;
+}
+
+.progress-bar-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.progress-bar-sphere {
+    width: 2em;
+    height: 2em;
+    background-color: #313131;
+    border-radius: 50%;
+    border: 1px solid #898989;
+}
+
+.progress-bar-line {
+    position: relative;
+    width: 2em; /* Adjust the width of the lines container */
+    height: 1px; /* Adjust the height of the lines */
+    background-color: #898989;
+}
+
+.progress-bar-label {
+    color: #ffffff;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.brand-alphabet-label {
+    font-size: 1.5em;
+    color: #898989;
+}
