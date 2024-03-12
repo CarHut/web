@@ -1,0 +1,95 @@
+.section-body-model-section {
+    background-color: #181818;
+    margin: 2em 20em;
+    padding: 1em 3em;
+    /* display: block;
+    justify-content: space-between;
+    align-items: center; */
+}
+
+.section-header-model-section {
+    color: #ffffff;
+    font-size: 2em;
+}
+
+.line-container {
+    position: relative;
+    width: 100%; /* Adjust the width of the lines container */
+    height: 2px; /* Adjust the height of the lines */
+    background-color: #898989;
+    margin-bottom: 0.3em;
+    margin: 2em 0;
+}
+
+.model-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.model-label {
+    color: #fff;
+    font-size: 1.5em;
+    margin-right: 2em;
+}
+
+.model-group {
+    display: block;
+    margin-top: 1em;
+}
+
+.click-and-pick-progress-bar {
+    display: block;
+    margin-top: 2em;
+}
+
+.progress-bar-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.progress-bar-sphere {
+    width: 2em;
+    height: 2em;
+    background-color: #313131;
+    border-radius: 50%;
+    border: 1px solid #898989;
+}
+
+.progress-bar-sphere {
+    width: 2em;
+    height: 2em;
+    background-color: #313131;
+    border-radius: 50%;
+    border: 1px solid #898989;
+}
+
+.progress-bar-sphere-current {
+    width: 2em;
+    height: 2em;
+    background-color: #fff;
+    border-radius: 50%;
+    border: 1px solid #898989;
+}
+
+.progress-bar-sphere-traversed {
+    width: 2em;
+    height: 2em;
+    background-color: green;
+    border-radius: 50%;
+    border: 1px solid #898989;
+}
+
+
+.progress-bar-line {
+    position: relative;
+    width: 2em; /* Adjust the width of the lines container */
+    height: 1px; /* Adjust the height of the lines */
+    background-color: #898989;
+}
+
+.progress-bar-label {
+    color: #ffffff;
+    font-size: 1.5em;
+    text-align: center;
+}

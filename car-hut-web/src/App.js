@@ -11,7 +11,8 @@ function App() {
       <Routes>
         <Route path="/mainPage" element={<MainPage/>} />
         <Route path="/moreFiltersPage" element={<MoreFiltersPage/>} />
-        <Route path="/clickAndPickPage" element={<ClickAndPickPage/>}/>
+        <Route path="/clickAndPickPage/brand" element={<ClickAndPickPage/>}/>
+        <Route path="/clickAndPickPage/model" element={<ClickAndPickPage/>}/>
       </Routes>
     </div>
   );

@@ -38,7 +38,7 @@ function ClickAndPick() {
                         <img className='img-click-and-pick' src={require("../../images/carbrands/vw.png")} alt="vw"/>
                     </div>
                 </div>
-                <Link to={"/clickAndPickPage"} className='more-brands-text'>More brands ...</Link>
+                <Link to={"/clickAndPickPage/brand"} className='more-brands-text'>More brands ...</Link>
             </div>
         </div>
     );
