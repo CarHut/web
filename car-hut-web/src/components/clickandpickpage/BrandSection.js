@@ -5,21 +5,34 @@ import { Link } from "react-router-dom";
 function BrandSection() {
 
     const [imageFilenames, setImageFilenames] = useState([]);
+    const [clickedBrands, setClickedBrands] = useState([]);
 
-  useEffect(() => {
-    // Fetch image filenames when the component mounts
-    const fetchImageFilenames = async () => {
-      try {
-        const context = require.context('../../images/clickandpick/');
-        const filenames = context.keys();
-        setImageFilenames(filenames);
-      } catch (error) {
-        console.error('Error fetching image filenames:', error);
+    const handleBrandClick = (brand) => {
+      // Check if the brand is already in the clickedBrands array
+      const croppedBrand = brand.split(".")[0];
+      const isBrandClicked = clickedBrands.includes(croppedBrand);
+      
+      // Toggle the clicked state
+      if (isBrandClicked) {
+        setClickedBrands(clickedBrands.filter((clickedBrand) => clickedBrand !== croppedBrand));
+      } else {
+        setClickedBrands([...clickedBrands, croppedBrand]);
       }
     };
 
-    fetchImageFilenames();
-  }, []);
+    useEffect(() => {
+        // Fetch image filenames when the component mounts
+        const fetchImageFilenames = async () => {
+          try {
+            const context = require.context('../../images/clickandpick/');
+            const filenames = context.keys();
+            setImageFilenames(filenames);
+          } catch (error) {
+            console.error('Error fetching image filenames:', error);
+          }
+        };
+        fetchImageFilenames();
+    }, []);
 
     const generateImages = (character) => { 
 
@@ -27,20 +40,18 @@ function BrandSection() {
 
         // Filter filenames starting with 'a' or 'A'
         const filteredImages = myImages.filter(filename => filename.toLowerCase().startsWith(character));
-    
-        // Generate <img> elements
+
         const imageElements = filteredImages.map((filename, index) => (
-          <Link
+          <div
             key={index}
-            to={`/clickAndPickPage/model`}
-            state={filename}
+            onClick={() => handleBrandClick(filename)}
           >
             <img
               key={index}
               src={require(`../../images/clickandpick/${filename}`)}
-              className="brand-entity"
+              className={`brand-entity ${clickedBrands.includes(filename.split(".")[0]) ? 'clicked' : ''}`}
             />
-          </Link>
+          </div>
         ));
     
         return imageElements;
@@ -62,6 +73,7 @@ function BrandSection() {
     return (
         <div className='section-body-brand-section'>
             <div className='section-header-brand-section'>Pick a brand</div>
+            <div className="picked-brands-label">Picked brands: {clickedBrands.map((brand, index) => (<span key={index}>{brand} </span>))}</div>
             <div className="line-container"/>
             <div className="brand-wrapper">
                 {generateAlphabetSections()}
@@ -102,6 +114,15 @@ function BrandSection() {
                 </div>
             </div>
             <div className="progress-bar-label">{"Brand  >  Model"}</div>
+            <Link
+                to={`/clickAndPickPage/model`}
+                state={{
+                    brand: clickedBrands
+                }}
+                className="next-button"
+            >
+                <button className="styled-button">Next</button>
+            </Link>
         </div>
     );
 

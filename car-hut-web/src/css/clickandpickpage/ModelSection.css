@@ -30,6 +30,7 @@
     color: #fff;
     font-size: 1.5em;
     margin-right: 2em;
+    margin-left: 2em;
 }
 
 .model-group {
@@ -39,7 +40,7 @@
 
 .click-and-pick-progress-bar {
     display: block;
-    margin-top: 2em;
+    margin-top: 5em;
 }
 
 .progress-bar-content {
@@ -93,3 +94,58 @@
     font-size: 1.5em;
     text-align: center;
 }
+
+.brand-label-model-section {
+    font-size: 1.5em;
+    color: #D9D9D9;
+    margin-top: 3em;
+}
+
+.custom-checkbox {
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    line-height: 1.5;
+    margin-left: 1em;
+  }
+  
+  /* Hide the default checkbox input */
+  .custom-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  /* Style for the custom checkmark */
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 1.0em;
+    width: 1.0em;
+    background-color: #313131; /* Background color of the checkmark */
+    border: 1px solid #D9D9D9; /* Border color of the checkmark */
+  }
+  
+  /* Style for the checkmark when the checkbox is checked */
+  .custom-checkbox input:checked + .checkmark {
+    background-color: #2196F3; /* Change the background color when checked */
+    border-color: #2196F3; /* Change the border color when checked */
+  }
+  
+  /* Style for the checkmark's appearance (in this case, a simple square) */
+  .checkmark::before {
+    content: '';
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the checkmark when the checkbox is checked */
+  .custom-checkbox input:checked + .checkmark::before {
+    display: block;
+  }
+
+  .model-line {
+    display: flex;
+    align-items: center;
+  }

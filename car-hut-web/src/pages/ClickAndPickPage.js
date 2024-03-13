@@ -1,6 +1,7 @@
 import Header from "../components/Header";
 import BrandSection from "../components/clickandpickpage/BrandSection";
 import ModelSection from "../components/clickandpickpage/ModelSection";
+import PriceSection from "../components/clickandpickpage/PriceSection";
 import "../css/ClickAndPickPage.css"
 import { useLocation } from "react-router-dom";
 
@@ -12,11 +13,11 @@ function ClickAndPickPage() {
         const { pathname } = location;
 
         if (pathname === '/clickAndPickPage/brand') {
-            console.log("1");
             return <BrandSection/>;
         } else if (pathname === '/clickAndPickPage/model') {
-            console.log("2");
             return <ModelSection/>;
+        } else if (pathname === '/clickAndPickPage/price') {
+            return <PriceSection/>;
         }
 
         return <div>Invalid route</div>;

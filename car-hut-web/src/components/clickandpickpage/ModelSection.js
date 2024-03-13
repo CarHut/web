@@ -1,25 +1,32 @@
 import '../../css/clickandpickpage/ModelSection.css'
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { keyboard } from '@testing-library/user-event/dist/keyboard';
 
 
 function ModelSection() {
-    var uppercaseFilename = useLocation().state.split('.')[0];
-    uppercaseFilename = uppercaseFilename.toLowerCase();
-    uppercaseFilename = uppercaseFilename.replace('-', ' ');
-
-    const [models, setModels] = useState([]);
+    const brands = useLocation().state.brand;
+    
+    const [modelsByBrand, setModelsByBrand] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                if (uppercaseFilename) {
-                    const response = await fetch(`http://localhost:8080/api/getModelsByBrandName/${uppercaseFilename}`);
-                    const data = await response.json();
-                    setModels(data);
+                if (brands && brands.length > 0) {
+                    var modelsData = [];
+
+                    for (const brand of brands) {
+                        const response = await fetch(`http://localhost:8080/api/getModelsByBrandName/${brand}`);
+                        const data = await response.json();
+
+                        modelsData.push({
+                            brand: brand,
+                            models: data
+                        });
+                    }
+
+                    setModelsByBrand(modelsData);
                 } else {
-                    setModels([]);
+                    setModelsByBrand([]);
                 }
             } catch (error) {
                 console.error('Error fetching models:', error);
@@ -27,32 +34,48 @@ function ModelSection() {
         };
 
         fetchData();
-    }, [uppercaseFilename]);
+
+        console.log(modelsByBrand);
+    }, [brands]);
 
     const generateLabelsForModels = () => {
-        const groupedModels = [];
-        const groupSize = models.length / 8;
-
-        for (let i = 0; i < models.length; i += groupSize) {
-            groupedModels.push(models.slice(i, i + groupSize));
-        }
-
-        return groupedModels.map((group, groupIndex) => (
-            <div key={groupIndex} className='model-group'>
-                {group.map((model, index) => (
-                    <div key={index} className='model-label'>{model.model}</div>
-                ))}
-            </div>
-        ));
+        return modelsByBrand.map((brandData, brandIndex) => {
+            const groupedModels = [];
+            const groupSize = brandData.models.length / 8;
+    
+            for (let i = 0; i < brandData.models.length; i += groupSize) {
+                groupedModels.push(brandData.models.slice(i, i + groupSize));
+            }
+    
+            return (
+                <div>
+                <div className='brand-label-model-section'>{brandData.brand}</div>
+                <div className='line-container'/>
+                <div key={brandIndex} className='model-wrapper'>
+                    {groupedModels.map((group, groupIndex) => (
+                        <div key={groupIndex} className='model-group'>
+                            {group.map((model, index) => (
+                                <div className='model-line'>
+                                    <label className='custom-checkbox'>
+                                        <input type="checkbox"/>
+                                        <span className="checkmark"></span>
+                                    </label>
+                                    <div key={index} className='model-label'>{model.model}</div>
+                                </div>
+                            ))}
+                        </div>
+                    ))}
+                </div>
+                </div>
+            );
+        });
     };
-
+    
     return (
         <div className='section-body-model-section'>
-            <div className='section-header-model-section'>Pick a model for car {uppercaseFilename}</div>
+            <div className='section-header-model-section'>Pick a model for car</div>
             <div className="line-container"/>        
-            <div className='model-wrapper'>
-                {generateLabelsForModels()}
-            </div>
+            {generateLabelsForModels()}
             <div className="click-and-pick-progress-bar">
                 <div className="progress-bar-content">
                     <div className="progress-bar-sphere-traversed"/>

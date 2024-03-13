@@ -51,8 +51,8 @@
     position: absolute;
     top: 0;
     left: 0;
-    height: 1.5em;
-    width: 1.5em;
+    height: 1.0em;
+    width: 1.0em;
     background-color: #313131; /* Background color of the checkmark */
     border: 1px solid #D9D9D9; /* Border color of the checkmark */
   }
@@ -77,8 +77,6 @@
   
   /* Style for the checkmark icon (in this case, a simple tick) */
   .checkmark::before {
-    content: '\2713'; /* Unicode character for a tick (check) */
-    font-size: 1em;
     color: #fff; /* Color of the checkmark icon */
     text-align: center;
     padding-left: 5px;
