@@ -1,12 +1,14 @@
 import '../../css/clickandpickpage/ModelSection.css'
 import { useLocation, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import BrandSection from './BrandSection';
 
 
 function ModelSection() {
     const brands = useLocation().state.brand;
     
     const [modelsByBrand, setModelsByBrand] = useState([]);
+    const [pickedModels, setPickedModels] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -35,7 +37,6 @@ function ModelSection() {
 
         fetchData();
 
-        console.log(modelsByBrand);
     }, [brands]);
 
     const generateLabelsForModels = () => {
@@ -57,7 +58,7 @@ function ModelSection() {
                             {group.map((model, index) => (
                                 <div className='model-line'>
                                     <label className='custom-checkbox'>
-                                        <input type="checkbox"/>
+                                        <input onClick={() => handleClickedModel(model.model)} type="checkbox"/>
                                         <span className="checkmark"></span>
                                     </label>
                                     <div key={index} className='model-label'>{model.model}</div>
@@ -70,7 +71,17 @@ function ModelSection() {
             );
         });
     };
-    
+   
+    const handleClickedModel = (model) => {
+      const isModelPicked = pickedModels.includes(model);
+
+       if (isModelPicked) {
+        setPickedModels(pickedModels.filter((pickedModel) => pickedModel !== model));
+      } else {
+        setPickedModels([...pickedModels, model]);
+      }
+    }
+
     return (
         <div className='section-body-model-section'>
             <div className='section-header-model-section'>Pick a model for car</div>
@@ -111,7 +122,17 @@ function ModelSection() {
                     <div className="progress-bar-sphere"/>
                 </div>
             </div>
-            <div className="progress-bar-label">{"Brand  <  Model  >  "}</div>
+            <div className="progress-bar-label">{"Brand  <  Model  >  Price"}</div>
+            <Link
+                to={`/clickAndPickPage/price`}
+                state={{
+                    brands: brands,
+                    models: pickedModels
+                }}
+                className="next-button"
+            >
+                <button className="styled-button">Next</button>
+            </Link>
         </div>
     );
 }

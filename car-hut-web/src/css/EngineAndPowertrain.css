@@ -74,13 +74,6 @@
   .custom-checkbox input:checked + .checkmark::before {
     display: block;
   }
-  
-  /* Style for the checkmark icon (in this case, a simple tick) */
-  .checkmark::before {
-    color: #fff; /* Color of the checkmark icon */
-    text-align: center;
-    padding-left: 5px;
-  }
 
 .line-wrapper-engine-and-powertrain {
     display: flex;

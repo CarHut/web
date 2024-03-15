@@ -14,6 +14,8 @@ function App() {
         <Route path="/clickAndPickPage/brand" element={<ClickAndPickPage/>}/>
         <Route path="/clickAndPickPage/model" element={<ClickAndPickPage/>}/>
         <Route path="/clickAndPickPage/price" element={<ClickAndPickPage/>}/>
+        <Route path="/clickAndPickPage/mileage" element={<ClickAndPickPage/>}/>
+        <Route path='/clickAndPickPage/registration' element={<ClickAndPickPage/>}/>
       </Routes>
     </div>
   );
