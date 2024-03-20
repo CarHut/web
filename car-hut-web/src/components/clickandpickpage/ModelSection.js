@@ -5,7 +5,7 @@ import BrandSection from './BrandSection';
 
 
 function ModelSection() {
-    const brands = useLocation().state.brand;
+    const brands = useLocation().state.brands;
     
     const [modelsByBrand, setModelsByBrand] = useState([]);
     const [pickedModels, setPickedModels] = useState([]);
@@ -50,23 +50,23 @@ function ModelSection() {
     
             return (
                 <div>
-                <div className='brand-label-model-section'>{brandData.brand}</div>
-                <div className='line-container'/>
-                <div key={brandIndex} className='model-wrapper'>
-                    {groupedModels.map((group, groupIndex) => (
-                        <div key={groupIndex} className='model-group'>
-                            {group.map((model, index) => (
-                                <div className='model-line'>
-                                    <label className='custom-checkbox'>
-                                        <input onClick={() => handleClickedModel(model.model)} type="checkbox"/>
-                                        <span className="checkmark"></span>
-                                    </label>
-                                    <div key={index} className='model-label'>{model.model}</div>
-                                </div>
-                            ))}
-                        </div>
-                    ))}
-                </div>
+                    <div className='brand-label-model-section'>{brandData.brand}</div>
+                    <div className='line-container'/>
+                    <div key={brandIndex} className='model-wrapper'>
+                        {groupedModels.map((group, groupIndex) => (
+                            <div key={groupIndex} className='model-group'>
+                                {group.map((model, index) => (
+                                    <div className='model-line'>
+                                        <label className='custom-checkbox'>
+                                            <input onClick={() => handleClickedModel(model.model)} type="checkbox"/>
+                                            <span className="checkmark"></span>
+                                        </label>
+                                        <div key={index} className='model-label'>{model.model}</div>
+                                    </div>
+                                ))}
+                            </div>
+                        ))}
+                    </div>
                 </div>
             );
         });
@@ -122,17 +122,25 @@ function ModelSection() {
                     <div className="progress-bar-sphere"/>
                 </div>
             </div>
-            <div className="progress-bar-label">{"Brand  <  Model  >  Price"}</div>
-            <Link
-                to={`/clickAndPickPage/price`}
-                state={{
-                    brands: brands,
-                    models: pickedModels
-                }}
-                className="next-button"
-            >
-                <button className="styled-button">Next</button>
-            </Link>
+            <div className='direction-buttons'>
+                <Link
+                    to={`/clickAndPickPage/brand`}
+                    state={{
+                    }}
+                >
+                    <button className="styled-button">Brand</button>
+                </Link>
+                <Link
+                    to={`/clickAndPickPage/price`}
+                    state={{
+                        brands: brands,
+                        models: pickedModels
+                    }}
+                >
+                    <button className="styled-button">Price</button>
+                </Link>
+            </div>
+            
         </div>
     );
 }

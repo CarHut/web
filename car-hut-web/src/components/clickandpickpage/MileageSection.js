@@ -83,21 +83,30 @@ function MileageSection() {
                     <div className="progress-bar-sphere"/>
                 </div>
             </div>
-            <div className="progress-bar-label">{"Model  <  Price  >  "}</div>
-            <Link
-                to={`/clickAndPickPage/registration`}
-                state={{
-                    brands: loc.state.brands,
-                    models: loc.state.pickedModels,
-                    price: loc.state.price,
-                    mileage: {
-                        fromMileage: fromMileage, toMileage: toMileage
-                    } 
-                }}
-                className="next-button"
-            >
-                <button className="styled-button">Next</button>
-            </Link>
+            <div className='direction-buttons'>
+                <Link
+                    to={`/clickAndPickPage/price`}
+                    state={{
+                        brands: loc.state.brands,
+                        models: loc.state.pickedModels,
+                    }}
+                >
+                    <button className="styled-button">Price</button>
+                </Link>
+                <Link
+                    to={`/clickAndPickPage/registration`}
+                    state={{
+                        brands: loc.state.brands,
+                        models: loc.state.pickedModels,
+                        price: loc.state.price,
+                        mileage: {
+                            fromMileage: fromMileage, toMileage: toMileage
+                        } 
+                    }}
+                >
+                    <button className="styled-button">Registration</button>
+                </Link>
+            </div>
         </div>
     );
 }

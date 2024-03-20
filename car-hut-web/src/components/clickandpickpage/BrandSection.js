@@ -117,7 +117,7 @@ function BrandSection() {
             <Link
                 to={`/clickAndPickPage/model`}
                 state={{
-                    brand: clickedBrands
+                    brands: clickedBrands
                 }}
                 className="next-button"
             >

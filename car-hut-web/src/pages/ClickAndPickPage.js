@@ -1,5 +1,6 @@
 import Header from "../components/Header";
 import BrandSection from "../components/clickandpickpage/BrandSection";
+import FuelSection from "../components/clickandpickpage/FuelSection";
 import MileageSection from "../components/clickandpickpage/MileageSection";
 import ModelSection from "../components/clickandpickpage/ModelSection";
 import PriceSection from "../components/clickandpickpage/PriceSection";
@@ -24,6 +25,8 @@ function ClickAndPickPage() {
             return <MileageSection/>;
         } else if (pathname === '/clickAndPickPage/registration') {
             return <RegistrationSection/>;
+        } else if (pathname === '/clickAndPickPage/fuel') {
+            return <FuelSection/>;
         }
 
         return <div>Invalid route</div>;

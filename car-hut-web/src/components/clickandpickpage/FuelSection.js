@@ -1,55 +1,48 @@
-import '../../css/clickandpickpage/RegistrationSection.css'
+import '../../css/clickandpickpage/FuelSection.css';
 import { useLocation, Link } from 'react-router-dom';
 import { useState } from 'react';
 
-function RegistrationSection() {
+function FuelSection() {
     var loc = useLocation();
 
-    const [fromRegistration, setFromRegistration] = useState(); 
-    const [toRegistration, setToRegistration] = useState();
+    // UPDATE IF NEW FUEL TYPE IS ADDED
+    const baseFuelTypes = ["Petrol", "Diesel", "Electric", "Hybrid", "LPG", "Plug-in-hybrid", "Ethanol"];
 
-    const handleFromRegistrationChange = (e) => {
-        setFromRegistration(e.target.value);
-    };
+    const [fuelTypes, setFuelTypes] = useState([]);
 
-    const handleToRegistrationChange = (e) => {
-        setToRegistration(e.target.value);
-    };
+    const generateFuelTypeCheckboxes = () => {
+        return baseFuelTypes.map((fuelType) => (
+            <div className='model-line' key={fuelType}>
+                <label className='custom-checkbox'>
+                    <input onClick={() => handleClickedFuelType(fuelType)} type="checkbox"/>
+                    <span className="checkmark"></span>
+                </label>
+                <div className='model-label'>{fuelType}</div>
+            </div>
+        ));
+    }
 
+    const handleClickedFuelType = (fuelType) => {
+        const isFuelTypePicked = fuelTypes.includes(fuelType);
+
+        if (isFuelTypePicked) {
+            setFuelTypes(fuelTypes.filter((type) => type !== fuelType))
+        } else {
+            setFuelTypes([...fuelTypes, fuelType]);
+        }
+    }
+ 
     return (
-        <div className='section-body-registration-section'>
-            <div className='section-header-registration-section'>Pick registration: {fromRegistration} - {toRegistration} </div>
+        <div className='section-body-fuel-section'>
+            <div className='section-header-fuel-section'>Pick fuel type</div>
             <div className="line-container"/>
-            <div className='registration-wrapper'>
-                <div className="registration-slider-container">
-                    <label htmlFor="fromRegistration">Registration (from): {fromRegistration}</label>
-                    <input
-                        type="range"
-                        id="fromRegistration"
-                        name="fromRegistration"
-                        min="1900"
-                        max="2024"
-                        step="1"
-                        value={fromRegistration}
-                        onChange={handleFromRegistrationChange}
-                    />
-                </div>
-                <div className="registration-slider-container">
-                    <label htmlFor="toRegistration">Registration (To): {toRegistration}</label>
-                    <input
-                        type="range"
-                        id="toRegistration"
-                        name="toRegistration"
-                        min="1900"
-                        max="2024"
-                        step="1"
-                        value={toRegistration}
-                        onChange={handleToRegistrationChange}
-                    />
-                </div>
+            <div className='fuel-wrapper'>
+                {generateFuelTypeCheckboxes()}
             </div>
             <div className="click-and-pick-progress-bar">
                 <div className="progress-bar-content">
+                    <div className="progress-bar-sphere-traversed"/>
+                    <div className="progress-bar-line"/>
                     <div className="progress-bar-sphere-traversed"/>
                     <div className="progress-bar-line"/>
                     <div className="progress-bar-sphere-traversed"/>
@@ -79,20 +72,19 @@ function RegistrationSection() {
                     <div className="progress-bar-sphere"/>
                     <div className="progress-bar-line"/>
                     <div className="progress-bar-sphere"/>
-                    <div className="progress-bar-line"/>
-                    <div className="progress-bar-sphere"/>
                 </div>
             </div>
             <div className='direction-buttons'>
                 <Link
-                    to={`/clickAndPickPage/mileage`}
+                    to={`/clickAndPickPage/registration`}
                     state={{
                         brands: loc.state.brands,
                         models: loc.state.pickedModels,
-                        price: loc.state.price
+                        price: loc.state.price,
+                        mileage: loc.state.mileage
                     }}
                 >
-                    <button className="styled-button">Mileage</button>
+                    <button className="styled-button">Registration</button>
                 </Link>
                 <Link
                     to={`/clickAndPickPage/fuel`}
@@ -101,16 +93,16 @@ function RegistrationSection() {
                         models: loc.state.pickedModels,
                         price: loc.state.price,
                         mileage: loc.state.mileage,
-                        registration: {
-                            fromRegistration: fromRegistration, toRegistration: toRegistration
-                        } 
+                        registration: loc.state.registration,
+                        fuel: fuelTypes 
                     }}
                 >
-                    <button className="styled-button">ss</button>
+                    <button className="styled-button">unknown</button>
                 </Link>
             </div>
         </div>
     );
+
 }
 
-export default RegistrationSection;
+export default FuelSection;

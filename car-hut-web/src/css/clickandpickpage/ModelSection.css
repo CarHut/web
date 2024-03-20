@@ -150,13 +150,6 @@
     align-items: center;
   }
 
-  .next-button {
-    display: inline-block;
-    margin-top: 1em;
-    text-decoration: none;
-    position: relative;
-    margin-left: 90%;
-}
 
 .styled-button {
     background-color: #313131;
@@ -172,4 +165,10 @@
 .styled-button:hover {
     background-color: #D9D9D9;
     color: #000;
+}
+
+.direction-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2em;
 }

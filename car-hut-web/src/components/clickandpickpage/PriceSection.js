@@ -83,20 +83,28 @@ function PriceSection() {
                     <div className="progress-bar-sphere"/>
                 </div>
             </div>
-            <div className="progress-bar-label">{"Model  <  Price  >  "}</div>
-            <Link
-                to={`/clickAndPickPage/mileage`}
-                state={{
-                    brands: loc.state.brands,
-                    models: loc.state.pickedModels,
-                    price: {
-                        fromPrice: fromPrice, toPrice: toPrice
-                    }
-                }}
-                className="next-button"
-            >
-                <button className="styled-button">Next</button>
-            </Link>
+            <div className='direction-buttons'>
+                <Link
+                    to={`/clickAndPickPage/model`}
+                    state={{
+                        brands: loc.state.brands
+                    }}
+                >
+                    <button className="styled-button">Model</button>
+                </Link>
+                <Link
+                    to={`/clickAndPickPage/mileage`}
+                    state={{
+                        brands: loc.state.brands,
+                        models: loc.state.pickedModels,
+                        price: {
+                            fromPrice: fromPrice, toPrice: toPrice
+                        }
+                    }}
+                >
+                    <button className="styled-button">Mileage</button>
+                </Link>
+            </div>
         </div>
     );
 }
