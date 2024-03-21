@@ -22,11 +22,12 @@
 }
 
 .registration-wrapper {
-    display: block;
+    display: flex;
+    justify-content: space-around;
 }
 
 .registration-slider-container {
-    width: 50%;
+    width: 40%;
     /* text-align: center; */
   }
   

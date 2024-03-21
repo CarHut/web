@@ -1,6 +1,8 @@
 import Header from "../components/Header";
 import BrandSection from "../components/clickandpickpage/BrandSection";
+import EngineSection from "../components/clickandpickpage/EngineSection";
 import FuelSection from "../components/clickandpickpage/FuelSection";
+import GearboxSection from "../components/clickandpickpage/GearboxSection";
 import MileageSection from "../components/clickandpickpage/MileageSection";
 import ModelSection from "../components/clickandpickpage/ModelSection";
 import PriceSection from "../components/clickandpickpage/PriceSection";
@@ -27,6 +29,10 @@ function ClickAndPickPage() {
             return <RegistrationSection/>;
         } else if (pathname === '/clickAndPickPage/fuel') {
             return <FuelSection/>;
+        } else if (pathname === '/clickAndPickPage/engine') {
+            return <EngineSection/>;
+        } else if (pathname === '/clickAndPickPage/gearbox') {
+            return <GearboxSection/>;
         }
 
         return <div>Invalid route</div>;

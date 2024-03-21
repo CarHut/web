@@ -22,11 +22,12 @@
 }
 
 .mileage-wrapper {
-    display: block;
+    display: flex;
+    justify-content: space-around;
 }
 
 .mileage-slider-container {
-    width: 50%;
+    width: 40%;
     /* text-align: center; */
   }
   

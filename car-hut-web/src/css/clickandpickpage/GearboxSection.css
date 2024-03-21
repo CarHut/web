@@ -1,0 +1,25 @@
+.section-body-gearbox-section {
+    background-color: #181818;
+    margin: 2em 20em;
+    padding: 1em 3em;
+}
+
+.section-header-gearbox-section {
+    color: #ffffff;
+    font-size: 2em;
+}
+
+.line-container {
+    position: relative;
+    width: 100%; /* Adjust the width of the lines container */
+    height: 2px; /* Adjust the height of the lines */
+    background-color: #898989;
+    margin-bottom: 0.3em;
+    margin: 2em 0;
+}
+
+.gearbox-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}

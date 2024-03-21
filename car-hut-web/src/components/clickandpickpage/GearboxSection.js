@@ -1,20 +1,21 @@
-import '../../css/clickandpickpage/FuelSection.css';
+import '../../css/clickandpickpage/GearboxSection.css';
 import { useLocation, Link } from 'react-router-dom';
 import { useState } from 'react';
 
-function FuelSection() {
+function GearboxSection() {
+
     var loc = useLocation();
 
-    // UPDATE IF NEW FUEL TYPE IS ADDED
-    const baseFuelTypes = ["Petrol", "Diesel", "Electric", "Hybrid", "LPG", "Ethanol", "Plug-in-hybrid"];
+    // UPDATE IF NEW GEARBOX TYPE IS ADDED
+    const baseGearboxTypes = ["Manual", "Automatic", "Sequential"];
 
-    const [fuelTypes, setFuelTypes] = useState([]);
+    const [gearboxTypes, setGearboxTypes] = useState([]);
 
-    const generateFuelTypeCheckboxes = () => {
-        return baseFuelTypes.map((fuelType) => (
+    const generateGearboxTypeCheckboxes = () => {
+        return baseGearboxTypes.map((fuelType) => (
             <div className='model-line' key={fuelType}>
                 <label className='custom-checkbox'>
-                    <input onClick={() => handleClickedFuelType(fuelType)} type="checkbox"/>
+                    <input onClick={() => handleClickedGearboxType(fuelType)} type="checkbox"/>
                     <span className="checkmark"></span>
                 </label>
                 <div className='model-label'>{fuelType}</div>
@@ -22,25 +23,27 @@ function FuelSection() {
         ));
     }
 
-    const handleClickedFuelType = (fuelType) => {
-        const isFuelTypePicked = fuelTypes.includes(fuelType);
+    const handleClickedGearboxType = (gearboxType) => {
+        const isGearboxTypePicked = gearboxTypes.includes(gearboxType);
 
-        if (isFuelTypePicked) {
-            setFuelTypes(fuelTypes.filter((type) => type !== fuelType))
+        if (isGearboxTypePicked) {
+            setGearboxTypes(gearboxTypes.filter((type) => type !== gearboxType))
         } else {
-            setFuelTypes([...fuelTypes, fuelType]);
+            setGearboxTypes([...gearboxTypes, gearboxType]);
         }
     }
- 
+
     return (
-        <div className='section-body-fuel-section'>
-            <div className='section-header-fuel-section'>Pick fuel type</div>
+        <div className='section-body-gearbox-section'>
+            <div className='section-header-gearbox-section'>Pick gearbox type</div>
             <div className="line-container"/>
-            <div className='fuel-wrapper'>
-                {generateFuelTypeCheckboxes()}
+            <div className='gearbox-wrapper'>
+                {generateGearboxTypeCheckboxes()}
             </div>
             <div className="click-and-pick-progress-bar">
                 <div className="progress-bar-content">
+                    <div className="progress-bar-sphere-traversed"/>
+                    <div className="progress-bar-line"/>
                     <div className="progress-bar-sphere-traversed"/>
                     <div className="progress-bar-line"/>
                     <div className="progress-bar-sphere-traversed"/>
@@ -70,22 +73,9 @@ function FuelSection() {
                     <div className="progress-bar-sphere"/>
                     <div className="progress-bar-line"/>
                     <div className="progress-bar-sphere"/>
-                    <div className="progress-bar-line"/>
-                    <div className="progress-bar-sphere"/>
                 </div>
             </div>
             <div className='direction-buttons'>
-                <Link
-                    to={`/clickAndPickPage/registration`}
-                    state={{
-                        brands: loc.state.brands,
-                        models: loc.state.pickedModels,
-                        price: loc.state.price,
-                        mileage: loc.state.mileage
-                    }}
-                >
-                    <button className="styled-button">Registration</button>
-                </Link>
                 <Link
                     to={`/clickAndPickPage/engine`}
                     state={{
@@ -93,16 +83,30 @@ function FuelSection() {
                         models: loc.state.pickedModels,
                         price: loc.state.price,
                         mileage: loc.state.mileage,
-                        registration: loc.state.registration,
-                        fuel: fuelTypes 
+                        registration: loc.state.registration
                     }}
                 >
                     <button className="styled-button">Engine</button>
                 </Link>
+                <Link
+                    to={`/clickAndPickPage/gearbox`}
+                    state={{
+                        brands: loc.state.brands,
+                        models: loc.state.pickedModels,
+                        price: loc.state.price,
+                        mileage: loc.state.mileage,
+                        registration: loc.state.registration,
+                        fuel: loc.state.fuel,
+                        enginePower: loc.state.enginePower,
+                        displacement: loc.state.displacement,
+                        gearbox: gearboxTypes
+                    }}
+                >
+                    <button className="styled-button">unknown</button>
+                </Link>
             </div>
         </div>
     );
-
 }
 
-export default FuelSection;
+export default GearboxSection;
