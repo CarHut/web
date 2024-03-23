@@ -1,4 +1,81 @@
 .search-list-offers-wrapper {
     background-color: #313131;
     width: 100%;
+    display: flex;
 }
+
+.line-container-seller {
+    position: relative;
+    width: 100%; /* Adjust the width of the lines container */
+    height: 2px; /* Adjust the height of the lines */
+    background-color: #898989;
+    margin: 0.5em 0;
+}
+
+.offers-line-separator {
+    position: relative;
+    width: 100%; /* Adjust the width of the lines container */
+    height: 2px; /* Adjust the height of the lines */
+    background-color: #898989;
+    margin: 2em 0;
+}
+
+.offers {
+    width: 100%;
+    display: block;
+    margin: 2em 3em;
+}
+
+.offer-wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.offer-left-wrapper {
+    display: block;
+    width: 55%;
+}
+
+.offer-right-wrapper {
+    display: flex;
+    width: 35%;
+}
+
+.offer-car-title {
+    font-size: 1.5em;
+    text-wrap: wrap;
+    color: #ffffff;
+    margin-bottom: 0.5em;
+}
+
+.car-stats-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.car-stats-column {
+    display: block;
+}
+
+.car-stats-text {
+    font-size: 0.8em;
+    color: #FFFFFF;
+    text-wrap: wrap;
+}
+
+.car-stats-price-text {
+    font-size: 1.5em;
+    color: #ffffff;
+}
+
+.car-stats-price-rating-text {
+    color: #898989;
+    font-size: 0.8em;
+}
+
+.car-img {
+    object-fit: scale-down;
+    margin-right: 1em;
+}
+
