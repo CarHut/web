@@ -1,47 +1,47 @@
-import '../../css/clickandpickpage/GearboxSection.css';
+import '../../css/clickandpickpage/ColorSection.css';
 import { useLocation, Link } from 'react-router-dom';
 import { useState } from 'react';
+import { isCompositeComponent } from 'react-dom/test-utils';
 
-function GearboxSection() {
+function ColorSection() {
 
-    var loc = useLocation();
+    const loc = useLocation();
 
-    // UPDATE IF NEW GEARBOX TYPE IS ADDED
-    const baseGearboxTypes = ["Manual", "Automatic", "Sequential"];
+    const colors = ["black", "silver", "gray", "white", "red", "purple", "green", "yellow", "navy", "blue", "beige", "brown", "darkorange", "gold", "powderblue", "sienna"];
 
-    const [gearboxTypes, setGearboxTypes] = useState([]);
+    const [pickedColors, setPickedColors] = useState([]);
 
-    const generateGearboxTypeCheckboxes = () => {
-        return baseGearboxTypes.map((fuelType) => (
-            <div className='model-line' key={fuelType}>
-                <label className='custom-checkbox'>
-                    <input onClick={() => handleClickedGearboxType(fuelType)} type="checkbox"/>
-                    <span className="checkmark"></span>
-                </label>
-                <div className='model-label'>{fuelType}</div>
-            </div>
+    const generateColorCheckboxes = () => {
+        return colors.map((color) => (
+            <label className='custom-checkbox'>
+                <input onClick={() => handleClickedColor(color)} type="checkbox"/>
+                <span className="checkmark" style={{"backgroundColor": color}}></span>
+            </label>
         ));
+
     }
 
-    const handleClickedGearboxType = (gearboxType) => {
-        const isGearboxTypePicked = gearboxTypes.includes(gearboxType);
-
-        if (isGearboxTypePicked) {
-            setGearboxTypes(gearboxTypes.filter((type) => type !== gearboxType))
+    const handleClickedColor = (color) => {
+        const iseColorPicked = pickedColors.includes(color);
+  
+        if (iseColorPicked) {
+            setPickedColors(pickedColors.filter((pickedColor) => pickedColor !== color));
         } else {
-            setGearboxTypes([...gearboxTypes, gearboxType]);
+            setPickedColors([...pickedColors, color]);
         }
     }
 
     return (
-        <div className='section-body-gearbox-section'>
-            <div className='section-header-gearbox-section'>Pick gearbox type</div>
-            <div className="line-container"/>
-            <div className='gearbox-wrapper'>
-                {generateGearboxTypeCheckboxes()}
+        <div className='section-body-registration-section'>
+            <div className='section-header-registration-section'>Pick color</div>
+            <div className='line-container'/>
+            <div className='color-wrapper'>
+                {generateColorCheckboxes()}
             </div>
             <div className="click-and-pick-progress-bar">
                 <div className="progress-bar-content">
+                    <div className="progress-bar-sphere-traversed"/>
+                    <div className="progress-bar-line"/>
                     <div className="progress-bar-sphere-traversed"/>
                     <div className="progress-bar-line"/>
                     <div className="progress-bar-sphere-traversed"/>
@@ -71,22 +71,23 @@ function GearboxSection() {
                     <div className="progress-bar-sphere"/>
                     <div className="progress-bar-line"/>
                     <div className="progress-bar-sphere"/>
-                    <div className="progress-bar-line"/>
-                    <div className="progress-bar-sphere"/>
                 </div>
             </div>
             <div className='direction-buttons'>
                 <Link
-                    to={`/clickAndPickPage/engine`}
+                    to={`/clickAndPickPage/gearbox`}
                     state={{
                         brands: loc.state.brands,
                         models: loc.state.pickedModels,
                         price: loc.state.price,
                         mileage: loc.state.mileage,
-                        registration: loc.state.registration
+                        registration: loc.state.registration,
+                        fuel: loc.state.fuel,
+                        enginePower: loc.state.enginePower,
+                        displacement: loc.state.displacement
                     }}
                 >
-                    <button className="styled-button">Engine</button>
+                    <button className="styled-button">Gearbox</button>
                 </Link>
                 <Link
                     to={`/clickAndPickPage/color`}
@@ -99,14 +100,15 @@ function GearboxSection() {
                         fuel: loc.state.fuel,
                         enginePower: loc.state.enginePower,
                         displacement: loc.state.displacement,
-                        gearbox: gearboxTypes
+                        gearbox: loc.state.gearbox,
+                        color: pickedColors
                     }}
                 >
-                    <button className="styled-button">Color</button>
+                    <button className="styled-button">Search results</button>
                 </Link>
             </div>
         </div>
     );
 }
 
-export default GearboxSection;
+export default ColorSection;

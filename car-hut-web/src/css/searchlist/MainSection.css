@@ -1,0 +1,16 @@
+.section-body-search-list-main-section {
+    background-color: #181818;
+    margin: 2em 20em;
+    padding: 1em 1em;
+    display: flex;
+}
+
+.search-list-left-wrapper {
+    width: 78%;
+    margin-right: 1%;
+}
+
+.search-list-right-wrapper {
+    width: 20%;
+    margin-left: 1%;
+}

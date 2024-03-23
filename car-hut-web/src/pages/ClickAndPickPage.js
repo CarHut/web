@@ -7,8 +7,10 @@ import MileageSection from "../components/clickandpickpage/MileageSection";
 import ModelSection from "../components/clickandpickpage/ModelSection";
 import PriceSection from "../components/clickandpickpage/PriceSection";
 import RegistrationSection from "../components/clickandpickpage/RegistrationSection";
+import CategoriesSection from "../components/clickandpickpage/CategoriesSection";
 import "../css/ClickAndPickPage.css"
 import { useLocation } from "react-router-dom";
+import ColorSection from "../components/clickandpickpage/ColorSection";
 
 function ClickAndPickPage() {
     const location = useLocation();
@@ -33,6 +35,8 @@ function ClickAndPickPage() {
             return <EngineSection/>;
         } else if (pathname === '/clickAndPickPage/gearbox') {
             return <GearboxSection/>;
+        } else if (pathname === '/clickAndPickPage/color') {
+            return <ColorSection/>;
         }
 
         return <div>Invalid route</div>;
@@ -44,6 +48,7 @@ function ClickAndPickPage() {
             <div className="current-route-text">Main page -> Click and pick!</div>
             <div className="click-and-pick-page-header">Click and pick - find your car with our guidance</div>
             {renderSection()}
+            <CategoriesSection/>
         </div>
     );
 }
