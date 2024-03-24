@@ -1,7 +1,14 @@
-.search-list-offers-wrapper {
+.search-list-main-wrapper {
     background-color: #313131;
     width: 100%;
+    display: block;
+    text-align: center;
+}
+
+.search-list-offers-wrapper {
+    width: 100%;
     display: flex;
+    text-align: left;
 }
 
 .line-container-seller {
@@ -56,6 +63,7 @@
 
 .car-stats-column {
     display: block;
+    width: 33%;
 }
 
 .car-stats-text {
@@ -79,3 +87,25 @@
     margin-right: 1em;
 }
 
+.page-buttons-wrapper {
+    padding-bottom: 2em;
+}
+
+.page-button {
+    border-color: #D9D9D9;
+    border: solid;
+    border-width: 0.1em;
+    background-color: #313131;
+    color: #fff;
+    margin: 0 1em;
+    width: 2em;
+    height: 2em;
+    transition: 0.1s ease-in;
+    cursor: pointer;
+}
+
+.page-button:hover {
+    background-color: #D9D9D9;
+    border-color: #313131;
+    color: #313131;
+}
