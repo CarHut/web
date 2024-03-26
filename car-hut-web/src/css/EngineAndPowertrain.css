@@ -12,7 +12,7 @@
     font-size: 2em;
 }
 
-.label {
+.label-engine-and-powertrain {
     color: #fff;
     font-size: 1.5em;
     padding-bottom: 0.4em;
@@ -20,6 +20,7 @@
 
 .fuel-type-wrapper {
     display: block;
+    margin-bottom: 3em;
 }
 
 .fuel-type-content {
@@ -31,7 +32,7 @@
     padding-right: 4em;
 }
 
-.custom-checkbox {
+.custom-checkbox-engine-and-power {
     position: relative;
     cursor: pointer;
     display: inline-block;
@@ -40,14 +41,14 @@
   }
   
   /* Hide the default checkbox input */
-  .custom-checkbox input {
+  .custom-checkbox-engine-and-power input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
   }
   
   /* Style for the custom checkmark */
-  .checkmark {
+  .checkmark-engine-and-power {
     position: absolute;
     top: 0;
     left: 0;
@@ -58,20 +59,20 @@
   }
   
   /* Style for the checkmark when the checkbox is checked */
-  .custom-checkbox input:checked + .checkmark {
+  .custom-checkbox-engine-and-power input:checked + .checkmark-engine-and-power {
     background-color: #2196F3; /* Change the background color when checked */
     border-color: #2196F3; /* Change the border color when checked */
   }
   
   /* Style for the checkmark's appearance (in this case, a simple square) */
-  .checkmark::before {
+  .checkmark-engine-and-power::before {
     content: '';
     position: absolute;
     display: none;
   }
   
   /* Show the checkmark when the checkbox is checked */
-  .custom-checkbox input:checked + .checkmark::before {
+  .custom-checkbox-engine-and-power input:checked + .checkmark-engine-and-power::before {
     display: block;
   }
 
@@ -130,7 +131,7 @@
     display: flex;
 }
 
-.gearbox-wrapper {
+.gearbox-wrapper-engine-and-powertrain {
     display: block;
 }
 
@@ -141,4 +142,16 @@
 .gearbox-entity {
     display: flex;
     padding-right: 4em;
+}
+
+.checkbox-label {
+  font-size: 1em;
+  color: #fff;
+}
+
+.checkmarklabel-engine-and-powertrain {
+  color: #fff;
+  font-size: 1em;
+  margin-bottom: 0.5em;
+  margin-right: 2em;
 }

@@ -1,7 +1,10 @@
 import '../../css/BasicData.css'
 import React, { useState, useEffect } from 'react';
 
-function BasicData() {
+function BasicData({brand, setBrand, model, setModel, carType, setCarType, 
+                    price, setPrice, mileage, setMileage, registration, setRegistration,
+                    seatingConfig, setSeatingConfig, doors, setDoors, location, setLocation,
+                    postalCode, setPostalCode}) {
     
     const [brands, setBrands] = useState([]);
     const [models, setModels] = useState([]);
@@ -29,6 +32,51 @@ function BasicData() {
         }
     }, [selectedBrand]);
 
+    const handleSelectedBrand = (e) => {
+        setSelectedBrand(e.target.value);
+        setBrand(e.target.value);
+    }
+
+    const handleSelectedModel = (e) => {
+        setSelectedModel(e.target.value);
+        setModel(e.target.value);
+    }
+
+    const handleSelectedCarType = (type) => {
+        setCarType(type);
+    }
+
+    const handleSelectedPrice = (e) => {
+        if (e.target.className == 'myComboBox price-from') {
+            setPrice({ ...price, priceFrom: e.target.value });
+        } else if (e.target.className == 'myComboBox price-to') {
+            setPrice({ ...price, priceTo: e.target.value });
+        }
+    }
+
+    const handleSelectedMileage = (e) => {
+        if (e.target.className == 'myComboBox mileage-from') {
+            setMileage({ ...mileage, mileageFrom: e.target.value });
+        } else if (e.target.className == 'myComboBox mileage-to') {
+            setMileage({ ...mileage, mileageTo: e.target.value });
+        }
+    }
+
+    const handleSelectedRegistration = (e) => {
+        if (e.target.className == 'myComboBox registration-from') {
+            setRegistration({ ...registration, registrationFrom: e.target.value });
+        } else if (e.target.className == 'myComboBox registration-to') {
+            setRegistration({ ...registration, registrationTo: e.target.value });
+        }
+    }
+
+    const handleSelectedSeatingConfig = (e) => {
+        setSeatingConfig(e.target.value);
+    }
+
+    const handleSelectedDoors = (e) => {
+        setDoors(e.target.value);
+    }
 
     return (
         <div className='section-body-basic-data'>
@@ -39,7 +87,7 @@ function BasicData() {
                     <div className='combobox-entity'>
                         <div className='label'>Brand</div>
                         <div className="custom-combobox">
-                            <select id="brandComboBox" className='myComboBox' value={selectedBrand} onChange={(e) => setSelectedBrand(e.target.value)}>
+                            <select id="brandComboBox" className='myComboBox' value={selectedBrand} onChange={(e) => handleSelectedBrand(e)}>
                                 <option value="" disabled>Select Brand</option>
                                 {brands.map(brand => (
                                     <option key={brand.id} value={brand.brand}>{brand.brand}</option>
@@ -50,7 +98,7 @@ function BasicData() {
                     <div className='combobox-entity'>
                         <div className='label'>Model</div>
                         <div className="custom-combobox">
-                            <select id="modelComboBox" className={`myComboBox ${!selectedBrand ? 'disabled' : ''}`} value={selectedModel} onChange={(e) => setSelectedModel(e.target.value)} disabled={!selectedBrand}>
+                            <select id="modelComboBox" className={`myComboBox ${!selectedBrand ? 'disabled' : ''}`} value={selectedModel} onChange={(e) => handleSelectedModel(e)} disabled={!selectedBrand}>
                                 <option value="" disabled={!selectedBrand}>Select Model</option>
                                 {models.map(model => (
                                     <option key={model.id} value={model.model}>{model.model}</option>
@@ -69,7 +117,7 @@ function BasicData() {
                             </div>
                             <label className='custom-checkbox'>
                                 <input type="checkbox"/>
-                                <span className="checkmark"></span>
+                                <span className="checkmark" onClick={handleSelectedCarType("Sedan")}></span>
                             </label>
                         </div>
                         <div className='car-type-entity'>
@@ -79,7 +127,7 @@ function BasicData() {
                             </div>
                             <label className='custom-checkbox'>
                                 <input type="checkbox"/>
-                                <span className="checkmark"></span>
+                                <span className="checkmark" onClick={handleSelectedCarType("Hatchback")}></span>
                             </label>
                         </div>
                         <div className='car-type-entity'>
@@ -89,7 +137,7 @@ function BasicData() {
                             </div>
                             <label className='custom-checkbox'>
                                 <input type="checkbox"/>
-                                <span className="checkmark"></span>
+                                <span className="checkmark" onClick={handleSelectedCarType("Combi")}></span>
                             </label>
                         </div>
                         <div className='car-type-entity'>
@@ -99,7 +147,7 @@ function BasicData() {
                             </div>
                             <label className='custom-checkbox'>
                                 <input type="checkbox"/>
-                                <span className="checkmark"></span>
+                                <span className="checkmark" onClick={handleSelectedCarType("SUV")}></span>
                             </label>
                         </div>
                         <div className='car-type-entity'>
@@ -109,7 +157,7 @@ function BasicData() {
                             </div>
                             <label className='custom-checkbox'>
                                 <input type="checkbox"/>
-                                <span className="checkmark"></span>
+                                <span className="checkmark" onClick={handleSelectedCarType("Coupé")}></span>
                             </label>
                         </div>
                         <div className='car-type-entity'>
@@ -119,7 +167,7 @@ function BasicData() {
                             </div>
                             <label className='custom-checkbox'>
                                 <input type="checkbox"/>
-                                <span className="checkmark"></span>
+                                <span className="checkmark" onClick={handleSelectedCarType("Cabriolet")}></span>
                             </label>
                         </div>
                         <div className='car-type-entity'>
@@ -129,7 +177,7 @@ function BasicData() {
                             </div>
                             <label className='custom-checkbox'>
                                 <input type="checkbox"/>
-                                <span className="checkmark"></span>
+                                <span className="checkmark" onClick={handleSelectedCarType("Minivan")}></span>
                             </label>
                         </div>
                         <div className='car-type-entity'>
@@ -139,7 +187,7 @@ function BasicData() {
                             </div>
                             <label className='custom-checkbox'>
                                 <input type="checkbox"/>
-                                <span className="checkmark"></span>
+                                <span className="checkmark" onClick={handleSelectedCarType("Other")}></span>
                             </label>
                         </div>
                     </div>
@@ -153,29 +201,29 @@ function BasicData() {
                             <div className='combobox-entity'>
                             <div className='label'>Price</div>
                                 <div className="custom-combobox">
-                                    <select className='myComboBox'>
+                                    <select className='myComboBox price-from' onChange={(e) => handleSelectedPrice(e)}>
                                         <option value="">From (€)</option>
-                                        <option key={1000} value={'price1000f'}>1 000€</option>
-                                        <option key={2000} value={'price2000f'}>2 000€</option>
-                                        <option key={3000} value={'price3000f'}>3 000€</option>
-                                        <option key={4000} value={'price4000f'}>4 000€</option>
-                                        <option key={5000} value={'price5000f'}>5 000€</option>
-                                        <option key={6000} value={'price6000f'}>6 000€</option>
-                                        <option key={7000} value={'price7000f'}>7 000€</option>
-                                        <option key={8000} value={'price8000f'}>8 000€</option>
-                                        <option key={9000} value={'price9000f'}>9 000€</option>
-                                        <option key={10000} value={'price10000f'}>10 000€</option>
-                                        <option key={20000} value={'price20000f'}>20 000€</option>
-                                        <option key={30000} value={'price30000f'}>30 000€</option>
-                                        <option key={40000} value={'price40000f'}>40 000€</option>
-                                        <option key={50000} value={'price50000f'}>50 000€</option>
-                                        <option key={60000} value={'price60000f'}>60 000€</option>
-                                        <option key={70000} value={'price70000f'}>70 000€</option>
-                                        <option key={80000} value={'price80000f'}>80 000€</option>
-                                        <option key={90000} value={'price90000f'}>90 000€</option>
-                                        <option key={100000} value={'price100000f'}>100 000€</option>
-                                        <option key={150000} value={'price150000f'}>150 000€</option>
-                                        <option key={200000} value={'price200000f'}>200 000€</option>
+                                        <option key={1000} value={'1000'}>1 000€</option>
+                                        <option key={2000} value={'2000'}>2 000€</option>
+                                        <option key={3000} value={'3000'}>3 000€</option>
+                                        <option key={4000} value={'4000'}>4 000€</option>
+                                        <option key={5000} value={'5000'}>5 000€</option>
+                                        <option key={6000} value={'6000'}>6 000€</option>
+                                        <option key={7000} value={'7000'}>7 000€</option>
+                                        <option key={8000} value={'8000'}>8 000€</option>
+                                        <option key={9000} value={'9000'}>9 000€</option>
+                                        <option key={10000} value={'10000'}>10 000€</option>
+                                        <option key={20000} value={'20000'}>20 000€</option>
+                                        <option key={30000} value={'30000'}>30 000€</option>
+                                        <option key={40000} value={'40000'}>40 000€</option>
+                                        <option key={50000} value={'50000'}>50 000€</option>
+                                        <option key={60000} value={'60000'}>60 000€</option>
+                                        <option key={70000} value={'70000'}>70 000€</option>
+                                        <option key={80000} value={'80000'}>80 000€</option>
+                                        <option key={90000} value={'90000'}>90 000€</option>
+                                        <option key={100000} value={'100000'}>100 000€</option>
+                                        <option key={150000} value={'150000'}>150 000€</option>
+                                        <option key={200000} value={'200000'}>200 000€</option>
                                         <option key={0} value={'priceMoref'}>More</option>
                                     </select>
                                 </div>
@@ -183,29 +231,29 @@ function BasicData() {
                             <div className='combobox-entity'>   
                                 <div className='label'>{'\0'}</div>
                                 <div className="custom-combobox">
-                                    <select className='myComboBox'>
+                                    <select className='myComboBox price-to' onChange={(e) => handleSelectedPrice(e)}>
                                         <option value="">To (€)</option>
-                                        <option key={1000} value={'price1000t'}>1 000€</option>
-                                        <option key={2000} value={'price2000t'}>2 000€</option>
-                                        <option key={3000} value={'price3000t'}>3 000€</option>
-                                        <option key={4000} value={'price4000t'}>4 000€</option>
-                                        <option key={5000} value={'price5000t'}>5 000€</option>
-                                        <option key={6000} value={'price6000t'}>6 000€</option>
-                                        <option key={7000} value={'price7000t'}>7 000€</option>
-                                        <option key={8000} value={'price8000t'}>8 000€</option>
-                                        <option key={9000} value={'price9000t'}>9 000€</option>
-                                        <option key={10000} value={'price10000t'}>10 000€</option>
-                                        <option key={20000} value={'price20000t'}>20 000€</option>
-                                        <option key={30000} value={'price30000t'}>30 000€</option>
-                                        <option key={40000} value={'price40000t'}>40 000€</option>
-                                        <option key={50000} value={'price50000t'}>50 000€</option>
-                                        <option key={60000} value={'price60000t'}>60 000€</option>
-                                        <option key={70000} value={'price70000t'}>70 000€</option>
-                                        <option key={80000} value={'price80000t'}>80 000€</option>
-                                        <option key={90000} value={'price90000t'}>90 000€</option>
-                                        <option key={100000} value={'price100000t'}>100 000€</option>
-                                        <option key={150000} value={'price150000t'}>150 000€</option>
-                                        <option key={200000} value={'price200000t'}>200 000€</option>
+                                        <option key={1000} value={'1000'}>1 000€</option>
+                                        <option key={2000} value={'2000'}>2 000€</option>
+                                        <option key={3000} value={'3000'}>3 000€</option>
+                                        <option key={4000} value={'4000'}>4 000€</option>
+                                        <option key={5000} value={'5000'}>5 000€</option>
+                                        <option key={6000} value={'6000'}>6 000€</option>
+                                        <option key={7000} value={'7000'}>7 000€</option>
+                                        <option key={8000} value={'8000'}>8 000€</option>
+                                        <option key={9000} value={'9000'}>9 000€</option>
+                                        <option key={10000} value={'10000'}>10 000€</option>
+                                        <option key={20000} value={'20000'}>20 000€</option>
+                                        <option key={30000} value={'30000'}>30 000€</option>
+                                        <option key={40000} value={'40000'}>40 000€</option>
+                                        <option key={50000} value={'50000'}>50 000€</option>
+                                        <option key={60000} value={'60000'}>60 000€</option>
+                                        <option key={70000} value={'70000'}>70 000€</option>
+                                        <option key={80000} value={'80000'}>80 000€</option>
+                                        <option key={90000} value={'90000'}>90 000€</option>
+                                        <option key={100000} value={'100000'}>100 000€</option>
+                                        <option key={150000} value={'150000'}>150 000€</option>
+                                        <option key={200000} value={'200000'}>200 000€</option>
                                         <option key={0} value={'priceMoret'}>More</option>
                                     </select>
                                 </div>
@@ -217,14 +265,14 @@ function BasicData() {
                             <div className='combobox-entity'>
                                 <div className='label'>Mileage</div>
                                 <div className="custom-combobox">
-                                    <select className='myComboBox'>
+                                    <select className='myComboBox mileage-from' onChange={(e) => handleSelectedMileage(e)}>
                                         <option value="" >From (km)</option>
-                                        <option key={1000} value={'mileage1000'}>1 000 km</option>
-                                        <option key={5000} value={'mileage5000'}>5 000 km</option>
-                                        <option key={10000} value={'mileage10000'}>10 000 km</option>
-                                        <option key={50000} value={'mileage50000'}>50 000 km</option>
-                                        <option key={100000} value={'mileage100000'}>100 000 km</option>
-                                        <option key={200000} value={'mileage200000'}>200 000 km</option>
+                                        <option key={1000} value={'1000'}>1 000 km</option>
+                                        <option key={5000} value={'5000'}>5 000 km</option>
+                                        <option key={10000} value={'10000'}>10 000 km</option>
+                                        <option key={50000} value={'50000'}>50 000 km</option>
+                                        <option key={100000} value={'100000'}>100 000 km</option>
+                                        <option key={200000} value={'200000'}>200 000 km</option>
                                         <option key={0} value={'mileageMore'}>More</option>
                                     </select>
                                 </div>
@@ -232,14 +280,14 @@ function BasicData() {
                             <div className='combobox-entity'>
                                 <div className='label'>{'\0'}</div>
                                 <div className="custom-combobox">
-                                    <select className='myComboBox'>
+                                    <select className='myComboBox mileage-to' onChange={(e) => handleSelectedMileage(e)}>
                                         <option value="" >To (km)</option>
-                                        <option key={1000} value={'mileage1000'}>1 000 km</option>
-                                        <option key={5000} value={'mileage5000'}>5 000 km</option>
-                                        <option key={10000} value={'mileage10000'}>10 000 km</option>
-                                        <option key={50000} value={'mileage50000'}>50 000 km</option>
-                                        <option key={100000} value={'mileage100000'}>100 000 km</option>
-                                        <option key={200000} value={'mileage200000'}>200 000 km</option>
+                                        <option key={1000} value={'1000'}>1 000 km</option>
+                                        <option key={5000} value={'5000'}>5 000 km</option>
+                                        <option key={10000} value={'10000'}>10 000 km</option>
+                                        <option key={50000} value={'50000'}>50 000 km</option>
+                                        <option key={100000} value={'100000'}>100 000 km</option>
+                                        <option key={200000} value={'200000'}>200 000 km</option>
                                         <option key={0} value={'mileageMore'}>More</option>
                                     </select>
                                 </div>
@@ -251,43 +299,43 @@ function BasicData() {
                             <div className='combobox-entity'>
                                 <div className='label'>Registration</div>
                                 <div className="custom-combobox">
-                                    <select className='myComboBox'>
+                                    <select className='myComboBox registration-from' onChange={(e) => handleSelectedRegistration(e)}>
                                         <option value=""  >From</option>
-                                        <option key={2024} value={'registration2024f'}>2024</option>
-                                        <option key={2023} value={'registration2023f'}>2023</option>
-                                        <option key={2022} value={'registration2022f'}>2022</option>
-                                        <option key={2021} value={'registration2021f'}>2021</option>
-                                        <option key={2020} value={'registration2020f'}>2020</option>
-                                        <option key={2019} value={'registration2019f'}>2019</option>
-                                        <option key={2018} value={'registration2018f'}>2018</option>
-                                        <option key={2017} value={'registration2017f'}>2017</option>
-                                        <option key={2016} value={'registration2016f'}>2016</option>
-                                        <option key={2015} value={'registration2015f'}>2015</option>
-                                        <option key={2014} value={'registration2014f'}>2014</option>
-                                        <option key={2013} value={'registration2013f'}>2013</option>
-                                        <option key={2012} value={'registration2012f'}>2012</option>
-                                        <option key={2011} value={'registration2011f'}>2011</option>
-                                        <option key={2010} value={'registration2010f'}>2010</option>
-                                        <option key={2009} value={'registration2009f'}>2009</option>
-                                        <option key={2008} value={'registration2008f'}>2008</option>
-                                        <option key={2007} value={'registration2007f'}>2007</option>
-                                        <option key={2006} value={'registration2006f'}>2006</option>
-                                        <option key={2005} value={'registration2005f'}>2005</option>
-                                        <option key={2004} value={'registration2004f'}>2004</option>
-                                        <option key={2003} value={'registration2003f'}>2003</option>
-                                        <option key={2002} value={'registration2002f'}>2002</option>
-                                        <option key={2001} value={'registration2001f'}>2001</option>
-                                        <option key={2000} value={'registration2000f'}>2000</option>
-                                        <option key={1999} value={'registration1999f'}>1999</option>
-                                        <option key={1998} value={'registration1998f'}>1998</option>
-                                        <option key={1997} value={'registration1997f'}>1997</option>
-                                        <option key={1996} value={'registration1996f'}>1996</option>
-                                        <option key={1995} value={'registration1995f'}>1995</option>
-                                        <option key={1990} value={'registration1990f'}>1990</option>
-                                        <option key={1985} value={'registration1985f'}>1985</option>
-                                        <option key={1980} value={'registration1980f'}>1980</option>
-                                        <option key={1970} value={'registration1970f'}>1970</option>
-                                        <option key={1960} value={'registration1960f'}>1960</option>
+                                        <option key={2024} value={'2024'}>2024</option>
+                                        <option key={2023} value={'2023'}>2023</option>
+                                        <option key={2022} value={'2022'}>2022</option>
+                                        <option key={2021} value={'2021'}>2021</option>
+                                        <option key={2020} value={'2020'}>2020</option>
+                                        <option key={2019} value={'2019'}>2019</option>
+                                        <option key={2018} value={'2018'}>2018</option>
+                                        <option key={2017} value={'2017'}>2017</option>
+                                        <option key={2016} value={'2016'}>2016</option>
+                                        <option key={2015} value={'2015'}>2015</option>
+                                        <option key={2014} value={'2014'}>2014</option>
+                                        <option key={2013} value={'2013'}>2013</option>
+                                        <option key={2012} value={'2012'}>2012</option>
+                                        <option key={2011} value={'2011'}>2011</option>
+                                        <option key={2010} value={'2010'}>2010</option>
+                                        <option key={2009} value={'2009'}>2009</option>
+                                        <option key={2008} value={'2008'}>2008</option>
+                                        <option key={2007} value={'2007'}>2007</option>
+                                        <option key={2006} value={'2006'}>2006</option>
+                                        <option key={2005} value={'2005'}>2005</option>
+                                        <option key={2004} value={'2004'}>2004</option>
+                                        <option key={2003} value={'2003'}>2003</option>
+                                        <option key={2002} value={'2002'}>2002</option>
+                                        <option key={2001} value={'2001'}>2001</option>
+                                        <option key={2000} value={'2000'}>2000</option>
+                                        <option key={1999} value={'1999'}>1999</option>
+                                        <option key={1998} value={'1998'}>1998</option>
+                                        <option key={1997} value={'1997'}>1997</option>
+                                        <option key={1996} value={'1996'}>1996</option>
+                                        <option key={1995} value={'1995'}>1995</option>
+                                        <option key={1990} value={'1990'}>1990</option>
+                                        <option key={1985} value={'1985'}>1985</option>
+                                        <option key={1980} value={'1980'}>1980</option>
+                                        <option key={1970} value={'1970'}>1970</option>
+                                        <option key={1960} value={'1960'}>1960</option>
                                         <option key={0} value={'registrationOlderf'}>Older</option>
                                     </select>
                                 </div>
@@ -295,43 +343,43 @@ function BasicData() {
                             <div className='combobox-entity'>
                                 <div className='label'>{'\0'}</div>
                                 <div className="custom-combobox">
-                                    <select className='myComboBox'>
+                                    <select className='myComboBox registration-to' onChange={(e) => handleSelectedRegistration(e)}>
                                         <option value=""  >To</option>
-                                        <option key={2024} value={'registration2024t'}>2024</option>
-                                        <option key={2023} value={'registration2023t'}>2023</option>
-                                        <option key={2022} value={'registration2022t'}>2022</option>
-                                        <option key={2021} value={'registration2021t'}>2021</option>
-                                        <option key={2020} value={'registration2020t'}>2020</option>
-                                        <option key={2019} value={'registration2019t'}>2019</option>
-                                        <option key={2018} value={'registration2018t'}>2018</option>
-                                        <option key={2017} value={'registration2017t'}>2017</option>
-                                        <option key={2016} value={'registration2016t'}>2016</option>
-                                        <option key={2015} value={'registration2015t'}>2015</option>
-                                        <option key={2014} value={'registration2014t'}>2014</option>
-                                        <option key={2013} value={'registration2013t'}>2013</option>
-                                        <option key={2012} value={'registration2012t'}>2012</option>
-                                        <option key={2011} value={'registration2011t'}>2011</option>
-                                        <option key={2010} value={'registration2010t'}>2010</option>
-                                        <option key={2009} value={'registration2009t'}>2009</option>
-                                        <option key={2008} value={'registration2008t'}>2008</option>
-                                        <option key={2007} value={'registration2007t'}>2007</option>
-                                        <option key={2006} value={'registration2006t'}>2006</option>
-                                        <option key={2005} value={'registration2005t'}>2005</option>
-                                        <option key={2004} value={'registration2004t'}>2004</option>
-                                        <option key={2003} value={'registration2003t'}>2003</option>
-                                        <option key={2002} value={'registration2002t'}>2002</option>
-                                        <option key={2001} value={'registration2001t'}>2001</option>
-                                        <option key={2000} value={'registration2000t'}>2000</option>
-                                        <option key={1999} value={'registration1999t'}>1999</option>
-                                        <option key={1998} value={'registration1998t'}>1998</option>
-                                        <option key={1997} value={'registration1997t'}>1997</option>
-                                        <option key={1996} value={'registration1996t'}>1996</option>
-                                        <option key={1995} value={'registration1995t'}>1995</option>
-                                        <option key={1990} value={'registration1990t'}>1990</option>
-                                        <option key={1985} value={'registration1985t'}>1985</option>
-                                        <option key={1980} value={'registration1980t'}>1980</option>
-                                        <option key={1970} value={'registration1970t'}>1970</option>
-                                        <option key={1960} value={'registration1960t'}>1960</option>
+                                        <option key={2024} value={'2024'}>2024</option>
+                                        <option key={2023} value={'2023'}>2023</option>
+                                        <option key={2022} value={'2022'}>2022</option>
+                                        <option key={2021} value={'2021'}>2021</option>
+                                        <option key={2020} value={'2020'}>2020</option>
+                                        <option key={2019} value={'2019'}>2019</option>
+                                        <option key={2018} value={'2018'}>2018</option>
+                                        <option key={2017} value={'2017'}>2017</option>
+                                        <option key={2016} value={'2016'}>2016</option>
+                                        <option key={2015} value={'2015'}>2015</option>
+                                        <option key={2014} value={'2014'}>2014</option>
+                                        <option key={2013} value={'2013'}>2013</option>
+                                        <option key={2012} value={'2012'}>2012</option>
+                                        <option key={2011} value={'2011'}>2011</option>
+                                        <option key={2010} value={'2010'}>2010</option>
+                                        <option key={2009} value={'2009'}>2009</option>
+                                        <option key={2008} value={'2008'}>2008</option>
+                                        <option key={2007} value={'2007'}>2007</option>
+                                        <option key={2006} value={'2006'}>2006</option>
+                                        <option key={2005} value={'2005'}>2005</option>
+                                        <option key={2004} value={'2004'}>2004</option>
+                                        <option key={2003} value={'2003'}>2003</option>
+                                        <option key={2002} value={'2002'}>2002</option>
+                                        <option key={2001} value={'2001'}>2001</option>
+                                        <option key={2000} value={'2000'}>2000</option>
+                                        <option key={1999} value={'1999'}>1999</option>
+                                        <option key={1998} value={'1998'}>1998</option>
+                                        <option key={1997} value={'1997'}>1997</option>
+                                        <option key={1996} value={'1996'}>1996</option>
+                                        <option key={1995} value={'1995'}>1995</option>
+                                        <option key={1990} value={'1990'}>1990</option>
+                                        <option key={1985} value={'1985'}>1985</option>
+                                        <option key={1980} value={'1980'}>1980</option>
+                                        <option key={1970} value={'1970'}>1970</option>
+                                        <option key={1960} value={'1960'}>1960</option>
                                         <option key={0} value={'registrationOldert'}>Older</option>
                                     </select>
                                 </div>
@@ -345,7 +393,7 @@ function BasicData() {
                             <div className='combobox-entity'>
                                 <div className='label'>Seating configuration</div>
                                 <div className="custom-combobox">
-                                    <select className='myComboBox'>
+                                    <select className='myComboBox' onChange={(e) => handleSelectedSeatingConfig(e)}>
                                         <option value="">No. of seast</option>
                                         <option key={2} value="seats2">2</option>
                                         <option key={2} value="seats3">3</option>
@@ -364,7 +412,7 @@ function BasicData() {
                             <div className='combobox-entity'>
                                 <div className='label'>Doors</div>
                                 <div className="custom-combobox">
-                                    <select className='myComboBox'>
+                                    <select className='myComboBox' onChange={(e) => handleSelectedDoors(e)}>
                                         <option value="" >No. of doors</option>
                                         <option key={23} value="doors23">2/3</option>
                                         <option key={45} value="doors45">4/5</option>
