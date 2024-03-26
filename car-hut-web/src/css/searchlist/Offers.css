@@ -109,3 +109,14 @@
     border-color: #313131;
     color: #313131;
 }
+
+.page-button-current {
+    border-color: #313131;
+    border: solid;
+    border-width: 0.1em;
+    background-color: #D9D9D9;
+    color: #313131;
+    margin: 0 1em;
+    width: 2em;
+    height: 2em;
+}

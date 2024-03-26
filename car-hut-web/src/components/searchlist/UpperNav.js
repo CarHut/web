@@ -1,21 +1,28 @@
 import '../../css/searchlist/UpperNav.css';
 
-function UpperNav({offersPerPage, setOffersPerPage }) {
+function UpperNav({offersPerPage, setOffersPerPage, sortBy, setSortBy}) {
     
     const handleOffersPerPageChange = (e) => {
         setOffersPerPage(e.target.value);
     }
     
+    const handleSortByChange = (e) => {
+        setSortBy(e.target.value);
+    }
+
     return (
         <div className='search-list-upper-nav-wrapper'>
             <div className='combobox-entity-upper-nav'>
                 <div className='sort-dropdown-label'>Sort by</div>
                 <div className="custom-combobox">
-                    <select id="brandComboBox" className='myComboBox' /*value={selectedBrand} onChange={(e) => setSelectedBrand(e.target.value)}*/>
+                    <select id="brandComboBox" className='myComboBox' value={sortBy} onChange={handleSortByChange}>
                         <option value="" disabled>Select Brand</option>
-                        {/* {brands.map(brand => (
-                            <option key={brand.id} value={brand.brand}>{brand.brand}</option>
-                        ))} */}
+                        <option value="PFL" key={1}>Price - from lowest</option>
+                        <option value="PFH" key={2}>Price - from highest</option>
+                        <option value="RFL" key={3}>Registration - from lowest</option>
+                        <option value="RFH" key={4}>Registration - from highest</option>
+                        <option value="MFL" key={5}>Mileage - from lowest</option>
+                        <option value="MFH" key={6}>Mileage - from highest</option>
                     </select>
                 </div>
             </div>

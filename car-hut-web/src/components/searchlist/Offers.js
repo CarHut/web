@@ -4,7 +4,7 @@ import audiRS3Image from '../../images/searchlist/offers/audiRS3.jpg';
 import { useEffect, useState } from 'react';
 
 
-function Offers({offersPerPage}) {
+function Offers({offersPerPage, sortBy}) {
 
     const [cars, setCars] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -20,6 +20,21 @@ function Offers({offersPerPage}) {
             .catch(error => console.error('Error fetching temp cars:', error)); 
              
     }, [offersPerPage]);
+
+    useEffect(() => {
+        // Infer sortOrder based on sortBy
+        const sortOrder = sortBy[sortBy.length - 1] == 'L' ? "ASC" : "DESC";
+        console.log(sortOrder);
+
+        fetch(`http://localhost:8080/api/getAllTempCars?sortBy=${sortBy}&sortOrder=${sortOrder}`)
+            .then(response => response.json())
+            .then(data => {
+                setCars(data);
+                setTotalPages(Math.ceil(data.length / offersPerPage));
+            })
+            .catch(error => console.error('Error fetching temp cars by sortBy:', error)); 
+
+    }, [sortBy]);
 
     const generateCarOffers = () => {
         const startIndex = (currentPage - 1) * parseInt(offersPerPage);
@@ -70,6 +85,7 @@ function Offers({offersPerPage}) {
 
     const goToPage = (page) => {
         setCurrentPage(page);
+        window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to the top of the page
     };
 
     const startPage = Math.max(1, currentPage - 2);
@@ -77,6 +93,11 @@ function Offers({offersPerPage}) {
 
     return (
         <div className='search-list-main-wrapper'>
+            <div className='page-buttons-wrapper' style={{paddingTop:'2em'}}>
+                {Array.from({ length: endPage - startPage + 1 }, (_, i) => (
+                    <button className={startPage + i == currentPage ? 'page-button-current' : 'page-button'} key={startPage + i} onClick={() => goToPage(startPage + i)}>{startPage + i}</button>
+                ))}
+            </div>
             <div className='search-list-offers-wrapper'>
                 <div className='offers'>
                     {generateCarOffers()}
@@ -84,7 +105,7 @@ function Offers({offersPerPage}) {
             </div>
             <div className='page-buttons-wrapper'>
                 {Array.from({ length: endPage - startPage + 1 }, (_, i) => (
-                    <button className='page-button' key={startPage + i} onClick={() => goToPage(startPage + i)}>{startPage + i}</button>
+                    <button className={startPage + i == currentPage ? 'page-button-current' : 'page-button'} key={startPage + i} onClick={() => goToPage(startPage + i)}>{startPage + i}</button>
                 ))}
             </div>
         </div>
