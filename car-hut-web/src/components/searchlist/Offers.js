@@ -4,35 +4,29 @@ import audiRS3Image from '../../images/searchlist/offers/audiRS3.jpg';
 import { useEffect, useState } from 'react';
 
 
-function Offers({offersPerPage, sortBy}) {
+function Offers({offersPerPage, sortBy, results}) {
 
     const [cars, setCars] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
 
     useEffect(() => {
-        fetch('http://localhost:8080/api/getAllTempCars')
-            .then(response => response.json())
-            .then(data => {
-                setCars(data);
-                setTotalPages(Math.ceil(data.length / offersPerPage));
-            })
-            .catch(error => console.error('Error fetching temp cars:', error)); 
-             
+        setCars(results);
+        setTotalPages(Math.ceil(results.length / offersPerPage)); 
     }, [offersPerPage]);
 
     useEffect(() => {
         // Infer sortOrder based on sortBy
-        const sortOrder = sortBy[sortBy.length - 1] == 'L' ? "ASC" : "DESC";
-        console.log(sortOrder);
+        // const sortOrder = sortBy[sortBy.length - 1] == 'L' ? "ASC" : "DESC";
+        // console.log(sortOrder);
 
-        fetch(`http://localhost:8080/api/getAllTempCars?sortBy=${sortBy}&sortOrder=${sortOrder}`)
-            .then(response => response.json())
-            .then(data => {
-                setCars(data);
-                setTotalPages(Math.ceil(data.length / offersPerPage));
-            })
-            .catch(error => console.error('Error fetching temp cars by sortBy:', error)); 
+        // fetch(`http://localhost:8080/api/getAllTempCars?sortBy=${sortBy}&sortOrder=${sortOrder}`)
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         setCars(data);
+        //         setTotalPages(Math.ceil(data.length / offersPerPage));
+        //     })
+        //     .catch(error => console.error('Error fetching temp cars by sortBy:', error)); 
 
     }, [sortBy]);
 

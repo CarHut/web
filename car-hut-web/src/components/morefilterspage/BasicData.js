@@ -88,7 +88,7 @@ function BasicData({brand, setBrand, model, setModel, carType, setCarType,
                         <div className='label'>Brand</div>
                         <div className="custom-combobox">
                             <select id="brandComboBox" className='myComboBox' value={selectedBrand} onChange={(e) => handleSelectedBrand(e)}>
-                                <option value="" disabled>Select Brand</option>
+                                <option value="all" disabled>Select Brand</option>
                                 {brands.map(brand => (
                                     <option key={brand.id} value={brand.brand}>{brand.brand}</option>
                                 ))}
@@ -99,7 +99,7 @@ function BasicData({brand, setBrand, model, setModel, carType, setCarType,
                         <div className='label'>Model</div>
                         <div className="custom-combobox">
                             <select id="modelComboBox" className={`myComboBox ${!selectedBrand ? 'disabled' : ''}`} value={selectedModel} onChange={(e) => handleSelectedModel(e)} disabled={!selectedBrand}>
-                                <option value="" disabled={!selectedBrand}>Select Model</option>
+                                <option value="all" disabled={!selectedBrand}>Select Model</option>
                                 {models.map(model => (
                                     <option key={model.id} value={model.model}>{model.model}</option>
                                 ))}

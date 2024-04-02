@@ -16,7 +16,7 @@ function UpperNav({offersPerPage, setOffersPerPage, sortBy, setSortBy}) {
                 <div className='sort-dropdown-label'>Sort by</div>
                 <div className="custom-combobox">
                     <select id="brandComboBox" className='myComboBox' value={sortBy} onChange={handleSortByChange}>
-                        <option value="" disabled>Select Brand</option>
+                        <option value="" disabled>--</option>
                         <option value="PFL" key={1}>Price - from lowest</option>
                         <option value="PFH" key={2}>Price - from highest</option>
                         <option value="RFL" key={3}>Registration - from lowest</option>
@@ -30,7 +30,7 @@ function UpperNav({offersPerPage, setOffersPerPage, sortBy, setSortBy}) {
                 <div className='sort-dropdown-label'>Offers per page</div>
                 <div className="custom-combobox">
                     <select id="brandComboBox" className='myComboBox' value={offersPerPage} onChange={handleOffersPerPageChange}>
-                        <option value="" disabled>Select </option>
+                        <option value="" disabled>--</option>
                         <option value={5} key={5}>5</option>
                         <option value={10} key={10}>10</option>
                         <option value={15} key={15}>15</option>

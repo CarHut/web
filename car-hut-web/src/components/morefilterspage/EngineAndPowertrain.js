@@ -40,7 +40,7 @@ function EngineAndPowertrain({fuelType, setFuelType, power, setPower, displaceme
                 <div className='fuel-type-content'>
                     <div className='fuel-type-entity'>
                         <div className='checkbox-label'>Petrol</div>
-                        <label className='custom-checkbox-engine-and-power'>
+                        <label className='custom-checkbox-engine-and-power' onClick={handleSelectedFuelType('Petrol')}>
                             <input type="checkbox"/>
                             <span className="checkmark-engine-and-power" onClick={handleSelectedFuelType('Petrol')}></span>
                         </label>

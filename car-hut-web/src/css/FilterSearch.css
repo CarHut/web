@@ -89,3 +89,8 @@ select {
     color: #898989;
     padding-left: 1em;
   }
+
+  .filter-search-links {
+    display: flex;
+    justify-content: space-between;
+  }
