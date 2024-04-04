@@ -60,7 +60,25 @@ function MoreFiltersPage() {
                 <Link
                     to={`/searchList`}
                     state={{
-                        results: resultList
+                        results: resultList,
+                        brand: brand,
+                        model: model,
+                        carType: carType,
+                        priceFrom: price.priceFrom,
+                        priceTo: price.priceTo,
+                        mileageFrom: mileage.mileageFrom,
+                        mileageTo: mileage.mileageTo,
+                        registrationFrom: registration.registrationFrom,
+                        registrationTo: registration.registrationTo,
+                        seatingConfig: seatingConfig,
+                        doors: doors,
+                        location: location,
+                        postalCode: postalCode,
+                        fuelType: fuelType,
+                        power: power,
+                        displacement: displacement,
+                        gearbox: gearbox,
+                        powertrain: powertrain
                     }}
                 >
                     <button className="styled-button">{updateNumberOfSearchResults()}</button>

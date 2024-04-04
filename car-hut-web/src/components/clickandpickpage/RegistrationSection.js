@@ -106,7 +106,7 @@ function RegistrationSection() {
                         } 
                     }}
                 >
-                    <button className="styled-button">ss</button>
+                    <button className="styled-button">Fuel</button>
                 </Link>
             </div>
         </div>

@@ -16,11 +16,11 @@ function UpperNav({offersPerPage, setOffersPerPage, sortBy, setSortBy}) {
                 <div className='sort-dropdown-label'>Sort by</div>
                 <div className="custom-combobox">
                     <select id="brandComboBox" className='myComboBox' value={sortBy} onChange={handleSortByChange}>
-                        <option value="" disabled>--</option>
+                        <option value="">--</option>
                         <option value="PFL" key={1}>Price - from lowest</option>
                         <option value="PFH" key={2}>Price - from highest</option>
-                        <option value="RFL" key={3}>Registration - from lowest</option>
-                        <option value="RFH" key={4}>Registration - from highest</option>
+                        <option value="AFL" key={3}>Alphabetically - A to Z</option>
+                        <option value="AFH" key={4}>Alphabetically - Z to A</option>
                         <option value="MFL" key={5}>Mileage - from lowest</option>
                         <option value="MFH" key={6}>Mileage - from highest</option>
                     </select>

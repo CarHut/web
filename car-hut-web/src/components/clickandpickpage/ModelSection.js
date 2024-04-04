@@ -9,6 +9,7 @@ function ModelSection() {
     
     const [modelsByBrand, setModelsByBrand] = useState([]);
     const [pickedModels, setPickedModels] = useState([]);
+    const [brandModelsObjects, setBrandModelsObjects] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -17,15 +18,15 @@ function ModelSection() {
                     var modelsData = [];
 
                     for (const brand of brands) {
-                        const response = await fetch(`http://localhost:8080/api/getModelsByBrandName/${brand}`);
+                        const response = await fetch(`http://localhost:8080/api/getModelsByBrandName?brandName=${brand}`);
                         const data = await response.json();
 
                         modelsData.push({
                             brand: brand,
                             models: data
                         });
+                        
                     }
-
                     setModelsByBrand(modelsData);
                 } else {
                     setModelsByBrand([]);
@@ -58,7 +59,7 @@ function ModelSection() {
                                 {group.map((model, index) => (
                                     <div className='model-line'>
                                         <label className='custom-checkbox'>
-                                            <input onClick={() => handleClickedModel(model.model)} type="checkbox"/>
+                                            <input onClick={() => handleClickedModel(model.model, brandIndex)} type="checkbox"/>
                                             <span className="checkmark"></span>
                                         </label>
                                         <div key={index} className='model-label'>{model.model}</div>
@@ -72,14 +73,16 @@ function ModelSection() {
         });
     };
    
-    const handleClickedModel = (model) => {
-      const isModelPicked = pickedModels.includes(model);
+    const handleClickedModel = (model, brandIndex) => {
+        const isModelPicked = pickedModels.includes(model);
 
-       if (isModelPicked) {
-        setPickedModels(pickedModels.filter((pickedModel) => pickedModel !== model));
-      } else {
-        setPickedModels([...pickedModels, model]);
-      }
+        if (isModelPicked) {
+            setPickedModels(pickedModels.filter((pickedModel) => pickedModel !== model));
+            setBrandModelsObjects(brandModelsObjects.filter((pickedModel) => pickedModel.model !== model));
+        } else {
+            setPickedModels([...pickedModels, model]);
+            setBrandModelsObjects([...brandModelsObjects, { brand: brands.at(brandIndex), model: model }])
+        }
     }
 
     return (
@@ -134,7 +137,7 @@ function ModelSection() {
                     to={`/clickAndPickPage/price`}
                     state={{
                         brands: brands,
-                        models: pickedModels
+                        models: brandModelsObjects
                     }}
                 >
                     <button className="styled-button">Price</button>

@@ -1,6 +1,7 @@
 import '../../css/FilterSearch.css';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 function FilterSearch() {
     const [brands, setBrands] = useState([]);
@@ -9,25 +10,17 @@ function FilterSearch() {
     const [selectedModel, setSelectedModel] = useState('');
     const [selectedPriceFrom, setSelectedPriceFrom] = useState('');
     const [selectedMileageFrom, setSelectedMileageFrom] = useState('')
-
     const [resultList, setResultList] = useState([]);
 
+    async function fetchFilteredData() {
+        const url = `http://localhost:8080/api/getTempCarsWithFilters?brand=${selectedBrand}&model=${selectedModel}&priceFrom=${selectedPriceFrom}&mileageFrom=${selectedMileageFrom}`;
+        var response = await axios.get(url);
+        setResultList(response.data);
+    }
+
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                selectedBrand === 'all' ? setSelectedBrand("") : setSelectedBrand(selectedBrand);
-                selectedModel === 'all' ? setSelectedModel("") : setSelectedModel(selectedModel);
-                const response = await fetch('http://localhost:8080/api/getTempCarsWithFilters?brand=' + selectedBrand + '&model=' + selectedModel + 
-                                    '&priceFrom=' + selectedPriceFrom + '&mileageFrom=' + selectedMileageFrom);
-                const data = await response.json();
-                setResultList(data);
-            } catch (error) {
-                console.error('Error fetching filtered car list:', error);
-            }
-        };
-    
-        fetchData();
-    }, [selectedBrand, selectedModel, selectedPriceFrom, selectedMileageFrom]);
+        fetchFilteredData();
+    }, [selectedBrand, selectedModel, selectedMileageFrom, selectedPriceFrom, brands, models]);
 
     const updateNumberOfSearchResults = () => {
         return (
@@ -38,7 +31,6 @@ function FilterSearch() {
     }
 
     useEffect(() => {
-        // Fetch data from the API when the component mounts
         fetch('http://localhost:8080/api/getAllBrands')
             .then(response => response.json())
             .then(data => setBrands(data))
@@ -46,19 +38,15 @@ function FilterSearch() {
     }, []);
 
     useEffect(() => {
-        // Fetch models when a brand is selected
         if (selectedBrand) {
             fetch(`http://localhost:8080/api/getModelsByBrand/${selectedBrand}`)
                 .then(response => response.json())
                 .then(data => setModels(data))
                 .catch(error => console.error('Error fetching models:', error));
         } else {
-            // Clear models when no brand is selected
             setModels([]);
         }
     }, [selectedBrand]);
-
-    
 
     return (
         <div className='section-body'>
@@ -69,7 +57,7 @@ function FilterSearch() {
                         <div className='label'>Brand</div>
                         <div className="custom-combobox">
                             <select id="brandComboBox" className='myComboBox' value={selectedBrand} onChange={(e) => setSelectedBrand(e.target.value)}>
-                                <option value="all" disabled>Select Brand</option>
+                                <option value="all">Select Brand</option>
                                 {brands.map(brand => (
                                     <option key={brand.id} value={brand.brand}>{brand.brand}</option>
                                 ))}
@@ -138,7 +126,11 @@ function FilterSearch() {
                     <Link
                         to={`/searchList`}
                         state={{
-                            results: resultList
+                            results: resultList,
+                            brand: selectedBrand,
+                            model: selectedModel,
+                            priceFrom: selectedPriceFrom,
+                            mileageFrom: selectedMileageFrom
                         }}
                     >
                         <button className="styled-button">{updateNumberOfSearchResults()}</button>
