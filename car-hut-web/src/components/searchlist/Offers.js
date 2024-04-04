@@ -4,18 +4,13 @@ import audiRS3Image from '../../images/searchlist/offers/audiRS3.jpg';
 import { useEffect, useState } from 'react';
 
 
-function Offers({offersPerPage, sortBy, results, state}) {
+function Offers({offersPerPage, sortBy, state}) {
 
     const [cars, setCars] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
 
-    useEffect(() => {
-        setCars(results);
-        setTotalPages(Math.ceil(results.length / offersPerPage)); 
-    }, [offersPerPage]);
-
-    useEffect(() => {
+    const fetchCars = () => {
         const sortOrder = sortBy[sortBy.length - 1] == 'L' ? "ASC" : "DESC";
 
         const url = `http://localhost:8080/api/getTempCarsWithFilters?brand=${state.brand}&model=${state.model}&priceFrom=${state.priceFrom}&mileageFrom=${state.mileageFrom}&sortBy=${sortBy}&sortOrder=${sortOrder}`;
@@ -26,7 +21,15 @@ function Offers({offersPerPage, sortBy, results, state}) {
                 setTotalPages(Math.ceil(data.length / offersPerPage));
             })
             .catch(error => console.error('Error fetching temp cars by sortBy:', error)); 
+    }
 
+    useEffect(() => {
+        fetchCars();
+        setTotalPages(Math.ceil(cars.length / offersPerPage)); 
+    }, [offersPerPage]);
+
+    useEffect(() => {
+        fetchCars()
     }, [sortBy]);
 
     const generateCarOffers = () => {

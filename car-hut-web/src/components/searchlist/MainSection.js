@@ -14,7 +14,7 @@ function MainSection({state}) {
         <div className='section-body-search-list-main-section'>
             <div className='search-list-left-wrapper'>  
                 <UpperNav offersPerPage={offersPerPage} setOffersPerPage={setOffersPerPage} sortBy={sortBy} setSortBy={setSortBy}/>
-                <Offers offersPerPage={offersPerPage} sortBy={sortBy} results={state.results} state={state}/>
+                <Offers offersPerPage={offersPerPage} sortBy={sortBy} state={state}/>
             </div>
             <div className='search-list-right-wrapper'>
                 <ExtendedFilters/>

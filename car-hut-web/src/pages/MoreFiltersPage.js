@@ -4,6 +4,7 @@ import BasicData from "../components/morefilterspage/BasicData";
 import EngineAndPowertrain from "../components/morefilterspage/EngineAndPowertrain";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import updateNumberOfSearchResults from "../utils/RenderTextUtil"; 
 
 function MoreFiltersPage() {
 
@@ -23,33 +24,24 @@ function MoreFiltersPage() {
     const [gearbox, setGearbox] = useState("");
     const [powertrain, setPowertrain] = useState("");
 
-    const [resultList, setResultList] = useState([]);
+    const [searchedCarsNumber, setSearchedCarsNumber] = useState(null);
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                brand === 'all' ? setBrand("") : setBrand(brand);
-                model === 'all' ? setModel("") : setModel(model);
-                const response = await fetch('http://localhost:8080/api/getTempCarsWithFilters?brand=' + brand + '&model=' + model + 
-                                    '&priceFrom=' + price.priceFrom + '&priceTo=' + price.priceTo + '&mileageFrom=' + mileage.mileageFrom +
-                                    '&mileageTo=' + mileage.mileageTo + '&fuelType=' + fuelType);
-                const data = await response.json();
-                setResultList(data);
-            } catch (error) {
-                console.error('Error fetching filtered car list:', error);
-            }
-        };
-    
-        fetchData();
-    }, [brand, model, price, mileage, fuelType]);
 
-    const updateNumberOfSearchResults = () => {
-        return (
-            <div>
-                {resultList.length} cars
-            </div>
-        )
-    } 
+        async function updateSearchedCarsNumber() {
+            try {
+                const result = await updateNumberOfSearchResults(brand, model, carType, price.priceFrom, price.priceTo, mileage.mileageFrom, mileage.mileageTo, registration.registrationFrom,
+                    registration.registrationTo, seatingConfig, doors, location, postalCode, fuelType, power.powerFrom, power.powerTo, displacement.displacementFrom,
+                    displacement.displacementTo, gearbox, powertrain);
+                setSearchedCarsNumber(result);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        console.log(model);
+        updateSearchedCarsNumber();
+    }, [brand, model, price, mileage, carType, registration, seatingConfig, doors, location, postalCode, fuelType, power, displacement, gearbox, powertrain]);
 
     return (
         <div className="body">
@@ -60,7 +52,6 @@ function MoreFiltersPage() {
                 <Link
                     to={`/searchList`}
                     state={{
-                        results: resultList,
                         brand: brand,
                         model: model,
                         carType: carType,
@@ -81,7 +72,7 @@ function MoreFiltersPage() {
                         powertrain: powertrain
                     }}
                 >
-                    <button className="styled-button">{updateNumberOfSearchResults()}</button>
+                    <button className="styled-button">{searchedCarsNumber !== null ? (searchedCarsNumber + ' cars') : ('0 cars')}</button>
                 </Link>
             </div>
             <BasicData brand={brand} setBrand={setBrand} model={model} setModel={setModel} carType={carType} setCarType={setCarType} price={price} setPrice={setPrice} 

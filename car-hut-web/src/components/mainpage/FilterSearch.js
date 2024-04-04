@@ -2,6 +2,8 @@ import '../../css/FilterSearch.css';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import updateNumberOfSearchResults from '../../utils/RenderTextUtil';
+
 
 function FilterSearch() {
     const [brands, setBrands] = useState([]);
@@ -9,26 +11,23 @@ function FilterSearch() {
     const [selectedBrand, setSelectedBrand] = useState('');
     const [selectedModel, setSelectedModel] = useState('');
     const [selectedPriceFrom, setSelectedPriceFrom] = useState('');
-    const [selectedMileageFrom, setSelectedMileageFrom] = useState('')
-    const [resultList, setResultList] = useState([]);
-
-    async function fetchFilteredData() {
-        const url = `http://localhost:8080/api/getTempCarsWithFilters?brand=${selectedBrand}&model=${selectedModel}&priceFrom=${selectedPriceFrom}&mileageFrom=${selectedMileageFrom}`;
-        var response = await axios.get(url);
-        setResultList(response.data);
-    }
+    const [selectedMileageFrom, setSelectedMileageFrom] = useState('');
+    const [searchedCarsNumber, setSearchedCarsNumber] = useState(null);
 
     useEffect(() => {
-        fetchFilteredData();
-    }, [selectedBrand, selectedModel, selectedMileageFrom, selectedPriceFrom, brands, models]);
 
-    const updateNumberOfSearchResults = () => {
-        return (
-            <div>
-                {resultList.length} cars
-            </div>
-        )
-    }
+        async function updateSearchedCarsNumber() {
+            try {
+                const result = await updateNumberOfSearchResults(selectedBrand, selectedModel, "", selectedPriceFrom, "", selectedMileageFrom, "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+                setSearchedCarsNumber(result);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        updateSearchedCarsNumber();
+    }, [selectedBrand, selectedModel, selectedPriceFrom, selectedMileageFrom, brands, models]);
+
 
     useEffect(() => {
         fetch('http://localhost:8080/api/getAllBrands')
@@ -126,14 +125,13 @@ function FilterSearch() {
                     <Link
                         to={`/searchList`}
                         state={{
-                            results: resultList,
                             brand: selectedBrand,
                             model: selectedModel,
                             priceFrom: selectedPriceFrom,
                             mileageFrom: selectedMileageFrom
                         }}
                     >
-                        <button className="styled-button">{updateNumberOfSearchResults()}</button>
+                        <button className="styled-button">{searchedCarsNumber !== null ? (searchedCarsNumber + " cars") : ("0 cars")}</button>
                     </Link>
                 </div>
             </div>

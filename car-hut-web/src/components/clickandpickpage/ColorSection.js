@@ -10,8 +10,6 @@ function ColorSection() {
     const colors = ["black", "silver", "gray", "white", "red", "purple", "green", "yellow", "navy", "blue", "beige", "brown", "darkorange", "gold", "powderblue", "sienna"];
 
     const [pickedColors, setPickedColors] = useState([]);
-    const [resultList, setResultList] = useState([]);
-
 
     const generateColorCheckboxes = () => {
         return colors.map((color) => (
@@ -32,19 +30,6 @@ function ColorSection() {
             setPickedColors([...pickedColors, color]);
         }
     }
-
-    useEffect(() => {
-        var tempList = [];
-        for (const car in loc.state.models) {
-            const response = await fetch('http://localhost:8080/api/getTempCarsWithFilters?brand=' + car.brand + '&model=' + car.model + 
-                                    '&priceFrom=' + loc.state.price.priceFrom + '&priceTo=' + loc.state.price.priceTo + '&mileageFrom=' + loc.state.mileage.mileageFrom +
-                                    '&mileageTo=' + loc.state.mileage.mileageTo + '&fuelType=' + loc.state.fuelType);
-
-            const data = await response.json();
-            tempList.push(data);
-        }
-        setResultList(tempList);
-    }, []);
 
     return (
         <div className='section-body-registration-section'>
@@ -107,7 +92,6 @@ function ColorSection() {
                 <Link
                     to={`/searchList`}
                     state={{
-                        results: tempList,
                         brands: loc.state.brands,
                         models: loc.state.pickedModels,
                         price: loc.state.price,

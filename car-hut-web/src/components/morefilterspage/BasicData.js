@@ -35,6 +35,8 @@ function BasicData({brand, setBrand, model, setModel, carType, setCarType,
     const handleSelectedBrand = (e) => {
         setSelectedBrand(e.target.value);
         setBrand(e.target.value);
+        setModel("");
+        setSelectedModel("");
     }
 
     const handleSelectedModel = (e) => {
