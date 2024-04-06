@@ -96,7 +96,7 @@ function PriceSection() {
                     to={`/clickAndPickPage/mileage`}
                     state={{
                         brands: loc.state.brands,
-                        models: loc.state.pickedModels,
+                        models: loc.state.models,
                         price: {
                             fromPrice: fromPrice, toPrice: toPrice
                         }

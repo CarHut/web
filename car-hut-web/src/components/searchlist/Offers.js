@@ -14,22 +14,54 @@ function Offers({offersPerPage, sortBy, state}) {
         const sortOrder = sortBy[sortBy.length - 1] == 'L' ? "ASC" : "DESC";
 
         const url = `http://localhost:8080/api/getTempCarsWithFilters?brand=${state.brand}&model=${state.model}&priceFrom=${state.priceFrom}&mileageFrom=${state.mileageFrom}&sortBy=${sortBy}&sortOrder=${sortOrder}`;
-        fetch(url)
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
             .then(response => response.json())
             .then(data => {
                 setCars(data);
                 setTotalPages(Math.ceil(data.length / offersPerPage));
             })
-            .catch(error => console.error('Error fetching temp cars by sortBy:', error)); 
+            .catch(error => console.error('Error fetching temp cars by sortBy:', error));         
     }
 
+    const fetchMultipleCars = async () => {
+        const sortOrder = sortBy[sortBy.length - 1] == 'L' ? "ASC" : "DESC";
+
+        const response = await fetch(`http://localhost:8080/api/getTempCarsWithFilters?priceFrom=${state.price.fromPrice}&mileageFrom=${state.mileage.fromMileage}&sortBy=${sortBy}&sortOrder=${sortOrder}`, {
+            method: 'POST',
+            body: JSON.stringify(state.models),
+            headers: {
+               'Content-Type': 'application/json'
+            }
+        });
+        const result = await response.json();
+        
+        setCars(result);
+        setTotalPages(Math.ceil(result.length / offersPerPage));
+    }
+
+
+
     useEffect(() => {
-        fetchCars();
+        console.log(state.models);
+        if (state.models !== undefined) {
+            fetchMultipleCars();
+        } else {
+            fetchCars();
+        }
         setTotalPages(Math.ceil(cars.length / offersPerPage)); 
     }, [offersPerPage]);
 
     useEffect(() => {
-        fetchCars()
+        if (state.models !== undefined) {
+            fetchMultipleCars();
+        } else {
+            fetchCars();
+        }
     }, [sortBy]);
 
     const generateCarOffers = () => {

@@ -47,6 +47,11 @@ function FilterSearch() {
         }
     }, [selectedBrand]);
 
+    const handleSelectedBrand = (e) => {
+        setSelectedBrand(e);
+        setSelectedModel('');
+    }
+
     return (
         <div className='section-body'>
             <img src={require('../../images/mainpage/find_car.png')}/>
@@ -55,7 +60,7 @@ function FilterSearch() {
                     <div className='combobox-entity-filter-search'>
                         <div className='label'>Brand</div>
                         <div className="custom-combobox">
-                            <select id="brandComboBox" className='myComboBox' value={selectedBrand} onChange={(e) => setSelectedBrand(e.target.value)}>
+                            <select id="brandComboBox" className='myComboBox' value={selectedBrand} onChange={(e) => handleSelectedBrand(e.target.value)}>
                                 <option value="all">Select Brand</option>
                                 {brands.map(brand => (
                                     <option key={brand.id} value={brand.brand}>{brand.brand}</option>

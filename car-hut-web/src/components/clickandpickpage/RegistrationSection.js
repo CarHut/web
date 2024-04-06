@@ -88,7 +88,7 @@ function RegistrationSection() {
                     to={`/clickAndPickPage/mileage`}
                     state={{
                         brands: loc.state.brands,
-                        models: loc.state.pickedModels,
+                        models: loc.state.models,
                         price: loc.state.price
                     }}
                 >
@@ -98,7 +98,7 @@ function RegistrationSection() {
                     to={`/clickAndPickPage/fuel`}
                     state={{
                         brands: loc.state.brands,
-                        models: loc.state.pickedModels,
+                        models: loc.state.models,
                         price: loc.state.price,
                         mileage: loc.state.mileage,
                         registration: {

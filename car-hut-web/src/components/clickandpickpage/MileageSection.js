@@ -88,7 +88,7 @@ function MileageSection() {
                     to={`/clickAndPickPage/price`}
                     state={{
                         brands: loc.state.brands,
-                        models: loc.state.pickedModels,
+                        models: loc.state.models,
                     }}
                 >
                     <button className="styled-button">Price</button>
@@ -97,7 +97,7 @@ function MileageSection() {
                     to={`/clickAndPickPage/registration`}
                     state={{
                         brands: loc.state.brands,
-                        models: loc.state.pickedModels,
+                        models: loc.state.models,
                         price: loc.state.price,
                         mileage: {
                             fromMileage: fromMileage, toMileage: toMileage

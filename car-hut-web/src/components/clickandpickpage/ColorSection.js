@@ -6,7 +6,7 @@ import { isCompositeComponent } from 'react-dom/test-utils';
 function ColorSection() {
 
     const loc = useLocation();
-
+    console.log(loc);
     const colors = ["black", "silver", "gray", "white", "red", "purple", "green", "yellow", "navy", "blue", "beige", "brown", "darkorange", "gold", "powderblue", "sienna"];
 
     const [pickedColors, setPickedColors] = useState([]);
@@ -78,7 +78,7 @@ function ColorSection() {
                     to={`/clickAndPickPage/gearbox`}
                     state={{
                         brands: loc.state.brands,
-                        models: loc.state.pickedModels,
+                        models: loc.state.models,
                         price: loc.state.price,
                         mileage: loc.state.mileage,
                         registration: loc.state.registration,
@@ -93,7 +93,7 @@ function ColorSection() {
                     to={`/searchList`}
                     state={{
                         brands: loc.state.brands,
-                        models: loc.state.pickedModels,
+                        models: loc.state.models,
                         price: loc.state.price,
                         mileage: loc.state.mileage,
                         registration: loc.state.registration,

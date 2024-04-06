@@ -79,7 +79,7 @@ function FuelSection() {
                     to={`/clickAndPickPage/registration`}
                     state={{
                         brands: loc.state.brands,
-                        models: loc.state.pickedModels,
+                        models: loc.state.models,
                         price: loc.state.price,
                         mileage: loc.state.mileage
                     }}
@@ -90,7 +90,7 @@ function FuelSection() {
                     to={`/clickAndPickPage/engine`}
                     state={{
                         brands: loc.state.brands,
-                        models: loc.state.pickedModels,
+                        models: loc.state.models,
                         price: loc.state.price,
                         mileage: loc.state.mileage,
                         registration: loc.state.registration,

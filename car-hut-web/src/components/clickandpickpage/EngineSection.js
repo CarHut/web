@@ -134,7 +134,7 @@ function EngineSection() {
                     to={`/clickAndPickPage/fuel`}
                     state={{
                         brands: loc.state.brands,
-                        models: loc.state.pickedModels,
+                        models: loc.state.models,
                         price: loc.state.price,
                         mileage: loc.state.mileage,
                         registration: loc.state.registration
@@ -146,7 +146,7 @@ function EngineSection() {
                     to={`/clickAndPickPage/gearbox`}
                     state={{
                         brands: loc.state.brands,
-                        models: loc.state.pickedModels,
+                        models: loc.state.models,
                         price: loc.state.price,
                         mileage: loc.state.mileage,
                         registration: loc.state.registration,
