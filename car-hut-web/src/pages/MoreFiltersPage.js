@@ -13,14 +13,14 @@ function MoreFiltersPage() {
     const [carType, setCarType] = useState("");
     const [price, setPrice] = useState({priceFrom: "", priceTo: ""});
     const [mileage, setMileage] = useState({mileageFrom: "", mileageTo: ""});
-    const [registration, setRegistration] = useState({registrationFrom: '0', registrationTo: '0'});
+    const [registration, setRegistration] = useState({registrationFrom: '', registrationTo: ''});
     const [seatingConfig, setSeatingconfig] = useState("");
     const [doors, setDoors] = useState("");
     const [location, setLocation] = useState("");
     const [postalCode, setPostalCode] = useState("");
     const [fuelType, setFuelType] = useState("");
-    const [power, setPower] = useState({powerFrom: '0', powerTo: '0'});
-    const [displacement, setDisplacement] = useState({displacementFrom: '0', displacementTo: '0'});
+    const [power, setPower] = useState({powerFrom: '', powerTo: ''});
+    const [displacement, setDisplacement] = useState({displacementFrom: '', displacementTo: ''});
     const [gearbox, setGearbox] = useState("");
     const [powertrain, setPowertrain] = useState("");
 
@@ -55,12 +55,9 @@ function MoreFiltersPage() {
                         brand: brand,
                         model: model,
                         carType: carType,
-                        priceFrom: price.priceFrom,
-                        priceTo: price.priceTo,
-                        mileageFrom: mileage.mileageFrom,
-                        mileageTo: mileage.mileageTo,
-                        registrationFrom: registration.registrationFrom,
-                        registrationTo: registration.registrationTo,
+                        price: price,
+                        mileage: mileage,
+                        registration: registration,
                         seatingConfig: seatingConfig,
                         doors: doors,
                         location: location,
@@ -69,7 +66,8 @@ function MoreFiltersPage() {
                         power: power,
                         displacement: displacement,
                         gearbox: gearbox,
-                        powertrain: powertrain
+                        powertrain: powertrain,
+                        models: [ { brand: brand, model: model} ]
                     }}
                 >
                     <button className="styled-button">{searchedCarsNumber !== null ? (searchedCarsNumber + ' cars') : ('0 cars')}</button>

@@ -36,57 +36,20 @@ function EngineAndPowertrain({fuelType, setFuelType, power, setPower, displaceme
             <div className='section-header-engine-and-powertrain'>Engine and powertrain</div>
             <div className='line-container'/>
             <div className='fuel-type-wrapper'>
-                <div className='checkmarklabel-engine-and-powertrain'>Fuel type</div>
-                <div className='fuel-type-content'>
-                    <div className='fuel-type-entity'>
-                        <div className='checkbox-label'>Petrol</div>
-                        <label className='custom-checkbox-engine-and-power' onClick={handleSelectedFuelType('Petrol')}>
-                            <input type="checkbox"/>
-                            <span className="checkmark-engine-and-power" onClick={handleSelectedFuelType('Petrol')}></span>
-                        </label>
-                    </div>
-                    <div className='fuel-type-entity'>
-                        <div className='checkbox-label'>Diesel</div>
-                        <label className='custom-checkbox-engine-and-power'>
-                            <input type="checkbox"/>
-                            <span className="checkmark-engine-and-power" onClick={handleSelectedFuelType('Diesel')}></span>
-                        </label>
-                    </div>
-                    <div className='fuel-type-entity'>
-                        <div className='checkbox-label'>Electric</div>
-                        <label className='custom-checkbox-engine-and-power'>
-                            <input type="checkbox"/>
-                            <span className="checkmark-engine-and-power" onClick={handleSelectedFuelType('Electric')}></span>
-                        </label>
-                    </div>
-                    <div className='fuel-type-entity'>
-                        <div className='checkbox-label'>Hybrid</div>
-                        <label className='custom-checkbox-engine-and-power' onClick={handleSelectedFuelType('Hybrid')}>
-                            <input type="checkbox"/>
-                            <span className="checkmark-engine-and-power"></span>
-                        </label>
-                    </div>
-                    <div className='fuel-type-entity'>
-                        <div className='checkbox-label'>LPG</div>
-                        <label className='custom-checkbox-engine-and-power'>
-                            <input type="checkbox"/>
-                            <span className="checkmark-engine-and-power" onClick={handleSelectedFuelType('LPG')}></span>
-                        </label>
-                    </div>
-                    <div className='fuel-type-entity'>
-                        <div className='checkbox-label'>Plug-in hybrid</div>
-                        <label className='custom-checkbox-engine-and-power'>
-                            <input type="checkbox"/>
-                            <span className="checkmark-engine-and-power" onClick={handleSelectedFuelType('Plug-in hybrid')}></span>
-                        </label>
-                    </div>
-                    <div className='fuel-type-entity'>
-                        <div className='checkbox-label'>Ethanol</div>
-                        <label className='custom-checkbox-engine-and-power'>
-                            <input type="checkbox"/>
-                            <span className="checkmark-engine-and-power" onClick={handleSelectedFuelType('Ethanol')}></span>
-                        </label>
-                    </div>
+                <div className='combobox-entity'>
+                        <div className='checkmarklabel-engine-and-powertrain'>Fuel type</div>
+                        <div className="custom-combobox">
+                            <select className='myComboBox' onChange={(e) => handleSelectedFuelType(e.target.value)}>
+                                <option key={1} value="">All</option>
+                                <option key={2} value={'Petrol'}>Petrol</option>
+                                <option key={3} value={'Diesel'}>Diesel</option>
+                                <option key={4} value={'Electric'}>Electric</option>
+                                <option key={5} value={'Hybrid'}>Hybrid</option>
+                                <option key={6} value={'LPG'}>LPG</option>
+                                <option key={7} value={'CNG'}>CNG</option>
+                                <option key={8} value={'Not stated'}>Not stated</option>
+                            </select>
+                        </div>
                 </div>
             </div>
             <div className='line-wrapper-engine-and-powertrain'>

@@ -5,8 +5,9 @@ import { useState, useEffect } from 'react';
 function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange }) {
 
     const [brandsAndModels, setBrandsAndModels] = useState([]);
-    const [price, setPrice] = useState({ priceFrom: '', priceTo: '' });
-    const [mileage, setMileage] = useState({ mileageFrom: '', mileageTo: ''});
+    const [price, setPrice] = useState(fetchedState.price);
+    const [mileage, setMileage] = useState(fetchedState.mileage);
+    const [fuelType, setFuelType] = useState(fetchedState.fuelType);
     var brandsAndModelsFetchedTrigger = false;
 
     const handleRemovalOfABrandsAndModelEntity = (brand, model) => {
@@ -19,8 +20,6 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange })
     useEffect(() => {
         if (fetchedState.models !== undefined && !brandsAndModelsFetchedTrigger) {
             setBrandsAndModels(fetchedState.models);
-            setPrice(fetchedState.price);
-            setMileage(fetchedState.mileage);
             brandsAndModelsFetchedTrigger = true;
         }
     }, []);
@@ -37,20 +36,6 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange })
                     })}
                 </div>
             );
-        } 
-        // Only one brand was chosen or none
-        else {
-            if (fetchedState.brand !== null || fetchedState.brand !== undefined) {
-                return (
-                    <div className='search-list-extended-filters-brandAndModel-section-content'>
-                        <div className='search-list-extended-filters-brandAndModel-entity'>{fetchedState.brand} {fetchedState.model}   x</div>
-                    </div>
-                )
-            } else {
-                return (
-                    <div className='search-list-extended-filters-brandAndModel-section-content'></div>
-                )
-            }            
         }
     }
 
@@ -64,10 +49,13 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange })
                 setPrice({ priceFrom: price.priceFrom, priceTo: value });
                 break;
         }
+    }
 
+    const onPriceChanged = () => {
         var updatedState = {...fetchedState};
         updatedState.price = price;
         handleStateChange(updatedState);
+        console.log('was here');
     }
 
     // type -> 0 = mileageFrom, 1 = mileageTo
@@ -80,9 +68,18 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange })
                 setMileage({ mileageFrom: mileage.mileageFrom, mileageTo: value });
                 break;
         }
+    }
 
+    const onMileageChanged = () => {
         var updatedState = {...fetchedState};
         updatedState.mileage = mileage;
+        handleStateChange(updatedState);
+    }
+
+    const handleFuelTypeChange = (fuelType) => {
+        setFuelType(fuelType);
+        var updatedState = {...fetchedState};
+        updatedState.fuelType = fuelType;
         handleStateChange(updatedState);
     }
 
@@ -108,6 +105,7 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange })
                             step="500"
                             value={price.priceFrom}
                             onChange={(e) => handlePriceChange(e.target.value, 0)}
+                            onMouseLeave ={() => onPriceChanged()}
                         />
                     </div>
                     <div className="search-list-extended-filters-slider-container">
@@ -121,6 +119,7 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange })
                             step="500"
                             value={price.priceTo}
                             onChange={(e) => handlePriceChange(e.target.value, 1)}
+                            onMouseLeave={() => onPriceChanged()}
                         />
                     </div>
                 </div>
@@ -137,6 +136,7 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange })
                             step="500"
                             value={mileage.mileageFrom}
                             onChange={(e) => handleMileageChange(e.target.value, 0)}
+                            onMouseLeave={() => onMileageChanged()}
                         />
                     </div>
                     <div className="search-list-extended-filters-slider-container">
@@ -150,7 +150,25 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange })
                             step="500"
                             value={mileage.mileageTo}
                             onChange={(e) => handleMileageChange(e.target.value, 1)}
+                            onMouseLeave={() => onMileageChanged()}
                         />
+                    </div>
+                </div>
+                <div className='search-list-extended-filters-section'>
+                    <div className='search-list-extended-filters-section-label'>Fuel type</div>
+                    <div className='combobox-entity'>
+                        <div className="custom-combobox">
+                            <select id="fuelComboBox" className='myComboBox' onChange={(e) => handleFuelTypeChange(e.target.value)}>
+                                <option key={1} value={""}>Any</option>
+                                <option key={2} value={'Not stated'}>Not stated</option>
+                                <option key={3} value={'Hybrid'}>Hybrid</option>
+                                <option key={4} value={'Diesel'}>Diesel</option>
+                                <option key={5} value={'Petrol'}>Petrol</option>
+                                <option key={6} value={'Electric'}>Electric</option>
+                                <option key={7} value={'LPG'}>LPG</option>
+                                <option key={8} value={'CNG'}>CNG</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>

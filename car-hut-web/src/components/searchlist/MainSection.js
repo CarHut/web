@@ -15,10 +15,6 @@ function MainSection({state}) {
         setFetchedState(updatedState);
     }
 
-    useEffect(() => {
-        console.log(fetchedState);
-    }, [fetchedState]);
-
     return (
         <div className='section-body-search-list-main-section'>
             <div className='search-list-left-wrapper'>  

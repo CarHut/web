@@ -132,8 +132,11 @@ function FilterSearch() {
                         state={{
                             brand: selectedBrand,
                             model: selectedModel,
-                            priceFrom: selectedPriceFrom,
-                            mileageFrom: selectedMileageFrom
+                            price: { priceFrom: selectedPriceFrom, priceTo: ''},
+                            mileage: { mileageFrom: selectedMileageFrom, mileageTo: '' },
+                            models: [
+                                { brand: selectedBrand, model: selectedModel }
+                            ]
                         }}
                     >
                         <button className="styled-button">{searchedCarsNumber !== null ? (searchedCarsNumber + " cars") : ("0 cars")}</button>
