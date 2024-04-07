@@ -8,7 +8,7 @@ export default async function updateNumberOfSearchResults(brand, model, carType,
                 `&seatingConfig=${seatingConfig}&doors=${doors}&location=${location}&postalCode=${postalCode}&fuelType=${fuelType}&powerFrom=${powerFrom}` +
                 `&powerTo=${powerTo}&displacementFrom=${displacementFrom}&displacement=${displacementTo}&gearbox=${gearbox}&powertrain=${powertrain}`;
     
-    console.log(url);
+    
 
     const response = await axios.get(url);
 

@@ -17,6 +17,9 @@ function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength}) {
             `&priceFrom=${fetchedState.price.priceFrom}&priceTo=${fetchedState.price.priceTo}&mileageFrom=${fetchedState.mileage.mileageFrom}` +
             `&mileageTo=${fetchedState.mileage.mileageTo}&fuelType=${fetchedState.fuelType}&sortBy=${sortBy}&sortOrder=${sortOrder}`;
 
+        console.log(url);
+        console.log(fetchedState.models);
+
         const response = await fetch(url, {
             method: 'POST',
             body: JSON.stringify(fetchedState.models),

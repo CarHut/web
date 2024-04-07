@@ -47,7 +47,7 @@ function EngineAndPowertrain({fuelType, setFuelType, power, setPower, displaceme
                                 <option key={5} value={'Hybrid'}>Hybrid</option>
                                 <option key={6} value={'LPG'}>LPG</option>
                                 <option key={7} value={'CNG'}>CNG</option>
-                                <option key={8} value={'Not stated'}>Not stated</option>
+                                <option key={8} value={'NotStated'}>Not stated</option>
                             </select>
                         </div>
                 </div>

@@ -134,6 +134,7 @@ function FilterSearch() {
                             model: selectedModel,
                             price: { priceFrom: selectedPriceFrom, priceTo: ''},
                             mileage: { mileageFrom: selectedMileageFrom, mileageTo: '' },
+                            fuelType: '',
                             models: [
                                 { brand: selectedBrand, model: selectedModel }
                             ]

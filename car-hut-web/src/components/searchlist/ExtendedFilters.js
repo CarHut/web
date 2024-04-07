@@ -8,7 +8,35 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange })
     const [price, setPrice] = useState(fetchedState.price);
     const [mileage, setMileage] = useState(fetchedState.mileage);
     const [fuelType, setFuelType] = useState(fetchedState.fuelType);
+    const [addBrands, setAddBrands] = useState([]);
+    const [addModels, setAddModels] = useState([]);
+    const [addBrand, setAddBrand] = useState('');
+    const [addModel, setAddModel] = useState('');
+
+    const [addBrandAndModelOverlay, setAddBrandAndModelOverlay] = useState(false);
     var brandsAndModelsFetchedTrigger = false;
+
+    useEffect(() => {
+        // Fetch data from the API when the component mounts
+        fetch('http://localhost:8080/api/getAllBrands')
+            .then(response => response.json())
+            .then(data => setAddBrands(data))
+            .catch(error => console.error('Error fetching brands:', error));
+    }, []);
+
+    useEffect(() => {
+        // Fetch models when a brand is 
+        if (addBrand !== '') {
+            fetch(`http://localhost:8080/api/getModelsByBrand/${addBrand}`)
+                .then(response => response.json())
+                .then(data => setAddModels(data))
+                .catch(error => console.error('Error fetching models:', error));
+        } else {
+            // Clear models when no brand is 
+            setAddModels([]);
+        }
+    }, [addBrand]);
+
 
     const handleRemovalOfABrandsAndModelEntity = (brand, model) => {
         setBrandsAndModels(brandsAndModels.filter((brandAndModel) => brandAndModel.brand !== brand || brandAndModel.model !== model));
@@ -24,19 +52,53 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange })
         }
     }, []);
     
+    const handleSelectedAddBrand = (val) => {
+        setAddBrand(val.target.value);
+    }
+
+    const handleSelectedAddModel = (val) => {
+        setAddModel(val.target.value);
+    }
+
     const renderBrandsAndModelsEntities = () => {
-        // Multiple brands and models choosed
-        if (brandsAndModels.length > 0) {
-            return (
-                <div className='search-list-extended-filters-brandAndModel-section-content'>
-                    {brandsAndModels.map((car, index) => {
-                        return (
-                            <div key={index} className='search-list-extended-filters-brandAndModel-entity'>{car.brand} {car.model} <div className='x' onClick={() => handleRemovalOfABrandsAndModelEntity(car.brand, car.model)}/></div>
-                        )
-                    })}
-                </div>
-            );
-        }
+        return (
+            <div className='search-list-extended-filters-brandAndModel-section-content'>
+                {brandsAndModels.map((car, index) => {
+                    return (
+                        <div key={index} className='search-list-extended-filters-brandAndModel-entity'>{car.brand} {car.model} <div className='x' onClick={() => handleRemovalOfABrandsAndModelEntity(car.brand, car.model)}/></div>
+                    )
+                })}
+                <div className='search-list-extended-filters-brandAndModel-add-button' onClick={() => handleAddBrandAndModelOverlay()}>Add +</div>
+                {addBrandAndModelOverlay === true 
+                    ?   <div className='search-list-extended-filters-brandAndModel-add-overlay'>
+                            <div className='combobox-entity'>
+                                <div className='label'>Brand</div>
+                                <div className="custom-combobox">
+                                    <select id="brandComboBox" className='myComboBox' value={addBrand} onChange={(e) => handleSelectedAddBrand(e)}>
+                                        <option key={0} value={''} onChange={(e) => handleSelectedAddBrand(e)}>All</option>
+                                        {addBrands.map(brand => (
+                                            <option key={brand.id} value={brand.brand}>{brand.brand}</option>
+                                        ))}
+                                    </select>
+                                </div>
+                            </div>
+                            <div className='combobox-entity'>
+                                <div className='label'>Model</div>
+                                <div className="custom-combobox">
+                                    <select id="modelComboBox" className={`myComboBox ${addBrand === '' ? 'disabled' : ''}`} value={addModel} onChange={(e) => handleSelectedAddModel(e)} disabled={addBrand === ''}>
+                                        <option key={0} value={''} onChange={(e) => handleSelectedAddBrand(e)}>All</option>
+                                        {addModels.map(model => (
+                                            <option key={model.id} value={model.model}>{model.model}</option>
+                                        ))}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    :   <div className=''></div> 
+                }
+            </div>
+        );
+
     }
 
     // type -> 0 = priceFrom, 1 = priceTo
@@ -76,11 +138,32 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange })
         handleStateChange(updatedState);
     }
 
-    const handleFuelTypeChange = (fuelType) => {
-        setFuelType(fuelType);
+    const handleFuelTypeChange = (fuelTypeNew) => {
+        setFuelType(fuelTypeNew);
         var updatedState = {...fetchedState};
-        updatedState.fuelType = fuelType;
+        updatedState.fuelType = fuelTypeNew;
         handleStateChange(updatedState);
+    }
+
+    const handleAddBrandAndModelOverlay = () => {
+        if (addBrandAndModelOverlay) {
+            if (addBrand !== '') {
+                var updatedState = {...fetchedState};
+                var updatedModels = [];
+                if (addModel !== '') {
+                    updatedModels = [...updatedState.models, { brand: addBrand, model: addModel }];
+                } else {
+                    updatedModels = [...updatedState.models, { brand: addBrand, model: '' }];
+                }
+                updatedState.models = updatedModels;
+                setBrandsAndModels(updatedModels);
+                handleStateChange(updatedState);
+            }
+        }
+
+        setAddBrand('');
+        setAddModel('');
+        setAddBrandAndModelOverlay(!addBrandAndModelOverlay);
     }
 
     return (
@@ -160,7 +243,7 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange })
                         <div className="custom-combobox">
                             <select id="fuelComboBox" className='myComboBox' onChange={(e) => handleFuelTypeChange(e.target.value)}>
                                 <option key={1} value={""}>Any</option>
-                                <option key={2} value={'Not stated'}>Not stated</option>
+                                <option key={2} value={'NotStated'}>Not stated</option>
                                 <option key={3} value={'Hybrid'}>Hybrid</option>
                                 <option key={4} value={'Diesel'}>Diesel</option>
                                 <option key={5} value={'Petrol'}>Petrol</option>

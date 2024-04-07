@@ -150,17 +150,23 @@
   }
 }
 
-.search-list-extended-filters-section .combobox-entity {
+.search-list-extended-filters-brandAndModel-add-overlay 
+.search-list-extended-filters-section 
+.combobox-entity {
   display: block;
 }
 
-.search-list-extended-filters-section .label {
+.search-list-extended-filters-brandAndModel-add-overlay 
+.search-list-extended-filters-section 
+.label {
   color: #fff;
   font-size: 1em;
   padding-bottom: 0.4em;
 }
 
-.search-list-extended-filters-section select {
+.search-list-extended-filters-brandAndModel-add-overlay
+.search-list-extended-filters-section 
+select {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -172,13 +178,17 @@
   cursor: pointer;
 }
 
-.search-list-extended-filters-section .custom-combobox {
+.search-list-extended-filters-section 
+.search-list-extended-filters-brandAndModel-add-overlay
+.custom-combobox {
     position: relative;
     width: 100%;
 }
 
 /* Style the custom combobox arrow */
-.search-list-extended-filters-section .custom-combobox::after {
+.search-list-extended-filters-section 
+.search-list-extended-filters-brandAndModel-add-overlay
+.custom-combobox::after {
   content: '\25BC'; /* Unicode arrow down character */
   color: #D9D9D9; /* Adjust the color as needed */
   position: absolute;
@@ -188,7 +198,9 @@
 }
 
 /* Style the custom combobox options */
-.search-list-extended-filters-section .myComboBox {
+.search-list-extended-filters-section 
+.search-list-extended-filters-brandAndModel-add-overlay
+.myComboBox {
   width: 100%;
   border: 1px solid #D9D9D9;
   border-radius: 5px;
@@ -200,13 +212,37 @@
 }
 
 /* Optional: Style the dropdown options */
-.search-list-extended-filters-section .myComboBox option {
+.search-list-extended-filters-section 
+.search-list-extended-filters-brandAndModel-add-overlay
+.myComboBox option {
   background-color: #fff;
   color: #000;
 }
 
-.search-list-extended-filters-section .myComboBox.disabled {
+.search-list-extended-filters-section 
+.search-list-extended-filters-brandAndModel-add-overlay
+.myComboBox.disabled {
   box-shadow: none; /* Reset shadow when disabled */
   opacity: 0.7; /* Adjust opacity to indicate disabled state */
   /* Add any additional styles to visually indicate disabled state */
+}
+
+.search-list-extended-filters-brandAndModel-add-button {
+    background-color: #181818;
+    padding: 0.5em;
+    font-size: 0.8em;
+    margin: 0.5em 0;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    display: flex;
+}
+
+.search-list-extended-filters-brandAndModel-add-button:hover {
+    cursor: pointer;
+}
+
+.search-list-extended-filters-brandAndModel-add-overlay {
+    width: 100%;
+    background-color: #181818;
 }
