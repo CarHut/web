@@ -4,7 +4,7 @@ import audiRS3Image from '../../images/searchlist/offers/audiRS3.jpg';
 import { useEffect, useState } from 'react';
 
 
-function Offers({offersPerPage, sortBy, state}) {
+function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength}) {
 
     const [cars, setCars] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -13,7 +13,9 @@ function Offers({offersPerPage, sortBy, state}) {
     const fetchCars = () => {
         const sortOrder = sortBy[sortBy.length - 1] == 'L' ? "ASC" : "DESC";
 
-        const url = `http://localhost:8080/api/getTempCarsWithFilters?brand=${state.brand}&model=${state.model}&priceFrom=${state.priceFrom}&mileageFrom=${state.mileageFrom}&sortBy=${sortBy}&sortOrder=${sortOrder}`;
+        const url = `http://localhost:8080/api/getTempCarsWithFilters?brand=${fetchedState.brand}&model=${fetchedState.model}` +
+            `&priceFrom=${fetchedState.price.priceFrom}&priceTo=${fetchedState.price.priceTo}&mileageFrom=${fetchedState.mileageFrom}` +
+            `&sortBy=${sortBy}&sortOrder=${sortOrder}`;
         fetch(url, {
             method: 'POST',
             headers: {
@@ -24,6 +26,7 @@ function Offers({offersPerPage, sortBy, state}) {
             .then(data => {
                 setCars(data);
                 setTotalPages(Math.ceil(data.length / offersPerPage));
+                setResultsListLength(data.length);
             })
             .catch(error => console.error('Error fetching temp cars by sortBy:', error));         
     }
@@ -31,9 +34,13 @@ function Offers({offersPerPage, sortBy, state}) {
     const fetchMultipleCars = async () => {
         const sortOrder = sortBy[sortBy.length - 1] == 'L' ? "ASC" : "DESC";
 
-        const response = await fetch(`http://localhost:8080/api/getTempCarsWithFilters?priceFrom=${state.price.fromPrice}&mileageFrom=${state.mileage.fromMileage}&sortBy=${sortBy}&sortOrder=${sortOrder}`, {
+        const url = `http://localhost:8080/api/getTempCarsWithFilters?` +
+            `&priceFrom=${fetchedState.price.priceFrom}&priceTo=${fetchedState.price.priceTo}&mileageFrom=${fetchedState.mileage.mileageFrom}` +
+            `&mileageTo=${fetchedState.mileage.mileageTo}&sortBy=${sortBy}&sortOrder=${sortOrder}`;
+
+        const response = await fetch(url, {
             method: 'POST',
-            body: JSON.stringify(state.models),
+            body: JSON.stringify(fetchedState.models),
             headers: {
                'Content-Type': 'application/json'
             }
@@ -42,13 +49,13 @@ function Offers({offersPerPage, sortBy, state}) {
         
         setCars(result);
         setTotalPages(Math.ceil(result.length / offersPerPage));
+        setResultsListLength(result.length);
     }
 
 
 
     useEffect(() => {
-        console.log(state.models);
-        if (state.models !== undefined) {
+        if (fetchedState.models !== undefined) {
             fetchMultipleCars();
         } else {
             fetchCars();
@@ -57,12 +64,20 @@ function Offers({offersPerPage, sortBy, state}) {
     }, [offersPerPage]);
 
     useEffect(() => {
-        if (state.models !== undefined) {
+        if (fetchedState.models !== undefined) {
             fetchMultipleCars();
         } else {
             fetchCars();
         }
     }, [sortBy]);
+
+    useEffect(() => {
+        if (fetchedState.models !== undefined) {
+            fetchMultipleCars();
+        } else {
+            fetchCars();
+        }
+    }, [fetchedState]);
 
     const generateCarOffers = () => {
         const startIndex = (currentPage - 1) * parseInt(offersPerPage);

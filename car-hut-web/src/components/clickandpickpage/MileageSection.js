@@ -5,8 +5,8 @@ import React, { useState } from 'react';
 function MileageSection() {
     var loc = useLocation();
 
-    const [fromMileage, setFromMileage] = useState(); 
-    const [toMileage, setToMileage] = useState();
+    const [mileageFrom, setFromMileage] = useState(''); 
+    const [mileageTo, setToMileage] = useState('');
 
     const handleFromMileageChange = (e) => {
         setFromMileage(e.target.value);
@@ -18,32 +18,32 @@ function MileageSection() {
 
     return (
         <div className='section-body-mileage-section'>
-            <div className='section-header-mileage-section'>Pick mileage: {fromMileage}km - {toMileage}km </div>
+            <div className='section-header-mileage-section'>Pick mileage: {mileageFrom}km - {mileageTo}km </div>
             <div className="line-container"/>
             <div className='mileage-wrapper'>
                 <div className="mileage-slider-container">
-                    <label htmlFor="fromMileage">Mileage (from): {fromMileage}km</label>
+                    <label htmlFor="mileageFrom">Mileage (from): {mileageFrom}km</label>
                     <input
                         type="range"
-                        id="fromMileage"
-                        name="fromMileage"
+                        id="mileageFrom"
+                        name="mileageFrom"
                         min="0"
                         max="500000"
                         step="500"
-                        value={fromMileage}
+                        value={mileageFrom}
                         onChange={handleFromMileageChange}
                     />
                 </div>
                 <div className="mileage-slider-container">
-                    <label htmlFor="toMileage">Mileage (To): {toMileage}km</label>
+                    <label htmlFor="mileageTo">Mileage (To): {mileageTo}km</label>
                     <input
                         type="range"
-                        id="toMileage"
-                        name="toMileage"
+                        id="mileageTo"
+                        name="mileageTo"
                         min="0"
                         max="500000"
                         step="500"
-                        value={toMileage}
+                        value={mileageTo}
                         onChange={handleToMileageChange}
                     />
                 </div>
@@ -100,7 +100,7 @@ function MileageSection() {
                         models: loc.state.models,
                         price: loc.state.price,
                         mileage: {
-                            fromMileage: fromMileage, toMileage: toMileage
+                            mileageFrom: mileageFrom, mileageTo: mileageTo
                         } 
                     }}
                 >

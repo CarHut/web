@@ -5,8 +5,8 @@ import React, { useState } from 'react';
 function PriceSection() {
     var loc = useLocation();
 
-    const [fromPrice, setFromPrice] = useState(); 
-    const [toPrice, setToPrice] = useState();
+    const [priceFrom, setFromPrice] = useState(''); 
+    const [priceTo, setToPrice] = useState('');
 
     const handleFromPriceChange = (e) => {
         setFromPrice(e.target.value);
@@ -18,32 +18,32 @@ function PriceSection() {
 
     return (
         <div className='section-body-model-section'>
-            <div className='section-header-model-section'>Pick a price: {fromPrice}€ - {toPrice}€ </div>
+            <div className='section-header-model-section'>Pick a price: {priceFrom}€ - {priceTo}€ </div>
             <div className="line-container"/>
             <div className='price-wrapper'>
                 <div className="price-slider-container">
-                    <label htmlFor="priceFrom">Price (from): {fromPrice}€</label>
+                    <label htmlFor="priceFrom">Price (from): {priceFrom}€</label>
                     <input
                         type="range"
-                        id="fromPrice"
-                        name="fromPrice"
+                        id="priceFrom"
+                        name="priceFrom"
                         min="0"
                         max="500000"
                         step="500"
-                        value={fromPrice}
+                        value={priceFrom}
                         onChange={handleFromPriceChange}
                     />
                 </div>
                 <div className="price-slider-container">
-                    <label htmlFor="toPrice">Price (To): {toPrice}€</label>
+                    <label htmlFor="priceTo">Price (To): {priceTo}€</label>
                     <input
                         type="range"
-                        id="toPrice"
-                        name="toPrice"
+                        id="priceTo"
+                        name="priceTo"
                         min="0"
                         max="500000"
                         step="500"
-                        value={toPrice}
+                        value={priceTo}
                         onChange={handleToPriceChange}
                     />
                 </div>
@@ -98,7 +98,7 @@ function PriceSection() {
                         brands: loc.state.brands,
                         models: loc.state.models,
                         price: {
-                            fromPrice: fromPrice, toPrice: toPrice
+                            priceFrom: priceFrom, priceTo: priceTo
                         }
                     }}
                 >
