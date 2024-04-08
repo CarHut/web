@@ -90,28 +90,16 @@ function EngineAndPowertrain({fuelType, setFuelType, power, setPower, displaceme
                     </div>
                 </div>
                 <div className='gearbox-wrapper-engine-and-powertrain'>
-                    <div className='checkmarklabel-engine-and-powertrain'>Gearbox</div>
-                    <div className='gearbox-content'>
-                        <div className='gearbox-entity'>
-                            <div className='checkbox-label'>Manual</div>
-                            <label className='custom-checkbox-engine-and-power'>
-                                <input type="checkbox"/>
-                                <span className="checkmark-engine-and-power" onClick={handleSelectedGearbox('Manual')}></span>
-                            </label>
-                        </div>
-                        <div className='gearbox-entity'>
-                            <div className='checkbox-label'>Automatic</div>
-                            <label className='custom-checkbox-engine-and-power'>
-                                <input type="checkbox"/>
-                                <span className="checkmark-engine-and-power" onClick={handleSelectedGearbox('Automatic')}></span>
-                            </label>
-                        </div>
-                        <div className='gearbox-entity'>
-                            <div className='checkbox-label'>Sequential</div>
-                            <label className='custom-checkbox-engine-and-power'>
-                                <input type="checkbox"/>
-                                <span className="checkmark-engine-and-power" onClick={handleSelectedGearbox('Sequential')}></span>
-                            </label>
+                    <div className='combobox-entity'>
+                        <div className='checkmarklabel-engine-and-powertrain'>Gearbox</div>
+                        <div className="custom-combobox">
+                            <select className='myComboBox' onChange={(e) => handleSelectedGearbox(e.target.value)}>
+                                <option key={1} value="">All</option>
+                                <option key={2} value="Manual">Manual</option>
+                                <option key={3} value="Automatic">Automatic</option>
+                                <option key={4} value="Sequential">Sequential</option>
+                                <option key={5} value="NotStated">Not stated</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -156,28 +144,17 @@ function EngineAndPowertrain({fuelType, setFuelType, power, setPower, displaceme
                     </div>
                 </div>
                 <div className='gearbox-wrapper-engine-and-powertrain'>
-                    <div className='checkmarklabel-engine-and-powertrain'>Powertrain (drive)</div>
-                    <div className='gearbox-content'>
-                        <div className='gearbox-entity'>
-                            <div className='checkbox-label'>Front-wheel</div>
-                            <label className='custom-checkbox-engine-and-power'>
-                                <input type="checkbox"/>
-                                <span className="checkmark-engine-and-power" onClick={handleSelectedPowertrain('Front-wheel')}></span>
-                            </label>
-                        </div>
-                        <div className='gearbox-entity'>
-                            <div className='checkbox-label'>Rear-wheel</div>
-                            <label className='custom-checkbox-engine-and-power'>
-                                <input type="checkbox"/>
-                                <span className="checkmark-engine-and-power" onClick={handleSelectedPowertrain('Rear-wheel')}></span>
-                            </label>
-                        </div>
-                        <div className='gearbox-entity'>
-                            <div className='checkbox-label'>All-wheel</div>
-                            <label className='custom-checkbox-engine-and-power'>
-                                <input type="checkbox"/>
-                                <span className="checkmark-engine-and-power" onClick={handleSelectedPowertrain('All-wheel')}></span>
-                            </label>
+                    <div className='combobox-entity'>
+                        <div className='checkmarklabel-engine-and-powertrain'>Powertrain</div>
+                        <div className="custom-combobox">
+                            <select className='myComboBox' onChange={(e) => handleSelectedPowertrain(e.target.value)}>
+                                <option key={1} value="">All</option>
+                                <option key={2} value="NotStated">Not stated</option>
+                                <option key={3} value="Other">Other</option>
+                                <option key={4} value="FrontWheel">Front-wheel drive</option>
+                                <option key={5} value="RearWheel">Rear-wheel drive</option>
+                                <option key={6} value="AllWheel">All-wheel drive</option>
+                            </select>
                         </div>
                     </div>
                 </div>

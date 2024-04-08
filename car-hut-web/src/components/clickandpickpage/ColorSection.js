@@ -82,7 +82,7 @@ function ColorSection() {
                         price: loc.state.price,
                         mileage: loc.state.mileage,
                         registration: loc.state.registration,
-                        fuel: loc.state.fuel,
+                        fuelType: loc.state.fuelType,
                         enginePower: loc.state.enginePower,
                         displacement: loc.state.displacement
                     }}
@@ -97,10 +97,11 @@ function ColorSection() {
                         price: loc.state.price,
                         mileage: loc.state.mileage,
                         registration: loc.state.registration,
-                        fuel: loc.state.fuel,
+                        fuelType: loc.state.fuelType,
                         enginePower: loc.state.enginePower,
                         displacement: loc.state.displacement,
                         gearbox: loc.state.gearbox,
+                        powertrain: '',
                         color: pickedColors
                     }}
                 >

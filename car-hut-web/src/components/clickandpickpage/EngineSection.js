@@ -150,7 +150,7 @@ function EngineSection() {
                         price: loc.state.price,
                         mileage: loc.state.mileage,
                         registration: loc.state.registration,
-                        fuel: loc.state.fuel,
+                        fuelType: loc.state.fuelType,
                         enginePower: {
                             fromEnginePower: fromEnginePower, toEnginePower: toEnginePower
                         },

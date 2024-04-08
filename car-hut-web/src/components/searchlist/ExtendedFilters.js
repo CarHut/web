@@ -8,6 +8,8 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange })
     const [price, setPrice] = useState(fetchedState.price);
     const [mileage, setMileage] = useState(fetchedState.mileage);
     const [fuelType, setFuelType] = useState(fetchedState.fuelType);
+    const [gearbox, setGearbox] = useState(fetchedState.gearbox);
+    const [powertrain, setPowertrain] = useState(fetchedState.powertrain);
     const [addBrands, setAddBrands] = useState([]);
     const [addModels, setAddModels] = useState([]);
     const [addBrand, setAddBrand] = useState('');
@@ -166,6 +168,20 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange })
         setAddBrandAndModelOverlay(!addBrandAndModelOverlay);
     }
 
+    const handleGearboxChange = (gearboxNew) => {
+        setGearbox(gearboxNew);
+        var updatedState = {...fetchedState};
+        updatedState.gearbox = gearboxNew;
+        handleStateChange(updatedState);
+    }
+
+    const handlePowertrainChange = (powertrainNew) => {
+        setPowertrain(powertrainNew);
+        var updatedState = {...fetchedState};
+        updatedState.powertrain = powertrainNew;
+        handleStateChange(updatedState);
+    }
+
     return (
         <div className='search-list-extended-filters-wrapper'>
             <div className='search-list-extended-filters-padding-wrapper'>
@@ -250,6 +266,35 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange })
                                 <option key={6} value={'Electric'}>Electric</option>
                                 <option key={7} value={'LPG'}>LPG</option>
                                 <option key={8} value={'CNG'}>CNG</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div className='search-list-extended-filters-section'>
+                    <div className='search-list-extended-filters-section-label'>Gearbox</div>
+                    <div className='combobox-entity'>
+                        <div className="custom-combobox">
+                            <select id="gearboxComboBox" className='myComboBox' onChange={(e) => handleGearboxChange(e.target.value)}>
+                                <option key={1} value={""}>Any</option>
+                                <option key={2} value={'NotStated'}>Not stated</option>
+                                <option key={3} value={'Manual'}>Manual</option>
+                                <option key={4} value={'Automatic'}>Automatic</option>
+                                <option key={5} value={'Sequential'}>Sequential</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div className='search-list-extended-filters-section'>
+                    <div className='search-list-extended-filters-section-label'>Powertrain</div>
+                    <div className='combobox-entity'>
+                        <div className="custom-combobox">
+                            <select id="gearboxComboBox" className='myComboBox' onChange={(e) => handlePowertrainChange(e.target.value)}>
+                                <option key={1} value={""}>Any</option>
+                                <option key={2} value={'Other'}>Other</option>
+                                <option key={3} value={'NotStated'}>Not stated</option>
+                                <option key={4} value={'RearWheel'}>Rear-wheel drive</option>
+                                <option key={5} value={'FronWheel'}>Front-wheel drive</option>
+                                <option key={5} value={'AllWheel'}>All-wheel drive</option>
                             </select>
                         </div>
                     </div>

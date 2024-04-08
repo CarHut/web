@@ -8,7 +8,7 @@ function FuelSection() {
     // UPDATE IF NEW FUEL TYPE IS ADDED
     const baseFuelTypes = ["Petrol", "Diesel", "Electric", "Hybrid", "LPG", "Ethanol", "Plug-in-hybrid"];
 
-    const [fuelTypes, setFuelTypes] = useState([]);
+    const [fuelType, setFuelType] = useState('');
 
     const generateFuelTypeCheckboxes = () => {
         return baseFuelTypes.map((fuelType) => (
@@ -23,12 +23,12 @@ function FuelSection() {
     }
 
     const handleClickedFuelType = (fuelType) => {
-        const isFuelTypePicked = fuelTypes.includes(fuelType);
+        const isFuelTypePicked = fuelType.includes(fuelType);
 
         if (isFuelTypePicked) {
-            setFuelTypes(fuelTypes.filter((type) => type !== fuelType))
+            setFuelType(fuelType.filter((type) => type !== fuelType))
         } else {
-            setFuelTypes([...fuelTypes, fuelType]);
+            setFuelType([...fuelType, fuelType]);
         }
     }
  
@@ -94,7 +94,7 @@ function FuelSection() {
                         price: loc.state.price,
                         mileage: loc.state.mileage,
                         registration: loc.state.registration,
-                        fuel: fuelTypes 
+                        fuelType: fuelType 
                     }}
                 >
                     <button className="styled-button">Engine</button>

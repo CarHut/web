@@ -135,6 +135,8 @@ function FilterSearch() {
                             price: { priceFrom: selectedPriceFrom, priceTo: ''},
                             mileage: { mileageFrom: selectedMileageFrom, mileageTo: '' },
                             fuelType: '',
+                            powertrain: '',
+                            gearbox: '',
                             models: [
                                 { brand: selectedBrand, model: selectedModel }
                             ]

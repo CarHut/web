@@ -9,7 +9,7 @@ function GearboxSection() {
     // UPDATE IF NEW GEARBOX TYPE IS ADDED
     const baseGearboxTypes = ["Manual", "Automatic", "Sequential"];
 
-    const [gearboxTypes, setGearboxTypes] = useState([]);
+    const [gearboxType, setGearboxType] = useState('');
 
     const generateGearboxTypeCheckboxes = () => {
         return baseGearboxTypes.map((fuelType) => (
@@ -24,12 +24,12 @@ function GearboxSection() {
     }
 
     const handleClickedGearboxType = (gearboxType) => {
-        const isGearboxTypePicked = gearboxTypes.includes(gearboxType);
+        const isGearboxTypePicked = gearboxType.includes(gearboxType);
 
         if (isGearboxTypePicked) {
-            setGearboxTypes(gearboxTypes.filter((type) => type !== gearboxType))
+            setGearboxType(gearboxType.filter((type) => type !== gearboxType))
         } else {
-            setGearboxTypes([...gearboxTypes, gearboxType]);
+            setGearboxType([...gearboxType, gearboxType]);
         }
     }
 
@@ -96,10 +96,10 @@ function GearboxSection() {
                         price: loc.state.price,
                         mileage: loc.state.mileage,
                         registration: loc.state.registration,
-                        fuel: loc.state.fuel,
+                        fuelType: loc.state.fuelType,
                         enginePower: loc.state.enginePower,
                         displacement: loc.state.displacement,
-                        gearbox: gearboxTypes
+                        gearbox: gearboxType
                     }}
                 >
                     <button className="styled-button">Color</button>

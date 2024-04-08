@@ -24,7 +24,7 @@ function MoreFiltersPage() {
     const [gearbox, setGearbox] = useState("");
     const [powertrain, setPowertrain] = useState("");
 
-    const [searchedCarsNumber, setSearchedCarsNumber] = useState(null);
+    const [searchedCarsNumber, setSearchedCarsNumber] = useState(0);
 
     useEffect(() => {
 
@@ -39,7 +39,6 @@ function MoreFiltersPage() {
             }
         }
 
-        console.log(model);
         updateSearchedCarsNumber();
     }, [brand, model, price, mileage, carType, registration, seatingConfig, doors, location, postalCode, fuelType, power, displacement, gearbox, powertrain]);
 

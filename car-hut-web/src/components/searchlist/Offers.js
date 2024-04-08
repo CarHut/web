@@ -15,7 +15,8 @@ function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength}) {
 
         const url = `http://localhost:8080/api/getTempCarsWithFilters?` +
             `&priceFrom=${fetchedState.price.priceFrom}&priceTo=${fetchedState.price.priceTo}&mileageFrom=${fetchedState.mileage.mileageFrom}` +
-            `&mileageTo=${fetchedState.mileage.mileageTo}&fuelType=${fetchedState.fuelType}&sortBy=${sortBy}&sortOrder=${sortOrder}`;
+            `&mileageTo=${fetchedState.mileage.mileageTo}&fuelType=${fetchedState.fuelType}&gearbox=${fetchedState.gearbox}&powertrain=${fetchedState.powertrain}` +
+            `&sortBy=${sortBy}&sortOrder=${sortOrder}`;
 
         console.log(url);
         console.log(fetchedState.models);
