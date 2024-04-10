@@ -23,6 +23,8 @@ function UpperNav({offersPerPage, setOffersPerPage, sortBy, setSortBy}) {
                         <option value="AFH" key={4}>Alphabetically - Z to A</option>
                         <option value="MFL" key={5}>Mileage - from lowest</option>
                         <option value="MFH" key={6}>Mileage - from highest</option>
+                        <option value="SFL" key={7}>Power - from lowest</option>
+                        <option value="SFH" key={8}>Power - from highest</option>
                     </select>
                 </div>
             </div>

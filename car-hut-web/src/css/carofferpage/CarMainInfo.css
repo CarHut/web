@@ -1,0 +1,12 @@
+.section-car-offer-main-info-section-body {
+    background-color: #313131;
+    width: 44%;
+    height: 21em;
+    color: #fff;
+    padding-top: 1em;
+}
+
+.section-car-offer-main-info-wrapper {
+    width: 90%;
+    text-wrap: wrap;
+}

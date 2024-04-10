@@ -10,6 +10,7 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange })
     const [fuelType, setFuelType] = useState(fetchedState.fuelType);
     const [gearbox, setGearbox] = useState(fetchedState.gearbox);
     const [powertrain, setPowertrain] = useState(fetchedState.powertrain);
+    const [power, setPower] = useState(fetchedState.power);
     const [addBrands, setAddBrands] = useState([]);
     const [addModels, setAddModels] = useState([]);
     const [addBrand, setAddBrand] = useState('');
@@ -115,11 +116,29 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange })
         }
     }
 
+    // type -> 0 = powerFrom, 1 = powerTo
+    const handlePowerChange = (value, type) => {
+        switch (type) {
+            case 0:
+                setPower({ powerFrom: value, powerTo: power.powerTo });
+                break;
+            case 1:
+                setPower({ powerFrom: power.powerFrom, powerTo: value });
+                break;
+        }
+    }
+
     const onPriceChanged = () => {
         var updatedState = {...fetchedState};
         updatedState.price = price;
         handleStateChange(updatedState);
-        console.log('was here');
+    }
+
+    const onPowerChanged = () => {
+        var updatedState = {...fetchedState};
+        updatedState.power = power;
+        handleStateChange(updatedState);
+        console.log(updatedState);
     }
 
     // type -> 0 = mileageFrom, 1 = mileageTo
@@ -200,7 +219,7 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange })
                             id="priceFrom"
                             name="priceFrom"
                             min="0"
-                            max="500000"
+                            max={price.priceTo === "" ? "500000" : price.priceTo}
                             step="500"
                             value={price.priceFrom}
                             onChange={(e) => handlePriceChange(e.target.value, 0)}
@@ -213,7 +232,7 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange })
                             type="range"
                             id="priceTo"
                             name="priceTo"
-                            min="0"
+                            min={price.priceFrom === "" ? "0" : price.priceFrom}
                             max="500000"
                             step="500"
                             value={price.priceTo}
@@ -231,7 +250,7 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange })
                             id="mileageFrom"
                             name="mileageFrom"
                             min="0"
-                            max="500000"
+                            max={mileage.mileageTo === "" ? "500000" : mileage.mileageTo}
                             step="500"
                             value={mileage.mileageFrom}
                             onChange={(e) => handleMileageChange(e.target.value, 0)}
@@ -244,7 +263,7 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange })
                             type="range"
                             id="mileageTo"
                             name="mileageTo"
-                            min="0"
+                            min={mileage.mileageFrom === "" ? "0" : mileage.mileageFrom}
                             max="500000"
                             step="500"
                             value={mileage.mileageTo}
@@ -293,10 +312,41 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange })
                                 <option key={2} value={'Other'}>Other</option>
                                 <option key={3} value={'NotStated'}>Not stated</option>
                                 <option key={4} value={'RearWheel'}>Rear-wheel drive</option>
-                                <option key={5} value={'FronWheel'}>Front-wheel drive</option>
+                                <option key={5} value={'FrontWheel'}>Front-wheel drive</option>
                                 <option key={5} value={'AllWheel'}>All-wheel drive</option>
                             </select>
                         </div>
+                    </div>
+                </div>
+                <div className='search-list-extended-filters-section'>
+                    <div className='search-list-extended-filters-section-label'>Power</div>
+                    <div className="search-list-extended-filters-slider-container">
+                        <label className='search-list-extended-filters-slider-label' htmlFor="powerFrom">From: {power.powerFrom} kW</label>
+                        <input
+                            type="range"
+                            id="powerFrom"
+                            name="powerFrom"
+                            min="0"
+                            max={power.powerTo === "" ? "1000" : power.powerTo}
+                            step="1"
+                            value={power.powerFrom}
+                            onChange={(e) => handlePowerChange(e.target.value, 0)}
+                            onMouseLeave ={() => onPowerChanged()}
+                        />
+                    </div>
+                    <div className="search-list-extended-filters-slider-container">
+                        <label className='search-list-extended-filters-slider-label' htmlFor="powerTo">To: {power.powerTo} kW</label>
+                        <input
+                            type="range"
+                            id="powerTo"
+                            name="powerTo"
+                            min={power.powerFrom === "" ? "0" : power.powerFrom}
+                            max="1000"
+                            step="1"
+                            value={power.powerTo}
+                            onChange={(e) => handlePowerChange(e.target.value, 1)}
+                            onMouseLeave={() => onPowerChanged()}
+                        />
                     </div>
                 </div>
             </div>

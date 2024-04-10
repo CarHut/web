@@ -1,0 +1,32 @@
+.section-car-offer-photos-section-body {
+    background-color: #313131;
+    width: 54%;
+    height: 21em;
+    color: #fff;
+    padding-top: 1em;
+    text-align: center;
+}
+
+.photo-miniatures-preview-wrapper {
+    text-align: center;
+}
+
+.photo-miniature-img {
+    height: 1em;
+    object-fit: fill;
+    margin: 0 0.2em;
+    border: solid #fff;
+}
+
+.main-photo-wrapper {
+    text-align: center;
+    margin-top: 2em;
+}
+
+.main-photo-img {
+    object-fit:fill;
+    height: 15em;
+}
+
+.current-page-label {
+}

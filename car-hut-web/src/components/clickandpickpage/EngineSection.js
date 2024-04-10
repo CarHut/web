@@ -6,26 +6,26 @@ function EngineSection() {
     
     var loc = useLocation();
 
-    const [fromEnginePower, setFromEnginePower] = useState(); 
-    const [toEnginePower, setToEnginePower] = useState();
-    const [fromDisplacement, setFromDisplacement] = useState();
-    const [toDisplacement, setToDisplacement] = useState();
+    const [powerFrom, setPowerFrom] = useState(); 
+    const [powerTo, setPowerTo] = useState();
+    const [displacementFrom, setDisplacementFrom] = useState();
+    const [displacementTo, setDisplacementTo] = useState();
     
 
     const handleFromEnginePowerChange = (e) => {
-        setFromEnginePower(e.target.value);
+        setPowerFrom(e.target.value);
     };
 
     const handleToEnginePowerChange = (e) => {
-        setToEnginePower(e.target.value);
+        setPowerTo(e.target.value);
     };
 
     const handleFromDisplacementChange = (e) => {
-        setFromDisplacement(e.target.value)
+        setDisplacementFrom(e.target.value)
     }
 
     const handleToDisplacementChange = (e) => {
-        setToDisplacement(e.target.value)
+        setDisplacementTo(e.target.value)
     }
 
     return (
@@ -37,28 +37,28 @@ function EngineSection() {
                 <div className='line-container'/>
                 <div className='engine-power-wrapper'>
                     <div className="registration-slider-container">
-                        <label htmlFor="fromRegistration">Engine power (from): {fromEnginePower} kW</label>
+                        <label htmlFor="fromRegistration">Engine power (from): {powerFrom} kW</label>
                         <input
                             type="range"
-                            id="fromEnginePower"
-                            name="fromEnginePower"
+                            id="powerFrom"
+                            name="powerFrom"
                             min="0"
                             max="1200"
                             step="1"
-                            value={fromEnginePower}
+                            value={powerFrom}
                             onChange={handleFromEnginePowerChange}
                         />
                     </div>
                     <div className="registration-slider-container">
-                        <label htmlFor="toRegistration">Engine power (To): {toEnginePower} kW</label>
+                        <label htmlFor="toRegistration">Engine power (To): {powerTo} kW</label>
                         <input
                             type="range"
-                            id="toEnginePower"
-                            name="toEnginePower"
+                            id="powerTo"
+                            name="powerTo"
                             min="0"
                             max="1200"
                             step="1"
-                            value={toEnginePower}
+                            value={powerTo}
                             onChange={handleToEnginePowerChange}
                         />
                     </div>
@@ -67,28 +67,28 @@ function EngineSection() {
                 <div className='line-container'/>
                 <div className='displacement-wrapper'>
                     <div className="registration-slider-container">
-                        <label htmlFor="fromRegistration">Displacement (from): {fromDisplacement} cm³</label>
+                        <label htmlFor="fromRegistration">Displacement (from): {displacementFrom} cm³</label>
                         <input
                             type="range"
-                            id="fromDisplacement"
-                            name="fromDisplacement"
+                            id="displacementFrom"
+                            name="displacementFrom"
                             min="200"
                             max="10000"
                             step="1"
-                            value={fromDisplacement}
+                            value={displacementFrom}
                             onChange={handleFromDisplacementChange}
                         />
                     </div>
                     <div className="registration-slider-container">
-                        <label htmlFor="toRegistration">Displacement (To): {toDisplacement} cm³</label>
+                        <label htmlFor="toRegistration">Displacement (To): {displacementTo} cm³</label>
                         <input
                             type="range"
-                            id="toDisplacement"
-                            name="toDisplacement"
+                            id="displacementTo"
+                            name="displacementTo"
                             min="200"
                             max="10000"
                             step="1"
-                            value={toDisplacement}
+                            value={displacementTo}
                             onChange={handleToDisplacementChange}
                         />
                     </div>
@@ -151,11 +151,11 @@ function EngineSection() {
                         mileage: loc.state.mileage,
                         registration: loc.state.registration,
                         fuelType: loc.state.fuelType,
-                        enginePower: {
-                            fromEnginePower: fromEnginePower, toEnginePower: toEnginePower
+                        power: {
+                            powerFrom: powerFrom, powerTo: powerTo
                         },
                         displacement: {
-                            fromDisplacement: fromDisplacement, toDisplacement: toDisplacement
+                            displacementFrom: displacementFrom, displacementTo: displacementTo
                         }
                     }}
                 >

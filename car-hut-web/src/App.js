@@ -5,6 +5,7 @@ import MoreFiltersPage from './pages/MoreFiltersPage';
 import { Route, Routes } from 'react-router-dom';
 import ClickAndPickPage from './pages/ClickAndPickPage';
 import SearchList from './pages/SearchList';
+import CarOfferPage from './pages/CarOfferPage';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path='/clickandPickPage/gearbox' element={<ClickAndPickPage/>}/>
         <Route path='/clickandPickPage/color' element={<ClickAndPickPage/>}/>
         <Route path='/searchList' element={<SearchList/>}/>
+        <Route path='/carOffer' element={<CarOfferPage/>}/>
       </Routes>
     </div>
   );

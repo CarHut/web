@@ -137,6 +137,7 @@ function FilterSearch() {
                             fuelType: '',
                             powertrain: '',
                             gearbox: '',
+                            power: { powerFrom: '', powerTo: '' },
                             models: [
                                 { brand: selectedBrand, model: selectedModel }
                             ]
