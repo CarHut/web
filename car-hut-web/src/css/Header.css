@@ -1,20 +1,35 @@
 header {
     background-color: #181818;
-    width: 100%;
     height: 6em;
     display: flex;
     align-items: center;
-    box-sizing: border-box; /* Include padding in the total width */
+    justify-content: space-between;
+    padding: 0 20em;
 }
 
-header img {
-    max-height: 100%; /* Ensure the image doesn't exceed the height of the header */
-    padding-left: 20em;
+.logo {
+    display: flex;
 }
 
-header h1 {
-    padding-left: 1em;
-    color: #ffffff; /* Set text color to white or your preferred color */
-    margin: 0; /* Remove default margin */
+.carhut-img {
+    max-height: 100%;
+}
+
+h1 {
+    color: #ffffff;
     font-size: 3em;
+}
+
+.header-text-content {
+    font-size: 2em;
+    color: #fff;
+}
+
+.login-entity {
+    display: flex;
+    align-items: center;
+}
+
+.login-img {
+    height: 2em;
 }

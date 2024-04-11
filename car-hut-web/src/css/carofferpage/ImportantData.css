@@ -1,0 +1,35 @@
+.section-car-offer-important-data-body {
+    background-color: #313131;
+    width: 100%;
+    color: #fff;
+    text-align: center;
+    margin-top: 1.5em;
+    display: flex;
+    justify-content: space-around;
+    padding: 2em 0;
+}
+
+.car-offer-important-data-entity-wrapper {
+    display: flex;
+}
+
+.car-offer-important-data-text-wrapper {
+    margin-left: 1em;
+    display: block;
+    text-align: left;
+}
+
+.car-offer-important-data-label {
+    font-size: 1em;
+    font-weight: bold;
+    color: #a3a3a3;
+}
+
+.car-offer-important-data-value {
+    font-size: 1em;
+}
+
+.car-offer-important-data-img {
+    height: 3em;
+    object-fit: scale-down;
+}

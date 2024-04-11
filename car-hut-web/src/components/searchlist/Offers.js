@@ -2,6 +2,7 @@ import { keyboard } from '@testing-library/user-event/dist/keyboard';
 import '../../css/searchlist/Offers.css';
 import audiRS3Image from '../../images/searchlist/offers/audiRS3.jpg';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 
 function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength}) {
@@ -17,9 +18,6 @@ function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength}) {
             `&priceFrom=${fetchedState.price.priceFrom}&priceTo=${fetchedState.price.priceTo}&mileageFrom=${fetchedState.mileage.mileageFrom}` +
             `&mileageTo=${fetchedState.mileage.mileageTo}&fuelType=${fetchedState.fuelType}&gearbox=${fetchedState.gearbox}&powertrain=${fetchedState.powertrain}` +
             `&powerFrom=${fetchedState.power.powerFrom}&powerTo=${fetchedState.power.powerTo}&sortBy=${sortBy}&sortOrder=${sortOrder}`;
-
-        console.log(url);
-        console.log(fetchedState.models);
 
         const response = await fetch(url, {
             method: 'POST',
@@ -57,7 +55,13 @@ function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength}) {
 
         return displayedCars.map((car, index) => { 
             return (
-                <div>
+                <Link
+                    to={'/carOffer'}
+                    state={{
+                        id: car.id
+                    }}
+                    style={{textDecoration: 'none'}}
+                >
                     <div className='offer-wrapper' key={index}>
                         <div className='offer-left-wrapper'>
                             <div className='offer-car-title'>{car.header}</div>
@@ -92,7 +96,7 @@ function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength}) {
                         </div>
                     </div>
                     <div className='offers-line-separator'/>
-                </div>
+                </Link>
             );
         });
     }

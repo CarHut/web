@@ -4,3 +4,9 @@
     padding: 1em 1em;
     display: block;
 }
+
+.car-main-section-split-wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}

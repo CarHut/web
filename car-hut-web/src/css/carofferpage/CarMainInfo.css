@@ -4,9 +4,119 @@
     height: 21em;
     color: #fff;
     padding-top: 1em;
+    display: block;
+    text-wrap: wrap;
 }
 
 .section-car-offer-main-info-wrapper {
-    width: 90%;
+    margin: 2em;
+}
+
+.car-offer-main-info-header {
+    font-size: 1.5em;
+}
+
+.car-offer-main-info-line-container {
+    position: relative;
+    width: 100%; /* Adjust the width of the lines container */
+    height: 2px; /* Adjust the height of the lines */
+    background-color: #898989;
+    margin: 1em 0;
+}
+
+.car-offer-main-info-split-wrapper {
+    display: flex;
+    flex-direction: row;
     text-wrap: wrap;
+    justify-content: space-between;
+}
+
+.car-offer-main-info-split-section-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content:space-evenly;
+    text-align: left;
+    width: 45%;
+}
+
+.car-offer-main-info-price-label {
+    font-size: 2em;
+}
+
+.car-offer-main-info-netto-label {
+    font-size: 1em;
+    color: #a3a3a3;
+}
+
+.car-offer-main-info-financing-label {
+    font-size: 1em;
+    color: #fff;
+    font-weight: bold;
+}
+
+.car-offer-main-info-stars-wrapper {
+    display: flex;
+    margin-left: 0.5em;
+}
+
+.star {
+    position: relative;
+    
+    display: inline-block;
+    width: 0;
+    height: 0;
+    
+    margin-left: .9em;
+    margin-right: .9em;
+    margin-bottom: 1.2em;
+    
+    border-right:  .3em solid transparent;
+    border-bottom: .7em  solid #FC0;
+    border-left:   .3em solid transparent;
+  
+    font-size: 1em;
+    
+    &:before, &:after {
+      content: '';
+      
+      display: block;
+      width: 0;
+      height: 0;
+      
+      position: absolute;
+      top: .6em;
+      left: -1em;
+    
+      border-right:  1em solid transparent;
+      border-bottom: .7em  solid #FC0;
+      border-left:   1em solid transparent;
+    
+      transform: rotate(-35deg);
+    }
+    
+    &:after {  
+      transform: rotate(35deg);
+    }
+  }
+
+.car-offer-main-info-price-status-label {
+    font-size: 1em;
+    color: #a3a3a3;
+}
+
+.car-offer-main-info-seller-name-label {
+    color: #fff;
+    font-size: 1em;
+}
+
+.car-offer-main-info-seller-address-label {
+    color: #a3a3a3;
+    font-size: 0.8em;
+}
+
+.car-offer-main-info-button {
+    margin-top: 2em;
+    width: 10em;
+    height: 2.5em;
+    cursor: pointer;
 }

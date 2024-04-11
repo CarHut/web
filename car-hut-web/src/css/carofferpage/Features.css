@@ -1,0 +1,38 @@
+.features-body {
+    display: block;
+    background-color: #313131;
+    margin-top: 1.5em;
+    width: 44%;
+    padding: 2em 2em;
+}
+
+.features-header {
+    font-size: 2em;
+    color: #fff;
+}
+
+.features-line-container {
+    position: relative;
+    width: 100%; 
+    height: 2px; 
+    background-color: #898989;
+    margin: 1em 0;
+}
+
+.features-columns-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.features-column-block {
+    display: flex;
+    flex-direction: column;
+    width: 22%;
+}
+
+.features-column-text {
+    font-size: 0.8em;
+    color: #fff;
+    margin-bottom: 0.5em;
+    text-wrap: wrap;
+}

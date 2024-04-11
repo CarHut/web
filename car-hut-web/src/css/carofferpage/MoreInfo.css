@@ -1,0 +1,17 @@
+.more-info-body {
+    display: block;
+    background-color: #313131;
+    margin-top: 1.5em;
+    padding: 2em 2em;
+}
+
+.more-info-header {
+    font-size: 2em;
+    color: #fff;
+}
+
+.more-info-main-paragraph {
+    font-size: 1em;
+    color: #fff;
+    text-wrap: wrap;
+}
