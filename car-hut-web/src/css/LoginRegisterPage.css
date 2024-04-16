@@ -1,0 +1,42 @@
+.login-page-body {
+    background-color: #313131;
+    color: #fff;
+    padding: 2em 20em;
+}
+
+.main-wrapper {
+    padding: 2em 0;    
+    border: #181818 solid 1em;
+    display: flex;
+    justify-content: space-around;
+}
+
+.login-wrapper {
+    display: block;
+}
+
+.header-label {
+    font-size: 2em;
+    margin-bottom: 1em;
+}
+
+.input-label {
+    font-size: 1em;
+    margin-bottom: 0.5em;
+}
+
+.input-container {
+
+}
+
+.register-wrapper {
+    display: block;
+}
+
+.login-input {
+    margin-bottom: 1em;
+}
+
+.register-input {
+    margin-bottom: 1em;
+}

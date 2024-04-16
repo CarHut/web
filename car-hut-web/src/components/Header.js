@@ -1,7 +1,10 @@
 import '../css/Header.css'
-
+import { useState } from 'react';
 
 function Header() {
+
+    const [loggedUserId, setLoggedUserId] = useState('');
+
     return (
         <header>
             <div className='logo'>

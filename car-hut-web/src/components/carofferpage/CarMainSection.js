@@ -12,7 +12,7 @@ function CarMainSection({ carId }) {
     const [car, setCar] = useState({});
 
     useEffect(async () => {
-        const url = `http://localhost:8080/api/getTempCarWithId?carId=${carId}`;
+        const url = `http://localhost:8080/api/carhut/getTempCarWithId?carId=${carId}`;
         console.log(url);
         const response = await fetch(url);
         const data = await response.json();

@@ -30,7 +30,7 @@ function FilterSearch() {
 
 
     useEffect(() => {
-        fetch('http://localhost:8080/api/getAllBrands')
+        fetch('http://localhost:8080/api/carhut/getAllBrands')
             .then(response => response.json())
             .then(data => setBrands(data))
             .catch(error => console.error('Error fetching brands:', error));
@@ -38,7 +38,7 @@ function FilterSearch() {
 
     useEffect(() => {
         if (selectedBrand) {
-            fetch(`http://localhost:8080/api/getModelsByBrand/${selectedBrand}`)
+            fetch(`http://localhost:8080/api/carhut/getModelsByBrand/${selectedBrand}`)
                 .then(response => response.json())
                 .then(data => setModels(data))
                 .catch(error => console.error('Error fetching models:', error));

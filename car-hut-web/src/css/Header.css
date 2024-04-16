@@ -5,6 +5,7 @@ header {
     align-items: center;
     justify-content: space-between;
     padding: 0 20em;
+    padding-top: 1em;
 }
 
 .logo {
@@ -31,5 +32,10 @@ h1 {
 }
 
 .login-img {
+    height: 2em;
+}
+
+.submit-button {
+    width: 5em;
     height: 2em;
 }

@@ -18,7 +18,7 @@ function ModelSection() {
                     var modelsData = [];
 
                     for (const brand of brands) {
-                        const response = await fetch(`http://localhost:8080/api/getModelsByBrandName?brandName=${brand}`);
+                        const response = await fetch(`http://localhost:8080/api/carhut/getModelsByBrandName?brandName=${brand}`);
                         const data = await response.json();
 
                         modelsData.push({

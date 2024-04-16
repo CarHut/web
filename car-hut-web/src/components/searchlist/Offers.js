@@ -14,7 +14,7 @@ function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength}) {
     const fetchCars = async () => {
         const sortOrder = sortBy[sortBy.length - 1] == 'L' ? "ASC" : "DESC";
 
-        const url = `http://localhost:8080/api/getTempCarsWithFilters?` +
+        const url = `http://localhost:8080/api/carhut/getTempCarsWithFilters?` +
             `&priceFrom=${fetchedState.price.priceFrom}&priceTo=${fetchedState.price.priceTo}&mileageFrom=${fetchedState.mileage.mileageFrom}` +
             `&mileageTo=${fetchedState.mileage.mileageTo}&fuelType=${fetchedState.fuelType}&gearbox=${fetchedState.gearbox}&powertrain=${fetchedState.powertrain}` +
             `&powerFrom=${fetchedState.power.powerFrom}&powerTo=${fetchedState.power.powerTo}&sortBy=${sortBy}&sortOrder=${sortOrder}`;
