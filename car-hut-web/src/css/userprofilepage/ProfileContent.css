@@ -1,0 +1,23 @@
+.profile-content-body {
+    display: block;
+    width: 100%;
+    margin-left: 2em;
+}
+
+.profile-content-header {
+    font-size: 2em;
+    color: #fff;
+    margin-bottom: 2em;
+}
+
+.profile-content-text {
+    font-size: 1em;
+    color: #fff;
+    margin-bottom: 1em;
+}
+
+.profile-content-dark-text {
+    font-size: 1em;
+    color: #a3a3a3;
+    margin-bottom: 1em;
+}

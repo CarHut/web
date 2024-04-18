@@ -5,7 +5,7 @@ import ClickAndPickPage from '../pages/ClickAndPickPage';
 import SearchList from '../pages/SearchList';
 import CarOfferPage from '../pages/CarOfferPage';
 import LoginRegisterPage from '../pages/LoginRegisterPage';
-import AuthProvider from "../auth/AuthProvider";
+import UserProfilePage from "../pages/UserProfilePage";
 
 function Routing() {
 
@@ -25,6 +25,8 @@ function Routing() {
           <Route path='/searchList' element={<SearchList/>}/>
           <Route path='/carOffer' element={<CarOfferPage/>}/>
           <Route path='/login' element={<LoginRegisterPage/>}/>
+          <Route path='/userProfile' element={<UserProfilePage/>}/>
+          <Route path='/userProfile/account' element={<UserProfilePage/>}/> 
         </Routes>
     );
 }

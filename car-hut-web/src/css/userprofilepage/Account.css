@@ -1,0 +1,12 @@
+.account-wrapper {
+    display: block;
+}
+
+.account-main-info-wrapper {
+    display: flex;
+}
+
+.account-main-info-column-entity {
+    display: block;
+    margin-right: 3em;
+}

@@ -1,0 +1,17 @@
+.user-profile-body {
+    background-color: #313131;
+}
+
+.user-profile-page-header {
+    color: #ffffff;
+    font-size: 2em;
+    padding-left: 10em;
+    padding-top: 2em;
+}
+
+.current-route-text {
+    color: #ffffff;
+    font-size: 0.8em;
+    margin-left: 26em;
+    padding-top: 1em;
+}

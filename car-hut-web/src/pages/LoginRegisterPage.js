@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import '../css/LoginRegisterPage.css';
-import { useLogin, useNotify } from 'react-admin';
-
+import AuthUtil from '../utils/auth/AuthUtil';
+import { redirect, useNavigate } from 'react-router-dom';
 function LoginRegisterPage() {
 
     const [loginEmail, setLoginEmail] = useState('');
@@ -11,13 +11,24 @@ function LoginRegisterPage() {
     const [registerPassword, setRegisterPassword] = useState('');
     const [repeatRegisterPassword, setRepeatRegisterPassword] = useState('');
 
-    const login = useLogin();
-    const notify = useNotify();
+    const [isTokenSet, setIsTokenSet] = useState(false);
+    const [showErrorMessage, setShowErrorMessage] = useState(false);
+    const navigate = useNavigate();
 
-    const handleLoginSubmit = (e) => {
+    const handleLoginSubmit = async (e) => {
         e.preventDefault();
-        login({ loginEmail, loginPassword }).catch((error) => notify(`Error: ${error.message}`));
+        const tokenAvailable = await AuthUtil.login(loginEmail, loginPassword); 
+        setIsTokenSet(tokenAvailable);
+        if (!tokenAvailable) {
+            setShowErrorMessage(true);
+        }
     }
+
+    useEffect(() => {
+        if (isTokenSet) {
+            navigate('/userProfile');
+        } 
+    }, [isTokenSet]);
 
     return (
         <div>
@@ -26,7 +37,7 @@ function LoginRegisterPage() {
                 <section className='main-wrapper'>
                     <div className='login-wrapper'>
                         <div className='header-label'>Login</div>
-                        <form onSubmit={handleLoginSubmit}>
+                        <form onSubmit={(e) => handleLoginSubmit(e)}>
                             <div className='input-container'>
                                 <div className='input-label'>Email</div>
                                 <input 
@@ -45,6 +56,7 @@ function LoginRegisterPage() {
                                     className='login-input'
                                 />
                             </div>
+                            {showErrorMessage ? <div className='error-text'>Invalid username or password</div> : ""}
                             <button type='submit'>Login</button>
                         </form>
                     </div>

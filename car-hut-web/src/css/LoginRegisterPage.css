@@ -40,3 +40,8 @@
 .register-input {
     margin-bottom: 1em;
 }
+
+.error-text {
+    color: red;
+    font-size: 1em;
+} 
