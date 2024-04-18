@@ -2,14 +2,16 @@ header {
     background-color: #181818;
     height: 6em;
     display: flex;
-    align-items: center;
     justify-content: space-between;
     padding: 0 20em;
     padding-top: 1em;
+    position: relative; /* Added */
 }
 
 .logo {
     display: flex;
+    align-items: center;
+    align-self: center;
 }
 
 .carhut-img {
@@ -29,13 +31,44 @@ h1 {
 .login-entity {
     display: flex;
     align-items: center;
+    z-index: 2;
 }
 
 .login-img {
     height: 2em;
+    z-index: 2;
 }
 
-.submit-button {
-    width: 5em;
-    height: 2em;
+.logged-user-entity {
+    display: block;
+    position: relative;
+    align-self: center;
+}
+
+.logged-user-dropdown-menu-wrapper {
+    background-color: #313131;
+    z-index: 10; /* Lower than logged-user-content */
+    position: absolute; /* Added */
+    top: 100%; /* Positioning it below logged-user-content */
+    left: 0; /* Aligning it with the left edge of logged-user-content */
+    display: none; /* Initially hidden */
+}
+
+.logged-user-entity:hover .logged-user-dropdown-menu-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.logged-user-content {
+    display: flex;
+    align-items: center;
+    z-index: 11; /* Higher than dropdown menu */
+}
+
+.dropdown-menu-text {
+    font-size: 1.5em;
+    color: #fff;
+    margin: 1em;
+    cursor: pointer;
+    text-decoration: none;
 }

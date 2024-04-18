@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 
 function Account() {
     
-    const [accountDetails, setAccountDetails] = useState();
+    const [accountDetails, setAccountDetails] = useState({});
 
     const fetchAccountDetails = async () => {
         const requestOptions = {
@@ -15,9 +15,6 @@ function Account() {
             },
             body: localStorage.getItem('username')
         }
-
-        console.log(localStorage.getItem('token'));
-        console.log(localStorage.getItem('username'));
         
         const response = await fetch('http://localhost:8080/api/auth/getUserDetailsInfo', requestOptions);
         const data = await response.json();

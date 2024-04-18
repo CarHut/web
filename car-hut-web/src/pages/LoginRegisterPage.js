@@ -51,6 +51,7 @@ function LoginRegisterPage() {
                                 <div className='input-label'>Password</div>
                                 <input 
                                     value={loginPassword}
+                                    type={'password'}
                                     placeholder='Enter password'
                                     onChange={(e) => {setLoginPassword(e.target.value)}}
                                     className='login-input'

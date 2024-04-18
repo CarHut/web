@@ -29,6 +29,7 @@ const AuthUtil = {
     },
     logout: () => {
         localStorage.removeItem('token');
+        localStorage.removeItem('username');
     },
     checkAuth: (...params) => {
         return Promise.resolve();
