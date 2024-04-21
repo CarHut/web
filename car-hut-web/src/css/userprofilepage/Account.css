@@ -42,6 +42,7 @@
 
 .profile-content-text-forgot-password:hover {
     cursor: pointer;
+    opacity: 70%;
 }
 
 .reset-password-wrapper {
@@ -49,3 +50,10 @@
     margin-top: 1em;
 }
 
+.profile-content-text-success {
+    color: green;
+}
+
+.profile-content-text-error {
+    color: red;
+}

@@ -120,3 +120,23 @@
     height: 2.5em;
     cursor: pointer;
 }
+
+.pretty-button-car-offer-page {
+    display: flex;
+    align-items: center;
+    background-color: #181818;
+    border: none;
+    height: 3em;
+    width: 8em;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1em;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.pretty-button-car-offer-page:hover {
+    opacity: 80%;
+}
+

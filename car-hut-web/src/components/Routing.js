@@ -27,7 +27,8 @@ function Routing() {
           <Route path='/carOffer' element={<CarOfferPage/>}/>
           <Route path='/login' element={<LoginRegisterPage/>}/>
           <Route path='/userProfile' element={<UserProfilePage/>}/>
-          <Route path='/userProfile/account' element={<UserProfilePage/>}/> 
+          <Route path='/userProfile/account' element={<UserProfilePage/>}/>
+          <Route path='/userProfile/savedCars' element={<UserProfilePage/>}/>  
           <Route path='/passwordReset' element={<PasswordResetPage/>}/>
         </Routes>
     );

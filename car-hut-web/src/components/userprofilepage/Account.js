@@ -5,6 +5,8 @@ import AuthUtil from '../../utils/auth/AuthUtil.js'
 function Account() {
     
     const [accountDetails, setAccountDetails] = useState({});
+    const [showResetPasswordSent, setShowResetPasswordSent] = useState(false);
+    const [showResetPasswordError, setShowResetPasswordError] = useState(false);
 
     const fetchAccountDetails = async () => {
         const requestOptions = {
@@ -26,6 +28,7 @@ function Account() {
     }, []);
 
     const handleResetPassword = async () => {
+
         const requestOptions = {
             method: 'POST',
             headers: { 
@@ -37,8 +40,16 @@ function Account() {
 
 
         const response = await fetch('http://localhost:8080/api/auth/resetPasswordSendEmail', requestOptions);
+        
         console.log(response);
-   
+
+        if (response.status === 200) {
+            setShowResetPasswordSent(true);
+            setShowResetPasswordError(false);
+        } else {
+            setShowResetPasswordSent(false);
+            setShowResetPasswordError(true);
+        }
     }
 
     return (
@@ -57,6 +68,12 @@ function Account() {
                     <div className='profile-content-text'>+421 000 000 000</div>
                     <div className='profile-content-text'>**********</div>
                     <div className='profile-content-text-forgot-password' onClick={handleResetPassword}>Forgot my password</div>
+                    {showResetPasswordSent 
+                        ?   <div className='profile-content-text-success'>Email with token will be send to email {accountDetails.email}.</div>
+                        :   showResetPasswordError 
+                            ?   <div className='profile-content-text-error'>Something went wrong. Try again later.</div>
+                            :   <div/>
+                    }
                 </div>
                 <a href='http://localhost:3000/mainPage' className='pretty-button' onClick={() => AuthUtil.logout()}>
                     <div className='pretty-button-text'>Log out</div></a>

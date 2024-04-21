@@ -1,6 +1,7 @@
 import '../../css/userprofilepage/ProfileContent.css';
 import { useLocation } from 'react-router-dom';
 import Account from './Account';
+import SavedCars from './SavedCars';
 
 function ProfileContent() {
 
@@ -9,6 +10,9 @@ function ProfileContent() {
     const renderProfileContentByLocation = () => {
         if (location.pathname === '/userProfile/account') {
             return <Account/>;
+        } 
+        else if (location.pathname === '/userProfile/savedCars') {
+            return <SavedCars/>
         }
 
         return <div/>;

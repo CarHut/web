@@ -55,9 +55,9 @@ function PasswordResetPage() {
         const response = await fetch('http://localhost:8080/api/auth/resetPasswordInitiate', requestOptions); 
 
         if (response.status === 200) {
-            redirect("/userProfile/account")
+            navigate("/userProfile/account")
         } else {
-            // Finish error logic - COULDNT RESET PASSWORD
+            console.log("there was a error.");
         }
     }
 
