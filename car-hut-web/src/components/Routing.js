@@ -6,6 +6,7 @@ import SearchList from '../pages/SearchList';
 import CarOfferPage from '../pages/CarOfferPage';
 import LoginRegisterPage from '../pages/LoginRegisterPage';
 import UserProfilePage from "../pages/UserProfilePage";
+import PasswordResetPage from "../pages/PasswordResetPage";
 
 function Routing() {
 
@@ -27,6 +28,7 @@ function Routing() {
           <Route path='/login' element={<LoginRegisterPage/>}/>
           <Route path='/userProfile' element={<UserProfilePage/>}/>
           <Route path='/userProfile/account' element={<UserProfilePage/>}/> 
+          <Route path='/passwordReset' element={<PasswordResetPage/>}/>
         </Routes>
     );
 }

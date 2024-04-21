@@ -10,3 +10,42 @@
     display: block;
     margin-right: 3em;
 }
+
+.pretty-button {
+    display: flex;
+    align-items: center;
+    background-color: #313131; /* Green */
+    border: none;
+    height: 3em;
+    width: 8em;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1em;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 8px;
+}
+  
+.pretty-button:hover {
+    background-color: #a3a3a3; 
+    color: #181818
+}
+
+.pretty-button-text {
+    margin-left: 1em;
+}
+
+.profile-content-text-forgot-password {
+    color: #a3a3a3;
+    text-decoration: underline;
+}
+
+.profile-content-text-forgot-password:hover {
+    cursor: pointer;
+}
+
+.reset-password-wrapper {
+    display: block;
+    margin-top: 1em;
+}
+
