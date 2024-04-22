@@ -36,6 +36,11 @@ function Header() {
                                 >
                                     Profile
                                 </Link>
+                                <Link
+                                    
+                                >
+                                    Add offer
+                                </Link>
                                 <a href='http://localhost:3000/mainPage' className='dropdown-menu-text' onClick={(e) => AuthUtil.logout(e)}>Logout</a>
                             </div>
                         </div>

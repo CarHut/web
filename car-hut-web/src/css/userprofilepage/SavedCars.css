@@ -5,3 +5,21 @@
 .saved-cars-content-wrapper {
     display: block;
 }
+
+.x-button {
+    width: 1em;
+    height: 1em;
+    display: flex;
+    border: none;
+    cursor: pointer;
+    background-color: red;
+    color: #313131;
+    align-items: center;
+    justify-content: center;
+    transition: 0.4s;
+  }
+  
+  .x-button:hover {
+    opacity: 70%;
+  }
+  
