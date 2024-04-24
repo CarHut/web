@@ -36,7 +36,7 @@ function ImportantData({car}) {
                 <img className='car-offer-important-data-img' src={require('../../images/caroffer/owner.png')}/>
                 <div className='car-offer-important-data-text-wrapper'>
                     <div className='car-offer-important-data-label'>Previous owners</div>
-                    <div className='car-offer-important-data-value'>2</div>
+                    <div className='car-offer-important-data-value'>{car.previousOwners}</div>
                 </div>
             </div>
         </div>

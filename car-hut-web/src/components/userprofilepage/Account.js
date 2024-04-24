@@ -1,6 +1,7 @@
 import '../../css/userprofilepage/Account.css';
 import { useState, useEffect } from 'react';
 import AuthUtil from '../../utils/auth/AuthUtil.js'
+import APIMethods from '../../api/APIMethods.js';
 
 function Account() {
     
@@ -9,17 +10,7 @@ function Account() {
     const [showResetPasswordError, setShowResetPasswordError] = useState(false);
 
     const fetchAccountDetails = async () => {
-        const requestOptions = {
-            method: 'POST',
-            headers: { 
-                'Authorization': 'Bearer ' + localStorage.getItem('token'),
-                'Content-Type': 'application/json' 
-            },
-            body: localStorage.getItem('username')
-        }
-        
-        const response = await fetch('http://localhost:8080/api/auth/getUserDetailsInfo', requestOptions);
-        const data = await response.json();
+        const data = await APIMethods.getUserDetailsInfo();
         setAccountDetails(data);
     }
 
@@ -28,21 +19,7 @@ function Account() {
     }, []);
 
     const handleResetPassword = async () => {
-
-        const requestOptions = {
-            method: 'POST',
-            headers: { 
-                'Authorization': 'Bearer ' + localStorage.getItem('token'),
-                'Content-Type': 'application/json' 
-            },
-            body: accountDetails.email
-        }
-
-
-        const response = await fetch('http://localhost:8080/api/auth/resetPasswordSendEmail', requestOptions);
-        
-        console.log(response);
-
+        const response = await APIMethods.resetPasswordSendEmail(accountDetails.email); 
         if (response.status === 200) {
             setShowResetPasswordSent(true);
             setShowResetPasswordError(false);

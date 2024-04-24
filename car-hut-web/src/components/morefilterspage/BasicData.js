@@ -1,3 +1,5 @@
+import { radiantDarkTheme } from 'react-admin';
+import APIMethods from '../../api/APIMethods';
 import '../../css/BasicData.css'
 import React, { useState, useEffect } from 'react';
 
@@ -11,23 +13,24 @@ function BasicData({brand, setBrand, model, setModel, carType, setCarType,
     const [selectedBrand, setSelectedBrand] = useState('');
     const [selectedModel, setSelectedModel] = useState('');
 
+    const fetchBrands = async () => {
+        const data = await APIMethods.getAllBrands();
+        setBrands(data);
+    }
+
+    const fetchModelsByBrand = async (brand) => {
+        const data = await APIMethods.getModelsByBrand(brand);
+        setModels(data);
+    }
+
     useEffect(() => {
-        // Fetch data from the API when the component mounts
-        fetch('http://localhost:8080/api/carhut/getAllBrands')
-            .then(response => response.json())
-            .then(data => setBrands(data))
-            .catch(error => console.error('Error fetching brands:', error));
+        fetchBrands();
     }, []);
 
     useEffect(() => {
-        // Fetch models when a brand is 
         if (selectedBrand) {
-            fetch(`http://localhost:8080/api/carhut/getModelsByBrand/${selectedBrand}`)
-                .then(response => response.json())
-                .then(data => setModels(data))
-                .catch(error => console.error('Error fetching models:', error));
+            fetchModelsByBrand(selectedBrand);
         } else {
-            // Clear models when no brand is 
             setModels([]);
         }
     }, [selectedBrand]);

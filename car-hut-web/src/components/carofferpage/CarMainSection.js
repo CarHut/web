@@ -6,21 +6,19 @@ import MainInfoSection from './MainInfoSection';
 import TechnicalData from './TechnicalData';
 import MoreInfo from './MoreInfo';
 import SellerInfo from './SellerInfo';
+import APIMethods from '../../api/APIMethods';
 
 function CarMainSection({ carId }) {
 
     const [car, setCar] = useState({});
 
-    useEffect(async () => {
-        const url = `http://localhost:8080/api/carhut/getTempCarWithId?carId=${carId}`;
-        console.log(url);
-        const response = await fetch(url);
-        const data = await response.json();
-        
-        if (data !== null) {
-            setCar(data);
-        }
-        console.log(data);
+    const fetchCar = async (carId) => {
+        const data = await APIMethods.getCarWithId(carId);
+        setCar(data);
+    } 
+
+    useEffect(() => {
+        fetchCar(carId);
     }, [carId]);
 
     return (

@@ -1,24 +1,10 @@
 import '../../css/carofferpage/CarMainInfo.css';
+import APIMethods from '../../api/APIMethods';
 
 function CarMainInfo({car}) {
 
     const addCarToWishlist = async () => {
-
-        const requestOptions = {
-            method: 'POST',
-            headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('token'),
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                id: -999,
-                userId: localStorage.getItem('username'),
-                carId: car.id
-              })
-        };
-
-        const response = await fetch('http://localhost:8080/api/carhut/savedCars/addSavedCarByUsername', requestOptions);
-        console.log(response);
+        const state = APIMethods.addCarToSavedByUser(-999, localStorage.getItem('username'), car.id);
     }
 
     return (
@@ -45,8 +31,8 @@ function CarMainInfo({car}) {
                         </div>
                         <div className='car-offer-main-info-price-status-label'>Good price</div>
                         <div className='car-offer-main-info-line-container'/>
-                        <div className='car-offer-main-info-seller-name-label'>Autohaus Royal GmbH</div>
-                        <div className='car-offer-main-info-seller-address-label'>DE-12103 Berlin, Händler</div>
+                        <div className='car-offer-main-info-seller-name-label'>{car.userId}</div>
+                        <div className='car-offer-main-info-seller-address-label'>{car.sellerAddress}</div>
                         <button className='car-offer-main-info-button'>Contant seller</button>
                     </div>
                 </div>

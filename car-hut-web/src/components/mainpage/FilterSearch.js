@@ -1,8 +1,8 @@
 import '../../css/FilterSearch.css';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import updateNumberOfSearchResults from '../../utils/RenderTextUtil';
+import APIMethods from '../../api/APIMethods';
 
 
 function FilterSearch() {
@@ -28,20 +28,23 @@ function FilterSearch() {
         updateSearchedCarsNumber();
     }, [selectedBrand, selectedModel, selectedPriceFrom, selectedMileageFrom, brands, models]);
 
+    const fetchBrands = async () => {
+        const data = await APIMethods.getAllBrands();
+        setBrands(data);
+    }
 
-    useEffect(() => {
-        fetch('http://localhost:8080/api/carhut/getAllBrands')
-            .then(response => response.json())
-            .then(data => setBrands(data))
-            .catch(error => console.error('Error fetching brands:', error));
+    const fetchModelsByBrand = async (brand) => {
+        const data = await APIMethods.getModelsByBrand(selectedBrand); 
+        setModels(data);
+    }
+
+    useEffect(() => { 
+        fetchBrands();
     }, []);
 
     useEffect(() => {
         if (selectedBrand) {
-            fetch(`http://localhost:8080/api/carhut/getModelsByBrand/${selectedBrand}`)
-                .then(response => response.json())
-                .then(data => setModels(data))
-                .catch(error => console.error('Error fetching models:', error));
+            fetchModelsByBrand(selectedBrand);
         } else {
             setModels([]);
         }

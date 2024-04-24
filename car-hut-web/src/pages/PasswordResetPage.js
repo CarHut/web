@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import { useState, useEffect } from 'react';
 import { redirect, useLocation, useNavigate } from 'react-router-dom';
 import { email } from 'react-admin';
+import APIMethods from '../api/APIMethods';
 
 function PasswordResetPage() {
 
@@ -16,17 +17,7 @@ function PasswordResetPage() {
     const location = useLocation();
 
     const fetchAccountDetails = async () => {
-        const requestOptions = {
-            method: 'POST',
-            headers: { 
-                'Authorization': 'Bearer ' + localStorage.getItem('token'),
-                'Content-Type': 'application/json' 
-            },
-            body: localStorage.getItem('username')
-        }
-        
-        const response = await fetch('http://localhost:8080/api/auth/getUserDetailsInfo', requestOptions);
-        const data = await response.json();
+        const data = await APIMethods.getUserDetailsInfo();
         setAccountDetails(data);
     }
 
@@ -38,22 +29,8 @@ function PasswordResetPage() {
             return;
         }
 
-        const requestOptions = {
-            method: 'POST',
-            headers: { 
-                'Authorization': 'Bearer ' + localStorage.getItem('token'),
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                'passwordResetToken': resetPasswordToken,
-                'newPassword': newPassword,
-                'repeatedNewPassword': repeatNewPassword,
-                'email': accountDetails.email
-            })
-        }
-
-        const response = await fetch('http://localhost:8080/api/auth/resetPasswordInitiate', requestOptions); 
-
+        const response = await APIMethods.resetPasswordInitiate(resetPasswordToken, newPassword, repeatNewPassword, accountDetails.email);
+        
         if (response.status === 200) {
             navigate("/userProfile/account")
         } else {

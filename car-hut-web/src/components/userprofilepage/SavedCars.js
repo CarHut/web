@@ -2,24 +2,14 @@ import '../../css/userprofilepage/SavedCars.css';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import audiRS3Image from '../../images/searchlist/offers/audiRS3.jpg';
+import APIMethods from '../../api/APIMethods';
 
 function SavedCars() {
  
     const [cars, setCars] = useState([]);
 
     const fetchSavedCarsByUserId = async () => {
-        const requestOption = {
-            method: 'POST',
-            headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('token'),
-                'Content-Type': 'application/json'
-            },
-            body: localStorage.getItem('username')
-        };
-
-        const response = await fetch('http://localhost:8080/api/carhut/savedCars/getSavedCarsByUsername', requestOption)
-        const data = await response.json();
-        setCars(data);
+        setCars(await APIMethods.getSavedCarsByUsername());
     }
 
     useEffect(() => {
@@ -27,20 +17,7 @@ function SavedCars() {
     }, []);
 
     const removeCarFromWishList = async (id) => {
-        const requestOption = {
-            method: 'POST',
-            headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('token'),
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                id: 'not-specified',
-                userId: localStorage.getItem('username'),
-                carId: id
-            })
-        };
-
-        const response = await fetch('http://localhost:8080/api/carhut/savedCars/removeSavedCarByUsername', requestOption)
+        const response = APIMethods.removeSavedCarByUsername(id);
         fetchSavedCarsByUserId();
     }
 

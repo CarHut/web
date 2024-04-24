@@ -1,6 +1,7 @@
 import { keyboard } from '@testing-library/user-event/dist/keyboard';
 import '../../css/searchlist/ExtendedFilters.css';
 import { useState, useEffect } from 'react';
+import APIMethods from '../../api/APIMethods';
 
 function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange }) {
 
@@ -20,20 +21,13 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange })
     var brandsAndModelsFetchedTrigger = false;
 
     useEffect(() => {
-        // Fetch data from the API when the component mounts
-        fetch('http://localhost:8080/api/carhut/getAllBrands')
-            .then(response => response.json())
-            .then(data => setAddBrands(data))
-            .catch(error => console.error('Error fetching brands:', error));
+        setAddBrands(APIMethods.getAllBrands());
     }, []);
 
     useEffect(() => {
         // Fetch models when a brand is 
         if (addBrand !== '') {
-            fetch(`http://localhost:8080/api/carhut/getModelsByBrand/${addBrand}`)
-                .then(response => response.json())
-                .then(data => setAddModels(data))
-                .catch(error => console.error('Error fetching models:', error));
+            setAddModels(APIMethods.getModelsByBrand(addBrand));
         } else {
             // Clear models when no brand is 
             setAddModels([]);

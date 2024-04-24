@@ -2,6 +2,7 @@ import '../../css/clickandpickpage/ModelSection.css'
 import { useLocation, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import BrandSection from './BrandSection';
+import APIMethods from '../../api/APIMethods';
 
 
 function ModelSection() {
@@ -11,33 +12,31 @@ function ModelSection() {
     const [pickedModels, setPickedModels] = useState([]);
     const [brandModelsObjects, setBrandModelsObjects] = useState([]);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                if (brands && brands.length > 0) {
-                    var modelsData = [];
+    const fetchData = async () => {
+        try {
+            if (brands && brands.length > 0) {
+                var modelsData = [];
 
-                    for (const brand of brands) {
-                        const response = await fetch(`http://localhost:8080/api/carhut/getModelsByBrandName?brandName=${brand}`);
-                        const data = await response.json();
+                for (const brand of brands) {
+                    const data = APIMethods.getModelsByBrandName(brand);
 
-                        modelsData.push({
-                            brand: brand,
-                            models: data
-                        });
-                        
-                    }
-                    setModelsByBrand(modelsData);
-                } else {
-                    setModelsByBrand([]);
+                    modelsData.push({
+                        brand: brand,
+                        models: data
+                    });
+                    
                 }
-            } catch (error) {
-                console.error('Error fetching models:', error);
+                setModelsByBrand(modelsData);
+            } else {
+                setModelsByBrand([]);
             }
-        };
+        } catch (error) {
+            console.error('Error fetching models:', error);
+        }
+    };
 
+    useEffect(() => {
         fetchData();
-
     }, [brands]);
 
     const generateLabelsForModels = () => {

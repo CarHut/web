@@ -3,6 +3,7 @@ import '../../css/searchlist/Offers.css';
 import audiRS3Image from '../../images/searchlist/offers/audiRS3.jpg';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import APIMethods from '../../api/APIMethods';
 
 
 function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength}) {
@@ -14,26 +15,20 @@ function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength}) {
     const fetchCars = async () => {
         const sortOrder = sortBy[sortBy.length - 1] == 'L' ? "ASC" : "DESC";
 
-        const url = `http://localhost:8080/api/carhut/getTempCarsWithFilters?` +
+        const url = `http://localhost:8080/api/carhut/getCarsWithFilters?` +
             `&priceFrom=${fetchedState.price.priceFrom}&priceTo=${fetchedState.price.priceTo}&mileageFrom=${fetchedState.mileage.mileageFrom}` +
             `&mileageTo=${fetchedState.mileage.mileageTo}&fuelType=${fetchedState.fuelType}&gearbox=${fetchedState.gearbox}&powertrain=${fetchedState.powertrain}` +
             `&powerFrom=${fetchedState.power.powerFrom}&powerTo=${fetchedState.power.powerTo}&sortBy=${sortBy}&sortOrder=${sortOrder}`;
 
-        const response = await fetch(url, {
-            method: 'POST',
-            body: JSON.stringify(fetchedState.models),
-            headers: {
-               'Content-Type': 'application/json'
-            }
-        });
-        const result = await response.json();
+        
+        const result = await APIMethods.getCarsWithFilters(url, fetchedState.models);
         
         setCars(result);
         setTotalPages(Math.ceil(result.length / offersPerPage));
         setResultsListLength(result.length);
+
+        console.log(result);
     }
-
-
 
     useEffect(() => {
         fetchCars();
@@ -76,7 +71,7 @@ function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength}) {
                                     <div className='car-stats-text'>{car.bodyType}</div>
                                     <div className='car-stats-text'>{car.gearbox}</div>
                                     <div className='car-stats-text'>{car.powertrain}</div>
-                                    <div className='car-stats-text'>{car.fuelConsumption}</div>  
+                                    <div className='car-stats-text'>{car.fuelConsumptionAvg}</div>  
                                 </div>
         
                                 <div className='car-stats-column'>
