@@ -1,0 +1,112 @@
+.add-car-main-info-section {
+    background-color: #181818;
+    margin: 2em 20em;
+    padding: 1em 3em;
+    display: block;
+}
+
+.add-car-main-info-header {
+    color: #ffffff;
+    font-size: 2em;
+}
+
+.line-container {
+    position: relative;
+    width: 100%; 
+    height: 2px; 
+    background-color: #898989;
+    margin-bottom: 0.3em;
+    margin: 2em 0;
+}
+
+.add-car-main-info-content-wrapper {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.add-car-main-info-column-wrapper {
+    width: 48%;
+    display: block;
+}
+
+.add-car-main-info-row-wrapper {
+    display: flex;
+    margin-bottom: 2em;
+}
+
+.add-car-main-info-custom-combobox {
+    position: relative;
+    width: 13em; 
+    height: 2em;
+    margin-right: 5em;
+}
+
+.add-car-main-info-combobox-entity {
+  display: block;
+  padding-right: 1em;
+  padding-bottom: 1em;
+}
+  
+  .add-car-main-info-custom-combobox::after {
+    content: '\25BC'; 
+    color: #D9D9D9; 
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+  }
+  
+  .add-car-main-info-myComboBox {
+    width: 100%;
+    border: 1px solid #D9D9D9;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #D9D9D9;
+    background-color: #313131;
+    height: 100%;
+    padding-left: 1em;
+  }
+  
+  .add-car-main-info-myComboBox option {
+    background-color: #fff;
+    color: #000;
+  }
+
+.add-car-main-info-myComboBox.disabled {
+    box-shadow: none; 
+    opacity: 0.7;
+}
+
+.add-car-form {
+    display: block;
+}
+
+.add-car-main-info-regular-text {
+    font-size: 1.5em;
+    color: #fff;
+    margin-bottom: 1em;
+}
+
+.add-car-main-info-text-input {
+    width: 15em;
+    height: 2em;
+    background-color: #313131;
+    color: #a3a3a3;
+    border: solid #a3a3a3 1px;
+    border-radius: 5px;
+}
+
+.add-car-main-info-small-text-darker {
+    font-size: 1em;
+    color: #fff;
+    font-weight: bold;
+    margin-bottom: 1em;
+    opacity: 70%;
+}
+
+.add-car-main-info-small-text {
+    font-size: 1em;
+    color: #fff;
+    margin-bottom: 1em;
+}

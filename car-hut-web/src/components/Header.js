@@ -37,7 +37,9 @@ function Header() {
                                     Profile
                                 </Link>
                                 <Link
-                                    
+                                    className='dropdown-menu-text'
+                                    to={'/addCar/mainInfo'}
+                                    style={{"textDecoration": "none"}}
                                 >
                                     Add offer
                                 </Link>

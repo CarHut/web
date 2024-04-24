@@ -1,0 +1,21 @@
+.body {
+    background-color: #313131;
+}
+
+.current-route-text {
+    color: #ffffff;
+    font-size: 0.8em;
+    margin-left: 26em;
+    padding-top: 1em;
+}
+
+.header-section {
+    margin: 2em 20em;
+    display: block;
+}
+
+.add-car-page-header {
+    color: #ffffff;
+    font-size: 2em;
+    padding-top: 2em;
+}

@@ -7,6 +7,7 @@ import CarOfferPage from '../pages/CarOfferPage';
 import LoginRegisterPage from '../pages/LoginRegisterPage';
 import UserProfilePage from "../pages/UserProfilePage";
 import PasswordResetPage from "../pages/PasswordResetPage";
+import AddCarPage from "../pages/AddCarPage";
 
 function Routing() {
 
@@ -30,6 +31,7 @@ function Routing() {
           <Route path='/userProfile/account' element={<UserProfilePage/>}/>
           <Route path='/userProfile/savedCars' element={<UserProfilePage/>}/>  
           <Route path='/passwordReset' element={<PasswordResetPage/>}/>
+          <Route path='/addCar/mainInfo' element={<AddCarPage/>}/>
         </Routes>
     );
 }
