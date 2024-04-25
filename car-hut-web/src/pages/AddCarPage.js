@@ -1,4 +1,5 @@
 import Header from '../components/Header';
+import EngineInfo from '../components/addcarpage/EngineInfo';
 import MainInfo from '../components/addcarpage/MainInfo';
 import '../css/AddCarPage.css';
 import { useLocation } from 'react-router-dom';
@@ -10,6 +11,8 @@ function AddCarPage() {
     const renderSection = () => {
         if (loc.pathname === '/addCar/mainInfo') {
             return <MainInfo/>;
+        } else if (loc.pathname === '/addCar/engineInfo') {
+            return <EngineInfo/>
         }
 
         return <div/>

@@ -125,9 +125,27 @@ const APIMethods = {
         }
 
         return await fetch('http://localhost:8080/api/auth/resetPasswordInitiate', requestOptions);
-    }
-
-    
+    },
+    getBodyTypes: async () => {
+        const response = await fetch('http://localhost:8080/api/carhut/getBodyTypes');
+        const data = await response.json();
+        return data;
+    },
+    getGearboxTypes: async () => {
+        const response = await fetch('http://localhost:8080/api/carhut/getGearboxTypes');
+        const data = await response.json();
+        return data;
+    },
+    getFuelTypes: async () => {
+        const response = await fetch('http://localhost:8080/api/carhut/getFuelTypes');
+        const data = await response.json();
+        return data;
+    },
+    getPowertrainTypes: async () => {
+        const response = await fetch('http://localhost:8080/api/carhut/getPowertrainTypes');
+        const data = await response.json();
+        return data;
+    },
 }
 
 export default APIMethods;

@@ -32,6 +32,7 @@ function Routing() {
           <Route path='/userProfile/savedCars' element={<UserProfilePage/>}/>  
           <Route path='/passwordReset' element={<PasswordResetPage/>}/>
           <Route path='/addCar/mainInfo' element={<AddCarPage/>}/>
+          <Route path='/addCar/engineInfo' element={<AddCarPage/>}/>
         </Routes>
     );
 }
