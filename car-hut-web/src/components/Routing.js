@@ -33,6 +33,7 @@ function Routing() {
           <Route path='/passwordReset' element={<PasswordResetPage/>}/>
           <Route path='/addCar/mainInfo' element={<AddCarPage/>}/>
           <Route path='/addCar/engineInfo' element={<AddCarPage/>}/>
+          <Route path='/addCar/additionalInfo' element={<AddCarPage/>}/>
         </Routes>
     );
 }

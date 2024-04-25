@@ -1,4 +1,5 @@
 import Header from '../components/Header';
+import AdditionalInfo from '../components/addcarpage/AdditionalInfo';
 import EngineInfo from '../components/addcarpage/EngineInfo';
 import MainInfo from '../components/addcarpage/MainInfo';
 import '../css/AddCarPage.css';
@@ -12,7 +13,9 @@ function AddCarPage() {
         if (loc.pathname === '/addCar/mainInfo') {
             return <MainInfo/>;
         } else if (loc.pathname === '/addCar/engineInfo') {
-            return <EngineInfo/>
+            return <EngineInfo/>;
+        } else if (loc.pathname === '/addCar/additionalInfo') {
+            return <AdditionalInfo/>;
         }
 
         return <div/>
