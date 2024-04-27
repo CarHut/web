@@ -150,6 +150,11 @@ const APIMethods = {
         const response = await fetch('http://localhost:8080/api/carhut/getColors');
         const data = await response.json();
         return data;
+    },
+    getFeatures: async () => {
+        const response = await fetch('http://localhost:8080/api/carhut/getFeatures');
+        const data = await response.json();
+        return data;
     }
 }
 

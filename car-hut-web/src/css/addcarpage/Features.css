@@ -1,0 +1,69 @@
+.add-car-features-section {
+    background-color: #181818;
+    margin: 2em 20em;
+    padding: 1em 3em;
+    display: block;
+}
+
+.add-car-features-header {
+    color: #ffffff;
+    font-size: 2em;
+}
+
+.line-container {
+    position: relative;
+    width: 100%; 
+    height: 2px; 
+    background-color: #898989;
+    margin-bottom: 0.3em;
+    margin: 2em 0;
+}
+
+.add-car-features-main-wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.add-car-features-column-wrapper {
+    width: 22%;
+    display: block;
+}
+
+.add-car-features-row-wrapper {
+    display: flex;
+    width: 100%;
+    margin-bottom: 0.5em;
+    align-items: center;
+}
+
+.add-car-features-feature-text {
+    font-size: 1em;
+    color: #ffffff;
+}
+
+.add-car-features-checkbox {
+    width: 1em;
+    height: 1em;
+    accent-color: #181818;
+    margin-right: 0.8em;
+}
+
+.add-car-features-styled-button {
+    background-color: #313131;
+    color: #ffffff;
+    padding: 10px 20px;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 3em;
+    text-align: center;
+    margin-top: 2em;
+}
+
+.add-car-features-styled-button:hover {
+    background-color: #D9D9D9;
+    color: #000;
+}

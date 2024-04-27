@@ -20,7 +20,7 @@ function AdditionalInfo() {
     const [countryOfOrigin, setCountryOfOrigin] = useState('Not stated');
     const [interiorColor, setInteriorColor] = useState('Not stated');
     const [exteriorColor, setExteriorColor] = useState('Not stated');
-    const [emmInspectionDate, setEmmInspectionDate] = useState('Not stated');
+    const [emInspectionDate, setemInspectionDate] = useState('Not stated');
     const [techInspectionDate, setTechInspectionDate] = useState('Not stated');
     const [colors, setColors] = useState([]);
 
@@ -74,7 +74,7 @@ function AdditionalInfo() {
     }
 
     const handleEmmInspection = (e) => {
-        setEmmInspectionDate(e);
+        setemInspectionDate(e);
     }
 
     const handleExteriorColorChange = (e) => {
@@ -120,7 +120,7 @@ function AdditionalInfo() {
                     <input type='date' value={techInspectionDate} onChange={(e) => handleTechInspection(e.target.value)}/>
 
                     <div className='label'>Next emission inspection</div>
-                    <input type='date' value={emmInspectionDate} onChange={(e) => handleEmmInspection(e.target.value)}/>
+                    <input type='date' value={emInspectionDate} onChange={(e) => handleEmmInspection(e.target.value)}/>
 
                     <div className='add-car-engine-info-combobox-entity'>
                         <div className='label'>Country of origin</div>
@@ -234,7 +234,7 @@ function AdditionalInfo() {
                         <div className='add-car-engine-info-small-text'>{exteriorColor}</div>
                         <div className='add-car-engine-info-small-text'>{interiorColor}</div>
                         <div className='add-car-engine-info-small-text'>{techInspectionDate}</div>
-                        <div className='add-car-engine-info-small-text'>{emmInspectionDate}</div>
+                        <div className='add-car-engine-info-small-text'>{emInspectionDate}</div>
                         <div className='add-car-engine-info-small-text'>{countryOfOrigin}</div>
                         <div className='add-car-engine-info-small-text'>{damage}</div>
                         <div className='add-car-engine-info-small-text'>{parkSensors}</div>
@@ -266,9 +266,22 @@ function AdditionalInfo() {
                     highwayFuelCons: currentCarModel.highwayFuelCons,
                     gearbox: currentCarModel.gearbox,
                     gearboxGears: currentCarModel.gearboxGears,
-                    powertrain: currentCarModel.powertrain
+                    powertrain: currentCarModel.powertrain,
+                    exteriorColor: exteriorColor,
+                    interiorColor: interiorColor,
+                    techInspectionDate: techInspectionDate,
+                    emInspectionDate: emInspectionDate,
+                    countryOfOrigin: countryOfOrigin,
+                    damage: damage,
+                    parkSensors: parkSensors,
+                    parkCameras: parkCameras,
+                    doors: doors,
+                    seats: seats,
+                    previousOwners: previousOwners,
+                    energyEffClass: energyEffClass,
+                    emissionClass: emissionClass
                 }}
-                to={'/addCar/additionalInfo'}
+                to={'/addCar/features'}
             >
                 Next
             </Link>

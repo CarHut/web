@@ -1,6 +1,8 @@
 import Header from '../components/Header';
+import AddPhotos from '../components/addcarpage/AddPhotos';
 import AdditionalInfo from '../components/addcarpage/AdditionalInfo';
 import EngineInfo from '../components/addcarpage/EngineInfo';
+import Features from '../components/addcarpage/Features';
 import MainInfo from '../components/addcarpage/MainInfo';
 import '../css/AddCarPage.css';
 import { useLocation } from 'react-router-dom';
@@ -16,6 +18,10 @@ function AddCarPage() {
             return <EngineInfo/>;
         } else if (loc.pathname === '/addCar/additionalInfo') {
             return <AdditionalInfo/>;
+        } else if (loc.pathname === '/addCar/features') {
+            return <Features/>;
+        } else if (loc.pathname === '/addCar/addPhotos') {
+            return <AddPhotos/>;
         }
 
         return <div/>

@@ -34,6 +34,8 @@ function Routing() {
           <Route path='/addCar/mainInfo' element={<AddCarPage/>}/>
           <Route path='/addCar/engineInfo' element={<AddCarPage/>}/>
           <Route path='/addCar/additionalInfo' element={<AddCarPage/>}/>
+          <Route path='/addCar/features' element={<AddCarPage/>}/>
+          <Route path='/addCar/addPhotos' element={<AddCarPage/>}/>
         </Routes>
     );
 }
