@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import '../../css/addcarpage/AddPhotos.css';
 import { useState } from 'react';
 
@@ -6,10 +6,10 @@ function AddPhotos() {
 
     const loc = useLocation();
     const currentCarModel = loc.state;
-    const [loadedImage, setLoadedImage] = useState(null)
+    const [loadedImage, setLoadedImage] = useState(null);
+    const [uploadedImages, setUploadedImages] = useState([]);
 
     const handleLoadedImage = (image) => {
-        console.log(image);
         setLoadedImage(image);
     }
 
@@ -28,18 +28,53 @@ function AddPhotos() {
               method: 'POST',
               body: formData,
             });
+
+            const newUploadedImages = [...uploadedImages, loadedImage];
+            setUploadedImages(newUploadedImages);
         } catch (error) {
             console.error('Error uploading image:', error);
+            return;
         }
+    }
 
+    const handleRemovedImage = (indexOfRemovedImg) => {
+        const tempImages = [...uploadedImages];
+        setUploadedImages(tempImages.filter((image, idx) => idx !== indexOfRemovedImg));
     }
 
     return (
         <div className='add-car-photos-section'>
             <div className='add-car-photos-header'>Add photos of you car</div>
             <div className='line-container'/>
-            <input type='file' accept="image/png, image/jpg, image/jpeg" onChange={(e) => handleLoadedImage(e.target.files[0])}/>
-            <div className='add-car-photo-styled-button' onClick={uploadImage}>Upload image</div>
+            <div className='add-car-photos-columns'>
+                <div className='add-car-photos-column-wrapper'>
+                    <img className='add-car-photos-loaded-img' src={loadedImage !== null ? URL.createObjectURL(loadedImage) : ""}/>
+                    <div><input type='file' accept="image/png, image/jpg, image/jpeg" onChange={(e) => handleLoadedImage(e.target.files[0])}/></div>
+                    <div className='add-car-photo-styled-button' onClick={uploadImage}>Upload image</div>            
+                </div>
+                <div className='add-car-photos-column-wrapper'>
+                    <div className='add-car-photos-header'>Added photos</div>
+                    <div className='add-car-photos-uploaded-images-wrapper'>
+                        {uploadedImages.map((image, idx) => {
+                            return (
+                                <div className='add-car-photos-uploaded-img'>
+                                    <img id={idx} src={URL.createObjectURL(image)}/>
+                                    <div className='x-mark' onClick={(e) => handleRemovedImage(idx)}/>
+                                </div>
+                                
+                            )
+                        })}
+                    </div>
+                </div>
+            </div>
+            <Link
+                to={""}
+                className='add-car-styled-button'
+                style={{textDecoration: "none"}}
+                state={currentCarModel}
+            >
+                Next    
+            </Link>
         </div>
     );
 
