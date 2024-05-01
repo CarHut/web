@@ -1,6 +1,6 @@
 import '../../css/carofferpage/SellerInfo.css';
 
-function SellerInfo() {
+function SellerInfo({car}) {
     return (
         <div className='seller-info-body'>
             <div className='seller-info-header'>Seller</div>

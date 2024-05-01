@@ -8,29 +8,32 @@ import MoreInfo from './MoreInfo';
 import SellerInfo from './SellerInfo';
 import APIMethods from '../../api/APIMethods';
 
-function CarMainSection({ carId }) {
+function CarMainSection({ carId, carModel }) {
+    const [car, setCar] = useState();
 
-    const [car, setCar] = useState({});
-
-    const fetchCar = async (carId) => {
-        const data = await APIMethods.getCarWithId(carId);
-        setCar(data);
+    const fetchCar = async () => {
+        if (carId === null) {
+            setCar(carModel);
+        } else {
+            const data = await APIMethods.getCarWithId(carId);
+            setCar(data);
+        }
     } 
 
     useEffect(() => {
-        fetchCar(carId);
-    }, [carId]);
+        fetchCar();
+    }, [carId, carModel]);
 
     return (
         <div className='section-body-car-main-section'>
-            <MainInfoSection car={car}/>
-            <ImportantData car={car}/>
+            {car === undefined ? <div/> : <MainInfoSection car={car}/>}
+            {car === undefined ? <div/> : <ImportantData car={car}/>}
             <div className='car-main-section-split-wrapper'>
-                <TechnicalData car={car}/>
-                <Features/>
+                {car === undefined ? <div/> : <TechnicalData car={car}/>}
+                {car === undefined ? <div/> : <Features car={car}/>}
             </div>
-            <MoreInfo car={car}/>
-            <SellerInfo car={car}/>
+            {car === undefined ? <div/>  : <MoreInfo car={car}/>}
+            {car === undefined ? <div/> : <SellerInfo car={car}/>}
         </div>
     );
 }

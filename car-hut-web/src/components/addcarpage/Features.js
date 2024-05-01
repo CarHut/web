@@ -2,6 +2,7 @@ import '../../css/addcarpage/Features.css';
 import { useLocation, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import APIMethods from '../../api/APIMethods';
+import SellerInfo from '../carofferpage/SellerInfo';
 
 function Features() {
 
@@ -79,28 +80,30 @@ function Features() {
                 className='add-car-features-styled-button'
                 style={{"textDecoration": "none"}}
                 state={{
-                    brand: currentCarModel.brand,
-                    model: currentCarModel.model,
+                    brandId: currentCarModel.brandId,
+                    modelId: currentCarModel.modelId,
                     header: currentCarModel.header,
                     mileage: currentCarModel.mileage,
                     registration: currentCarModel.registration,
+                    price: currentCarModel.price,
+                    sellerAddress: currentCarModel.sellerAddress,
                     enginePower: currentCarModel.enginePower,
-                    displacement: currentCarModel.displacement,
+                    engineDisplacement: currentCarModel.engineDisplacement,
                     fuel: currentCarModel.fuel,
-                    avgFuelCons: currentCarModel.avgFuelCons,
-                    cityFuelCons: currentCarModel.cityFuelCons,
-                    highwayFuelCons: currentCarModel.highwayFuelCons,
+                    fuelConsumptionAvg: currentCarModel.fuelConsumptionAvg,
+                    fuelConsumptionCity: currentCarModel.fuelConsumptionCity,
+                    fuelConsumptionHighway: currentCarModel.fuelConsumptionHighway,
                     gearbox: currentCarModel.gearbox,
                     gearboxGears: currentCarModel.gearboxGears,
                     powertrain: currentCarModel.powertrain,
-                    exteriorColor: currentCarModel.exteriorColor,
-                    interiorColor: currentCarModel.interiorColor,
-                    techInspectionDate: currentCarModel.techInspectionDate,
-                    emInspectionDate: currentCarModel.emInspectionDate,
+                    exteriorColorId: currentCarModel.exteriorColorId,
+                    interiorColorId: currentCarModel.interiorColorId,
+                    technicalInspectionDate: currentCarModel.technicalInspectionDate,
+                    emissionInspectionDate: currentCarModel.emissionInspectionDate,
                     countryOfOrigin: currentCarModel.countryOfOrigin,
-                    damage: currentCarModel.damage,
-                    parkSensors: currentCarModel.parkSensors,
-                    parkCameras: currentCarModel.parkCameras,
+                    damageStatus: currentCarModel.damageStatus,
+                    parkingSensors: currentCarModel.parkingSensors,
+                    parkingCameras: currentCarModel.parkingCameras,
                     doors: currentCarModel.doors,
                     seats: currentCarModel.seats,
                     previousOwners: currentCarModel.previousOwners,

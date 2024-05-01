@@ -15,7 +15,7 @@ function CarOfferPage() {
             <Header/>
             <div className="current-route-text">xxx</div>
             <div className="car-offer-page-header">You've picked</div>
-            <CarMainSection carId={carId}/>
+            <CarMainSection carId={carId} car={null}/>
         </div>
     );
 

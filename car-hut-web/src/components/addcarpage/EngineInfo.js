@@ -192,6 +192,8 @@ function EngineInfo() {
                         <div className='add-car-engine-info-small-text-darker'>Headline</div>
                         <div className='add-car-engine-info-small-text-darker'>*Mileage</div>
                         <div className='add-car-engine-info-small-text-darker'>*Registration</div>
+                        <div className='add-car-engine-info-small-text-darker'>*Price</div>
+                        <div className='add-car-engine-info-small-text-darker'>*Address</div>
                         <div className='add-car-engine-info-small-text-darker'>*Engine power</div>
                         <div className='add-car-engine-info-small-text-darker'>Displacement</div>
                         <div className='add-car-engine-info-small-text-darker'>*Fuel</div>
@@ -203,11 +205,13 @@ function EngineInfo() {
                         <div className='add-car-engine-info-small-text-darker'>*Powertrain</div>
                     </div>
                     <div className='add-car-engine-info-column-wrapper'>
-                        <div className='add-car-engine-info-small-text'>{currentCarModel.brand}</div>
-                        <div className='add-car-engine-info-small-text'>{currentCarModel.model}</div>
+                        <div className='add-car-engine-info-small-text'>{currentCarModel.brandId}</div>
+                        <div className='add-car-engine-info-small-text'>{currentCarModel.modelId}</div>
                         <div className='add-car-engine-info-small-text'>{currentCarModel.header}</div>
                         <div className='add-car-engine-info-small-text'>{currentCarModel.mileage} km</div>
                         <div className='add-car-engine-info-small-text'>{currentCarModel.registration}</div>
+                        <div className='add-car-engine-info-small-text'>{currentCarModel.price} €</div>
+                        <div className='add-car-engine-info-small-text'>{currentCarModel.sellerAddress}</div>
                         <div className='add-car-engine-info-small-text'>{enginePower} kW</div>
                         <div className='add-car-engine-info-small-text'>{displacement} cm³</div>  
                         <div className='add-car-engine-info-small-text'>{fuel}</div>   
@@ -225,17 +229,19 @@ function EngineInfo() {
                 className='add-car-styled-button'
                 style={{"textDecoration": "none"}}
                 state={{
-                    brand: currentCarModel.brand,
-                    model: currentCarModel.model,
+                    brandId: currentCarModel.brandId,
+                    modelId: currentCarModel.modelId,
                     header: currentCarModel.header,
                     mileage: currentCarModel.mileage,
                     registration: currentCarModel.registration,
+                    price: currentCarModel.price,
+                    sellerAddress: currentCarModel.sellerAddress,
                     enginePower: enginePower,
-                    displacement: displacement,
+                    engineDisplacement: displacement,
                     fuel: fuel,
-                    avgFuelCons: avgFuelCons,
-                    cityFuelCons: cityFuelCons,
-                    highwayFuelCons: highwayFuelCons,
+                    fuelConsumptionAvg: avgFuelCons,
+                    fuelConsumptionCity: cityFuelCons,
+                    fuelConsumptionHighway: highwayFuelCons,
                     gearbox: gearbox,
                     gearboxGears: gears,
                     powertrain: powertrain

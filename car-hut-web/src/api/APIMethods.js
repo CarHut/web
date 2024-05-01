@@ -155,6 +155,21 @@ const APIMethods = {
         const response = await fetch('http://localhost:8080/api/carhut/getFeatures');
         const data = await response.json();
         return data;
+    },
+    getBrandIdFromBrandName: async (brand) => {
+        const response = await fetch('http://localhost:8080/api/carhut/getBrandIdFromBrandName?brand=' + brand);
+        const data = await response.json();
+        return data;
+    },
+    getModelIdByModelName: async (model, brandId) => {
+        const response = await fetch('http://localhost:8080/api/carhut/getModelIdFromModelName?model=' + model + '&brandId=' + brandId);
+        const data = await response.json();
+        return data;
+    },
+    getFeatureIdByFeatureName: async (feature) => {
+        const response = await fetch('http://localhost:8080/api/carhut/getFeatureIdByFeatureName?feature=' + feature);
+        const data = await response.json();
+        return data;
     }
 }
 

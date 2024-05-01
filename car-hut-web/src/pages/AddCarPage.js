@@ -4,6 +4,8 @@ import AdditionalInfo from '../components/addcarpage/AdditionalInfo';
 import EngineInfo from '../components/addcarpage/EngineInfo';
 import Features from '../components/addcarpage/Features';
 import MainInfo from '../components/addcarpage/MainInfo';
+import SuccessPage from '../components/addcarpage/SuccessPage';
+import Summary from '../components/addcarpage/Summary';
 import '../css/AddCarPage.css';
 import { useLocation } from 'react-router-dom';
 
@@ -22,6 +24,10 @@ function AddCarPage() {
             return <Features/>;
         } else if (loc.pathname === '/addCar/addPhotos') {
             return <AddPhotos/>;
+        } else if (loc.pathname === '/addCar/summary') {
+            return <Summary/>;
+        } else if (loc.pathname === '/addCar/success') {
+            return <SuccessPage/>;
         }
 
         return <div/>

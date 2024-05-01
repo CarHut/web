@@ -68,10 +68,42 @@ function AddPhotos() {
                 </div>
             </div>
             <Link
-                to={""}
+                to={"/addCar/summary"}
                 className='add-car-styled-button'
                 style={{textDecoration: "none"}}
-                state={currentCarModel}
+                state={{
+                    brandId: currentCarModel.brandId,
+                    modelId: currentCarModel.modelId,
+                    header: currentCarModel.header,
+                    mileage: currentCarModel.mileage,
+                    registration: currentCarModel.registration,
+                    price: currentCarModel.price,
+                    sellerAddress: currentCarModel.sellerAddress,
+                    enginePower: currentCarModel.enginePower,
+                    engineDisplacement: currentCarModel.engineDisplacement,
+                    fuel: currentCarModel.fuel,
+                    fuelConsumptionAvg: currentCarModel.fuelConsumptionAvg,
+                    fuelConsumptionCity: currentCarModel.fuelConsumptionCity,
+                    fuelConsumptionHighway: currentCarModel.fuelConsumptionHighway,
+                    gearbox: currentCarModel.gearbox,
+                    gearboxGears: currentCarModel.gearboxGears,
+                    powertrain: currentCarModel.powertrain,
+                    exteriorColorId: currentCarModel.exteriorColorId,
+                    interiorColorId: currentCarModel.interiorColorId,
+                    technicalInspectionDate: currentCarModel.technicalInspectionDate,
+                    emissionInspectionDate: currentCarModel.emissionInspectionDate,
+                    countryOfOrigin: currentCarModel.countryOfOrigin,
+                    damageStatus: currentCarModel.damageStatus,
+                    parkingSensors: currentCarModel.parkingSensors,
+                    parkingCameras: currentCarModel.parkingCameras,
+                    doors: currentCarModel.doors,
+                    seats: currentCarModel.seats,
+                    previousOwners: currentCarModel.previousOwners,
+                    energyEffClass: currentCarModel.energyEffClass,
+                    emissionClass: currentCarModel.emissionClass,
+                    features: currentCarModel.features,
+                    images: uploadedImages
+                }}
             >
                 Next    
             </Link>

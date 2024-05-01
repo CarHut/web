@@ -1,12 +1,16 @@
+import { keyboard, specialCharMap } from '@testing-library/user-event/dist/keyboard';
 import '../../css/carofferpage/MainInfoSection.css';
 import CarMainInfo from './CarMainInfo';
 import PhotosSection from './PhotosSection';
+import { useEffect, useState } from 'react';
 
 function MainInfoSection({car}) {
+    const [carModel, setCarModel] = useState(car);
+    
     return (
         <div className='section-body-car-offer-main-info'>
-            <PhotosSection/>
-            <CarMainInfo car={car}/>
+            {carModel === undefined ? <div/> : <PhotosSection car={carModel}/>}
+            {carModel === undefined ? <div/> : <CarMainInfo car={carModel}/>}
         </div>
     );
 }

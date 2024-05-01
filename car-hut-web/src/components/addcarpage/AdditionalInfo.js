@@ -193,6 +193,8 @@ function AdditionalInfo() {
                         <div className='add-car-engine-info-small-text-darker'>Headline</div>
                         <div className='add-car-engine-info-small-text-darker'>*Mileage</div>
                         <div className='add-car-engine-info-small-text-darker'>*Registration</div>
+                        <div className='add-car-engine-info-small-text-darker'>*Price</div>
+                        <div className='add-car-engine-info-small-text-darker'>*Address</div>
                         <div className='add-car-engine-info-small-text-darker'>*Engine power</div>
                         <div className='add-car-engine-info-small-text-darker'>Displacement</div>
                         <div className='add-car-engine-info-small-text-darker'>*Fuel</div>
@@ -217,17 +219,19 @@ function AdditionalInfo() {
                         <div className='add-car-engine-info-small-text-darker'>Emission class</div>
                     </div>
                     <div className='add-car-engine-info-column-wrapper'>
-                        <div className='add-car-engine-info-small-text'>{currentCarModel.brand}</div>
-                        <div className='add-car-engine-info-small-text'>{currentCarModel.model}</div>
+                        <div className='add-car-engine-info-small-text'>{currentCarModel.brandId}</div>
+                        <div className='add-car-engine-info-small-text'>{currentCarModel.modelId}</div>
                         <div className='add-car-engine-info-small-text'>{currentCarModel.header}</div>
                         <div className='add-car-engine-info-small-text'>{currentCarModel.mileage} km</div>
                         <div className='add-car-engine-info-small-text'>{currentCarModel.registration}</div>
+                        <div className='add-car-engine-info-small-text'>{currentCarModel.price} €</div>
+                        <div className='add-car-engine-info-small-text'>{currentCarModel.sellerAddress}</div>
                         <div className='add-car-engine-info-small-text'>{currentCarModel.enginePower} kW</div>
-                        <div className='add-car-engine-info-small-text'>{currentCarModel.displacement} cm³</div>  
+                        <div className='add-car-engine-info-small-text'>{currentCarModel.engineDisplacement} cm³</div>  
                         <div className='add-car-engine-info-small-text'>{currentCarModel.fuel}</div>   
-                        <div className='add-car-engine-info-small-text'>{currentCarModel.avgFuelCons} l/100km</div>   
-                        <div className='add-car-engine-info-small-text'>{currentCarModel.cityFuelCons} l/100km</div>   
-                        <div className='add-car-engine-info-small-text'>{currentCarModel.highwayFuelCons} l/100km</div> 
+                        <div className='add-car-engine-info-small-text'>{currentCarModel.fuelConsumptionAvg} l/100km</div>   
+                        <div className='add-car-engine-info-small-text'>{currentCarModel.fuelConsumptionCity} l/100km</div>   
+                        <div className='add-car-engine-info-small-text'>{currentCarModel.fuelConsumptionHighway} l/100km</div> 
                         <div className='add-car-engine-info-small-text'>{currentCarModel.gearbox}</div>  
                         <div className='add-car-engine-info-small-text'>{currentCarModel.gearboxGears}</div>  
                         <div className='add-car-engine-info-small-text'>{currentCarModel.powertrain}</div>            
@@ -253,28 +257,30 @@ function AdditionalInfo() {
                 className='add-car-styled-button'
                 style={{"textDecoration": "none"}}
                 state={{
-                    brand: currentCarModel.brand,
-                    model: currentCarModel.model,
+                    brandId: currentCarModel.brandId,
+                    modelId: currentCarModel.modelId,
                     header: currentCarModel.header,
                     mileage: currentCarModel.mileage,
                     registration: currentCarModel.registration,
+                    price: currentCarModel.price,
+                    sellerAddress: currentCarModel.sellerAddress,
                     enginePower: currentCarModel.enginePower,
-                    displacement: currentCarModel.displacement,
+                    engineDisplacement: currentCarModel.engineDisplacement,
                     fuel: currentCarModel.fuel,
-                    avgFuelCons: currentCarModel.avgFuelCons,
-                    cityFuelCons: currentCarModel.cityFuelCons,
-                    highwayFuelCons: currentCarModel.highwayFuelCons,
+                    fuelConsumptionAvg: currentCarModel.fuelConsumptionAvg,
+                    fuelConsumptionCity: currentCarModel.fuelConsumptionCity,
+                    fuelConsumptionHighway: currentCarModel.fuelConsumptionHighway,
                     gearbox: currentCarModel.gearbox,
                     gearboxGears: currentCarModel.gearboxGears,
                     powertrain: currentCarModel.powertrain,
-                    exteriorColor: exteriorColor,
-                    interiorColor: interiorColor,
-                    techInspectionDate: techInspectionDate,
-                    emInspectionDate: emInspectionDate,
+                    exteriorColorId: exteriorColor,
+                    interiorColorId: interiorColor,
+                    technicalInspectionDate: techInspectionDate,
+                    emissionInspectionDate: emInspectionDate,
                     countryOfOrigin: countryOfOrigin,
-                    damage: damage,
-                    parkSensors: parkSensors,
-                    parkCameras: parkCameras,
+                    damageStatus: damage,
+                    parkingSensors: parkSensors,
+                    parkingCameras: parkCameras,
                     doors: doors,
                     seats: seats,
                     previousOwners: previousOwners,
