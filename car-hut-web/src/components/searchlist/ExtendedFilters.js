@@ -3,7 +3,7 @@ import '../../css/searchlist/ExtendedFilters.css';
 import { useState, useEffect } from 'react';
 import APIMethods from '../../api/APIMethods';
 
-function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange }) {
+function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange, loadingResultsListLength, setLoadingResultsListLength }) {
 
     const [brandsAndModels, setBrandsAndModels] = useState([]);
     const [price, setPrice] = useState(fetchedState.price);
@@ -40,6 +40,7 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange })
         var updatedFetchedState = {...fetchedState};
         updatedFetchedState.models = updatedFetchedState.models.filter((brandAndModel) => brandAndModel.brand !== brand || brandAndModel.model != model);
         handleStateChange(updatedFetchedState);
+        setLoadingResultsListLength(true);
     }
 
     useEffect(() => {
@@ -51,10 +52,13 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange })
     
     const handleSelectedAddBrand = (val) => {
         setAddBrand(val.target.value);
+        setLoadingResultsListLength(true);
+        
     }
 
     const handleSelectedAddModel = (val) => {
         setAddModel(val.target.value);
+        setLoadingResultsListLength(true);
     }
 
     const renderBrandsAndModelsEntities = () => {
@@ -108,6 +112,7 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange })
                 setPrice({ priceFrom: price.priceFrom, priceTo: value });
                 break;
         }
+        setLoadingResultsListLength(true);
     }
 
     // type -> 0 = powerFrom, 1 = powerTo
@@ -120,19 +125,21 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange })
                 setPower({ powerFrom: power.powerFrom, powerTo: value });
                 break;
         }
+        setLoadingResultsListLength(true);
     }
 
     const onPriceChanged = () => {
         var updatedState = {...fetchedState};
         updatedState.price = price;
         handleStateChange(updatedState);
+        setLoadingResultsListLength(true);
     }
 
     const onPowerChanged = () => {
         var updatedState = {...fetchedState};
         updatedState.power = power;
         handleStateChange(updatedState);
-        console.log(updatedState);
+        setLoadingResultsListLength(true);
     }
 
     // type -> 0 = mileageFrom, 1 = mileageTo
@@ -145,12 +152,14 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange })
                 setMileage({ mileageFrom: mileage.mileageFrom, mileageTo: value });
                 break;
         }
+        setLoadingResultsListLength(true);
     }
 
     const onMileageChanged = () => {
         var updatedState = {...fetchedState};
         updatedState.mileage = mileage;
         handleStateChange(updatedState);
+        setLoadingResultsListLength(true);
     }
 
     const handleFuelTypeChange = (fuelTypeNew) => {
@@ -158,6 +167,7 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange })
         var updatedState = {...fetchedState};
         updatedState.fuelType = fuelTypeNew;
         handleStateChange(updatedState);
+        setLoadingResultsListLength(true);
     }
 
     const handleAddBrandAndModelOverlay = () => {
@@ -186,6 +196,7 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange })
         var updatedState = {...fetchedState};
         updatedState.gearbox = gearboxNew;
         handleStateChange(updatedState);
+        setLoadingResultsListLength(true);
     }
 
     const handlePowertrainChange = (powertrainNew) => {
@@ -193,12 +204,13 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange })
         var updatedState = {...fetchedState};
         updatedState.powertrain = powertrainNew;
         handleStateChange(updatedState);
+        setLoadingResultsListLength(true);
     }
 
     return (
         <div className='search-list-extended-filters-wrapper'>
             <div className='search-list-extended-filters-padding-wrapper'>
-                <div className='search-list-extended-filters-num-of-searches'>{resultsListLength} cars</div>
+                <div className='search-list-extended-filters-num-of-searches'>{!loadingResultsListLength ? resultsListLength + " cars" : "Loading cars"} </div>
                 <div className='search-list-extended-filters-header'>Filters</div>
                 <div className='search-list-extended-filters-section'>
                     <div className='search-list-extended-filters-section-label'>Brands & models</div>

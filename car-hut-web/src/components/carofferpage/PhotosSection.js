@@ -5,11 +5,20 @@ function PhotosSection({ car }) {
 
     const MAX_OF_SHOWN_MINIATURES = 5;
     const [currentMiniatureSelectedNum, setCurrentMiniatureSelectedNum] = useState(1);
+
+    // Images (when adding car they are in state, when looking for already added car web app must fetch images from backend via base_image_path)
     const [images, setImages] = useState(null);
     const [carModel, setCarModel] = useState(car);
 
     useEffect(() => {
-        setImages(carModel.images);
+        if (carModel.images === undefined) {
+            //fetching images from backend
+            
+        } else {
+            // adding images from state
+            setImages(carModel.images);
+        }
+        
     }, [carModel])
 
     const renderPhotoMiniatures = () => {

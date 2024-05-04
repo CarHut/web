@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import APIMethods from '../../api/APIMethods';
 
 
-function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength}) {
+function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength, setLoadingResultsListLength}) {
 
     const [cars, setCars] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -25,9 +25,8 @@ function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength}) {
         
         setCars(result);
         setTotalPages(Math.ceil(result.length / offersPerPage));
-        setResultsListLength(result.length);
-
-        console.log(result);
+        setResultsListLength(result.length);    
+        setLoadingResultsListLength(false);
     }
 
     useEffect(() => {

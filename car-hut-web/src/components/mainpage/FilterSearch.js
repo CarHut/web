@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import updateNumberOfSearchResults from '../../utils/RenderTextUtil';
 import APIMethods from '../../api/APIMethods';
+import { inferTypeFromValues } from 'react-admin';
 
 
 function FilterSearch() {
@@ -13,29 +14,33 @@ function FilterSearch() {
     const [selectedPriceFrom, setSelectedPriceFrom] = useState('');
     const [selectedMileageFrom, setSelectedMileageFrom] = useState('');
     const [searchedCarsNumber, setSearchedCarsNumber] = useState(null);
+    const [loadingSearchedCarsNumber, setLoadingSearchedCarsNumber] = useState(true);
+
+    const updateSearchedCarsNumber = async () => {
+        try {
+            const result = await updateNumberOfSearchResults(selectedBrand, selectedModel, "", selectedPriceFrom, "", selectedMileageFrom, "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+            setSearchedCarsNumber(result);
+            setLoadingSearchedCarsNumber(false);
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
 
     useEffect(() => {
-
-        async function updateSearchedCarsNumber() {
-            try {
-                const result = await updateNumberOfSearchResults(selectedBrand, selectedModel, "", selectedPriceFrom, "", selectedMileageFrom, "", "", "", "", "", "", "", "", "", "", "", "", "", "");
-                setSearchedCarsNumber(result);
-            } catch (error) {
-                console.error('Error:', error);
-            }
-        }
-
         updateSearchedCarsNumber();
     }, [selectedBrand, selectedModel, selectedPriceFrom, selectedMileageFrom, brands, models]);
 
     const fetchBrands = async () => {
         const data = await APIMethods.getAllBrands();
         setBrands(data);
+        setLoadingSearchedCarsNumber(true);
     }
 
     const fetchModelsByBrand = async (brand) => {
         const data = await APIMethods.getModelsByBrand(selectedBrand); 
         setModels(data);
+        setLoadingSearchedCarsNumber(true);
+        console.log('was here');
     }
 
     useEffect(() => { 
@@ -54,6 +59,22 @@ function FilterSearch() {
         setSelectedBrand(e);
         setSelectedModel('');
     }
+
+    const handleSelectedModel = (model) => {
+        setSelectedModel(model);
+        setLoadingSearchedCarsNumber(true);
+    }
+
+    const handleSelectedPriceFrom = (priceFrom) => {
+        setSelectedPriceFrom(priceFrom);
+        setLoadingSearchedCarsNumber(true);
+    }
+
+    const handleSelectedMileageFrom = (mileageFrom) => {
+        setSelectedMileageFrom(mileageFrom);
+        setLoadingSearchedCarsNumber(true);
+    }
+
 
     return (
         <div className='section-body'>
@@ -74,7 +95,7 @@ function FilterSearch() {
                     <div className='combobox-entity-filter-search'>
                         <div className='label'>Model</div>
                         <div className="custom-combobox">
-                            <select id="modelComboBox" className={`myComboBox ${!selectedBrand ? 'disabled' : ''}`} value={selectedModel} onChange={(e) => setSelectedModel(e.target.value)} disabled={!selectedBrand}>
+                            <select id="modelComboBox" className={`myComboBox ${!selectedBrand ? 'disabled' : ''}`} value={selectedModel} onChange={(e) => handleSelectedModel(e.target.value)} disabled={!selectedBrand}>
                                 <option value="all" disabled={!selectedBrand}>Select Model</option>
                                 {models.map(model => (
                                     <option key={model.id} value={model.model}>{model.model}</option>
@@ -85,7 +106,7 @@ function FilterSearch() {
                     <div className='combobox-entity-filter-search'>
                         <div className='label'>Price from</div>
                         <div className="custom-combobox">
-                            <select id="priceComboBox" className='myComboBox' onChange={(e) => setSelectedPriceFrom(e.target.value)}>
+                            <select id="priceComboBox" className='myComboBox' onChange={(e) => handleSelectedPriceFrom(e.target.value)}>
                                 <option value="">Select Price</option>
                                 <option key={1000} value={'1000'}>1 000€</option>
                                 <option key={2000} value={'2000'}>2 000€</option>
@@ -115,7 +136,7 @@ function FilterSearch() {
                     <div className='combobox-entity-filter-search'>
                         <div className='label'>Mileage from</div>
                         <div className="custom-combobox">
-                            <select id="mileageComboBox" className='myComboBox' onChange={(e) => setSelectedMileageFrom(e.target.value)}> 
+                            <select id="mileageComboBox" className='myComboBox' onChange={(e) => handleSelectedMileageFrom(e.target.value)}> 
                                 <option value="">Select Mileage</option> 
                                 <option key={1000} value={'1000'}>1 000 km</option>
                                 <option key={5000} value={'5000'}>5 000 km</option>
@@ -146,7 +167,7 @@ function FilterSearch() {
                             ]
                         }}
                     >
-                        <button className="styled-button">{searchedCarsNumber !== null ? (searchedCarsNumber + " cars") : ("0 cars")}</button>
+                        <button className="styled-button">{searchedCarsNumber !== null && !loadingSearchedCarsNumber ? (searchedCarsNumber + " cars") : ("Loading cars")}</button>
                     </Link>
                 </div>
             </div>

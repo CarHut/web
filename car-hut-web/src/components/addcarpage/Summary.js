@@ -9,7 +9,8 @@ function Summary() {
     const loc = useLocation();
     const nav = useNavigate();
     const [carModel, setCarModel] = useState(loc.state);
-    
+    const [showErrorMessage, setShowErrorMessage] = useState(false);
+
     const handleCreatedOffer = async () => {
 
         const brandId = await APIMethods.getBrandIdFromBrandName(carModel.brandId);
@@ -66,8 +67,13 @@ function Summary() {
         };
 
         const response = await fetch('http://localhost:8080/api/carhut/addCarToDatabase', requestOptions);
-        console.log(response);
-        // nav('/addCar/success');
+        
+        if (response.status === 200) {
+            nav('/addCar/success');
+        } else {
+            setShowErrorMessage(true);
+        }
+        
     }
 
     return (
@@ -76,6 +82,7 @@ function Summary() {
                 <div className='add-car-summary-header'>That's it! Now double check whether all information is ok.</div>
                 <div className='line-container'/>
                 <div className='add-car-summary-styled-button' onClick={(e) => handleCreatedOffer(e)}>Create offer</div>
+                {showErrorMessage ? <div className='error-text'>Something went wrong!</div> : <div/>}
             </div>
             {carModel === undefined ? <div/> : <CarMainSection carId={null} carModel={carModel}/>}
         </div>

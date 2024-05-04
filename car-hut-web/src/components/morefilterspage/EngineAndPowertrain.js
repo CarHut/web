@@ -1,10 +1,11 @@
 import '../../css/EngineAndPowertrain.css';
 
 function EngineAndPowertrain({fuelType, setFuelType, power, setPower, displacement, setDisplacement,
-        gearbox, setGearbox, powertrain, setPowertrain}) {
+        gearbox, setGearbox, powertrain, setPowertrain, setLoadingSearchedCarsNumber}) {
 
     const handleSelectedFuelType = (fuel) => {
         setFuelType(fuel);
+        setLoadingSearchedCarsNumber(true);
     }
 
     const handleSelectedPower = (e) => {
@@ -13,6 +14,7 @@ function EngineAndPowertrain({fuelType, setFuelType, power, setPower, displaceme
         } else if (e.target.className == 'myComboBox power-to') {
             setPower({ ...power, powerTo: e.target.value });
         }
+        setLoadingSearchedCarsNumber(true);
     }
 
     const handleSelectedDisplacement = (e) => {
@@ -21,14 +23,17 @@ function EngineAndPowertrain({fuelType, setFuelType, power, setPower, displaceme
         } else if (e.target.className == 'myComboBox displacement-to') {
             setDisplacement({ ...displacement, displacementTo: e.target.value });
         }
+        setLoadingSearchedCarsNumber(true);
     }
 
     const handleSelectedGearbox = (gearbox) => {
         setGearbox(gearbox);
+        setLoadingSearchedCarsNumber(true);
     }
 
     const handleSelectedPowertrain = (powertrain) => {
         setPowertrain(powertrain);
+        setLoadingSearchedCarsNumber(true);
     }
 
     return (

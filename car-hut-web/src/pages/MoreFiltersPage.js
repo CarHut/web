@@ -25,22 +25,23 @@ function MoreFiltersPage() {
     const [powertrain, setPowertrain] = useState("");
 
     const [searchedCarsNumber, setSearchedCarsNumber] = useState(0);
+    const [loadingSearchedCarsNumber, setLoadingSearchedCarsNumber] = useState(true);
+
+    const updateSearchedCarsNumber = async () => {
+        try {
+            const result = await updateNumberOfSearchResults(brand, model, carType, price.priceFrom, price.priceTo, mileage.mileageFrom, mileage.mileageTo, registration.registrationFrom,
+                registration.registrationTo, seatingConfig, doors, location, postalCode, fuelType, power.powerFrom, power.powerTo, displacement.displacementFrom,
+                displacement.displacementTo, gearbox, powertrain);
+            setSearchedCarsNumber(result);
+            setLoadingSearchedCarsNumber(false);
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
 
     useEffect(() => {
-
-        async function updateSearchedCarsNumber() {
-            try {
-                const result = await updateNumberOfSearchResults(brand, model, carType, price.priceFrom, price.priceTo, mileage.mileageFrom, mileage.mileageTo, registration.registrationFrom,
-                    registration.registrationTo, seatingConfig, doors, location, postalCode, fuelType, power.powerFrom, power.powerTo, displacement.displacementFrom,
-                    displacement.displacementTo, gearbox, powertrain);
-                setSearchedCarsNumber(result);
-            } catch (error) {
-                console.error('Error:', error);
-            }
-        }
-
         updateSearchedCarsNumber();
-    }, [brand, model, price, mileage, carType, registration, seatingConfig, doors, location, postalCode, fuelType, power, displacement, gearbox, powertrain]);
+    }, [brand, model, price, mileage, carType, registration, seatingConfig, doors, location, postalCode, fuelType, power, displacement, gearbox, powertrain, loadingSearchedCarsNumber]);
 
     return (
         <div className="body">
@@ -69,14 +70,14 @@ function MoreFiltersPage() {
                         models: [ { brand: brand, model: model} ]
                     }}
                 >
-                    <button className="styled-button">{searchedCarsNumber !== null ? (searchedCarsNumber + ' cars') : ('0 cars')}</button>
+                    <button className="styled-search-button">{searchedCarsNumber !== null && !loadingSearchedCarsNumber ? (searchedCarsNumber + ' cars') : ('Loading cars')}</button>
                 </Link>
             </div>
             <BasicData brand={brand} setBrand={setBrand} model={model} setModel={setModel} carType={carType} setCarType={setCarType} price={price} setPrice={setPrice} 
                     mileage={mileage} setMileage={setMileage} registration={registration} setRegistration={setRegistration} seatingConfig={seatingConfig} setSeatingconfig={setSeatingconfig}
-                    doors={doors} setDoors={setDoors} location={location} setLocation={setLocation} postalCode={postalCode} setPostalCode={setPostalCode}/>
+                    doors={doors} setDoors={setDoors} location={location} setLocation={setLocation} postalCode={postalCode} setPostalCode={setPostalCode} setLoadingSearchedCarsNumber={setLoadingSearchedCarsNumber}/>
             <EngineAndPowertrain fuelType={fuelType} setFuelType={setFuelType} power={power} setPower={setPower} displacement={displacement} setDisplacement={setDisplacement}
-                    gearbox={gearbox} setGearbox={setGearbox} powertrain={powertrain} setPowertrain={setPowertrain}/>
+                    gearbox={gearbox} setGearbox={setGearbox} powertrain={powertrain} setPowertrain={setPowertrain} setLoadingSearchedCarsNumber={setLoadingSearchedCarsNumber}/>
         </div>
     );
 }

@@ -6,6 +6,12 @@ function Features({ car }) {
     const [carModel, setCarModel] = useState(car);
 
     const renderFeatures = () => {
+        if (car.features === null) {
+            return (
+                <div/>
+            );
+        }
+
         return (
             <div className='features-columns-wrapper'>
                 {Array.from({ length: 4}, (_, i) => {

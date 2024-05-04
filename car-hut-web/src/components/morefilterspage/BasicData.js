@@ -6,7 +6,7 @@ import React, { useState, useEffect } from 'react';
 function BasicData({brand, setBrand, model, setModel, carType, setCarType, 
                     price, setPrice, mileage, setMileage, registration, setRegistration,
                     seatingConfig, setSeatingConfig, doors, setDoors, location, setLocation,
-                    postalCode, setPostalCode}) {
+                    postalCode, setPostalCode, setLoadingSearchedCarsNumber}) {
     
     const [brands, setBrands] = useState([]);
     const [models, setModels] = useState([]);
@@ -40,15 +40,18 @@ function BasicData({brand, setBrand, model, setModel, carType, setCarType,
         setBrand(e.target.value);
         setModel("");
         setSelectedModel("");
+        setLoadingSearchedCarsNumber(true);
     }
 
     const handleSelectedModel = (e) => {
         setSelectedModel(e.target.value);
         setModel(e.target.value);
+        setLoadingSearchedCarsNumber(true);
     }
 
     const handleSelectedCarType = (type) => {
         setCarType(type);
+        setLoadingSearchedCarsNumber(true);
     }
 
     const handleSelectedPrice = (e) => {
@@ -57,6 +60,7 @@ function BasicData({brand, setBrand, model, setModel, carType, setCarType,
         } else if (e.target.className == 'myComboBox price-to') {
             setPrice({ ...price, priceTo: e.target.value });
         }
+        setLoadingSearchedCarsNumber(true);
     }
 
     const handleSelectedMileage = (e) => {
@@ -65,6 +69,7 @@ function BasicData({brand, setBrand, model, setModel, carType, setCarType,
         } else if (e.target.className == 'myComboBox mileage-to') {
             setMileage({ ...mileage, mileageTo: e.target.value });
         }
+        setLoadingSearchedCarsNumber(true);
     }
 
     const handleSelectedRegistration = (e) => {
@@ -73,14 +78,17 @@ function BasicData({brand, setBrand, model, setModel, carType, setCarType,
         } else if (e.target.className == 'myComboBox registration-to') {
             setRegistration({ ...registration, registrationTo: e.target.value });
         }
+        setLoadingSearchedCarsNumber(true);
     }
 
     const handleSelectedSeatingConfig = (e) => {
         setSeatingConfig(e.target.value);
+        setLoadingSearchedCarsNumber(true);
     }
 
     const handleSelectedDoors = (e) => {
         setDoors(e.target.value);
+        setLoadingSearchedCarsNumber(true);
     }
 
     return (
