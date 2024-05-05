@@ -20,7 +20,7 @@ function MainSection({state}) {
         <div className='section-body-search-list-main-section'>
             <div className='search-list-left-wrapper'>  
                 <UpperNav offersPerPage={offersPerPage} setOffersPerPage={setOffersPerPage} sortBy={sortBy} setSortBy={setSortBy}/>
-                <Offers offersPerPage={offersPerPage} sortBy={sortBy} fetchedState={fetchedState} setResultsListLength={setResultsListLength} setLoadingResultsListLength={setLoadingResultsListLength}/>
+                <Offers offersPerPage={offersPerPage} sortBy={sortBy} fetchedState={fetchedState} setResultsListLength={setResultsListLength} setLoadingResultsListLength={setLoadingResultsListLength} loadingResultsListLength={loadingResultsListLength}/>
             </div>
             <div className='search-list-right-wrapper'>
                 <ExtendedFilters fetchedState={fetchedState} resultsListLength={resultsListLength} loadingResultsListLength={loadingResultsListLength} 

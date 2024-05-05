@@ -1,4 +1,4 @@
-import Header from "../components/Header";
+import Header from "../components/maincomponents/Header";
 import BrandSection from "../components/clickandpickpage/BrandSection";
 import EngineSection from "../components/clickandpickpage/EngineSection";
 import FuelSection from "../components/clickandpickpage/FuelSection";
@@ -8,7 +8,7 @@ import ModelSection from "../components/clickandpickpage/ModelSection";
 import PriceSection from "../components/clickandpickpage/PriceSection";
 import RegistrationSection from "../components/clickandpickpage/RegistrationSection";
 import CategoriesSection from "../components/clickandpickpage/CategoriesSection";
-import "../css/ClickAndPickPage.css"
+import "../css/pages/ClickAndPickPage.css"
 import { useLocation } from "react-router-dom";
 import ColorSection from "../components/clickandpickpage/ColorSection";
 

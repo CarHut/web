@@ -4,9 +4,9 @@ import audiRS3Image from '../../images/searchlist/offers/audiRS3.jpg';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import APIMethods from '../../api/APIMethods';
+import LoadingCircle from '../maincomponents/LoadingCircle';
 
-
-function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength, setLoadingResultsListLength}) {
+function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength, setLoadingResultsListLength, loadingResultsListLength}) {
 
     const [cars, setCars] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -20,9 +20,8 @@ function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength, setL
             `&mileageTo=${fetchedState.mileage.mileageTo}&fuelType=${fetchedState.fuelType}&gearbox=${fetchedState.gearbox}&powertrain=${fetchedState.powertrain}` +
             `&powerFrom=${fetchedState.power.powerFrom}&powerTo=${fetchedState.power.powerTo}&sortBy=${sortBy}&sortOrder=${sortOrder}`;
 
-        
         const result = await APIMethods.getCarsWithFilters(url, fetchedState.models);
-        
+
         setCars(result);
         setTotalPages(Math.ceil(result.length / offersPerPage));
         setResultsListLength(result.length);    
@@ -105,21 +104,27 @@ function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength, setL
 
     return (
         <div className='search-list-main-wrapper'>
-            <div className='page-buttons-wrapper' style={{paddingTop:'2em'}}>
-                {Array.from({ length: endPage - startPage + 1 }, (_, i) => (
-                    <button className={startPage + i == currentPage ? 'page-button-current' : 'page-button'} key={startPage + i} onClick={() => goToPage(startPage + i)}>{startPage + i}</button>
-                ))}
-            </div>
-            <div className='search-list-offers-wrapper'>
-                <div className='offers'>
-                    {generateCarOffers()}
-                </div>
-            </div>
-            <div className='page-buttons-wrapper'>
-                {Array.from({ length: endPage - startPage + 1 }, (_, i) => (
-                    <button className={startPage + i == currentPage ? 'page-button-current' : 'page-button'} key={startPage + i} onClick={() => goToPage(startPage + i)}>{startPage + i}</button>
-                ))}
-            </div>
+            {!loadingResultsListLength ? (
+                <>
+                    <div className='page-buttons-wrapper' style={{ paddingTop: '2em' }}>
+                        {Array.from({ length: endPage - startPage + 1 }, (_, i) => (
+                            <button className={startPage + i === currentPage ? 'page-button-current' : 'page-button'} key={startPage + i} onClick={() => goToPage(startPage + i)}>{startPage + i}</button>
+                        ))}
+                    </div>
+                    <div className='search-list-offers-wrapper'>
+                        <div className='offers'>
+                            {generateCarOffers()}
+                        </div>
+                    </div>
+                    <div className='page-buttons-wrapper'>
+                        {Array.from({ length: endPage - startPage + 1 }, (_, i) => (
+                            <button className={startPage + i === currentPage ? 'page-button-current' : 'page-button'} key={startPage + i} onClick={() => goToPage(startPage + i)}>{startPage + i}</button>
+                        ))}
+                    </div>
+                </>
+            ) : (
+                <LoadingCircle />
+            )}
         </div>
     );
 }

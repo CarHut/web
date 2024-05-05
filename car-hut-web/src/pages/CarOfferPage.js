@@ -1,5 +1,5 @@
-import '../css/CarOfferPage.css';
-import Header from "../components/Header";
+import '../css/pages/CarOfferPage.css';
+import Header from "../components/maincomponents/Header";
 import CarMainSection from '../components/carofferpage/CarMainSection';
 import { useLocation, Link } from 'react-router-dom';
 import { useState } from 'react';

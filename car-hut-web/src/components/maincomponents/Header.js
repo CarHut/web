@@ -1,6 +1,6 @@
-import '../css/Header.css'
+import '../../css/maincomponents/Header.css'
 import { Link } from 'react-router-dom';
-import AuthUtil from '../utils/auth/AuthUtil';
+import AuthUtil from '../../utils/auth/AuthUtil';
 
 function Header() {
 
@@ -11,7 +11,7 @@ function Header() {
                 to={"/mainPage"}
                 style={{"textDecoration": "none"}}
             >
-                <img className='carhut-img' src={require('../images/carhut_logo.png')}/>
+                <img className='carhut-img' src={require('../../images/carhut_logo.png')}/>
                 <h1>CarHut</h1>
             </Link>
             {localStorage.getItem('token') === null && localStorage.getItem('username') === null 
@@ -21,12 +21,12 @@ function Header() {
                             style={{"textDecoration": "none"}}  
                         >
                             <div className='header-text-content'>Login</div>
-                            <img className='login-img' src={require('../images/mainpage/login.png')}/>
+                            <img className='login-img' src={require('../../images/mainpage/login.png')}/>
                         </Link> 
                   :     <div className='logged-user-entity'> 
                             <div className='logged-user-content'>
                                 <div className='header-text-content'>{localStorage.getItem('username')}</div>
-                                <img className='login-img' src={require('../images/mainpage/login.png')}/>
+                                <img className='login-img' src={require('../../images/mainpage/login.png')}/>
                             </div>
                             <div className='logged-user-dropdown-menu-wrapper'>
                                 <Link

@@ -1,4 +1,4 @@
-import '../../css/FilterSearch.css';
+import '../../css/mainpage/FilterSearch.css';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import updateNumberOfSearchResults from '../../utils/RenderTextUtil';

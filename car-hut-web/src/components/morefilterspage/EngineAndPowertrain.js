@@ -1,4 +1,4 @@
-import '../../css/EngineAndPowertrain.css';
+import '../../css/morefilterspage/EngineAndPowertrain.css';
 
 function EngineAndPowertrain({fuelType, setFuelType, power, setPower, displacement, setDisplacement,
         gearbox, setGearbox, powertrain, setPowertrain, setLoadingSearchedCarsNumber}) {

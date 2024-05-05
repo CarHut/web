@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import Header from '../components/Header';
-import '../css/LoginRegisterPage.css';
+import Header from '../components/maincomponents/Header';
+import '../css/pages/LoginRegisterPage.css';
 import AuthUtil from '../utils/auth/AuthUtil';
 import { redirect, useNavigate } from 'react-router-dom';
 function LoginRegisterPage() {

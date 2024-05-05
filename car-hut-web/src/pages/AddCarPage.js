@@ -1,4 +1,4 @@
-import Header from '../components/Header';
+import Header from '../components/maincomponents/Header';
 import AddPhotos from '../components/addcarpage/AddPhotos';
 import AdditionalInfo from '../components/addcarpage/AdditionalInfo';
 import EngineInfo from '../components/addcarpage/EngineInfo';
@@ -6,7 +6,7 @@ import Features from '../components/addcarpage/Features';
 import MainInfo from '../components/addcarpage/MainInfo';
 import SuccessPage from '../components/addcarpage/SuccessPage';
 import Summary from '../components/addcarpage/Summary';
-import '../css/AddCarPage.css';
+import '../css/pages/AddCarPage.css';
 import { useLocation } from 'react-router-dom';
 
 function AddCarPage() {

@@ -21,19 +21,26 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange, l
     var brandsAndModelsFetchedTrigger = false;
 
     useEffect(() => {
-        setAddBrands(APIMethods.getAllBrands());
+        fetchBrands();
     }, []);
 
     useEffect(() => {
         // Fetch models when a brand is 
         if (addBrand !== '') {
-            setAddModels(APIMethods.getModelsByBrand(addBrand));
+            fetchModels();
         } else {
             // Clear models when no brand is 
             setAddModels([]);
         }
     }, [addBrand]);
 
+    const fetchBrands = async () => {
+        setAddBrands(await APIMethods.getAllBrands());
+    }
+
+    const fetchModels = async () => {
+        setAddModels(await APIMethods.getModelsByBrand(addBrand));
+    }
 
     const handleRemovalOfABrandsAndModelEntity = (brand, model) => {
         setBrandsAndModels(brandsAndModels.filter((brandAndModel) => brandAndModel.brand !== brand || brandAndModel.model !== model));
@@ -129,6 +136,10 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange, l
     }
 
     const onPriceChanged = () => {
+        // Nothing changed thus no need to call update
+        if (fetchedState.price === price) {
+            return;
+        }
         var updatedState = {...fetchedState};
         updatedState.price = price;
         handleStateChange(updatedState);
@@ -136,6 +147,10 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange, l
     }
 
     const onPowerChanged = () => {
+        // Nothing changed thus no need to call update
+        if (fetchedState.power === power) {
+            return;
+        }
         var updatedState = {...fetchedState};
         updatedState.power = power;
         handleStateChange(updatedState);
@@ -156,6 +171,10 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange, l
     }
 
     const onMileageChanged = () => {
+        // Nothing changed thus no need to call update
+        if (fetchedState.mileage === mileage) {
+            return;
+        }
         var updatedState = {...fetchedState};
         updatedState.mileage = mileage;
         handleStateChange(updatedState);

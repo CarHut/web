@@ -1,6 +1,6 @@
-import Header from '../components/Header';
+import Header from '../components/maincomponents/Header';
 import MainWrapper from '../components/userprofilepage/MainWrapper';
-import '../css/UserProfilePage.css';
+import '../css/pages/UserProfilePage.css';
 
 function UserProfilePage() {
 

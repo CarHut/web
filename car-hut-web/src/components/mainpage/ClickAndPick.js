@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import '../../css/ClickAndPick.css';
+import '../../css/mainpage/ClickAndPick.css';
 
 function ClickAndPick() {
     return (

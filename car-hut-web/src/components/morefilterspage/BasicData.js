@@ -1,6 +1,6 @@
 import { radiantDarkTheme } from 'react-admin';
 import APIMethods from '../../api/APIMethods';
-import '../../css/BasicData.css'
+import '../../css/morefilterspage/BasicData.css'
 import React, { useState, useEffect } from 'react';
 
 function BasicData({brand, setBrand, model, setModel, carType, setCarType, 

@@ -47,6 +47,7 @@ const APIMethods = {
         return data;
     },
     getCarsWithFilters: async (url, models) => {
+        console.log(models);
         const response = await fetch(url, {
             method: 'POST',
             body: JSON.stringify(models),

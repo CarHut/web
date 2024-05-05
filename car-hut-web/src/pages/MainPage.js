@@ -1,6 +1,5 @@
-import '../css/MainPage.css'
-import '../components/Header.js'
-import Header from '../components/Header.js';
+import '../css/pages/MainPage.css'
+import Header from '../components/maincomponents/Header.js';
 import FilterSearch from '../components/mainpage/FilterSearch.js';
 import ClickAndPick from '../components/mainpage/ClickAndPick.js';
 import CarNews from '../components/mainpage/CarNews.js';

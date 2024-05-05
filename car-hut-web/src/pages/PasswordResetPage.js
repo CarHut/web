@@ -1,5 +1,5 @@
-import '../css/PasswordResetPage.css';
-import Header from '../components/Header';
+import '../css/pages/PasswordResetPage.css';
+import Header from '../components/maincomponents/Header';
 import { useState, useEffect } from 'react';
 import { redirect, useLocation, useNavigate } from 'react-router-dom';
 import { email } from 'react-admin';

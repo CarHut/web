@@ -1,4 +1,4 @@
-import '../../css/CarNews.css';
+import '../../css/mainpage/CarNews.css';
 
 function CarNews() {
     return (

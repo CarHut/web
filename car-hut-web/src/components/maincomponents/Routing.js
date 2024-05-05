@@ -1,13 +1,13 @@
 import { Routes, Route } from "react-router-dom";
-import MainPage from '../pages/MainPage';
-import MoreFiltersPage from '../pages/MoreFiltersPage';
-import ClickAndPickPage from '../pages/ClickAndPickPage';
-import SearchList from '../pages/SearchList';
-import CarOfferPage from '../pages/CarOfferPage';
-import LoginRegisterPage from '../pages/LoginRegisterPage';
-import UserProfilePage from "../pages/UserProfilePage";
-import PasswordResetPage from "../pages/PasswordResetPage";
-import AddCarPage from "../pages/AddCarPage";
+import MainPage from '../../pages/MainPage';
+import MoreFiltersPage from '../../pages/MoreFiltersPage';
+import ClickAndPickPage from '../../pages/ClickAndPickPage';
+import SearchList from '../../pages/SearchList';
+import CarOfferPage from '../../pages/CarOfferPage';
+import LoginRegisterPage from '../../pages/LoginRegisterPage';
+import UserProfilePage from "../../pages/UserProfilePage";
+import PasswordResetPage from "../../pages/PasswordResetPage";
+import AddCarPage from "../../pages/AddCarPage";
 
 function Routing() {
 

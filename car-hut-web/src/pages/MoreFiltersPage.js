@@ -1,5 +1,5 @@
-import Header from "../components/Header";
-import "../css/MoreFiltersPage.css"
+import Header from "../components/maincomponents/Header";
+import "../css/pages/MoreFiltersPage.css"
 import BasicData from "../components/morefilterspage/BasicData";
 import EngineAndPowertrain from "../components/morefilterspage/EngineAndPowertrain";
 import { useState, useEffect } from "react";
