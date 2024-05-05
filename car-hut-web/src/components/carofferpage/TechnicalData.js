@@ -1,3 +1,4 @@
+import APIMethods from '../../api/APIMethods';
 import '../../css/carofferpage/TechnicalData.css';
 import CarOfferPage from '../../pages/CarOfferPage';
 import { useState, useEffect } from 'react';
@@ -5,6 +6,27 @@ import { useState, useEffect } from 'react';
 function TechnicalData({car}) { 
 
     const [carModel, setCarModel] = useState(car);
+    const [interiorColor, setInteriorColor] = useState("");
+    const [exteriorColor, setExteriorColor] = useState("");
+
+
+    const fetchExteriorColorStringFromColorId = async () => {
+        if (car.exteriorColorId !== undefined || car.exteriorColorId !== null) {
+            setExteriorColor(await APIMethods.getColorStringNameFromColorId(car.exteriorColorId));
+        }
+    }
+
+    const fetchInteriorColorStringFromColorId = async () => {
+        if (car.interiorColorId !== undefined || car.interiorColorId !== null) {
+            setInteriorColor(await APIMethods.getColorStringNameFromColorId(car.interiorColorId));
+        }
+    }
+
+    useEffect(() => {
+        fetchExteriorColorStringFromColorId();
+        fetchInteriorColorStringFromColorId();
+    }, []);
+
 
     return (
         <div className='technical-data-body'>
@@ -72,23 +94,23 @@ function TechnicalData({car}) {
                 <div className='technical-data-content-body-entity-wrapper'>
                     <div className='technical-data-body-line'>
                         <div className='technical-data-content-text'>Exterior color</div>
-                        <div className='technical-data-content-text-value'>{carModel.exteriorColorId}</div>    
+                        <div className='technical-data-content-text-value'>{exteriorColor}</div>    
                     </div>
                     <div className='technical-data-body-line'>
                         <div className='technical-data-content-text'>Interior color</div>
-                        <div className='technical-data-content-text-value'>{carModel.interiorColorId}</div>    
+                        <div className='technical-data-content-text-value'>{interiorColor}</div>    
                     </div>
                     <div className='technical-data-body-line'>
                         <div className='technical-data-content-text'>Damage status</div>
-                        <div className='technical-data-content-text-value'>{carModel.damageStatus}</div>    
+                        <div className='technical-data-content-text-value'>{carModel.damageStatus === "false" ? "No" : "Yes"}</div>    
                     </div>
                     <div className='technical-data-body-line'>
                         <div className='technical-data-content-text'>Parking sensors</div>
-                        <div className='technical-data-content-text-value'>{carModel.parkingSensors}</div>    
+                        <div className='technical-data-content-text-value'>{carModel.parkingSensors ? "Yes" : "No"}</div>    
                     </div>
                     <div className='technical-data-body-line'>
                         <div className='technical-data-content-text'>Parking cameras</div>
-                        <div className='technical-data-content-text-value'>{carModel.parkingCameras}</div>    
+                        <div className='technical-data-content-text-value'>{carModel.parkingCameras ? "Yes" : "No"}</div>    
                     </div>
                     <div className='technical-data-body-line'>
                         <div className='technical-data-content-text'>Availability</div>

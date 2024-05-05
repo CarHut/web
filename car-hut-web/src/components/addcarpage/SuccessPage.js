@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import '../../css/addcarpage/SuccessPage.css';
 
 function SuccessPage() {
@@ -6,7 +7,13 @@ function SuccessPage() {
         <div className='add-car-success-section'>
             <div className='add-car-success-header'>Your offer has been successfully added to our system.</div>
             <div className='line-container'/>
-            <div className='add-car-success-styled-button'>Check your offers</div>
+            <Link
+                to={"/userProfile"}
+                className='add-car-success-styled-button'
+                style={{textDecoration: "none"}}
+            >
+                Check your offers
+            </Link>
         </div>
     );
 }

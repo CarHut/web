@@ -17,7 +17,6 @@ function CarMainSection({ carId, carModel }) {
         } else {
             const data = await APIMethods.getCarWithId(carId);
             setCar(data);
-            console.log(data);
         }
     } 
 

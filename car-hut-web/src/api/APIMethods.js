@@ -1,3 +1,5 @@
+import { composeSyncValidators } from "react-admin";
+
 const APIMethods = {
     addCarToSavedByUser: async (id, userId, carId) => {
         const requestOptions = {
@@ -168,6 +170,34 @@ const APIMethods = {
     },
     getFeatureIdByFeatureName: async (feature) => {
         const response = await fetch('http://localhost:8080/api/carhut/getFeatureIdByFeatureName?feature=' + feature);
+        const data = await response.json();
+        return data;
+    },
+    getImages: async (carId) => {
+        const response = await fetch('http://localhost:8080/api/carhut/getImages?carId=' + carId);
+        const data = await response.json();
+        return data;
+    },
+    getColorStringNameFromColorId: async (colorId) => {
+        const response = await fetch('http://localhost:8080/api/carhut/getColorStringNameFromColorId?colorId=' + colorId);
+        const data = await response.json();
+        return data;
+    },
+    getFeatureNameByFeatureId: async (featureId) => {
+        const response = await fetch('http://localhost:8080/api/carhut/getFeatureNameByFeatureId?colorId=' + featureId);
+        const data = await response.json();
+        return data;
+    },
+    getMultipleFeaturesByIds: async (featureIds) => {
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(featureIds) 
+        }
+
+        const response = await fetch('http://localhost:8080/api/carhut/getMultipleFeaturesByIds', requestOptions);
         const data = await response.json();
         return data;
     }
