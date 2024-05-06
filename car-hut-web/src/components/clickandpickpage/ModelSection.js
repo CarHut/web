@@ -1,7 +1,6 @@
 import '../../css/clickandpickpage/ModelSection.css'
 import { useLocation, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import BrandSection from './BrandSection';
 import APIMethods from '../../api/APIMethods';
 
 
@@ -18,7 +17,7 @@ function ModelSection() {
                 var modelsData = [];
 
                 for (const brand of brands) {
-                    const data = APIMethods.getModelsByBrandName(brand);
+                    const data = await APIMethods.getModelsByBrandName(brand);
 
                     modelsData.push({
                         brand: brand,

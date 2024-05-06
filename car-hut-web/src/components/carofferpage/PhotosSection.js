@@ -36,7 +36,6 @@ function PhotosSection({ car }) {
         return (
             <div className='photo-miniatures-preview-wrapper'>
                 {Array.from({ length: endMiniature - startMiniature + 1}, (_, i) => {
-                    // const url = URL.createObjectURL(images[startMiniature + i - 1]);
                     return (
                         <img className='photo-miniature-img' src={images[startMiniature + i - 1]} key={startMiniature + i} onClick={() => setCurrentMiniatureSelectedNum(startMiniature + i)}/>
                     );
@@ -46,7 +45,6 @@ function PhotosSection({ car }) {
     }
 
     const renderMainPhoto = () => {
-        // const url = URL.createObjectURL(images[currentMiniatureSelectedNum - 1]);
 
         return (
             <div className='main-photo-wrapper'>

@@ -6,14 +6,13 @@ import { isCompositeComponent } from 'react-dom/test-utils';
 function ColorSection() {
 
     const loc = useLocation();
-    console.log(loc);
-    const colors = ["black", "silver", "gray", "white", "red", "purple", "green", "yellow", "navy", "blue", "beige", "brown", "darkorange", "gold", "powderblue", "sienna"];
 
+    const colors = ["black", "silver", "gray", "white", "red", "purple", "green", "yellow", "navy", "blue", "beige", "brown", "darkorange", "gold", "powderblue", "sienna"];
     const [pickedColors, setPickedColors] = useState([]);
 
     const generateColorCheckboxes = () => {
-        return colors.map((color) => (
-            <label className='custom-checkbox'>
+        return colors.map((color, idx) => (
+            <label className='custom-checkbox' key={idx}>
                 <input onClick={() => handleClickedColor(color)} type="checkbox"/>
                 <span className="checkmark" style={{"backgroundColor": color}}></span>
             </label>

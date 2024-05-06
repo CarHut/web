@@ -1,14 +1,13 @@
 import '../../css/clickandpickpage/GearboxSection.css';
 import { useLocation, Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import APIMethods from '../../api/APIMethods';
 
 function GearboxSection() {
 
     var loc = useLocation();
 
-    // UPDATE IF NEW GEARBOX TYPE IS ADDED
-    const baseGearboxTypes = ["Manual", "Automatic", "Sequential"];
-
+    const [baseGearboxTypes, setBaseGearboxTypes] = useState([]);
     const [gearboxType, setGearboxType] = useState('');
 
     const generateGearboxTypeCheckboxes = () => {
@@ -32,6 +31,20 @@ function GearboxSection() {
             setGearboxType([...gearboxType, gearboxType]);
         }
     }
+
+    const fetchGearboxTypes = async () => {
+        const data = await APIMethods.getGearboxTypes();
+
+        if (data === null) {
+            return;
+        }
+
+        setBaseGearboxTypes(data);
+    }
+
+    useEffect(() => {
+        fetchGearboxTypes();
+    }, [])
 
     return (
         <div className='section-body-gearbox-section'>

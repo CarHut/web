@@ -12,13 +12,15 @@ function TechnicalData({car}) {
 
     const fetchExteriorColorStringFromColorId = async () => {
         if (car.exteriorColorId !== undefined || car.exteriorColorId !== null) {
-            setExteriorColor(await APIMethods.getColorStringNameFromColorId(car.exteriorColorId));
+            const color = await APIMethods.getColorStringNameFromColorId(car.exteriorColorId);
+            setExteriorColor(color);
         }
     }
 
     const fetchInteriorColorStringFromColorId = async () => {
         if (car.interiorColorId !== undefined || car.interiorColorId !== null) {
-            setInteriorColor(await APIMethods.getColorStringNameFromColorId(car.interiorColorId));
+            const color = await APIMethods.getColorStringNameFromColorId(car.exteriorColorId);
+            setInteriorColor(color);
         }
     }
 

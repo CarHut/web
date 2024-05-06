@@ -11,6 +11,8 @@ function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength, setL
     const [cars, setCars] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
+    const [displayedCars, setDisplayedCars] = useState([]);
+    const [imagesForDisplayedCars, setImagesForDisplayedCars] = useState([]);
 
     const fetchCars = async () => {
         const sortOrder = sortBy[sortBy.length - 1] == 'L' ? "ASC" : "DESC";
@@ -22,10 +24,12 @@ function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength, setL
 
         const result = await APIMethods.getCarsWithFilters(url, fetchedState.models);
 
-        setCars(result);
-        setTotalPages(Math.ceil(result.length / offersPerPage));
-        setResultsListLength(result.length);    
-        setLoadingResultsListLength(false);
+        if (result !== null) {
+            setCars(result);
+            setTotalPages(Math.ceil(result.length / offersPerPage));
+            setResultsListLength(result.length);    
+            setLoadingResultsListLength(false);
+        }
     }
 
     useEffect(() => {
@@ -35,25 +39,47 @@ function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength, setL
 
     useEffect(() => {
         fetchCars();
-    }, [sortBy]);
+    }, [sortBy, fetchedState])
 
     useEffect(() => {
-        fetchCars();
-    }, [fetchedState]);
+        fetchImagesForDisplayedCars();
+    }, [displayedCars])
 
-    const generateCarOffers = () => {
+    useEffect(() => {
         const startIndex = (currentPage - 1) * parseInt(offersPerPage);
         const endIndex = currentPage * parseInt(offersPerPage);
-        const displayedCars = cars.slice(startIndex, endIndex);
+        const disCars = cars.slice(startIndex, endIndex);
+        setDisplayedCars(disCars);
+    }, [cars]);
 
-        return displayedCars.map((car, index) => { 
-            return (
+    const fetchImagesForDisplayedCars = async () => {
+        const imageList = [];
+        for (let i = 0; i < displayedCars.length; i++) {
+            const data = await APIMethods.getImages(displayedCars[i].id);
+            if (data !== null) {
+                const url = `data:image/png;base64,${data[0]}`;
+                imageList.push(url);
+            } else {
+                imageList.push("no-image-found");
+            }
+        }
+        setImagesForDisplayedCars(imageList);
+    } 
+
+    const generateCarOffers = () => {
+        const offerElements = [];
+        for (let index = 0; index < displayedCars.length; index++) {
+            const car = displayedCars[index];
+            const imageSrc = imagesForDisplayedCars[index];
+
+            offerElements.push(
                 <Link
                     to={'/carOffer'}
                     state={{
                         id: car.id
                     }}
-                    style={{textDecoration: 'none'}}
+                    style={{ textDecoration: 'none' }}
+                    key={index}
                 >
                     <div className='offer-wrapper' key={index}>
                         <div className='offer-left-wrapper'>
@@ -69,35 +95,46 @@ function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength, setL
                                     <div className='car-stats-text'>{car.bodyType}</div>
                                     <div className='car-stats-text'>{car.gearbox}</div>
                                     <div className='car-stats-text'>{car.powertrain}</div>
-                                    <div className='car-stats-text'>{car.fuelConsumptionAvg}</div>  
+                                    <div className='car-stats-text'>{car.fuelConsumptionAvg}</div>
                                 </div>
-        
+    
                                 <div className='car-stats-column'>
                                     <div className='car-stats-text'>Seller</div>
-                                    <div className='line-container-seller'/>
+                                    <div className='line-container-seller' />
                                     <div className='car-stats-text'>{car.sellerName}</div>
                                     <div className='car-stats-text'>{car.sellerAddress}</div>
                                 </div>
                             </div>
                         </div>
                         <div className='offer-right-wrapper'>
-                            <img className='car-img' src={audiRS3Image}/>
+                            <img className='car-img' src={imageSrc}/>
                             <div className='car-stats-column-right-wrapper'>
                                 <div className='car-stats-price-text'>{car.price}</div>
                                 <div className='car-stats-price-rating-text'>Good price</div>
                             </div>
                         </div>
                     </div>
-                    <div className='offers-line-separator'/>
+                    <div className='offers-line-separator' />
                 </Link>
             );
-        });
+        }
+    
+        return offerElements;
     }
 
     const goToPage = (page) => {
         setCurrentPage(page);
         window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to the top of the page
     };
+
+    const renderPageButtons = () => {
+        return (
+            Array.from({ length: endPage - startPage + 1 }, (_, i) => (
+                <button className={startPage + i === currentPage ? 'page-button-current' : 'page-button'} key={startPage + i} onClick={() => goToPage(startPage + i)}>{startPage + i}</button>
+            ))
+        )
+    }
+
 
     const startPage = Math.max(1, currentPage - 2);
     const endPage = Math.min(totalPages, startPage + 4);
@@ -107,9 +144,7 @@ function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength, setL
             {!loadingResultsListLength ? (
                 <>
                     <div className='page-buttons-wrapper' style={{ paddingTop: '2em' }}>
-                        {Array.from({ length: endPage - startPage + 1 }, (_, i) => (
-                            <button className={startPage + i === currentPage ? 'page-button-current' : 'page-button'} key={startPage + i} onClick={() => goToPage(startPage + i)}>{startPage + i}</button>
-                        ))}
+                        {renderPageButtons()}
                     </div>
                     <div className='search-list-offers-wrapper'>
                         <div className='offers'>
@@ -117,13 +152,11 @@ function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength, setL
                         </div>
                     </div>
                     <div className='page-buttons-wrapper'>
-                        {Array.from({ length: endPage - startPage + 1 }, (_, i) => (
-                            <button className={startPage + i === currentPage ? 'page-button-current' : 'page-button'} key={startPage + i} onClick={() => goToPage(startPage + i)}>{startPage + i}</button>
-                        ))}
+                        {renderPageButtons()}
                     </div>
                 </>
             ) : (
-                <LoadingCircle />
+                <LoadingCircle/>
             )}
         </div>
     );

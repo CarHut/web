@@ -6,10 +6,10 @@ function EngineSection() {
     
     var loc = useLocation();
 
-    const [powerFrom, setPowerFrom] = useState(); 
-    const [powerTo, setPowerTo] = useState();
-    const [displacementFrom, setDisplacementFrom] = useState();
-    const [displacementTo, setDisplacementTo] = useState();
+    const [powerFrom, setPowerFrom] = useState(''); 
+    const [powerTo, setPowerTo] = useState('');
+    const [displacementFrom, setDisplacementFrom] = useState('');
+    const [displacementTo, setDisplacementTo] = useState('');
     
 
     const handleFromEnginePowerChange = (e) => {

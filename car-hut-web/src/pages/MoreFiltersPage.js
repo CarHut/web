@@ -14,7 +14,7 @@ function MoreFiltersPage() {
     const [price, setPrice] = useState({priceFrom: "", priceTo: ""});
     const [mileage, setMileage] = useState({mileageFrom: "", mileageTo: ""});
     const [registration, setRegistration] = useState({registrationFrom: '', registrationTo: ''});
-    const [seatingConfig, setSeatingconfig] = useState("");
+    const [seatingConfig, setSeatingConfig] = useState("");
     const [doors, setDoors] = useState("");
     const [location, setLocation] = useState("");
     const [postalCode, setPostalCode] = useState("");
@@ -28,15 +28,16 @@ function MoreFiltersPage() {
     const [loadingSearchedCarsNumber, setLoadingSearchedCarsNumber] = useState(true);
 
     const updateSearchedCarsNumber = async () => {
-        try {
-            const result = await updateNumberOfSearchResults(brand, model, carType, price.priceFrom, price.priceTo, mileage.mileageFrom, mileage.mileageTo, registration.registrationFrom,
-                registration.registrationTo, seatingConfig, doors, location, postalCode, fuelType, power.powerFrom, power.powerTo, displacement.displacementFrom,
-                displacement.displacementTo, gearbox, powertrain);
-            setSearchedCarsNumber(result);
-            setLoadingSearchedCarsNumber(false);
-        } catch (error) {
-            console.error('Error:', error);
+        const result = await updateNumberOfSearchResults(brand, model, carType, price.priceFrom, price.priceTo, mileage.mileageFrom, mileage.mileageTo, registration.registrationFrom,
+            registration.registrationTo, seatingConfig, doors, location, postalCode, fuelType, power.powerFrom, power.powerTo, displacement.displacementFrom,
+            displacement.displacementTo, gearbox, powertrain);
+        
+        if (result === null) {
+            return;
         }
+
+        setSearchedCarsNumber(result);
+        setLoadingSearchedCarsNumber(false);
     }
 
     useEffect(() => {
@@ -74,7 +75,7 @@ function MoreFiltersPage() {
                 </Link>
             </div>
             <BasicData brand={brand} setBrand={setBrand} model={model} setModel={setModel} carType={carType} setCarType={setCarType} price={price} setPrice={setPrice} 
-                    mileage={mileage} setMileage={setMileage} registration={registration} setRegistration={setRegistration} seatingConfig={seatingConfig} setSeatingconfig={setSeatingconfig}
+                    mileage={mileage} setMileage={setMileage} registration={registration} setRegistration={setRegistration} seatingConfig={seatingConfig} setSeatingConfig={setSeatingConfig}
                     doors={doors} setDoors={setDoors} location={location} setLocation={setLocation} postalCode={postalCode} setPostalCode={setPostalCode} setLoadingSearchedCarsNumber={setLoadingSearchedCarsNumber}/>
             <EngineAndPowertrain fuelType={fuelType} setFuelType={setFuelType} power={power} setPower={setPower} displacement={displacement} setDisplacement={setDisplacement}
                     gearbox={gearbox} setGearbox={setGearbox} powertrain={powertrain} setPowertrain={setPowertrain} setLoadingSearchedCarsNumber={setLoadingSearchedCarsNumber}/>

@@ -37,26 +37,42 @@ const APIMethods = {
         return await response.json();
     },
     getAllBrands: async () => {
-        const response = await fetch('http://localhost:8080/api/carhut/getAllBrands');
-        const data  = await response.json();
-        return data;
+        try {
+            const response = await fetch('http://localhost:8080/api/carhut/getAllBrands');
+            const data  = await response.json();
+            return data;
+        }
+        catch (e) {
+            console.log(e);
+            return null;
+        } 
     },
     getModelsByBrand: async (selectedBrand) => {
-        const response = await fetch(`http://localhost:8080/api/carhut/getModelsByBrand/${selectedBrand}`);
-        const data  = await response.json();
-        return data;
+        try {
+            const response = await fetch(`http://localhost:8080/api/carhut/getModelsByBrand/${selectedBrand}`);
+            const data  = await response.json();
+            return data;
+        }
+        catch (e) {
+            console.log(e);
+            return null;
+        }
     },
     getCarsWithFilters: async (url, models) => {
-        console.log(models);
-        const response = await fetch(url, {
-            method: 'POST',
-            body: JSON.stringify(models),
-            headers: {
-               'Content-Type': 'application/json'
-            }
-        });
-
-        return await response.json();
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                body: JSON.stringify(models),
+                headers: {
+                   'Content-Type': 'application/json'
+                }
+            });
+            return await response.json();
+        }
+        catch (e) {
+            console.log(e);
+            return null;
+        }
     },
     getUserDetailsInfo: async () => {
         const requestOptions = {
@@ -135,14 +151,26 @@ const APIMethods = {
         return data;
     },
     getGearboxTypes: async () => {
-        const response = await fetch('http://localhost:8080/api/carhut/getGearboxTypes');
-        const data = await response.json();
-        return data;
+        try {
+            const response = await fetch('http://localhost:8080/api/carhut/getGearboxTypes');
+            const data = await response.json();
+            return data;
+        }
+        catch (e) {
+            console.log(e);
+            return null;
+        }
     },
     getFuelTypes: async () => {
-        const response = await fetch('http://localhost:8080/api/carhut/getFuelTypes');
-        const data = await response.json();
-        return data;
+        try {
+            const response = await fetch('http://localhost:8080/api/carhut/getFuelTypes');
+            const data = await response.json();
+            return data;
+        }
+        catch (e) {
+            console.log(e);
+            return null;
+        }
     },
     getPowertrainTypes: async () => {
         const response = await fetch('http://localhost:8080/api/carhut/getPowertrainTypes');
@@ -181,11 +209,11 @@ const APIMethods = {
     },
     getColorStringNameFromColorId: async (colorId) => {
         const response = await fetch('http://localhost:8080/api/carhut/getColorStringNameFromColorId?colorId=' + colorId);
-        const data = await response.json();
+        const data = await response.text();
         return data;
     },
     getFeatureNameByFeatureId: async (featureId) => {
-        const response = await fetch('http://localhost:8080/api/carhut/getFeatureNameByFeatureId?colorId=' + featureId);
+        const response = await fetch('http://localhost:8080/api/carhut/getFeatureNameByFeatureId?featureId=' + featureId);
         const data = await response.json();
         return data;
     },
@@ -201,7 +229,7 @@ const APIMethods = {
         const response = await fetch('http://localhost:8080/api/carhut/getMultipleFeaturesByIds', requestOptions);
         const data = await response.json();
         return data;
-    }
+    },
 }
 
 export default APIMethods;

@@ -1,13 +1,12 @@
 import '../../css/clickandpickpage/FuelSection.css';
 import { useLocation, Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import APIMethods from '../../api/APIMethods';
 
 function FuelSection() {
     var loc = useLocation();
 
-    // UPDATE IF NEW FUEL TYPE IS ADDED
-    const baseFuelTypes = ["Petrol", "Diesel", "Electric", "Hybrid", "LPG", "Ethanol", "Plug-in-hybrid"];
-
+    const [baseFuelTypes, setBaseFuelTypes] = useState([]);
     const [fuelType, setFuelType] = useState('');
 
     const generateFuelTypeCheckboxes = () => {
@@ -31,6 +30,20 @@ function FuelSection() {
             setFuelType([...fuelType, fuelType]);
         }
     }
+
+    const fetchFuelTypes = async () => {
+        const data = await APIMethods.getFuelTypes();
+
+        if (data === null) {
+            return;
+        }
+
+        setBaseFuelTypes(data);
+    }
+
+    useEffect(() => {
+        fetchFuelTypes();
+    }, [])
  
     return (
         <div className='section-body-fuel-section'>
