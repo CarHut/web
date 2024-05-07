@@ -42,6 +42,20 @@ function AddPhotos() {
         setUploadedImages(tempImages.filter((image, idx) => idx !== indexOfRemovedImg));
     }
 
+    const renderUploadedImages = () => {
+        return (
+            uploadedImages.map((image, idx) => {
+                return (
+                    <div className='add-car-photos-uploaded-img'>
+                        <img id={idx} src={URL.createObjectURL(image)}/>
+                        <div className='x-mark' onClick={(e) => handleRemovedImage(idx)}/>
+                    </div>
+                    
+                )
+            })
+        )
+    }
+
     return (
         <div className='add-car-photos-section'>
             <div className='add-car-photos-header'>Add photos of you car</div>
@@ -55,15 +69,7 @@ function AddPhotos() {
                 <div className='add-car-photos-column-wrapper'>
                     <div className='add-car-photos-header'>Added photos</div>
                     <div className='add-car-photos-uploaded-images-wrapper'>
-                        {uploadedImages.map((image, idx) => {
-                            return (
-                                <div className='add-car-photos-uploaded-img'>
-                                    <img id={idx} src={URL.createObjectURL(image)}/>
-                                    <div className='x-mark' onClick={(e) => handleRemovedImage(idx)}/>
-                                </div>
-                                
-                            )
-                        })}
+                        {renderUploadedImages()}
                     </div>
                 </div>
             </div>

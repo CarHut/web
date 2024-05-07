@@ -99,6 +99,94 @@ function MainInfo() {
         setSellerAddress(e);
     }
 
+    const renderBrands = () => {
+        return (
+            brands.map(brand => (
+                <option key={brand.id} value={brand.brand}>{brand.brand}</option>
+            ))
+        )
+    }
+
+    const renderModels = () => {
+        return (
+            models.map(model => (
+                <option key={model.id} value={model.model}>{model.model}</option>
+            ))
+        )
+    }
+
+    const renderHeaderInput = () => {
+        return (
+            <div className='add-car-form'>
+                <div className='add-car-main-info-regular-text'>Do you want custom header? Here you go!</div>
+                <input className='add-car-main-info-text-input' maxLength='50' type='text' placeholder='max. 50 characters' onChange={(e) => handleWrittenHeadline(e.target.value)}/>
+            </div>
+        )
+    }
+
+    const renderPriceSlider = () => {
+        return (
+            <div className="registration-slider-container">
+                <div className='add-car-label' htmlFor="price" style={{"display": "flex", "alignItems": "center"}}>Price*: <input className='add-car-main-info-text-input' style={{"margin": "0 1em"}} maxLength='7' type='text' placeholder='' value={price} onChange={(e) => handlePriceChange(e.target.value)} pattern='[0-9]'/> €</div>
+                <input
+                    type="range"
+                    id="price"
+                    name="price"
+                    min="0"
+                    max="999999"
+                    step="5"
+                    value={price}
+                    onChange={(e) => handlePriceChange(e.target.value)}
+                />
+            </div>
+        )
+    }
+
+    const renderMileageSlider = () => {
+        return (
+            <div className="registration-slider-container">
+                <div className='add-car-label' htmlFor="mileage" style={{"display": "flex", "alignItems": "center"}}>Mileage*: <input className='add-car-main-info-text-input' style={{"margin": "0 1em"}} maxLength='7' type='text' placeholder='' value={mileage} onChange={(e) => handleMileageChange(e.target.value)} pattern='[0-9]'/> km</div>
+                <input
+                    type="range"
+                    id="mileage"
+                    name="mileage"
+                    min="0"
+                    max="1000000"
+                    step="1"
+                    value={mileage}
+                    onChange={(e) => handleMileageChange(e.target.value)}
+                />
+            </div>
+        )
+    }
+
+    const renderRegistrationSlider = () => {
+        return (
+            <div className="registration-slider-container">
+                <div className='add-car-label' htmlFor="registration" style={{"display": "flex", "alignItems": "center"}}>Registration*: <input className='add-car-main-info-text-input' style={{"margin": "0 1em"}} maxLength='4' type='text' placeholder='' value={registration} pattern='[0-9]' onChange={(e) => handleRegistrationChange(e.target.value)}/></div>
+                <input
+                    type="range"
+                    id="fromRegistration"
+                    name="fromRegistration"
+                    min="1900"
+                    max="2024"
+                    step="1"
+                    value={registration}
+                    onChange={(e) => handleRegistrationChange(e.target.value)}
+                />
+            </div>
+        )
+    }
+
+    const renderAddressSection = () => {
+        return (
+            <>
+                <div className='add-car-label' htmlFor="address">Address*</div>
+                <input className='add-car-main-info-text-input' maxLength={512} type='text' placeholder='' value={sellerAddress} pattern='[0-9]' onChange={(e) => handleSellerAddressChange(e.target.value)}/>                        
+            </>
+        )
+    }
+
     return (
         <div className='add-car-main-info-section'>
             <div className='add-car-main-info-header'>Let's start with basic data of your car</div>
@@ -111,9 +199,7 @@ function MainInfo() {
                             <div className="add-car-main-info-custom-combobox">
                                 <select id="brandComboBox" className='add-car-main-info-myComboBox' value={selectedBrand} onChange={(e) => handleSelectedBrand(e.target.value)}>
                                     <option value="all" disabled>Select Brand</option>
-                                    {brands.map(brand => (
-                                        <option key={brand.id} value={brand.brand}>{brand.brand}</option>
-                                    ))}
+                                    {renderBrands()}
                                 </select>
                             </div>
                         </div>
@@ -122,66 +208,24 @@ function MainInfo() {
                             <div className="add-car-main-info-custom-combobox">
                                 <select id="modelComboBox" className={`add-car-main-info-myComboBox ${!selectedBrand ? 'disabled' : ''}`} value={selectedModel} onChange={(e) => handleSelectedModel(e.target.value)} disabled={!selectedBrand}>
                                     <option value="all" disabled={!selectedBrand}>Select Model</option>
-                                    {models.map(model => (
-                                        <option key={model.id} value={model.model}>{model.model}</option>
-                                    ))}
+                                    {renderModels()}
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div className='add-car-main-info-row-wrapper'>
-                        <div className='add-car-form'>
-                            <div className='add-car-main-info-regular-text'>Do you want custom header? Here you go!</div>
-                            <input className='add-car-main-info-text-input' maxLength='50' type='text' placeholder='max. 50 characters' onChange={(e) => handleWrittenHeadline(e.target.value)}/>
-                        </div>
+                        {renderHeaderInput()}
                     </div>
                     <div className='add-car-main-info-row-wrapper'>
-                        <div className="registration-slider-container">
-                            <div className='add-car-label' htmlFor="price" style={{"display": "flex", "alignItems": "center"}}>Price*: <input className='add-car-main-info-text-input' style={{"margin": "0 1em"}} maxLength='7' type='text' placeholder='' value={price} onChange={(e) => handlePriceChange(e.target.value)} pattern='[0-9]'/> €</div>
-                            <input
-                                type="range"
-                                id="price"
-                                name="price"
-                                min="0"
-                                max="999999"
-                                step="5"
-                                value={price}
-                                onChange={(e) => handlePriceChange(e.target.value)}
-                            />
-                        </div>
+                        {renderPriceSlider()}
                     </div>
                     <div className='add-car-main-info-row-wrapper'>
-                        <div className="registration-slider-container">
-                            <div className='add-car-label' htmlFor="mileage" style={{"display": "flex", "alignItems": "center"}}>Mileage*: <input className='add-car-main-info-text-input' style={{"margin": "0 1em"}} maxLength='7' type='text' placeholder='' value={mileage} onChange={(e) => handleMileageChange(e.target.value)} pattern='[0-9]'/> km</div>
-                            <input
-                                type="range"
-                                id="mileage"
-                                name="mileage"
-                                min="0"
-                                max="1000000"
-                                step="1"
-                                value={mileage}
-                                onChange={(e) => handleMileageChange(e.target.value)}
-                            />
-                        </div>
+                        {renderMileageSlider()}
                     </div>
                     <div className='add-car-main-info-row-wrapper'>
-                        <div className="registration-slider-container">
-                            <div className='add-car-label' htmlFor="registration" style={{"display": "flex", "alignItems": "center"}}>Registration*: <input className='add-car-main-info-text-input' style={{"margin": "0 1em"}} maxLength='4' type='text' placeholder='' value={registration} pattern='[0-9]' onChange={(e) => handleRegistrationChange(e.target.value)}/></div>
-                            <input
-                                type="range"
-                                id="fromRegistration"
-                                name="fromRegistration"
-                                min="1900"
-                                max="2024"
-                                step="1"
-                                value={registration}
-                                onChange={(e) => handleRegistrationChange(e.target.value)}
-                            />
-                        </div>
+                        {renderRegistrationSlider()}
                     </div>
-                    <div className='add-car-label' htmlFor="address">Address*</div>
-                    <input className='add-car-main-info-text-input' maxLength={512} type='text' placeholder='' value={sellerAddress} pattern='[0-9]' onChange={(e) => handleSellerAddressChange(e.target.value)}/>                
+                    {renderAddressSection()}
                 </div>
                 <div className='add-car-main-info-content-wrapper'>
                     <div className='add-car-main-info-column-wrapper'>

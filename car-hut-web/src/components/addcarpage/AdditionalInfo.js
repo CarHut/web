@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import nations from '../../resources/Nations'; 
 import APIMethods from '../../api/APIMethods';
+import { render } from '@testing-library/react';
 
 function AdditionalInfo() {
 
@@ -85,6 +86,121 @@ function AdditionalInfo() {
         setInteriorColor(e);
     }
 
+    const renderColors = (type) => {
+        const usedHandleFunction = type === 'exterior' ? (e) => handleExteriorColorChange(e.target.value) : (e) => handleInteriorColorChange(e.target.value);
+
+        return (
+            <form className='add-car-additional-info-form'>
+                {colors.map((color, idx) => {
+                    return (
+                        <div className='add-car-label-additional-info'>
+                            <input id={idx} type='radio' name='option' value={color.color} onClick={usedHandleFunction}/>
+                            {color.color}
+                        </div>
+                    )
+                })}
+            </form>
+        )
+    }
+
+    const renderInspectionDate = (type) => {
+        const usedHandleFunction = type === 'technical' ? (e) => handleTechInspection(e.target.value) : (e) => handleEmmInspection(e.target.value);
+        const val = type === 'technical' ? techInspectionDate : emInspectionDate;
+    
+        return (
+            <>
+                <div className='label'>Next {type} inspection</div>
+                <input type='date' value={val} onChange={usedHandleFunction}/>
+            </>
+        )
+    }
+
+    const renderCountries = () => {
+        return (
+            <div className='add-car-engine-info-combobox-entity'>
+                <div className='label'>Country of origin</div>
+                <div className="add-car-engine-info-custom-combobox">
+                    <select id="brandComboBox" className='add-car-engine-info-myComboBox' value={countryOfOrigin} onChange={(e) => handleNationChange(e.target.value)}>
+                        <option value="all" disabled></option>
+                        {nations.map((nation, idx) => (
+                            <option key={idx} value={nation}>{nation}</option>
+                        ))}
+                    </select>
+                </div>
+            </div>
+        )
+    }
+
+    const renderBooleanStatusRadioButtons = (type, label) => {
+        let usedHandleFunction = null;
+        switch (type) {
+            case 'crashStatus':
+                usedHandleFunction = (e) => handleDamageChange(e.target.value);     
+                break;
+            case 'parkingSensors':
+                usedHandleFunction = (e) => handleParkSensorsChange(e.target.value);     
+                break;
+            case 'parkingCameras':
+                usedHandleFunction = (e) => handleParkCamerasChange(e.target.value);     
+                break;
+            default:
+                break;
+        }
+
+        return (
+            <>
+                <div className='label'>{label}</div>
+                <form className='add-car-additional-info-form'>
+                    <div className='add-car-label-additional-info'>
+                        <input type='radio' name='option' value='Yes' onClick={usedHandleFunction}/>
+                        Yes
+                    </div>
+                    <div className='add-car-label-additional-info'>
+                        <input type='radio' name='option' value='No' onClick={usedHandleFunction}/>
+                        No
+                    </div>
+                </form>
+            </>
+        )
+    }
+
+    const renderInputBox = (type, label) => {
+        let val = 'null';
+        let usedHandleFunction = null;
+
+        switch (type) {
+            case 'doors':
+                usedHandleFunction = (e) => handleDoorsChange(e.target.value);
+                val = doors;
+                break;
+            case 'seats':
+                usedHandleFunction = (e) => handleSeatsChange(e.target.value);
+                val = seats;
+                break;
+            case 'previousOwners':
+                usedHandleFunction = (e) => handlePreviousOwnersChange(e.target.value);
+                val = previousOwners;
+                break;
+            case 'energyEffClass':
+                usedHandleFunction = (e) => handleEnergyEffClassChange(e.target.value);
+                val = energyEffClass;
+                break;
+            case 'emClass':
+                usedHandleFunction = (e) => handleEmissionClassChange(e.target.value);
+                val = emissionClass;
+                break;                
+            default:
+                break;
+        }
+
+        return (
+            <>
+                <div className='label'>{label}</div>
+                <input className='add-car-additional-info-text-input' style={{"margin": "1em 1em"}} type='text' placeholder='' value={val} onChange={usedHandleFunction}/>    
+            </>
+        )
+    }
+
     return (
         <div className='add-car-additional-info-section'>
             <div className='add-car-additional-info-header'>Additional info</div>
@@ -93,98 +209,28 @@ function AdditionalInfo() {
                 <div className='add-car-additional-info-column-wrapper'>
                     
                     <div className='label'>Exterior color</div>
-                    <form className='add-car-additional-info-form'>
-                        {colors.map((color, idx) => {
-                            return (
-                                <div className='add-car-label-additional-info'>
-                                    <input id={idx} type='radio' name='option' value={color.color} onClick={(e) => handleExteriorColorChange(e.target.value)}/>
-                                    {color.color}
-                                </div>
-                            )
-                        })}
-                    </form>
+                    {renderColors('exterior')}
 
                     <div className='label'>Interior color</div>
-                    <form className='add-car-additional-info-form'>
-                        {colors.map((color, idx) => {
-                            return (
-                                <div className='add-car-label-additional-info'>
-                                    <input id={idx} type='radio' name='option' value={color.color} onClick={(e) => handleInteriorColorChange(e.target.value)}/>
-                                    {color.color}
-                                </div>
-                            )
-                        })}
-                    </form>
+                    {renderColors('interior')}
 
-                    <div className='label'>Next technical inspection</div>
-                    <input type='date' value={techInspectionDate} onChange={(e) => handleTechInspection(e.target.value)}/>
+                    {renderInspectionDate('technical')}
+                    {renderInspectionDate('emission')}
 
-                    <div className='label'>Next emission inspection</div>
-                    <input type='date' value={emInspectionDate} onChange={(e) => handleEmmInspection(e.target.value)}/>
+                    {renderCountries()}
 
-                    <div className='add-car-engine-info-combobox-entity'>
-                        <div className='label'>Country of origin</div>
-                        <div className="add-car-engine-info-custom-combobox">
-                            <select id="brandComboBox" className='add-car-engine-info-myComboBox' value={countryOfOrigin} onChange={(e) => handleNationChange(e.target.value)}>
-                                <option value="all" disabled></option>
-                                {nations.map((nation, idx) => (
-                                    <option key={idx} value={nation}>{nation}</option>
-                                ))}
-                            </select>
-                        </div>
-                    </div>
+                    {renderBooleanStatusRadioButtons('crashStatus', 'Was car previously crashed?')}
 
-                    <div className='label'>Was car previously crashed?</div>
-                    <form className='add-car-additional-info-form'>
-                        <div className='add-car-label-additional-info'>
-                            <input type='radio' name='option' value='Yes' onClick={(e) => handleDamageChange(e.target.value)}/>
-                            Yes
-                        </div>
-                        <div className='add-car-label-additional-info'>
-                            <input type='radio' name='option' value='No' onClick={(e) => handleDamageChange(e.target.value)}/>
-                            No
-                        </div>
-                    </form>
+                    {renderBooleanStatusRadioButtons('parkingSensors', 'Does your car have parking sensors?')}
 
-                    <div className='label'>Does your car have parking sensors?</div>
-                    <form className='add-car-additional-info-form'>
-                        <div className='add-car-label-additional-info'>
-                            <input type='radio' name='option' value='Yes' onClick={(e) => handleParkSensorsChange(e.target.value)}/>
-                            Yes
-                        </div>
-                        <div className='add-car-label-additional-info'>
-                            <input type='radio' name='option' value='No' onClick={(e) => handleParkSensorsChange(e.target.value)}/>
-                            No
-                        </div>
-                    </form>
+                    {renderBooleanStatusRadioButtons('parkingCameras', 'Does your car have parking cameras?')}
 
-                    <div className='label'>Does your car have parking cameras?</div>
-                    <form className='add-car-additional-info-form'>
-                        <div className='add-car-label-additional-info'>
-                            <input type='radio' name='option' value='Yes' onClick={(e) => handleParkCamerasChange(e.target.value)}/>
-                            Yes
-                        </div>
-                        <div className='add-car-label-additional-info'>
-                            <input type='radio' name='option' value='No' onClick={(e) => handleParkCamerasChange(e.target.value)}/>
-                            No
-                        </div>
-                    </form>
-
-                    <div className='label'>No. of doors</div>
-                    <input className='add-car-additional-info-text-input' style={{"margin": "1em 1em"}} type='text' placeholder='' value={doors} onChange={(e) => handleDoorsChange(e.target.value)} pattern='[0-9]'/>
-                                        
-                    <div className='label'>No. of seats</div>
-                    <input className='add-car-additional-info-text-input' style={{"margin": "1em 1em"}} type='text' placeholder='' value={seats} onChange={(e) => handleSeatsChange(e.target.value)} pattern='[0-9]'/>
+                    {renderInputBox('doors', 'No. of doors')}
+                    {renderInputBox('seats', 'No. of seats')}
+                    {renderInputBox('previousOwners', 'No. of previous owners')}
+                    {renderInputBox('energyEffClass', 'Energy efficiency class')}
+                    {renderInputBox('emClass', 'Emission class')}
                     
-                    <div className='label'>No. of previous owners</div>
-                    <input className='add-car-additional-info-text-input' style={{"margin": "1em 1em"}} type='text' placeholder='' value={previousOwners} onChange={(e) => handlePreviousOwnersChange(e.target.value)} pattern='[0-9]'/>
-                    
-                    <div className='label'>Energy efficiency class</div>
-                    <input className='add-car-additional-info-text-input' style={{"margin": "1em 1em"}} type='text' placeholder='' value={energyEffClass} onChange={(e) => handleEnergyEffClassChange(e.target.value)} pattern='[0-9]'/>
-                
-                    
-                    <div className='label'>Emission class</div>
-                    <input className='add-car-additional-info-text-input' style={{"margin": "1em 1em"}} type='text' placeholder='' value={emissionClass} onChange={(e) => handleEmissionClassChange(e.target.value)} pattern='[0-9]'/>
                 </div>
                 <div className='add-car-engine-info-content-wrapper'>
                     <div className='add-car-engine-info-column-wrapper'>

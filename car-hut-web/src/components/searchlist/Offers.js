@@ -101,7 +101,7 @@ function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength, setL
                                 <div className='car-stats-column'>
                                     <div className='car-stats-text'>Seller</div>
                                     <div className='line-container-seller' />
-                                    <div className='car-stats-text'>{car.sellerName}</div>
+                                    <div className='car-stats-text'>{car.sellerId}</div>
                                     <div className='car-stats-text'>{car.sellerAddress}</div>
                                 </div>
                             </div>

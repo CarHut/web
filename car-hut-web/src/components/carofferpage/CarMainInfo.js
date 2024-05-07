@@ -33,7 +33,7 @@ function CarMainInfo({car}) {
                         </div>
                         <div className='car-offer-main-info-price-status-label'>Good price</div>
                         <div className='car-offer-main-info-line-container'/>
-                        <div className='car-offer-main-info-seller-name-label'>{carModel.userId}</div>
+                        <div className='car-offer-main-info-seller-name-label'>{carModel.sellerId}</div>
                         <div className='car-offer-main-info-seller-address-label'>{carModel.sellerAddress}</div>
                         <button className='car-offer-main-info-button'>Contant seller</button>
                     </div>

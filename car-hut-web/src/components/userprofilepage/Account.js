@@ -44,7 +44,7 @@ function Account() {
                     <div className='profile-content-text'>{accountDetails.email}</div>
                     <div className='profile-content-text'>+421 000 000 000</div>
                     <div className='profile-content-text'>**********</div>
-                    <div className='profile-content-text-forgot-password' onClick={handleResetPassword}>Forgot my password</div>
+                    <div className='profile-content-text-forgot-password' onClick={handleResetPassword}>Change my password</div>
                     {showResetPasswordSent 
                         ?   <div className='profile-content-text-success'>Email with token will be send to email {accountDetails.email}.</div>
                         :   showResetPasswordError 
