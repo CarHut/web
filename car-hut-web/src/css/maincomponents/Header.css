@@ -1,11 +1,11 @@
 header {
     background-color: #181818;
-    height: 6em;
+    height: 6vw;
     display: flex;
     justify-content: space-between;
-    padding: 0 20em;
-    padding-top: 1em;
-    position: relative; /* Added */
+    padding: 0 20vw;
+    padding-top: 1vw;
+    position: relative;
 }
 
 .logo {
@@ -15,16 +15,17 @@ header {
 }
 
 .carhut-img {
-    max-height: 100%;
+    width: 5vw;
+    height: auto;
 }
 
 h1 {
     color: #ffffff;
-    font-size: 3em;
+    font-size: 3vw;
 }
 
 .header-text-content {
-    font-size: 2em;
+    font-size: 2vw;
     color: #fff;
 }
 
@@ -35,7 +36,7 @@ h1 {
 }
 
 .login-img {
-    height: 2em;
+    height: 2vw;
     z-index: 2;
 }
 
@@ -66,9 +67,9 @@ h1 {
 }
 
 .dropdown-menu-text {
-    font-size: 1.5em;
+    font-size: 1.5vw;
     color: #fff;
-    margin: 1em;
+    margin: 1vw;
     cursor: pointer;
     text-decoration: none;
 }

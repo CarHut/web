@@ -1,3 +1,5 @@
+import Constants from '../../constants/Constants.js';
+
 const AuthUtil = {
     login: async (username, password) => {
 
@@ -11,7 +13,7 @@ const AuthUtil = {
         }
 
         try {
-            const response = await fetch('http://localhost:8080/api/auth/authenticate', requestOptions);
+            const response = await fetch(Constants.baseAPIPath + 'auth/authenticate', requestOptions);
             if (response.status !== 200) {
                 return false;
             }
@@ -36,7 +38,7 @@ const AuthUtil = {
         // }
 
 
-        const response = await fetch('http://localhost:8080/logout')
+        const response = await fetch(Constants.baseAddressPath + 'logout')
                         .catch((error) => console.log(error));
 
         localStorage.removeItem('token');

@@ -1,15 +1,13 @@
-FROM node:latest 
+FROM node:16.3.0-alpine as build
 
 WORKDIR /app
-
-COPY package*.json ./
+COPY package.json /app
+COPY ./package-lock.json /app/package-lock.json
 
 RUN npm install
-
-COPY . .
-
+COPY . /app
 RUN npm run build
 
-EXPOSE 3000
-
-CMD ["npm", "start"]
+FROM nginx:alpine
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /app/build /usr/share/nginx/html

@@ -1,11 +1,11 @@
 img {
-    height: 7em;
+    height: 5vw;
 }
 
 .section-body {
     background-color: #181818;
-    margin: 2em 20em;
-    padding: 1em 3em;
+    margin: 2vw 20vw;
+    padding: 1vw 3vw;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -13,13 +13,13 @@ img {
 
 .combobox-entity-filter-search {
     display: block;
-    padding: 1em;
+    padding: 1vw;
 }
 
-.label {
+.label-search-list-main-page {
     color: #fff;
-    font-size: 1em;
-    padding-bottom: 0.4em;
+    font-size: 1vw;
+    padding-bottom: 0.4vw;
 }
 
 select {
@@ -34,63 +34,145 @@ select {
     cursor: pointer;
 }
   
-.custom-combobox {
+.custom-combobox-filter-search-main-page {
     position: relative;
-    width: 13em; 
-    height: 2em;
+    width: 10vw; 
+    height: 2vw;
+    font-size: 1vw;
 }
   
-  /* Style the custom combobox arrow */
-  .custom-combobox::after {
-    content: '\25BC'; /* Unicode arrow down character */
-    color: #D9D9D9; /* Adjust the color as needed */
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-  }
-  
-  /* Style the custom combobox options */
-  .myComboBox {
-    width: 100%;
-    border: 1px solid #D9D9D9;
-    border-radius: 5px;
-    font-size: 14px;
-    color: #D9D9D9;
-    background-color: #313131;
-    height: 100%;
-    padding-left: 1em;
-  }
-  
-  /* Optional: Style the dropdown options */
-  .myComboBox option {
-    background-color: #fff;
-    color: #000;
-  }
+/* Style the custom combobox arrow */
+.custom-combobox-filter-search-main-page::after {
+  content: '\25BC'; /* Unicode arrow down character */
+  color: #D9D9D9; /* Adjust the color as needed */
+  position: absolute;
+  top: 50%;
+  right: 1vw;
+  transform: translateY(-50%);
+}
 
-.myComboBox.disabled {
+/* Style the custom combobox options */
+.my-combo-box-search-list-main-page {
+  width: 100%;
+  border: 1px solid #D9D9D9;
+  border-radius: 5px;
+  color: #D9D9D9;
+  background-color: #313131;
+  height: 100%;
+  padding-left: 1vw;
+  font-size: 1vw;
+}
+
+/* Optional: Style the dropdown options */
+.my-combo-box-search-list-main-page option {
+  background-color: #fff;
+  color: #000;
+}
+
+.my-combo-box-search-list-main-page.disabled {
     box-shadow: none; /* Reset shadow when disabled */
     opacity: 0.7; /* Adjust opacity to indicate disabled state */
     /* Add any additional styles to visually indicate disabled state */
 }
 
-  .right-wrapper {
-    display: box;
+.right-wrapper {
+  display: box;
+}
+
+.comboboxes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.more-filters-text-search-list-main-page {
+  font-size: 1vw;
+  color: #898989;
+  padding-left: 1vw;
+}
+
+.filter-search-links {
+  display: flex;
+  justify-content: space-between;
+}
+
+.styled-button-filter-search-main-page {
+  background-color: #313131;
+  color: #ffffff;
+  padding: 0.8vw 1vw;
+  font-size: 1.1vw;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.styled-button-filter-search-main-page:hover {
+  background-color: #D9D9D9;
+  color: #000;
+}
+
+
+@media screen and (max-width: 1350px) {
+
+  .section-body {
+      margin: 2vw 0;
+  }
+    
+  .custom-combobox-filter-search-main-page {
+      width: 18vw; 
+  }
+
+  .my-combo-box-search-list-main-page {
+    width: 100%;
   }
 
   .comboboxes {
     display: flex;
     justify-content: space-between;
-    align-items: center;
   }
 
-  .more-filters-text {
-    font-size: 1em;
-    color: #898989;
-    padding-left: 1em;
+}
+
+@media screen and (max-width: 600px) {
+
+  .section-body {
+      margin: 2vw 0;
+  }
+    
+  .comboboxes {
+    display: flex;
+    flex-wrap: wrap;
   }
 
-  .filter-search-links {
+  .custom-combobox-filter-search-main-page {
+      width: 35vw; 
+      height: 5vw;
+  }
+
+  .my-combo-box-search-list-main-page {
+    width: 100%;
+    font-size: 2vw;
+  }
+  
+  .comboboxes {
     display: flex;
     justify-content: space-between;
   }
+
+  .label-search-list-main-page {
+    color: #fff;
+    font-size: 2vw;
+    padding-bottom: 0.4vw;
+  }
+
+  .styled-button-filter-search-main-page {
+    padding: 1vw 2vw;
+    font-size: 3vw;
+  }
+
+  .more-filters-text-search-list-main-page {
+    font-size: 2vw;
+  }
+
+}

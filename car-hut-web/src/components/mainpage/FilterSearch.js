@@ -105,7 +105,7 @@ function FilterSearch() {
 
     const renderPriceComboBox = () => {
         return (
-            <select id="priceComboBox" className='myComboBox' onChange={(e) => handleSelectedPriceFrom(e.target.value)}>
+            <select id="priceComboBox" className='my-combo-box-search-list-main-page' onChange={(e) => handleSelectedPriceFrom(e.target.value)}>
                 <option value="">Select Price</option>
                 <option key={1000} value={'1000'}>1 000€</option>
                 <option key={2000} value={'2000'}>2 000€</option>
@@ -135,7 +135,7 @@ function FilterSearch() {
 
     const renderMileageComboBox = () => {
         return (
-            <select id="mileageComboBox" className='myComboBox' onChange={(e) => handleSelectedMileageFrom(e.target.value)}> 
+            <select id="mileageComboBox" className='my-combo-box-search-list-main-page' onChange={(e) => handleSelectedMileageFrom(e.target.value)}> 
                 <option value="">Select Mileage</option> 
                 <option key={1000} value={'1000'}>1 000 km</option>
                 <option key={5000} value={'5000'}>5 000 km</option>
@@ -155,38 +155,38 @@ function FilterSearch() {
             <div className='right-wrapper'>
                 <div className='comboboxes'>
                     <div className='combobox-entity-filter-search'>
-                        <div className='label'>Brand</div>
-                        <div className="custom-combobox">
-                            <select id="brandComboBox" className='myComboBox' value={selectedBrand} onChange={(e) => handleSelectedBrand(e.target.value)}>
+                        <div className='label-search-list-main-page'>Brand</div>
+                        <div className="custom-combobox-filter-search-main-page">
+                            <select id="brandComboBox" className='my-combo-box-search-list-main-page' value={selectedBrand} onChange={(e) => handleSelectedBrand(e.target.value)}>
                                 <option value="all">Select Brand</option>
                                 {renderBrands()}
                             </select>
                         </div>
                     </div>
                     <div className='combobox-entity-filter-search'>
-                        <div className='label'>Model</div>
-                        <div className="custom-combobox">
-                            <select id="modelComboBox" className={`myComboBox ${!selectedBrand ? 'disabled' : ''}`} value={selectedModel} onChange={(e) => handleSelectedModel(e.target.value)} disabled={!selectedBrand}>
+                        <div className='label-search-list-main-page'>Model</div>
+                        <div className="custom-combobox-filter-search-main-page">
+                            <select id="modelComboBox" className={`my-combo-box-search-list-main-page ${!selectedBrand ? 'disabled' : ''}`} value={selectedModel} onChange={(e) => handleSelectedModel(e.target.value)} disabled={!selectedBrand}>
                                 <option value="all" disabled={!selectedBrand}>Select Model</option>
                                 {renderModels()}
                             </select>
                         </div>
                     </div>
                     <div className='combobox-entity-filter-search'>
-                        <div className='label'>Price from</div>
-                        <div className="custom-combobox">
+                        <div className='label-search-list-main-page'>Price from</div>
+                        <div className="custom-combobox-filter-search-main-page">
                             {renderPriceComboBox()}
                         </div>
                     </div>
                     <div className='combobox-entity-filter-search'>
-                        <div className='label'>Mileage from</div>
-                        <div className="custom-combobox">
+                        <div className='label-search-list-main-page'>Mileage from</div>
+                        <div className="custom-combobox-filter-search-main-page">
                             {renderMileageComboBox()}
                         </div>
                     </div>
                 </div>
                 <div className="filter-search-links">
-                    <Link to={'/moreFiltersPage'} className='more-filters-text'>More filters</Link>
+                    <Link to={'/moreFiltersPage'} className='more-filters-text-search-list-main-page'>More filters</Link>
                     <Link
                         to={`/searchList`}
                         state={{
@@ -203,7 +203,7 @@ function FilterSearch() {
                             ]
                         }}
                     >
-                        <button className="styled-button">{searchedCarsNumber !== null && !loadingSearchedCarsNumber ? (searchedCarsNumber + " cars") : ("Loading cars")}</button>
+                        <button className="styled-button-filter-search-main-page">{searchedCarsNumber !== null && !loadingSearchedCarsNumber ? (searchedCarsNumber + " cars") : ("Loading cars")}</button>
                     </Link>
                 </div>
             </div>

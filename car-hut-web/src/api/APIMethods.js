@@ -1,3 +1,5 @@
+import Constants from '../constants/Constants.js';
+
 const APIMethods = {
     addCarToSavedByUser: async (id, userId, carId) => {
         const requestOptions = {
@@ -14,7 +16,7 @@ const APIMethods = {
         };
 
         try {
-            const response = await fetch('http://localhost:8080/api/carhut/savedCars/addSavedCarByUsername', requestOptions)
+            const response = await fetch(Constants.baseAPIPath + 'carhut/savedCars/addSavedCarByUsername', requestOptions)
                 .catch((error) => console.log(error));
 
             return response;
@@ -26,7 +28,7 @@ const APIMethods = {
     },
     getTempCarWithId: async (id) => {
         try {
-            const url = `http://localhost:8080/api/carhut/getTempCarWithId?carId=${id}`;
+            const url = Constants.baseAPIPath + `carhut/getTempCarWithId?carId=${id}`;
             const response = await fetch(url);
             const data = await response.json();
             return data;
@@ -38,7 +40,7 @@ const APIMethods = {
     },
     getCarWithId: async (id) => {
         try {
-            const url = `http://localhost:8080/api/carhut/getCarWithId?carId=${id}`;
+            const url = Constants.baseAPIPath + `carhut/getCarWithId?carId=${id}`;
             const response = await fetch(url);
             const data = await response.json();
             return data;
@@ -50,7 +52,7 @@ const APIMethods = {
     },
     getModelsByBrandName: async (brandName) => {
         try {
-            const response = await fetch(`http://localhost:8080/api/carhut/getModelsByBrandName?brandName=${brandName}`);
+            const response = await fetch(Constants.baseAPIPath + `carhut/getModelsByBrandName?brandName=${brandName}`);
             return await response.json();
         }
         catch (e) {
@@ -60,7 +62,7 @@ const APIMethods = {
     },
     getAllBrands: async () => {
         try {
-            const response = await fetch('http://localhost:8080/api/carhut/getAllBrands');
+            const response = await fetch(Constants.baseAPIPath + 'carhut/getAllBrands');
             const data  = await response.json();
             return data;
         }
@@ -71,7 +73,7 @@ const APIMethods = {
     },
     getModelsByBrand: async (selectedBrand) => {
         try {
-            const response = await fetch(`http://localhost:8080/api/carhut/getModelsByBrand/${selectedBrand}`);
+            const response = await fetch(Constants.baseAPIPath + `carhut/getModelsByBrand/${selectedBrand}`);
             const data  = await response.json();
             return data;
         }
@@ -107,7 +109,7 @@ const APIMethods = {
         }
         
         try {
-            const response = await fetch('http://localhost:8080/api/auth/getUserDetailsInfo', requestOptions);
+            const response = await fetch(Constants.baseAPIPath + 'auth/getUserDetailsInfo', requestOptions);
             return await response.json();
         }
         catch (e) {
@@ -126,7 +128,7 @@ const APIMethods = {
         }
 
         try {
-            return await fetch('http://localhost:8080/api/auth/resetPasswordSendEmail', requestOptions);
+            return await fetch(Constants.baseAPIPath + 'auth/resetPasswordSendEmail', requestOptions);
         }
         catch (e) {
             console.log(e);
@@ -143,7 +145,7 @@ const APIMethods = {
             body: localStorage.getItem('username')
         };
         try {
-            const response = await fetch('http://localhost:8080/api/carhut/savedCars/getSavedCarsByUsername', requestOption)
+            const response = await fetch(Constants.baseAPIPath + 'carhut/savedCars/getSavedCarsByUsername', requestOption)
             return await response.json();
         }
         catch (e) {
@@ -166,7 +168,7 @@ const APIMethods = {
         };
 
         try {
-            return await fetch('http://localhost:8080/api/carhut/savedCars/removeSavedCarByUsername', requestOption);
+            return await fetch(Constants.baseAPIPath + 'carhut/savedCars/removeSavedCarByUsername', requestOption);
         }
         catch (e) {
             console.log(e);
@@ -189,7 +191,7 @@ const APIMethods = {
         }
 
         try {
-            return await fetch('http://localhost:8080/api/auth/resetPasswordInitiate', requestOptions);
+            return await fetch(Constants.baseAPIPath + 'auth/resetPasswordInitiate', requestOptions);
         }
         catch (e) {
             console.log(e);
@@ -198,7 +200,7 @@ const APIMethods = {
     },
     getBodyTypes: async () => {
         try {
-            const response = await fetch('http://localhost:8080/api/carhut/getBodyTypes');
+            const response = await fetch(Constants.baseAPIPath + 'carhut/getBodyTypes');
             const data = await response.json();
             return data;
         }
@@ -209,7 +211,7 @@ const APIMethods = {
     },
     getGearboxTypes: async () => {
         try {
-            const response = await fetch('http://localhost:8080/api/carhut/getGearboxTypes');
+            const response = await fetch(Constants.baseAPIPath + 'carhut/getGearboxTypes');
             const data = await response.json();
             return data;
         }
@@ -220,7 +222,7 @@ const APIMethods = {
     },
     getFuelTypes: async () => {
         try {
-            const response = await fetch('http://localhost:8080/api/carhut/getFuelTypes');
+            const response = await fetch(Constants.baseAPIPath + 'carhut/getFuelTypes');
             const data = await response.json();
             return data;
         }
@@ -231,7 +233,7 @@ const APIMethods = {
     },
     getPowertrainTypes: async () => {
         try {
-            const response = await fetch('http://localhost:8080/api/carhut/getPowertrainTypes');
+            const response = await fetch(Constants.baseAPIPath + 'carhut/getPowertrainTypes');
             const data = await response.json();
             return data;
         }
@@ -241,7 +243,7 @@ const APIMethods = {
     },
     getColors: async () => {
         try {
-            const response = await fetch('http://localhost:8080/api/carhut/getColors');
+            const response = await fetch(Constants.baseAPIPath + 'carhut/getColors');
             const data = await response.json();
             return data;
         }
@@ -252,7 +254,7 @@ const APIMethods = {
     },
     getFeatures: async () => {
         try {
-            const response = await fetch('http://localhost:8080/api/carhut/getFeatures');
+            const response = await fetch(Constants.baseAPIPath + 'carhut/getFeatures');
             const data = await response.json();
             return data;
         }
@@ -263,7 +265,7 @@ const APIMethods = {
     },
     getBrandIdFromBrandName: async (brand) => {
         try {
-            const response = await fetch('http://localhost:8080/api/carhut/getBrandIdFromBrandName?brand=' + brand);
+            const response = await fetch(Constants.baseAPIPath + 'carhut/getBrandIdFromBrandName?brand=' + brand);
             const data = await response.json();
             return data;
         }
@@ -274,7 +276,7 @@ const APIMethods = {
     },
     getModelIdByModelName: async (model, brandId) => {
         try {
-            const response = await fetch('http://localhost:8080/api/carhut/getModelIdFromModelName?model=' + model + '&brandId=' + brandId);
+            const response = await fetch(Constants.baseAPIPath + 'carhut/getModelIdFromModelName?model=' + model + '&brandId=' + brandId);
             const data = await response.json();
             return data;
         }
@@ -285,7 +287,7 @@ const APIMethods = {
     },
     getFeatureIdByFeatureName: async (feature) => {
         try {
-            const response = await fetch('http://localhost:8080/api/carhut/getFeatureIdByFeatureName?feature=' + feature);
+            const response = await fetch(Constants.baseAPIPath + 'carhut/getFeatureIdByFeatureName?feature=' + feature);
             const data = await response.json();
             return data;
         }
@@ -296,7 +298,7 @@ const APIMethods = {
     },
     getImages: async (carId) => {
         try {
-            const response = await fetch('http://localhost:8080/api/carhut/getImages?carId=' + carId);
+            const response = await fetch(Constants.baseAPIPath + 'carhut/getImages?carId=' + carId);
             const data = await response.json();
             return data;
         }
@@ -307,7 +309,7 @@ const APIMethods = {
     },
     getColorStringNameFromColorId: async (colorId) => {
         try {
-            const response = await fetch('http://localhost:8080/api/carhut/getColorStringNameFromColorId?colorId=' + colorId);
+            const response = await fetch(Constants.baseAPIPath + 'carhut/getColorStringNameFromColorId?colorId=' + colorId);
             const data = await response.text();
             return data;
         }
@@ -318,7 +320,7 @@ const APIMethods = {
     },
     getFeatureNameByFeatureId: async (featureId) => {
         try {
-            const response = await fetch('http://localhost:8080/api/carhut/getFeatureNameByFeatureId?featureId=' + featureId);
+            const response = await fetch(Constants.baseAPIPath + 'carhut/getFeatureNameByFeatureId?featureId=' + featureId);
             const data = await response.json();
             return data;
         }
@@ -336,10 +338,23 @@ const APIMethods = {
             body: JSON.stringify(featureIds) 
         }
 
-        const response = await fetch('http://localhost:8080/api/carhut/getMultipleFeaturesByIds', requestOptions);
+        const response = await fetch(Constants.baseAPIPath + 'carhut/getMultipleFeaturesByIds', requestOptions);
         const data = await response.json();
         return data;
     },
+    uploadImage: async (imageData) => {
+        const response = await fetch(Constants.baseAPIPath + 'carhut/uploadImage', {
+            method: 'POST',
+            body: imageData,
+        });
+
+        return response;
+    },
+    addCarToDatabase: async (requestOptions) => {
+        const response =  await fetch(Constants.baseAPIPath + '/carhut/addCarToDatabase', requestOptions);
+        return response;
+    }
+
 }
 
 export default APIMethods;

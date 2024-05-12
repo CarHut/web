@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import '../../css/addcarpage/AddPhotos.css';
 import { useState } from 'react';
+import APIMethods from '../../api/APIMethods';
 
 function AddPhotos() {
 
@@ -24,11 +25,7 @@ function AddPhotos() {
         formData.append('username', localStorage.getItem('username'));
 
         try {
-            const response = await fetch('http://localhost:8080/api/carhut/uploadImage', {
-              method: 'POST',
-              body: formData,
-            });
-
+            const response = await APIMethods.uploadImage(formData);
             const newUploadedImages = [...uploadedImages, loadedImage];
             setUploadedImages(newUploadedImages);
         } catch (error) {

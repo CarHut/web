@@ -66,7 +66,7 @@ function Summary() {
             })
         };
 
-        const response = await fetch('http://localhost:8080/api/carhut/addCarToDatabase', requestOptions);
+        const response = await APIMethods.addCarToDatabase(requestOptions);
         
         if (response.status === 200) {
             nav('/addCar/success');

@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import APIMethods from '../../api/APIMethods';
 import LoadingCircle from '../maincomponents/LoadingCircle';
+import Constants from '../../constants/Constants.js'
 
 function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength, setLoadingResultsListLength, loadingResultsListLength}) {
 
@@ -17,7 +18,7 @@ function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength, setL
     const fetchCars = async () => {
         const sortOrder = sortBy[sortBy.length - 1] == 'L' ? "ASC" : "DESC";
 
-        const url = `http://localhost:8080/api/carhut/getCarsWithFilters?` +
+        const url = Constants.baseAPIPath + `carhut/getCarsWithFilters?` +
             `&priceFrom=${fetchedState.price.priceFrom}&priceTo=${fetchedState.price.priceTo}&mileageFrom=${fetchedState.mileage.mileageFrom}` +
             `&mileageTo=${fetchedState.mileage.mileageTo}&fuelType=${fetchedState.fuelType}&gearbox=${fetchedState.gearbox}&powertrain=${fetchedState.powertrain}` +
             `&powerFrom=${fetchedState.power.powerFrom}&powerTo=${fetchedState.power.powerTo}&sortBy=${sortBy}&sortOrder=${sortOrder}`;

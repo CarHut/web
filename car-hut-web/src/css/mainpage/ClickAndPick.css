@@ -1,7 +1,7 @@
 .section-body-click-and-pick {
     background-color: #181818;
-    margin: 2em 20em;
-    padding: 1em 3em;
+    margin: 2vw 20vw;
+    padding: 1vw 3vw;
     display: block;
     justify-content: space-between;
     align-items: center;
@@ -9,7 +9,7 @@
 
 .section-header-text-click-and-pick {
     color: #ffffff;
-    font-size: 2em;
+    font-size: 2vw;
 }
 
 .row-click-and-pick {
@@ -17,31 +17,47 @@
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+    width: 85%;
 }
 
 .cell-click-and-pick {
   flex-basis: calc(18%); 
-  margin: 10px;
+  margin: 1vw;
   text-align: center;
 }
 
 .img-click-and-pick {
-  max-width: 100%;
+  width: 8vw;
   height: auto;
   display: block;
   margin: 0 auto;
 }
 
-.p-click-and-pick {
-  margin: 10px 0 0;
-}
-
 .more-brands-text {
     color: #898989;
-    font-size: 1em;
+    font-size: 1vw;
+    width: 15%;
 }
 
 .content-click-and-pick {
     display: flex;
-    margin: 1.5em;
+    margin: 1.5vw;
+}
+
+@media screen and (max-width: 1350px) {
+  .section-body-click-and-pick {
+      margin: 2vw 0;
+  }
+
+  .more-brands-text {
+    font-size: 2vw;
+  }
+
+}
+
+@media screen and (max-width: 600px) {
+  .section-header-text-click-and-pick {
+      font-size: 4vw;
+  }
+
 }
