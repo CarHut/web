@@ -15,7 +15,6 @@
 .row-click-and-pick {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
     align-items: center;
     width: 85%;
 }
@@ -57,7 +56,8 @@
 
 @media screen and (max-width: 600px) {
   .section-header-text-click-and-pick {
-      font-size: 4vw;
+    margin-top: 2vw;  
+    font-size: 5vw;
   }
 
 }

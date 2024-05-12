@@ -17,6 +17,7 @@ header {
 .carhut-img {
     width: 5vw;
     height: auto;
+    margin-right: 1vw;
 }
 
 h1 {
@@ -48,11 +49,11 @@ h1 {
 
 .logged-user-dropdown-menu-wrapper {
     background-color: #313131;
-    z-index: 10; /* Lower than logged-user-content */
-    position: absolute; /* Added */
-    top: 100%; /* Positioning it below logged-user-content */
-    left: 0; /* Aligning it with the left edge of logged-user-content */
-    display: none; /* Initially hidden */
+    z-index: 10; 
+    position: absolute; 
+    top: 100%; 
+    left: 0;
+    display: none;
 }
 
 .logged-user-entity:hover .logged-user-dropdown-menu-wrapper {
@@ -63,7 +64,7 @@ h1 {
 .logged-user-content {
     display: flex;
     align-items: center;
-    z-index: 11; /* Higher than dropdown menu */
+    z-index: 11;
 }
 
 .dropdown-menu-text {
@@ -72,4 +73,32 @@ h1 {
     margin: 1vw;
     cursor: pointer;
     text-decoration: none;
+}
+
+@media screen and (max-width: 600px) {
+    header {
+        height: 13vw;
+    }
+    
+    .carhut-img {
+        width: 10vw;
+        height: auto;
+    }
+    
+    h1 {
+        color: #ffffff;
+        font-size: 6vw;
+    }
+    
+    .header-text-content {
+        font-size: 4vw;
+    }
+    
+    .login-img {
+        height: 4vw;
+    }
+    
+    .dropdown-menu-text {
+        font-size: 3vw;
+    }
 }

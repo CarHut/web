@@ -47,8 +47,8 @@ function MoreFiltersPage() {
     return (
         <div className="body">
             <Header/>
-            <div className="current-route-text">Main page -> Detailed search</div>
-            <div className="header-section">
+            {/* <div className="current-route-text">Main page -> Detailed search</div> */}
+            <div className="header-section-more-filters">
                 <div className="more-filters-page-header">Detailed search - find exactly what you want!</div>
                 <Link
                     to={`/searchList`}
@@ -70,8 +70,8 @@ function MoreFiltersPage() {
                         powertrain: powertrain,
                         models: [ { brand: brand, model: model} ]
                     }}
-                >
-                    <button className="styled-search-button">{searchedCarsNumber !== null && !loadingSearchedCarsNumber ? (searchedCarsNumber + ' cars') : ('Loading cars')}</button>
+                > 
+                    <button className="styled-search-button-more-filters">{searchedCarsNumber !== null && !loadingSearchedCarsNumber ? (searchedCarsNumber + ' cars') : ('Loading cars')}</button>
                 </Link>
             </div>
             <BasicData brand={brand} setBrand={setBrand} model={model} setModel={setModel} carType={carType} setCarType={setCarType} price={price} setPrice={setPrice} 

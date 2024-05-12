@@ -151,7 +151,7 @@ function FilterSearch() {
 
     return (
         <div className='section-body'>
-            <img src={require('../../images/mainpage/find_car.png')}/>
+            <img className='img-basic-data' src={require('../../images/mainpage/find_car.png')}/>
             <div className='right-wrapper'>
                 <div className='comboboxes'>
                     <div className='combobox-entity-filter-search'>

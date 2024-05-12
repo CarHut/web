@@ -1,26 +1,33 @@
 .section-body-engine-and-powertrain {
     background-color: #181818;
-    margin: 2em 20em;
-    padding: 1em 3em;
+    margin: 2vw 20vw;
+    padding: 1vw 3vw;
     display: block;
-    /* justify-content: space-between;
-    align-items: center;  */
 }
 
 .section-header-engine-and-powertrain {
     color: #ffffff;
-    font-size: 2em;
+    font-size: 2vw;
+}
+
+.line-container-engine-and-powertrain {
+    position: relative;
+    width: 100%; 
+    height: 2px;
+    background-color: #898989;
+    margin-bottom: 0.3vw;
+    margin: 2vw 0;
 }
 
 .label-engine-and-powertrain {
     color: #fff;
-    font-size: 1.5em;
-    padding-bottom: 0.4em;
+    font-size: 1.5vw;
+    padding-bottom: 0.4vw;
 }
 
 .fuel-type-wrapper {
     display: block;
-    margin-bottom: 3em;
+    margin-bottom: 3vw;
 }
 
 .fuel-type-content {
@@ -29,7 +36,7 @@
 
 .fuel-type-entity {
     display: flex;
-    padding-right: 4em;
+    padding-right: 4vw;
 }
 
 .custom-checkbox-engine-and-power {
@@ -37,41 +44,36 @@
     cursor: pointer;
     display: inline-block;
     line-height: 1.5;
-    margin-left: 1em;
+    margin-left: 1vw;
   }
   
-  /* Hide the default checkbox input */
   .custom-checkbox-engine-and-power input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
   }
   
-  /* Style for the custom checkmark */
   .checkmark-engine-and-power {
     position: absolute;
     top: 0;
     left: 0;
-    height: 1.0em;
-    width: 1.0em;
-    background-color: #313131; /* Background color of the checkmark */
-    border: 1px solid #D9D9D9; /* Border color of the checkmark */
+    height: 1vw;
+    width: 1vw;
+    background-color: #313131;
+    border: 1px solid #D9D9D9;
   }
   
-  /* Style for the checkmark when the checkbox is checked */
   .custom-checkbox-engine-and-power input:checked + .checkmark-engine-and-power {
-    background-color: #2196F3; /* Change the background color when checked */
-    border-color: #2196F3; /* Change the border color when checked */
+    background-color: #2196F3;
+    border-color: #2196F3;
   }
   
-  /* Style for the checkmark's appearance (in this case, a simple square) */
   .checkmark-engine-and-power::before {
     content: '';
     position: absolute;
     display: none;
   }
   
-  /* Show the checkmark when the checkbox is checked */
   .custom-checkbox-engine-and-power input:checked + .checkmark-engine-and-power::before {
     display: block;
   }
@@ -81,30 +83,28 @@
     justify-content: space-between;
 }
 
-.custom-combobox {
+.custom-combobox-engine-and-powertrain {
     position: relative;
-    width: 13em; 
-    height: 2em;
+    width: 13vw; 
+    height: 2vw;
 }
 
-.combobox-entity {
+.combobox-entity-engine-and-powertrain {
   display: block;
-  padding-right: 1em;
-  padding-bottom: 1em;
+  padding-right: 1vw;
+  padding-bottom: 1vw;
 }
-  
-  /* Style the custom combobox arrow */
-.custom-combobox::after {
-  content: '\25BC'; /* Unicode arrow down character */
-  color: #D9D9D9; /* Adjust the color as needed */
+
+.custom-combobox-engine-and-powertrain::after {
+  content: '\25BC';
+  color: #D9D9D9; 
   position: absolute;
   top: 50%;
   right: 10px;
   transform: translateY(-50%);
 }
 
-/* Style the custom combobox options */
-.myComboBox {
+.my-combobox-engine-and-powertrain {
   width: 100%;
   border: 1px solid #D9D9D9;
   border-radius: 5px;
@@ -112,19 +112,17 @@
   color: #D9D9D9;
   background-color: #313131;
   height: 100%;
-  padding-left: 1em;
+  padding-left: 1vw;
 }
 
-/* Optional: Style the dropdown options */
-.myComboBox option {
+.my-combobox-engine-and-powertrain option {
   background-color: #fff;
   color: #000;
 }
 
-.myComboBox.disabled {
-    box-shadow: none; /* Reset shadow when disabled */
-    opacity: 0.7; /* Adjust opacity to indicate disabled state */
-    /* Add any additional styles to visually indicate disabled state */
+.my-combobox-engine-and-powertrain.disabled {
+    box-shadow: none; 
+    opacity: 0.7;
 }
 
 .power-wrapper {
@@ -141,17 +139,52 @@
 
 .gearbox-entity {
     display: flex;
-    padding-right: 4em;
+    padding-right: 4vw;
 }
 
-.checkbox-label {
-  font-size: 1em;
+.label-engine-and-powertrain {
   color: #fff;
+  font-size: 1em;
+  margin-bottom: 0.5vw;
+  margin-right: 2vw;
 }
 
-.checkmarklabel-engine-and-powertrain {
-  color: #fff;
-  font-size: 1em;
-  margin-bottom: 0.5em;
-  margin-right: 2em;
+@media screen and (max-width: 1350px) {
+  .section-body-engine-and-powertrain {
+      margin: 2vw 0vw;
+  }
+
+  .custom-combobox-engine-and-powertrain {
+      width: 25vw; 
+      height: 5vw;
+  }
+
+  .combobox-entity-engine-and-powertrain {
+    margin-top: 2vw;
+    margin-right: 5vw;
+  }
+
+  .my-combobox-engine-and-powertrain {
+    font-size: 1.8vw;
+  }
+
+  .label-engine-and-powertrain {
+    font-size: 4vw;
+    color: #fff;
+    margin-bottom: 1vw;
+    margin-top: 3vw;
+  }
+
+  .line-wrapper-engine-and-powertrain {
+    display: block;
+  }
+
+  .section-header-engine-and-powertrain {
+    margin-top: 5vw;
+    font-size: 5vw;
+  }
+
+  .section-body-engine-and-powertrain {
+    padding-bottom: 10vw;  
+  }
 }

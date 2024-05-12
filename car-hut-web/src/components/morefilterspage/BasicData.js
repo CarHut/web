@@ -65,27 +65,27 @@ function BasicData({brand, setBrand, model, setModel, carType, setCarType,
     }
 
     const handleSelectedPrice = (e) => {
-        if (e.target.className == 'myComboBox price-from') {
+        if (e.target.className == 'basic-data-styled-combobox price-from') {
             setPrice({ ...price, priceFrom: e.target.value });
-        } else if (e.target.className == 'myComboBox price-to') {
+        } else if (e.target.className == 'basic-data-styled-combobox price-to') {
             setPrice({ ...price, priceTo: e.target.value });
         }
         setLoadingSearchedCarsNumber(true);
     }
 
     const handleSelectedMileage = (e) => {
-        if (e.target.className == 'myComboBox mileage-from') {
+        if (e.target.className == 'basic-data-styled-combobox mileage-from') {
             setMileage({ ...mileage, mileageFrom: e.target.value });
-        } else if (e.target.className == 'myComboBox mileage-to') {
+        } else if (e.target.className == 'basic-data-styled-combobox mileage-to') {
             setMileage({ ...mileage, mileageTo: e.target.value });
         }
         setLoadingSearchedCarsNumber(true);
     }
 
     const handleSelectedRegistration = (e) => {
-        if (e.target.className == 'myComboBox registration-from') {
+        if (e.target.className == 'basic-data-styled-combobox registration-from') {
             setRegistration({ ...registration, registrationFrom: e.target.value });
-        } else if (e.target.className == 'myComboBox registration-to') {
+        } else if (e.target.className == 'basic-data-styled-combobox registration-to') {
             setRegistration({ ...registration, registrationTo: e.target.value });
         }
         setLoadingSearchedCarsNumber(true);
@@ -119,86 +119,86 @@ function BasicData({brand, setBrand, model, setModel, carType, setCarType,
 
     const renderCarTypes = () => {
         return (
-            <div className='car-type-wrapper'>
-                <div className='car-type-entity'>
-                    <div className='car-type-left-wrapper'>
+            <div className='car-type-wrapper-basic-data'>
+                <div className='car-type-entity-basic-data'>
+                    <div className='car-type-left-wrapper-basic-data'>
                         <img className='car-type-img' src={require('../../images/morefilterspage/sedan.png')}/>
-                        <div className='car-type-bottom-label'>Sedan</div>
+                        <div className='car-type-bottom-label-basic-data'>Sedan</div>
                     </div>
-                    <label className='custom-checkbox'>
+                    <div className='custom-checkbox-basic-data'>
                         <input type="checkbox"/>
-                        <span className="checkmark" onClick={handleSelectedCarType("Sedan")}></span>
-                    </label>
+                        <span className="checkmark-basic-data" onClick={handleSelectedCarType("Sedan")}></span>
+                    </div>
                 </div>
-                <div className='car-type-entity'>
-                    <div className='car-type-left-wrapper'>
+                <div className='car-type-entity-basic-data'>
+                    <div className='car-type-left-wrapper-basic-data'>
                         <img className='car-type-img' src={require('../../images/morefilterspage/hatchback.png')}/>
-                        <div className='car-type-bottom-label'>Hatchback</div>
+                        <div className='car-type-bottom-label-basic-data'>Hatchback</div>
                     </div>
-                    <label className='custom-checkbox'>
+                    <div className='custom-checkbox-basic-data'>
                         <input type="checkbox"/>
-                        <span className="checkmark" onClick={handleSelectedCarType("Hatchback")}></span>
-                    </label>
+                        <span className="checkmark-basic-data" onClick={handleSelectedCarType("Hatchback")}></span>
+                    </div>
                 </div>
-                <div className='car-type-entity'>
-                    <div className='car-type-left-wrapper'>
+                <div className='car-type-entity-basic-data'>
+                    <div className='car-type-left-wrapper-basic-data'>
                         <img className='car-type-img' src={require('../../images/morefilterspage/combi.png')}/>
-                        <div className='car-type-bottom-label'>Combi</div>
+                        <div className='car-type-bottom-label-basic-data'>Combi</div>
                     </div>
-                    <label className='custom-checkbox'>
+                    <div className='custom-checkbox-basic-data'>
                         <input type="checkbox"/>
-                        <span className="checkmark" onClick={handleSelectedCarType("Combi")}></span>
-                    </label>
+                        <span className="checkmark-basic-data" onClick={handleSelectedCarType("Combi")}></span>
+                    </div>
                 </div>
-                <div className='car-type-entity'>
-                    <div className='car-type-left-wrapper'>
+                <div className='car-type-entity-basic-data'>
+                    <div className='car-type-left-wrapper-basic-data'>
                         <img className='car-type-img' src={require('../../images/morefilterspage/suv.png')}/>
-                        <div className='car-type-bottom-label'>SUV</div>
+                        <div className='car-type-bottom-label-basic-data'>SUV</div>
                     </div>
-                    <label className='custom-checkbox'>
+                    <div className='custom-checkbox-basic-data'>
                         <input type="checkbox"/>
-                        <span className="checkmark" onClick={handleSelectedCarType("SUV")}></span>
-                    </label>
+                        <span className="checkmark-basic-data" onClick={handleSelectedCarType("SUV")}></span>
+                    </div>
                 </div>
-                <div className='car-type-entity'>
-                    <div className='car-type-left-wrapper'>
+                <div className='car-type-entity-basic-data'>
+                    <div className='car-type-left-wrapper-basic-data'>
                         <img className='car-type-img' src={require('../../images/morefilterspage/coupe.png')}/>
-                        <div className='car-type-bottom-label'>Coupé</div>
+                        <div className='car-type-bottom-label-basic-data'>Coupé</div>
                     </div>
-                    <label className='custom-checkbox'>
+                    <div className='custom-checkbox-basic-data'>
                         <input type="checkbox"/>
-                        <span className="checkmark" onClick={handleSelectedCarType("Coupé")}></span>
-                    </label>
+                        <span className="checkmark-basic-data" onClick={handleSelectedCarType("Coupé")}></span>
+                    </div>
                 </div>
-                <div className='car-type-entity'>
-                    <div className='car-type-left-wrapper'>
+                <div className='car-type-entity-basic-data'>
+                    <div className='car-type-left-wrapper-basic-data'>
                         <img className='car-type-img' src={require('../../images/morefilterspage/cabriolet.png')}/>
-                        <div className='car-type-bottom-label'>Cabriolet</div>
+                        <div className='car-type-bottom-label-basic-data'>Cabriolet</div>
                     </div>
-                    <label className='custom-checkbox'>
+                    <div className='custom-checkbox-basic-data'>
                         <input type="checkbox"/>
-                        <span className="checkmark" onClick={handleSelectedCarType("Cabriolet")}></span>
-                    </label>
+                        <span className="checkmark-basic-data" onClick={handleSelectedCarType("Cabriolet")}></span>
+                    </div>
                 </div>
-                <div className='car-type-entity'>
-                    <div className='car-type-left-wrapper'>
+                <div className='car-type-entity-basic-data'>
+                    <div className='car-type-left-wrapper-basic-data'>
                         <img className='car-type-img' src={require('../../images/morefilterspage/minivan.png')}/>
-                        <div className='car-type-bottom-label'>Minivan</div>
+                        <div className='car-type-bottom-label-basic-data'>Minivan</div>
                     </div>
-                    <label className='custom-checkbox'>
+                    <div className='custom-checkbox-basic-data'>
                         <input type="checkbox"/>
-                        <span className="checkmark" onClick={handleSelectedCarType("Minivan")}></span>
-                    </label>
+                        <span className="checkmark-basic-data" onClick={handleSelectedCarType("Minivan")}></span>
+                    </div>
                 </div>
-                <div className='car-type-entity'>
-                    <div className='car-type-left-wrapper'>
+                <div className='car-type-entity-basic-data'>
+                    <div className='car-type-left-wrapper-basic-data'>
                         <img className='car-type-img' src={require('../../images/morefilterspage/other.png')}/>
-                        <div className='car-type-bottom-label'>Other</div>
+                        <div className='car-type-bottom-label-basic-data'>Other</div>
                     </div>
-                    <label className='custom-checkbox'>
+                    <div className='custom-checkbox-basic-data'>
                         <input type="checkbox"/>
-                        <span className="checkmark" onClick={handleSelectedCarType("Other")}></span>
-                    </label>
+                        <span className="checkmark-basic-data" onClick={handleSelectedCarType("Other")}></span>
+                    </div>
                 </div>
             </div>
         )
@@ -206,7 +206,7 @@ function BasicData({brand, setBrand, model, setModel, carType, setCarType,
 
     const renderPrice = (className) => {
         return (
-            <div className="custom-combobox">
+            <div className="basic-data-combobox">
                 <select className={className} onChange={(e) => handleSelectedPrice(e)}>
                     <option value="">From (€)</option>
                     <option key={1000} value={'1000'}>1 000€</option>
@@ -238,7 +238,7 @@ function BasicData({brand, setBrand, model, setModel, carType, setCarType,
 
     const renderMileage = (className) => {
         return (
-            <div className="custom-combobox">
+            <div className="basic-data-combobox">
                 <select className={className} onChange={(e) => handleSelectedMileage(e)}>
                     <option value="" >From (km)</option>
                     <option key={1000} value={'1000'}>1 000 km</option>
@@ -255,7 +255,7 @@ function BasicData({brand, setBrand, model, setModel, carType, setCarType,
 
     const renderRegistration = (className) => {
         return (
-            <div className="custom-combobox">
+            <div className="basic-data-combobox">
                 <select className={className} onChange={(e) => handleSelectedRegistration(e)}>
                     <option value=""  >From</option>
                     <option key={2024} value={'2024'}>2024</option>
@@ -301,8 +301,8 @@ function BasicData({brand, setBrand, model, setModel, carType, setCarType,
 
     const renderSeatingConfig = () => {
         return (
-            <div className="custom-combobox">
-                <select className='myComboBox' onChange={(e) => handleSelectedSeatingConfig(e)}>
+            <div className="basic-data-combobox">
+                <select className='basic-data-styled-combobox' onChange={(e) => handleSelectedSeatingConfig(e)}>
                     <option value="">No. of seast</option>
                     <option key={2} value="seats2">2</option>
                     <option key={3} value="seats3">3</option>
@@ -318,8 +318,8 @@ function BasicData({brand, setBrand, model, setModel, carType, setCarType,
 
     const renderDoors = () => {
         return (
-            <div className="custom-combobox">
-                <select className='myComboBox' onChange={(e) => handleSelectedDoors(e)}>
+            <div className="basic-data-combobox">
+                <select className='basic-data-styled-combobox' onChange={(e) => handleSelectedDoors(e)}>
                     <option value="" >No. of doors</option>
                     <option key={23} value="doors23">2/3</option>
                     <option key={45} value="doors45">4/5</option>
@@ -333,103 +333,103 @@ function BasicData({brand, setBrand, model, setModel, carType, setCarType,
     return (
         <div className='section-body-basic-data'>
             <div className='section-header-basic-data'>Basic data</div>
-            <div className='line-container'/>
-            <div className='upper-section-wrapper'>
-                <div className='upper-section-left'>
-                    <div className='combobox-entity'>
-                        <div className='label'>Brand</div>
-                        <div className="custom-combobox">
-                            <select id="brandComboBox" className='myComboBox' value={selectedBrand} onChange={(e) => handleSelectedBrand(e)}>
+            <div className='line-container-basic-data'/>
+            <div className='upper-section-wrapper-basic-data'>
+                <div className='upper-section-left-basic-data'>
+                    <div className='basic-data-combobox-entity'>
+                        <div className='label-basic-data'>Brand</div>
+                        <div className="basic-data-combobox">
+                            <select id="brandComboBox" className='basic-data-styled-combobox' value={selectedBrand} onChange={(e) => handleSelectedBrand(e)}>
                                 <option value="all" disabled>Select Brand</option>
                                 {renderBrands()}
                             </select>
                         </div>
                     </div>
-                    <div className='combobox-entity'>
-                        <div className='label'>Model</div>
-                        <div className="custom-combobox">
-                            <select id="modelComboBox" className={`myComboBox ${!selectedBrand ? 'disabled' : ''}`} value={selectedModel} onChange={(e) => handleSelectedModel(e)} disabled={!selectedBrand}>
+                    <div className='basic-data-combobox-entity'>
+                        <div className='label-basic-data'>Model</div>
+                        <div className="basic-data-combobox">
+                            <select id="modelComboBox" className={`basic-data-styled-combobox ${!selectedBrand ? 'disabled' : ''}`} value={selectedModel} onChange={(e) => handleSelectedModel(e)} disabled={!selectedBrand}>
                                 <option value="all" disabled={!selectedBrand}>Select Model</option>
                                 {renderModels()}
                             </select>
                         </div>
                     </div>
                 </div>
-                <div className='upper-section-right'>   
-                    <div className='label'>Car type</div>
+                <div className='upper-section-right-basic-data'>   
+                    <div className='label-basic-data'>Car type</div>
                     {renderCarTypes()}
                 </div>
             </div>
-            <div className='line-container'/>
-            <div className='lower-section-wrapper'>
-                <div className='lower-section-left'>
-                    <div className='lower-combobox-wrapper'>   
-                        <div className='lower-combobox-content'>
-                            <div className='combobox-entity'>
-                            <div className='label'>Price</div>
-                                {renderPrice('myComboBox price-from')}
+            <div className='line-container-basic-data'/>
+            <div className='lower-section-wrapper-basic-data'>
+                <div className='lower-section-left-basic-data'>
+                    <div className='lower-combobox-wrapper-basic-data'>   
+                        <div className='lower-combobox-content-basic-data'>
+                            <div className='basic-data-combobox-entity'>
+                            <div className='label-basic-data'>Price</div>
+                                {renderPrice('basic-data-styled-combobox price-from')}
                             </div>
-                            <div className='combobox-entity'>   
-                                <div className='label'>{'\0'}</div>
-                                {renderPrice('myComboBox price-to')}
-                            </div>
-                        </div>
-                    </div>
-                    <div className='lower-combobox-wrapper'>   
-                        <div className='lower-combobox-content'>
-                            <div className='combobox-entity'>
-                                <div className='label'>Mileage</div>
-                                {renderMileage('myComboBox mileage-from')}
-                            </div>
-                            <div className='combobox-entity'>
-                                <div className='label'>{'\0'}</div>
-                                {renderMileage('myComboBox mileage-to')}
+                            <div className='basic-data-combobox-entity'>   
+                                <div className='label-basic-data'>{'\0'}</div>
+                                {renderPrice('basic-data-styled-combobox price-to')}
                             </div>
                         </div>
                     </div>
-                    <div className='lower-combobox-wrapper'>   
-                        <div className='lower-combobox-content'>
-                            <div className='combobox-entity'>
-                                <div className='label'>Registration</div>
-                                {renderRegistration('myComboBox registration-from')}
+                    <div className='lower-combobox-wrapper-basic-data'>   
+                        <div className='lower-combobox-content-basic-data'>
+                            <div className='basic-data-combobox-entity'>
+                                <div className='label-basic-data'>Mileage</div>
+                                {renderMileage('basic-data-styled-combobox mileage-from')}
                             </div>
-                            <div className='combobox-entity'>
-                                <div className='label'>{'\0'}</div>
-                                {renderRegistration('myComboBox registration-to')}
+                            <div className='basic-data-combobox-entity'>
+                                <div className='label-basic-data'>{'\0'}</div>
+                                {renderMileage('basic-data-styled-combobox mileage-to')}
+                            </div>
+                        </div>
+                    </div>
+                    <div className='lower-combobox-wrapper-basic-data'>   
+                        <div className='lower-combobox-content-basic-data'>
+                            <div className='basic-data-combobox-entity'>
+                                <div className='label-basic-data'>Registration</div>
+                                {renderRegistration('basic-data-styled-combobox registration-from')}
+                            </div>
+                            <div className='basic-data-combobox-entity'>
+                                <div className='label-basic-data'>{'\0'}</div>
+                                {renderRegistration('basic-data-styled-combobox registration-to')}
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className='lower-section-right'>
-                    <div className='lower-combobox-wrapper'>
-                        <div className='lower-combobox-content'>
-                            <div className='combobox-entity'>
-                                <div className='label'>Seating configuration</div>
+                <div className='lower-section-right-basic-data'>
+                    <div className='lower-combobox-wrapper-basic-data'>
+                        <div className='lower-combobox-content-basic-data'>
+                            <div className='basic-data-combobox-entity'>
+                                <div className='label-basic-data'>Seating configuration</div>
                                 {renderSeatingConfig()}
                             </div>
                         </div>
                     </div>
-                    <div className='lower-combobox-wrapper'>
-                        <div className='lower-combobox-content'>
-                            <div className='combobox-entity'>
-                                <div className='label'>Doors</div>
+                    <div className='lower-combobox-wrapper-basic-data'>
+                        <div className='lower-combobox-content-basic-data'>
+                            <div className='basic-data-combobox-entity'>
+                                <div className='label-basic-data'>Doors</div>
                                 {renderDoors()}
                             </div>
                         </div>
                     </div>
-                    <div className='lower-combobox-wrapper'>
-                        <div className='lower-combobox-content'>
-                            <div className='combobox-entity'>
-                                <div className='label'>Location</div>
-                                <div className="custom-combobox">
-                                    <select className='myComboBox'>
+                    <div className='lower-combobox-wrapper-basic-data'>
+                        <div className='lower-combobox-content-basic-data'>
+                            <div className='basic-data-combobox-entity'>
+                                <div className='label-basic-data'>Location</div>
+                                <div className="basic-data-combobox">
+                                    <select className='basic-data-styled-combobox'>
                                         <option value="" disabled ></option>
                                     </select>
                                 </div>
                             </div>
-                            <div className="custom-input-container">
-                                <div className='label'>{'\0'}</div>
-                                <input type="text" id="customInput" className="custom-input" placeholder="Postal code"/>
+                            <div className="custom-input-container-basic-data">
+                                <div className='label-basic-data'>{'\0'}</div>
+                                <input type="text" id="customInput" className="custom-input-basic-data" placeholder="Postal code"/>
                             </div>
                         </div>      
                     </div>

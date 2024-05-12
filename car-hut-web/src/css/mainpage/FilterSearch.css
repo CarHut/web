@@ -137,7 +137,7 @@ select {
 @media screen and (max-width: 600px) {
 
   .section-body {
-      margin: 2vw 0;
+      margin: 4vw 0;
   }
     
   .comboboxes {
@@ -146,7 +146,7 @@ select {
   }
 
   .custom-combobox-filter-search-main-page {
-      width: 35vw; 
+      width: 25vw; 
       height: 5vw;
   }
 
@@ -157,22 +157,27 @@ select {
   
   .comboboxes {
     display: flex;
-    justify-content: space-between;
   }
 
   .label-search-list-main-page {
     color: #fff;
-    font-size: 2vw;
-    padding-bottom: 0.4vw;
+    font-size: 3vw;
+    margin-bottom: 0.6vw;
   }
 
   .styled-button-filter-search-main-page {
-    padding: 1vw 2vw;
-    font-size: 3vw;
+    padding: 2vw 3vw;
+    margin-top: 3vw;
+    font-size: 4vw;
   }
 
   .more-filters-text-search-list-main-page {
     font-size: 2vw;
+  }
+
+  .img-basic-data {
+    height: 20vw;
+    margin-right: 8vw;
   }
 
 }

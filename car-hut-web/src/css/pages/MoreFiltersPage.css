@@ -1,45 +1,66 @@
 .body {
     background-color: #313131;
+    width: 100%;
 }
 
 .more-filters-page-header {
     color: #ffffff;
-    font-size: 2em;
-    padding-top: 2em;
+    font-size: 2vw;
+    padding-top: 2vw;
 }
 
 .current-route-text {
     color: #ffffff;
-    font-size: 0.8em;
-    margin-left: 26em;
-    padding-top: 1em;
+    font-size: 0.8vw;
+    margin-left: 26vw;
+    padding-top: 1vw;
 }
 
-.search-button {
-    display: inline-block;
-    text-decoration: none;
-    position: relative;
-    margin-left: 90%;
-}
-
-.styled-search-button {
+.styled-search-button-more-filters {
     background-color: #181818;
     color: #ffffff;
-    padding: 1em 2em;
-    font-size: 16px;
+    padding: 1vw 2vw;
+    font-size: 1vw;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-.styled-search-button:hover {
+.styled-search-button-more-filters:hover {
     background-color: #D9D9D9;
     color: #000;
 }
 
-.header-section {
-    margin: 2em 20em;
+.header-section-more-filters {
+    margin: 2vw 20vw;
     display: flex;
     justify-content: space-between; 
+    align-items: center;
+}
+
+@media screen and (max-width: 1350px) {
+     
+    .header-section-more-filters {
+        margin: 2vw 2vw;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .header-section-more-filters {
+        margin: 2vw 2vw;
+        flex-wrap: wrap;
+    }
+    
+    .more-filters-page-header {
+        color: #ffffff;
+        font-size: 3.5vw;
+        margin-top: 3vw;
+        margin-bottom: 3vw;
+    }
+
+    .styled-search-button-more-filters {
+        padding: 3vw 4vw;
+        font-size: 2.5vw;
+    }
 }

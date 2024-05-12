@@ -9,18 +9,18 @@ function EngineAndPowertrain({fuelType, setFuelType, power, setPower, displaceme
     }
 
     const handleSelectedPower = (e) => {
-        if (e.target.className == 'myComboBox power-from') {
+        if (e.target.className == 'my-combobox-engine-and-powertrain power-from') {
             setPower({ ...power, powerFrom: e.target.value });
-        } else if (e.target.className == 'myComboBox power-to') {
+        } else if (e.target.className == 'my-combobox-engine-and-powertrain power-to') {
             setPower({ ...power, powerTo: e.target.value });
         }
         setLoadingSearchedCarsNumber(true);
     }
 
     const handleSelectedDisplacement = (e) => {
-        if (e.target.className == 'myComboBox displacement-from') {
+        if (e.target.className == 'my-combobox-engine-and-powertrain displacement-from') {
             setDisplacement({ ...displacement, displacementFrom: e.target.value });
-        } else if (e.target.className == 'myComboBox displacement-to') {
+        } else if (e.target.className == 'my-combobox-engine-and-powertrain displacement-to') {
             setDisplacement({ ...displacement, displacementTo: e.target.value });
         }
         setLoadingSearchedCarsNumber(true);
@@ -38,8 +38,8 @@ function EngineAndPowertrain({fuelType, setFuelType, power, setPower, displaceme
 
     const renderFuelTypes = () => {
         return (
-            <div className="custom-combobox">
-                <select className='myComboBox' onChange={(e) => handleSelectedFuelType(e.target.value)}>
+            <div className="custom-combobox-engine-and-powertrain">
+                <select className='my-combobox-engine-and-powertrain' onChange={(e) => handleSelectedFuelType(e.target.value)}>
                     <option key={1} value="">All</option>
                     <option key={2} value={'Petrol'}>Petrol</option>
                     <option key={3} value={'Diesel'}>Diesel</option>
@@ -55,7 +55,7 @@ function EngineAndPowertrain({fuelType, setFuelType, power, setPower, displaceme
 
     const renderEnginePower = (className) => {
         return (
-            <div className="custom-combobox">
+            <div className="custom-combobox-engine-and-powertrain">
                 <select className={className} onChange={(e) => handleSelectedPower(e)}>
                     <option value="">From (kw)</option>
                     <option key={25} value={'25'}>25 kw</option>
@@ -74,8 +74,8 @@ function EngineAndPowertrain({fuelType, setFuelType, power, setPower, displaceme
 
     const renderGearboxTypes = () => {
         return (
-            <div className="custom-combobox">
-                <select className='myComboBox' onChange={(e) => handleSelectedGearbox(e.target.value)}>
+            <div className="custom-combobox-engine-and-powertrain">
+                <select className='my-combobox-engine-and-powertrain' onChange={(e) => handleSelectedGearbox(e.target.value)}>
                     <option key={1} value="">All</option>
                     <option key={2} value="Manual">Manual</option>
                     <option key={3} value="Automatic">Automatic</option>
@@ -88,7 +88,7 @@ function EngineAndPowertrain({fuelType, setFuelType, power, setPower, displaceme
 
     const renderDisplacement = (className) => {
         return (
-            <div className="custom-combobox">
+            <div className="custom-combobox-engine-and-powertrain">
                 <select className={className} onChange={(e) => handleSelectedDisplacement(e)}>
                     <option value="">From (cm³)</option>
                     <option key={1000} value={'1000'}>1000 cm³</option>
@@ -108,8 +108,8 @@ function EngineAndPowertrain({fuelType, setFuelType, power, setPower, displaceme
 
     const renderPowertrain = () => {
         return (
-            <div className="custom-combobox">
-                <select className='myComboBox' onChange={(e) => handleSelectedPowertrain(e.target.value)}>
+            <div className="custom-combobox-engine-and-powertrain">
+                <select className='my-combobox-engine-and-powertrain' onChange={(e) => handleSelectedPowertrain(e.target.value)}>
                     <option key={1} value="">All</option>
                     <option key={2} value="NotStated">Not stated</option>
                     <option key={3} value="Other">Other</option>
@@ -124,45 +124,45 @@ function EngineAndPowertrain({fuelType, setFuelType, power, setPower, displaceme
     return (
         <div className="section-body-engine-and-powertrain">
             <div className='section-header-engine-and-powertrain'>Engine and powertrain</div>
-            <div className='line-container'/>
+            <div className='line-container-engine-and-powertrain'/>
             <div className='fuel-type-wrapper'>
-                <div className='combobox-entity'>
-                        <div className='checkmarklabel-engine-and-powertrain'>Fuel type</div>
-                        {renderFuelTypes()}
+                <div className='combobox-entity-engine-and-powertrain'>
+                    <div className='label-engine-and-powertrain'>Fuel type</div>
+                    {renderFuelTypes()}
                 </div>
             </div>
             <div className='line-wrapper-engine-and-powertrain'>
                 <div className='power-wrapper'>
-                    <div className='combobox-entity'>
-                        <div className='checkmarklabel-engine-and-powertrain'>Power</div>
-                        {renderEnginePower('myComboBox power-from')}
+                    <div className='combobox-entity-engine-and-powertrain'>
+                        <div className='label-engine-and-powertrain'>Power</div>
+                        {renderEnginePower('my-combobox-engine-and-powertrain power-from')}
                     </div>
-                    <div className='combobox-entity'>
-                        <div className='checkmarklabel-engine-and-powertrain'>{'\0'}</div>
-                        {renderEnginePower('myComboBox power-to')}
+                    <div className='combobox-entity-engine-and-powertrain'>
+                        <div className='label-engine-and-powertrain'>{'\0'}</div>
+                        {renderEnginePower('my-combobox-engine-and-powertrain power-to')}
                     </div>
                 </div>
                 <div className='gearbox-wrapper-engine-and-powertrain'>
-                    <div className='combobox-entity'>
-                        <div className='checkmarklabel-engine-and-powertrain'>Gearbox</div>
+                    <div className='combobox-entity-engine-and-powertrain'>
+                        <div className='label-engine-and-powertrain'>Gearbox</div>
                         {renderGearboxTypes()}
                     </div>
                 </div>
             </div>
             <div className='line-wrapper-engine-and-powertrain'>
                 <div className='power-wrapper'>
-                    <div className='combobox-entity'>
-                        <div className='checkmarklabel-engine-and-powertrain'>Displacement</div>
-                        {renderDisplacement('myComboBox displacement-from')}
+                    <div className='combobox-entity-engine-and-powertrain'>
+                        <div className='label-engine-and-powertrain'>Displacement</div>
+                        {renderDisplacement('my-combobox-engine-and-powertrain displacement-from')}
                     </div>
-                    <div className='combobox-entity'>
-                        <div className='checkmarklabel-engine-and-powertrain'>{'\0'}</div>
-                        {renderDisplacement('myComboBox displacement-to')}
+                    <div className='combobox-entity-engine-and-powertrain'>
+                        <div className='label-engine-and-powertrain'>{'\0'}</div>
+                        {renderDisplacement('my-combobox-engine-and-powertrain displacement-to')}
                     </div>
                 </div>
                 <div className='gearbox-wrapper-engine-and-powertrain'>
-                    <div className='combobox-entity'>
-                        <div className='checkmarklabel-engine-and-powertrain'>Powertrain</div>
+                    <div className='combobox-entity-engine-and-powertrain'>
+                        <div className='label-engine-and-powertrain'>Powertrain</div>
                         {renderPowertrain()}
                     </div>
                 </div>
