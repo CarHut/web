@@ -45,7 +45,7 @@ function ClickAndPickPage() {
     return (
         <div className="body">
             <Header/>
-            <div className="current-route-text">Main page -> Click and pick!</div>
+            {/* <div className="current-route-text">Main page -> Click and pick!</div> */}
             <div className="click-and-pick-page-header">Click and pick - find your car with our guidance</div>
             {renderSection()}
             <CategoriesSection/>

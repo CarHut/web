@@ -12,8 +12,8 @@ function UpperNav({offersPerPage, setOffersPerPage, sortBy, setSortBy}) {
 
     const renderSortComboBox = () => {
         return (
-            <div className="custom-combobox">
-                <select id="brandComboBox" className='myComboBox' value={sortBy} onChange={handleSortByChange}>
+            <div className="custom-combobox-upper-nav">
+                <select id="brandComboBox" className='my-combobox-upper-nav' value={sortBy} onChange={handleSortByChange}>
                     <option value="">--</option>
                     <option value="PFL" key={1}>Price - from lowest</option>
                     <option value="PFH" key={2}>Price - from highest</option>
@@ -30,8 +30,8 @@ function UpperNav({offersPerPage, setOffersPerPage, sortBy, setSortBy}) {
 
     const renderOfferPerPageComboBox = () => {
         return (
-            <div className="custom-combobox">
-                <select id="brandComboBox" className='myComboBox' value={offersPerPage} onChange={handleOffersPerPageChange}>
+            <div className="custom-combobox-upper-nav">
+                <select id="brandComboBox" className='my-combobox-upper-nav' value={offersPerPage} onChange={handleOffersPerPageChange}>
                     <option value="" disabled>--</option>
                     <option value={5} key={5}>5</option>
                     <option value={10} key={10}>10</option>
@@ -48,14 +48,14 @@ function UpperNav({offersPerPage, setOffersPerPage, sortBy, setSortBy}) {
     return (
         <div className='search-list-upper-nav-wrapper'>
             <div className='combobox-entity-upper-nav'>
-                <div className='sort-dropdown-label'>Sort by</div>
+                <div className='sort-dropdown-label-upper-nav'>Sort by</div>
                 {renderSortComboBox()}
             </div>
             <div className='combobox-entity-upper-nav'>
-                <div className='sort-dropdown-label'>Offers per page</div>
+                <div className='sort-dropdown-label-upper-nav'>Offers per page</div>
                 {renderOfferPerPageComboBox()}
             </div>
-            <button className="styled-button-upper-nav">Save search</button>
+            <div className="styled-button-upper-nav">Save search</div>
         </div>
     );
 }

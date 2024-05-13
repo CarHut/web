@@ -1,22 +1,22 @@
 .section-body-categories-section {
     background-color: #181818;
-    margin: 2em 20em;
-    padding: 1em 3em;
+    margin: 2vw 20vw;
+    padding: 1vw 3vw;
     display: block;
 }
 
 .section-header-categories-section {
     color: #ffffff;
-    font-size: 2em;
+    font-size: 2vw;
 }
 
-.line-container {
+.line-container-categories-section {
     position: relative;
     width: 100%; /* Adjust the width of the lines container */
     height: 2px; /* Adjust the height of the lines */
     background-color: #898989;
-    margin-bottom: 0.3em;
-    margin: 2em 0;
+    margin-bottom: 0.3vw;
+    margin: 2vw 0;
 }
 
 .categories-wrapper {
@@ -27,20 +27,66 @@
 
 .category-background {
     background-color: #313131;
-    width: 10em;
-    height: 5em;
+    width: 10vw;
+    height: 5vw;
     border: solid;
     border-radius: 10px;
-    border-width: 0.1em;
+    border-width: 0.1vw;
     border-color: #D9D9D9;
     text-align: center;
-    margin-left: 2em;
-    margin-right: 2em;
-    margin-bottom: 3em;
+    margin-left: 2vw;
+    margin-right: 2vw;
+    margin-bottom: 3vw;
 }
 
 .category-label {
-    font-size: 1.3em;
+    font-size: 1.3vw;
     color: #fff;
     transform: translate(0, 100%)
+}
+
+@media screen and (max-width: 1350px) {
+    .section-body-categories-section {
+        margin: 2vw 0vw;
+    }
+    
+    .section-header-categories-section {
+        font-size: 3vw;
+    }
+    
+    .categories-wrapper {
+        justify-content: start;
+    }
+    
+    .category-background {
+        width: 13vw;
+        height: 6vw;
+    }
+    
+    .category-label {
+        font-size: 1.7vw;
+        transform: translate(0, 70%);
+    }
+}
+
+@media screen and (max-width: 600px) {
+    
+    .section-header-categories-section {
+        margin-top: 2vw;
+        font-size: 4vw;
+    }
+    
+    .categories-wrapper {
+        justify-content: start;
+    }
+    
+    .category-background {
+        width: 20vw;
+        height: 8vw;
+    }
+    
+    .category-label {
+        font-size: 2.2vw;
+        transform: translate(0, 100%)
+    }
 }

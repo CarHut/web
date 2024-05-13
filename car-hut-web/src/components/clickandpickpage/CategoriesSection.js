@@ -4,7 +4,7 @@ function CategoriesSection() {
     return (
         <div className='section-body-categories-section'>
             <div className='section-header-categories-section'>Categories</div>
-            <div className='line-container'/>
+            <div className='line-container-categories-section'/>
             <div className='categories-wrapper'>
                 <div className='category-background'>
                     <div className='category-label'>Family car</div>

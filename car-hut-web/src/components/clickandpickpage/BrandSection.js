@@ -74,43 +74,43 @@ function BrandSection() {
         <div className='section-body-brand-section'>
             <div className='section-header-brand-section'>Pick a brand</div>
             <div className="picked-brands-label">Picked brands: {clickedBrands.map((brand, index) => (<span key={index}>{brand} </span>))}</div>
-            <div className="line-container"/>
+            <div className="line-container-brand-section"/>
             <div className="brand-wrapper">
                 {generateAlphabetSections()}
             </div>
             <div className="click-and-pick-progress-bar">
                 <div className="progress-bar-content">
-                    <div className="progress-bar-sphere-current"/>
+                    <div className="progress-bar-sphere-brand-section-current"/>
                     <div className="progress-bar-line"/>
-                    <div className="progress-bar-sphere"/>
+                    <div className="progress-bar-sphere-brand-section"/>
                     <div className="progress-bar-line"/>
-                    <div className="progress-bar-sphere"/>
+                    <div className="progress-bar-sphere-brand-section"/>
                     <div className="progress-bar-line"/>
-                    <div className="progress-bar-sphere"/>
+                    <div className="progress-bar-sphere-brand-section"/>
                     <div className="progress-bar-line"/>
-                    <div className="progress-bar-sphere"/>
+                    <div className="progress-bar-sphere-brand-section"/>
                     <div className="progress-bar-line"/>
-                    <div className="progress-bar-sphere"/>
+                    <div className="progress-bar-sphere-brand-section"/>
                     <div className="progress-bar-line"/>
-                    <div className="progress-bar-sphere"/>
+                    <div className="progress-bar-sphere-brand-section"/>
                     <div className="progress-bar-line"/>
-                    <div className="progress-bar-sphere"/>
+                    <div className="progress-bar-sphere-brand-section"/>
                     <div className="progress-bar-line"/>
-                    <div className="progress-bar-sphere"/>
+                    <div className="progress-bar-sphere-brand-section"/>
                     <div className="progress-bar-line"/>
-                    <div className="progress-bar-sphere"/>
+                    <div className="progress-bar-sphere-brand-section"/>
                     <div className="progress-bar-line"/>
-                    <div className="progress-bar-sphere"/>
+                    <div className="progress-bar-sphere-brand-section"/>
                     <div className="progress-bar-line"/>
-                    <div className="progress-bar-sphere"/>
+                    <div className="progress-bar-sphere-brand-section"/>
                     <div className="progress-bar-line"/>
-                    <div className="progress-bar-sphere"/>
+                    <div className="progress-bar-sphere-brand-section"/>
                     <div className="progress-bar-line"/>
-                    <div className="progress-bar-sphere"/>
+                    <div className="progress-bar-sphere-brand-section"/>
                     <div className="progress-bar-line"/>
-                    <div className="progress-bar-sphere"/>
+                    <div className="progress-bar-sphere-brand-section"/>
                     <div className="progress-bar-line"/>
-                    <div className="progress-bar-sphere"/>
+                    <div className="progress-bar-sphere-brand-section"/>
                 </div>
             </div>
             <div className="progress-bar-label">{"Brand  >  Model"}</div>
@@ -119,9 +119,9 @@ function BrandSection() {
                 state={{
                     brands: clickedBrands
                 }}
-                className="next-button"
+                className="next-button-brand-section"
             >
-                <button className="styled-button">Next</button>
+                <button className="styled-button-brand-section">Model</button>
             </Link>
         </div>
     );

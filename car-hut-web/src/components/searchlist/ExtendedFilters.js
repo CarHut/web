@@ -86,10 +86,10 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange, l
                 <div className='search-list-extended-filters-brandAndModel-add-button' onClick={() => handleAddBrandAndModelOverlay()}>Add +</div>
                 {addBrandAndModelOverlay === true 
                     ?   <div className='search-list-extended-filters-brandAndModel-add-overlay'>
-                            <div className='combobox-entity'>
-                                <div className='label'>Brand</div>
-                                <div className="custom-combobox">
-                                    <select id="brandComboBox" className='myComboBox' value={addBrand} onChange={(e) => handleSelectedAddBrand(e)}>
+                            <div className='combobox-entity-extended-filters'>
+                                <div className='current-state-label'>Brand</div>
+                                <div className="custom-combobox-extended-filters">
+                                    <select id="brandComboBox" className='my-combobox-extended-filters' value={addBrand} onChange={(e) => handleSelectedAddBrand(e)}>
                                         <option key={0} value={''} onChange={(e) => handleSelectedAddBrand(e)}>All</option>
                                         {addBrands.map(brand => (
                                             <option key={brand.id} value={brand.brand}>{brand.brand}</option>
@@ -97,10 +97,10 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange, l
                                     </select>
                                 </div>
                             </div>
-                            <div className='combobox-entity'>
-                                <div className='label'>Model</div>
-                                <div className="custom-combobox">
-                                    <select id="modelComboBox" className={`myComboBox ${addBrand === '' ? 'disabled' : ''}`} value={addModel} onChange={(e) => handleSelectedAddModel(e)} disabled={addBrand === ''}>
+                            <div className='combobox-entity-extended-filters'>
+                                <div className='current-state-label'>Model</div>
+                                <div className="custom-combobox-extended-filters">
+                                    <select id="modelComboBox" className={`my-combobox-extended-filters ${addBrand === '' ? 'disabled' : ''}`} value={addModel} onChange={(e) => handleSelectedAddModel(e)} disabled={addBrand === ''}>
                                         <option key={0} value={''} onChange={(e) => handleSelectedAddBrand(e)}>All</option>
                                         {addModels.map(model => (
                                             <option key={model.id} value={model.model}>{model.model}</option>
@@ -239,7 +239,7 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange, l
     const renderPrice = (type) => {
         return (
             <div className="search-list-extended-filters-slider-container">
-                <label className='search-list-extended-filters-slider-label' htmlFor={type}>From: {type === 'priceFrom' ? price.priceFrom : price.priceTo}€</label>
+                <div className='current-state-label' htmlFor={type}>From: {type === 'priceFrom' ? price.priceFrom : price.priceTo}€</div>
                 <input
                     type="range"
                     id={type}
@@ -258,7 +258,7 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange, l
     const renderMileage = (type) => {
         return (
             <div className="search-list-extended-filters-slider-container">
-                <label className='search-list-extended-filters-slider-label' htmlFor={type}>From: {type === 'mileageFrom' ? mileage.mileageFrom : mileage.mileageTo} km</label>
+                <div className='current-state-label' htmlFor={type}>From: {type === 'mileageFrom' ? mileage.mileageFrom : mileage.mileageTo} km</div>
                 <input
                     type="range"
                     id={type === 'mileageFrom' ? mileage.mileageFrom : mileage.mileageTo}
@@ -276,9 +276,9 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange, l
 
     const renderFuelTypes = () => {
         return (
-            <div className='combobox-entity'>
-                <div className="custom-combobox">
-                    <select id="fuelComboBox" className='myComboBox' onChange={(e) => handleFuelTypeChange(e.target.value)}>
+            <div className='combobox-entity-extended-filters'>
+                <div className="custom-combobox-extended-filters">
+                    <select id="fuelComboBox" className='my-combobox-extended-filters' onChange={(e) => handleFuelTypeChange(e.target.value)}>
                         <option key={1} value={""}>Any</option>
                         <option key={2} value={'NotStated'}>Not stated</option>
                         <option key={3} value={'Hybrid'}>Hybrid</option>
@@ -295,9 +295,9 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange, l
 
     const renderGearboxTypes = () => {
         return (
-            <div className='combobox-entity'>
-                <div className="custom-combobox">
-                    <select id="gearboxComboBox" className='myComboBox' onChange={(e) => handleGearboxChange(e.target.value)}>
+            <div className='combobox-entity-extended-filters'>
+                <div className="custom-combobox-extended-filters">
+                    <select id="gearboxComboBox" className='my-combobox-extended-filters' onChange={(e) => handleGearboxChange(e.target.value)}>
                         <option key={1} value={""}>Any</option>
                         <option key={2} value={'NotStated'}>Not stated</option>
                         <option key={3} value={'Manual'}>Manual</option>
@@ -312,7 +312,7 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange, l
     const renderEnginePower = (type) => {
         return (
             <div className="search-list-extended-filters-slider-container">
-                <label className='search-list-extended-filters-slider-label' htmlFor={type}>From: {type === 'powerFrom' ? power.powerFrom : power.powerTo} kW</label>
+                <div className='current-state-label' htmlFor={type}>From: {type === 'powerFrom' ? power.powerFrom : power.powerTo} kW</div>
                 <input
                     type="range"
                     id={type}
@@ -330,9 +330,9 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange, l
 
     const renderPowertrainTypes = () => {
         return (
-            <div className='combobox-entity'>
-                <div className="custom-combobox">
-                    <select id="gearboxComboBox" className='myComboBox' onChange={(e) => handlePowertrainChange(e.target.value)}>
+            <div className='combobox-entity-extended-filters'>
+                <div className="custom-combobox-extended-filters">
+                    <select id="gearboxComboBox" className='my-combobox-extended-filters' onChange={(e) => handlePowertrainChange(e.target.value)}>
                         <option key={1} value={""}>Any</option>
                         <option key={2} value={'Other'}>Other</option>
                         <option key={3} value={'NotStated'}>Not stated</option>

@@ -4,14 +4,24 @@
 
 .click-and-pick-page-header {
     color: #ffffff;
-    font-size: 2em;
-    padding-left: 10em;
-    padding-top: 2em;
+    font-size: 2vw;
+    padding-left: 20vw;
+    padding-top: 2vw;
 }
 
 .current-route-text {
     color: #ffffff;
-    font-size: 0.8em;
-    margin-left: 26em;
-    padding-top: 1em;
+    font-size: 0.8vw;
+    margin-left: 26vw;
+    padding-top: 1vw;
 }
+
+@media screen and (max-width: 1350px) {
+    .click-and-pick-page-header {
+        color: #ffffff;
+        font-size: 4vw;
+        padding-left: 1vw;
+        padding: 4vw 0vw;
+    }
+}
+

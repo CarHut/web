@@ -50,15 +50,15 @@ function ModelSection() {
             return (
                 <div>
                     <div className='brand-label-model-section'>{brandData.brand}</div>
-                    <div className='line-container'/>
+                    <div className='line-container-model-section'/>
                     <div key={brandIndex} className='model-wrapper'>
                         {groupedModels.map((group, groupIndex) => (
                             <div key={groupIndex} className='model-group'>
                                 {group.map((model, index) => (
                                     <div className='model-line'>
-                                        <label className='custom-checkbox'>
+                                        <label className='custom-checkbox-model-section'>
                                             <input onClick={() => handleClickedModel(model.model, brandIndex)} type="checkbox"/>
-                                            <span className="checkmark"></span>
+                                            <span className="checkmark-model-section"></span>
                                         </label>
                                         <div key={index} className='model-label'>{model.model}</div>
                                     </div>
@@ -86,7 +86,7 @@ function ModelSection() {
     return (
         <div className='section-body-model-section'>
             <div className='section-header-model-section'>Pick a model for car</div>
-            <div className="line-container"/>        
+            <div className="line-container-model-section"/>        
             {generateLabelsForModels()}
             <div className="click-and-pick-progress-bar">
                 <div className="progress-bar-content">
@@ -129,7 +129,7 @@ function ModelSection() {
                     state={{
                     }}
                 >
-                    <button className="styled-button">Brand</button>
+                    <button className="styled-button-model-section">Brand</button>
                 </Link>
                 <Link
                     to={`/clickAndPickPage/price`}
@@ -138,7 +138,7 @@ function ModelSection() {
                         models: brandModelsObjects
                     }}
                 >
-                    <button className="styled-button">Price</button>
+                    <button className="styled-button-model-section">Price</button>
                 </Link>
             </div>
             

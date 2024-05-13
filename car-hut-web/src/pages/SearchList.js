@@ -10,8 +10,8 @@ function SearchList() {
     return (
         <div className="body">
             <Header/>
-            <div className="current-route-text">Main page -> Search list</div>
-            <div className="click-and-pick-page-header">Search list</div>
+            {/* <div className="current-route-text">Main page -> Search list</div> */}
+            <div className="search-list-page-header">Search list</div>
             <MainSection state={loc.state}/>
         </div>
     );

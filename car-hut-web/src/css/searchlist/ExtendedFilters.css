@@ -4,30 +4,30 @@
 }
 
 .search-list-extended-filters-padding-wrapper {
-    padding: 1em;
+    padding: 1vw;
 }
 
 .search-list-extended-filters-header {
-    font-size: 1.5em;
+    font-size: 1.5vw;
     color: #fff;
 }
 
 .search-list-extended-filters-num-of-searches {
-    font-size: 1.5em;
+    font-size: 1.5vw;
     color: #fff;
-    margin-bottom: 2em;
+    margin-bottom: 2vw;
 }
 
 .search-list-extended-filters-section {
-    margin: 1em 0;
+    margin: 1vw 0;
     display: block;
     width: 90%;
 }
 
 .search-list-extended-filters-section-label {
-    font-size: 1em;
+    font-size: 1.2vw;
     color: #fff;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.5vw;
 }
 
 .search-list-extended-filters-brandAndModel-section-content {
@@ -37,9 +37,9 @@
 
 .search-list-extended-filters-brandAndModel-entity {
     background-color: #181818;
-    padding: 0.5em;
-    font-size: 0.8em;
-    margin: 0.5em 0;
+    padding: 0.5vw;
+    font-size: 1vw;
+    margin: 0.5vw 0;
     color: #fff;
     text-align: center;
     border-radius: 5px;
@@ -48,8 +48,8 @@
 
 .x {
     position: relative;
-    width: 1.5em;
-    height: 1.5em;
+    width: 1.5vw;
+    height: 1.5vw;
     cursor: pointer;
 }
 
@@ -80,8 +80,8 @@
 
 .search-list-extended-filters-slider-label {
   display: block;
-  margin-bottom: 1em;
-  font-size: 0.8em;
+  margin-bottom: 1vw;
+  font-size: 0.8vw;
   color: #fff;
 }
 
@@ -97,16 +97,16 @@
 
 .search-list-extended-filters-slider-container input[type="range"]::-webkit-slider-thumb {
   appearance: none;
-  width: 20px;
-  height: 20px;
+  width: 2vw;
+  height: 2vw;
   background-color: #007bff;
   border-radius: 50%;
   cursor: pointer;
 }
 
 .search-list-extended-filters-slider-container input[type="range"]::-moz-range-thumb {
-  width: 10px;
-  height: 10px;
+  width: 1vw;
+  height: 1vw;
   background-color: #007bff;
   border: none;
   border-radius: 50%;
@@ -114,8 +114,8 @@
 }
 
 .search-list-extended-filters-slider-container input[type="range"]::-ms-thumb {
-  width: 5px;
-  height: 5px;
+  width: 0.7vw;
+  height: 0.7vw;
   background-color: #007bff;
   border: none;
   border-radius: 50%;
@@ -152,16 +152,16 @@
 
 .search-list-extended-filters-brandAndModel-add-overlay 
 .search-list-extended-filters-section 
-.combobox-entity {
+.custom-combobox-extended-filters {
   display: block;
 }
 
 .search-list-extended-filters-brandAndModel-add-overlay 
 .search-list-extended-filters-section 
-.label {
+.current-state-label {
   color: #fff;
-  font-size: 1em;
-  padding-bottom: 0.4em;
+  font-size: 3vw;
+  padding-bottom: 0.4vw;
 }
 
 .search-list-extended-filters-brandAndModel-add-overlay
@@ -180,58 +180,56 @@ select {
 
 .search-list-extended-filters-section 
 .search-list-extended-filters-brandAndModel-add-overlay
-.custom-combobox {
+.custom-combobox-extended-filters {
     position: relative;
     width: 100%;
+    font-size: 1vw;
 }
 
-/* Style the custom combobox arrow */
 .search-list-extended-filters-section 
 .search-list-extended-filters-brandAndModel-add-overlay
-.custom-combobox::after {
-  content: '\25BC'; /* Unicode arrow down character */
-  color: #D9D9D9; /* Adjust the color as needed */
+.custom-combobox-extended-filters::after {
+  content: '\25BC'; 
+  color: #D9D9D9;
   position: absolute;
   top: 50%;
   right: 10px;
   transform: translateY(-50%);
+  font-size: 1vw;
 }
 
-/* Style the custom combobox options */
 .search-list-extended-filters-section 
 .search-list-extended-filters-brandAndModel-add-overlay
-.myComboBox {
+.my-combobox-extended-filters {
   width: 100%;
   border: 1px solid #D9D9D9;
   border-radius: 5px;
-  font-size: 14px;
+  font-size: 1.5vw;
   color: #D9D9D9;
   background-color: #313131;
   height: 100%;
-  padding-left: 1em;
+  padding-left: 1vw;
 }
 
-/* Optional: Style the dropdown options */
 .search-list-extended-filters-section 
 .search-list-extended-filters-brandAndModel-add-overlay
-.myComboBox option {
+.my-combobox-extended-filters option {
   background-color: #fff;
   color: #000;
 }
 
 .search-list-extended-filters-section 
 .search-list-extended-filters-brandAndModel-add-overlay
-.myComboBox.disabled {
-  box-shadow: none; /* Reset shadow when disabled */
-  opacity: 0.7; /* Adjust opacity to indicate disabled state */
-  /* Add any additional styles to visually indicate disabled state */
+.my-combobox-extended-filters.disabled {
+  box-shadow: none;
+  opacity: 0.7;
 }
 
 .search-list-extended-filters-brandAndModel-add-button {
     background-color: #181818;
-    padding: 0.5em;
-    font-size: 0.8em;
-    margin: 0.5em 0;
+    padding: 0.7vw;
+    font-size: 0.8vw;
+    margin: 0.5vw 0;
     color: #fff;
     text-align: center;
     border-radius: 5px;
@@ -245,4 +243,187 @@ select {
 .search-list-extended-filters-brandAndModel-add-overlay {
     width: 100%;
     background-color: #181818;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.custom-combobox-extended-filters {
+  position: relative;
+  width: 10vw; 
+  height: 2vw;
+}
+
+.custom-combobox-extended-filters::after {
+  content: '\25BC';
+  color: #D9D9D9;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+}
+
+.my-combobox-extended-filters {
+  width: 100%;
+  border: 1px solid #D9D9D9;
+  border-radius: 5px;
+  font-size: 1vw;
+  color: #D9D9D9;
+  background-color: #313131;
+  height: 100%;
+  padding: 0.5vw 1vw;
+}
+
+.my-combobox-extended-filters option {
+  background-color: #fff;
+  color: #000;
+}
+
+.my-combobox-extended-filters.disabled {
+  box-shadow: none; 
+  opacity: 0.7; 
+}
+
+.current-state-label {
+  font-size: 1vw;
+  color: #fff;
+  padding: 0.5vw 0vw;
+}
+
+@media screen and (max-width: 1350px) {
+
+  .search-list-extended-filters-padding-wrapper {
+      padding: 2vw;
+  }
+
+  .search-list-extended-filters-header {
+      font-size: 2.7vw;
+  }
+
+  .search-list-extended-filters-num-of-searches {
+      font-size: 3vw;
+  }
+
+  .search-list-extended-filters-section-label {
+      font-size: 2vw;
+  }
+
+  .search-list-extended-filters-brandAndModel-entity {
+      font-size: 1.5vw;
+  }
+
+  .x {
+      width: 2vw;
+      height: 2vw;
+  }
+
+  .search-list-extended-filters-slider-container input[type="range"] {
+    padding: 1vw;
+  }
+
+  .search-list-extended-filters-slider-container input[type="range"]::-moz-range-thumb {
+    width: 1.5vw;
+    height: 1.5vw;
+  }
+
+  .search-list-extended-filters-brandAndModel-add-button {
+      padding: 1vw;
+      font-size: 1.3vw;
+  }
+
+  .custom-combobox-extended-filters {
+    position: relative;
+    width: 10vw; 
+    height: 3vw;
+  }
+
+  .my-combobox-extended-filters {
+    font-size: 1.6vw;
+  }
+
+  .current-state-label {
+    font-size: 1.5vw;
+    color: #fff;
+    padding: 0.5vw 0vw;
+  }
+}
+
+@media screen and (max-width: 600px) {
+
+  .search-list-extended-filters-padding-wrapper {
+      padding: 4vw;
+  }
+
+  .search-list-extended-filters-header {
+      font-size: 6vw;
+  }
+
+  .search-list-extended-filters-num-of-searches {
+      font-size: 7vw;
+  }
+
+  .search-list-extended-filters-section-label {
+      font-size: 4.5vw;
+      margin-top: 5vw;
+  }
+
+  .search-list-extended-filters-brandAndModel-entity {
+      font-size: 3vw;
+  }
+
+  .x {
+      width: 3vw;
+      height: 3vw;
+  }
+
+  .search-list-extended-filters-slider-container input[type="range"] {
+    padding: 3vw;
+  }
+
+  .search-list-extended-filters-slider-container input[type="range"]::-moz-range-thumb {
+    width: 2vw;
+    height: 2vw;
+  }
+
+  .search-list-extended-filters-brandAndModel-add-button {
+      padding: 3vw;
+      font-size: 3vw;
+  }
+
+  .custom-combobox-extended-filters {
+    width: 35vw; 
+    height: 7vw;
+  }
+
+  .my-combobox-extended-filters {
+    font-size: 3vw;
+  }
+
+  .current-state-label {
+    font-size: 3vw;
+    color: #fff;
+    padding: 1.3vw 0vw;
+  }
+
+  .search-list-extended-filters-section 
+  .search-list-extended-filters-brandAndModel-add-overlay
+  .my-combobox-extended-filters {
+    width: 100%;
+    border: 1px solid #D9D9D9;
+    border-radius: 5px;
+    font-size: 3vw;
+    color: #D9D9D9;
+    background-color: #313131;
+    height: 100%;
+    padding-left: 1vw;
+  }
 }
