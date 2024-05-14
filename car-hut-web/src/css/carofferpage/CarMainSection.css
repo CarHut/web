@@ -1,7 +1,7 @@
 .section-body-car-main-section {
     background-color: #181818;
-    margin: 2em 20em;
-    padding: 1em 1em;
+    margin: 2vw 20vw;
+    padding: 1vw 1vw;
     display: block;
 }
 
@@ -9,4 +9,16 @@
     display: flex;
     width: 100%;
     justify-content: space-between;
+}
+
+@media screen and (max-width: 1350px) {
+    .section-body-car-main-section {
+        margin: 2vw 0vw;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .car-main-section-split-wrapper {
+        display: block;
+    }
 }

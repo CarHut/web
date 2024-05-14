@@ -2,3 +2,9 @@
     display: flex;
     justify-content: space-between;
 }
+
+@media screen and (max-width: 600px) {
+    .section-body-car-offer-main-info {
+        display: block;
+    }
+}

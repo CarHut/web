@@ -1,17 +1,35 @@
 .more-info-body {
     display: block;
     background-color: #313131;
-    margin-top: 1.5em;
-    padding: 2em 2em;
+    margin-top: 1.5vw;
+    padding: 2vw 2vw;
 }
 
 .more-info-header {
-    font-size: 2em;
+    font-size: 2vw;
     color: #fff;
 }
 
 .more-info-main-paragraph {
-    font-size: 1em;
+    font-size: 1vw;
     color: #fff;
     text-wrap: wrap;
+}
+
+@media screen and (max-width: 1350px) {
+    
+    .more-info-header {
+        font-size: 2.6vw;
+    } 
+}
+
+@media screen and (max-width: 600px) {
+    .more-info-body {
+        margin-top: 5vw;
+        padding: 5vw 5vw;
+    }
+    
+    .more-info-header {
+        font-size: 5vw;
+    }
 }

@@ -13,7 +13,7 @@ function CarOfferPage() {
     return (
         <div className="body">
             <Header/>
-            <div className="current-route-text">in development</div>
+            {/* <div className="current-route-text">in development</div> */}
             <div className="car-offer-page-header">You've picked</div>
             <CarMainSection carId={carId} car={null}/>
         </div>

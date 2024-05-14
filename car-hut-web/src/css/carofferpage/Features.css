@@ -1,13 +1,13 @@
 .features-body {
     display: block;
     background-color: #313131;
-    margin-top: 1.5em;
+    margin-top: 1.5vw;
     width: 44%;
-    padding: 2em 2em;
+    padding: 2vw 2vw;
 }
 
 .features-header {
-    font-size: 2em;
+    font-size: 2vw;
     color: #fff;
 }
 
@@ -16,7 +16,7 @@
     width: 100%; 
     height: 2px; 
     background-color: #898989;
-    margin: 1em 0;
+    margin: 1vw 0;
 }
 
 .features-columns-wrapper {
@@ -31,8 +31,37 @@
 }
 
 .features-column-text {
-    font-size: 0.8em;
+    font-size: 0.8vw;
     color: #fff;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.5vw;
     text-wrap: wrap;
+}
+
+@media screen and (max-width: 1350px) {
+    
+    .features-header {
+        font-size: 2.6vw;
+    }
+    
+    .features-column-text {
+        font-size: 1.2vw;
+        margin-bottom: 0.6vw;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .features-body {
+        margin-top: 5vw;
+        width: 90%;
+        padding: 3vw 5vw;
+    }
+
+    .features-header {
+        font-size: 5vw;
+    }
+    
+    .features-column-text {
+        font-size: 2vw;
+        margin-bottom: 2vw;
+    }
 }

@@ -64,7 +64,7 @@ function TechnicalData({car}) {
                         <div className='technical-data-content-text-value'>{carModel.fuel}</div>    
                     </div>
                     <div className='technical-data-body-line'>
-                        <div className='technical-data-content-text'>Fuel Consumption</div>
+                        <div className='technical-data-content-text'>Fuel Cons.</div>
                         <div className='technical-data-content-text-value'>comb. {carModel.fuelConsumptionAvg}</div>    
                     </div>
                     <div className='technical-data-body-line'>

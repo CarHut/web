@@ -1,9 +1,8 @@
 .section-car-offer-photos-section-body {
     background-color: #313131;
     width: 54%;
-    height: 21em;
     color: #fff;
-    padding-top: 1em;
+    padding-top: 1vw;
     text-align: center;
 }
 
@@ -12,21 +11,46 @@
 }
 
 .photo-miniature-img {
-    height: 1em;
+    height: 1vw;
     object-fit: fill;
-    margin: 0 0.2em;
+    margin: 0 0.2vw;
     border: solid #fff;
 }
 
 .main-photo-wrapper {
     text-align: center;
-    margin-top: 2em;
+    margin-top: 2vw;
 }
 
 .main-photo-img {
-    object-fit:fill;
-    height: 15em;
+    width: 90%;
+    height: auto;
+    object-fit: scale-down;
 }
 
 .current-page-label {
+}
+
+@media screen and (max-width: 1350px) {
+    
+    .photo-miniature-img {
+        height: 2vw;
+        margin: 0 0.5vw;
+    }
+
+}
+
+@media screen and (max-width: 600px) {
+    .section-car-offer-photos-section-body {
+        background-color: #313131;
+        width: 100%;
+        padding-top: 3vw;
+        padding-bottom: 2vw;
+    }
+
+    .photo-miniature-img {
+        height: 6vw;
+        margin: 0 1.2vw;
+    }
+
 }
