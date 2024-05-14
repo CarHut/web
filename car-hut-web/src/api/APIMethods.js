@@ -351,8 +351,12 @@ const APIMethods = {
         return response;
     },
     addCarToDatabase: async (requestOptions) => {
-        const response =  await fetch(Constants.baseAPIPath + '/carhut/addCarToDatabase', requestOptions);
+        const response =  await fetch(Constants.baseAPIPath + 'carhut/addCarToDatabase', requestOptions);
         return response;
+    },
+    getNumberOfFilteredCars: async (url) => {
+        const response = await fetch(Constants.baseAPIPath + "carhut/getNumberOfFilteredCars?" + url);
+        return await response.json();
     }
 
 }

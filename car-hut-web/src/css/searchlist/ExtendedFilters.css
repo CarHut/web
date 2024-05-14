@@ -299,6 +299,19 @@ select {
   padding: 0.5vw 0vw;
 }
 
+.extended-filters-dropdown-arrow {
+  margin-top: 1vw;
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 30px solid #D9D9D9;
+  display: none;
+  visibility: hidden;
+  cursor: pointer;
+}
+
+
 @media screen and (max-width: 1350px) {
 
   .search-list-extended-filters-padding-wrapper {
@@ -417,13 +430,12 @@ select {
   .search-list-extended-filters-section 
   .search-list-extended-filters-brandAndModel-add-overlay
   .my-combobox-extended-filters {
-    width: 100%;
-    border: 1px solid #D9D9D9;
-    border-radius: 5px;
     font-size: 3vw;
-    color: #D9D9D9;
-    background-color: #313131;
-    height: 100%;
-    padding-left: 1vw;
+  }
+
+  .extended-filters-dropdown-arrow {
+    margin-top: 5vw;
+    visibility: visible;
+    display: block;
   }
 }

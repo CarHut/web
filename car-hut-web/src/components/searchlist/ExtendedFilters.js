@@ -17,6 +17,7 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange, l
     const [addModels, setAddModels] = useState([]);
     const [addBrand, setAddBrand] = useState('');
     const [addModel, setAddModel] = useState('');
+    const [visibleFilters, setVisibleFilters] = useState(true);
 
     const [addBrandAndModelOverlay, setAddBrandAndModelOverlay] = useState(false);
     var brandsAndModelsFetchedTrigger = false;
@@ -345,38 +346,43 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange, l
         )
     }
 
+    const handleFiltersVisibility = () => {
+        setVisibleFilters(!visibleFilters);
+    }
+
     return (
         <div className='search-list-extended-filters-wrapper'>
             <div className='search-list-extended-filters-padding-wrapper'>
                 <div className='search-list-extended-filters-num-of-searches'>{!loadingResultsListLength ? resultsListLength + " cars" : "Loading cars"} </div>
                 <div className='search-list-extended-filters-header'>Filters</div>
-                <div className='search-list-extended-filters-section'>
+                <div className='extended-filters-dropdown-arrow' onClick={handleFiltersVisibility}/>
+                <div className='search-list-extended-filters-section' style={visibleFilters === true ? {visibility: "visible", display: "block"} : {visibility: "hidden", display: "none"}}>
                     <div className='search-list-extended-filters-section-label'>Brands & models</div>
                     {renderBrandsAndModelsEntities()}
                 </div>
-                <div className='search-list-extended-filters-section'>
+                <div className='search-list-extended-filters-section' style={visibleFilters === true ? {visibility: "visible", display: "block"} : {visibility: "hidden", display: "none"}}>
                     <div className='search-list-extended-filters-section-label'>Price</div>
                     {renderPrice("priceFrom")}
                     {renderPrice("priceTo")}
                 </div>
-                <div className='search-list-extended-filters-section'>
+                <div className='search-list-extended-filters-section' style={visibleFilters === true ? {visibility: "visible", display: "block"} : {visibility: "hidden", display: "none"}}>
                     <div className='search-list-extended-filters-section-label'>Mileage</div>
                     {renderMileage('mileageFrom')}
                     {renderMileage('mileageTo')}
                 </div>
-                <div className='search-list-extended-filters-section'>
+                <div className='search-list-extended-filters-section' style={visibleFilters === true ? {visibility: "visible", display: "block"} : {visibility: "hidden", display: "none"}}>
                     <div className='search-list-extended-filters-section-label'>Fuel type</div>
                     {renderFuelTypes()}
                 </div>
-                <div className='search-list-extended-filters-section'>
+                <div className='search-list-extended-filters-section' style={visibleFilters === true ? {visibility: "visible", display: "block"} : {visibility: "hidden", display: "none"}}>
                     <div className='search-list-extended-filters-section-label'>Gearbox</div>
                     {renderGearboxTypes()}
                 </div>
-                <div className='search-list-extended-filters-section'>
+                <div className='search-list-extended-filters-section' style={visibleFilters === true ? {visibility: "visible", display: "block"} : {visibility: "hidden", display: "none"}}>
                     <div className='search-list-extended-filters-section-label'>Powertrain</div>
                     {renderPowertrainTypes()}
                 </div>
-                <div className='search-list-extended-filters-section'>
+                <div className='search-list-extended-filters-section' style={visibleFilters === true ? {visibility: "visible", display: "block"} : {visibility: "hidden", display: "none"}}>
                     <div className='search-list-extended-filters-section-label'>Power</div>
                     {renderEnginePower('powerFrom')}
                     {renderEnginePower('powerTo')}

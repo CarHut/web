@@ -12,7 +12,6 @@ function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength, setL
     const [cars, setCars] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
-    const [displayedCars, setDisplayedCars] = useState([]);
     const [imagesForDisplayedCars, setImagesForDisplayedCars] = useState([]);
 
     const fetchCars = async () => {
@@ -21,14 +20,21 @@ function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength, setL
         const url = Constants.baseAPIPath + `carhut/getCarsWithFilters?` +
             `&priceFrom=${fetchedState.price.priceFrom}&priceTo=${fetchedState.price.priceTo}&mileageFrom=${fetchedState.mileage.mileageFrom}` +
             `&mileageTo=${fetchedState.mileage.mileageTo}&fuelType=${fetchedState.fuelType}&gearbox=${fetchedState.gearbox}&powertrain=${fetchedState.powertrain}` +
-            `&powerFrom=${fetchedState.power.powerFrom}&powerTo=${fetchedState.power.powerTo}&sortBy=${sortBy}&sortOrder=${sortOrder}`;
+            `&powerFrom=${fetchedState.power.powerFrom}&powerTo=${fetchedState.power.powerTo}&sortBy=${sortBy}&sortOrder=${sortOrder}` +
+            `&offersPerPage=${offersPerPage}&currentPage=${currentPage}`;
 
         const result = await APIMethods.getCarsWithFilters(url, fetchedState.models);
 
         if (result !== null) {
             setCars(result);
-            setTotalPages(Math.ceil(result.length / offersPerPage));
-            setResultsListLength(result.length);    
+            const length = await APIMethods.getNumberOfFilteredCars(
+            `priceFrom=${fetchedState.price.priceFrom}&priceTo=${fetchedState.price.priceTo}&mileageFrom=${fetchedState.mileage.mileageFrom}` +
+            `&mileageTo=${fetchedState.mileage.mileageTo}&fuelType=${fetchedState.fuelType}&gearbox=${fetchedState.gearbox}&powertrain=${fetchedState.powertrain}` +
+            `&powerFrom=${fetchedState.power.powerFrom}&powerTo=${fetchedState.power.powerTo}`
+            );
+
+            setTotalPages(Math.ceil(length / offersPerPage));
+            setResultsListLength(length);    
             setLoadingResultsListLength(false);
         }
     }
@@ -40,23 +46,16 @@ function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength, setL
 
     useEffect(() => {
         fetchCars();
-    }, [sortBy, fetchedState])
+    }, [sortBy, fetchedState, currentPage])
 
     useEffect(() => {
         fetchImagesForDisplayedCars();
-    }, [displayedCars])
-
-    useEffect(() => {
-        const startIndex = (currentPage - 1) * parseInt(offersPerPage);
-        const endIndex = currentPage * parseInt(offersPerPage);
-        const disCars = cars.slice(startIndex, endIndex);
-        setDisplayedCars(disCars);
-    }, [cars]);
+    }, [cars])
 
     const fetchImagesForDisplayedCars = async () => {
         const imageList = [];
-        for (let i = 0; i < displayedCars.length; i++) {
-            const data = await APIMethods.getImages(displayedCars[i].id);
+        for (let i = 0; i < cars.length; i++) {
+            const data = await APIMethods.getImages(cars[i].id);
             if (data !== null) {
                 const url = `data:image/png;base64,${data[0]}`;
                 imageList.push(url);
@@ -69,8 +68,8 @@ function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength, setL
 
     const generateCarOffers = () => {
         const offerElements = [];
-        for (let index = 0; index < displayedCars.length; index++) {
-            const car = displayedCars[index];
+        for (let index = 0; index < cars.length; index++) {
+            const car = cars[index];
             const imageSrc = imagesForDisplayedCars[index];
 
             offerElements.push(
@@ -126,6 +125,7 @@ function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength, setL
     const goToPage = (page) => {
         setCurrentPage(page);
         window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to the top of the page
+        setLoadingResultsListLength(true);
     };
 
     const renderPageButtons = () => {
@@ -135,7 +135,6 @@ function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength, setL
             ))
         )
     }
-
 
     const startPage = Math.max(1, currentPage - 2);
     const endPage = Math.min(totalPages, startPage + 4);
