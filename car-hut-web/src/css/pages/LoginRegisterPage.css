@@ -1,12 +1,12 @@
 .login-page-body {
     background-color: #313131;
     color: #fff;
-    padding: 2em 20em;
+    padding: 2vw 20vw;
 }
 
 .main-wrapper {
-    padding: 2em 0;    
-    border: #181818 solid 1em;
+    padding: 2vw 0;    
+    border: #181818 solid 1vw;
     display: flex;
     justify-content: space-around;
 }
@@ -16,13 +16,13 @@
 }
 
 .header-label {
-    font-size: 2em;
-    margin-bottom: 1em;
+    font-size: 2vw;
+    margin-bottom: 1vw;
 }
 
 .input-label {
-    font-size: 1em;
-    margin-bottom: 0.5em;
+    font-size: 1vw;
+    margin-bottom: 0.5vw;
 }
 
 .input-container {
@@ -34,14 +34,70 @@
 }
 
 .login-input {
-    margin-bottom: 1em;
+    margin-bottom: 1vw;
 }
 
 .register-input {
-    margin-bottom: 1em;
+    margin-bottom: 1vw;
 }
 
 .error-text {
     color: red;
-    font-size: 1em;
+    font-size: 1vw;
 } 
+
+@media screen and (max-width: 1350px) {
+    .login-page-body {
+        padding: 2vw 0vw;
+    }
+    
+    .main-wrapper {
+        padding: 4vw 0;
+    }
+    
+    .header-label {
+        font-size: 3vw;
+        margin-bottom: 2vw;
+    }
+    
+    .input-label {
+        font-size: 2vw;
+        margin-bottom: 0.5vw;
+    }
+    
+    .error-text {
+        font-size: 2vw;
+    } 
+}
+
+@media screen and (max-width: 600px) {
+    .login-page-body {
+        padding: 2vw 0vw;
+    }
+    
+    .main-wrapper {
+        padding: 4vw 0;
+    }
+    
+    .header-label {
+        font-size: 6vw;
+        margin-bottom: 2vw;
+    }
+    
+    .input-label {
+        font-size: 2vw;
+        margin-bottom: 0.5vw;
+    }
+    
+    .error-text {
+        font-size: 2vw;
+    } 
+
+    .login-input {
+        width: 25vw;
+    }
+
+    .register-input {
+        width: 25vw;
+    }
+}

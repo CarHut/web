@@ -8,36 +8,37 @@
 
 .account-main-info-column-entity {
     display: block;
-    margin-right: 3em;
+    margin-right: 3vw;
 }
 
-.pretty-button {
+.account-button {
     display: flex;
     align-items: center;
-    background-color: #313131; /* Green */
+    background-color: #313131;
     border: none;
-    height: 3em;
-    width: 8em;
+    height: 3vw;
+    width: 8vw;
     color: #fff;
     text-decoration: none;
-    font-size: 1em;
+    font-size: 1vw;
     transition-duration: 0.4s;
     cursor: pointer;
     border-radius: 8px;
 }
   
-.pretty-button:hover {
+.account-button:hover {
     background-color: #a3a3a3; 
     color: #181818
 }
 
-.pretty-button-text {
-    margin-left: 1em;
+.account-button-text {
+    margin-left: 1vw;
 }
 
 .profile-content-text-forgot-password {
     color: #a3a3a3;
     text-decoration: underline;
+    font-size: 1vw;
 }
 
 .profile-content-text-forgot-password:hover {
@@ -47,7 +48,7 @@
 
 .reset-password-wrapper {
     display: block;
-    margin-top: 1em;
+    margin-top: 1vw;
 }
 
 .profile-content-text-success {
@@ -56,4 +57,49 @@
 
 .profile-content-text-error {
     color: red;
+}
+
+@media screen and (max-width: 1350px) {
+
+    .account-main-info-column-entity {
+        display: block;
+        margin-right: 4vw;
+    }
+    
+    .account-button {
+        height: 4vw;
+        width: 10vw;
+        font-size: 1.4vw;
+    }
+
+    .account-button-text {
+        margin-left: 1.2vw;
+    }
+
+    .profile-content-text-forgot-password {
+        font-size: 1.4vw;
+    }
+
+}
+
+@media screen and (max-width: 600px) {
+    
+    .account-main-info-column-entity {
+        margin-right: 5vw;
+    }
+    
+    .account-button {
+        height: 8vw;
+        width: 20vw;
+        font-size: 3vw;
+    }
+    
+    .account-button-text {
+        margin-left: 2vw;
+    }
+    
+    .profile-content-text-forgot-password {
+        font-size: 3vw;
+    }
+    
 }

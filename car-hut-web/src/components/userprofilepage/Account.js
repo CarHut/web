@@ -52,8 +52,8 @@ function Account() {
                             :   <div/>
                     }
                 </div>
-                <a href='http://localhost:3000/mainPage' className='pretty-button' onClick={() => AuthUtil.logout()}>
-                    <div className='pretty-button-text'>Log out</div></a>
+                <a href='http://localhost:3000/mainPage' className='account-button' onClick={() => AuthUtil.logout()}>
+                    <div className='account-button-text'>Log out</div></a>
             </div>
         </div>
     );

@@ -7,8 +7,8 @@
 }
 
 .x-button {
-    width: 1em;
-    height: 1em;
+    width: 2vw;
+    height: 2vw;
     display: flex;
     border: none;
     cursor: pointer;
@@ -22,4 +22,126 @@
   .x-button:hover {
     opacity: 70%;
   }
+
+.saved-car-offer-wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.saved-car-offer-left-wrapper {
+  display: block;
+  width: 50%;
+}
+
+.saved-car-offer-car-title {
+  font-size: 1.3vw;
+  text-wrap: wrap;
+  color: #ffffff;
+  margin-bottom: 0.7vw;
+}
+
+.saved-car-stats-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.saved-car-stats-column {
+  display: block;
+  width: 33%;
+}
+
+.saved-car-stats-text {
+  font-size: 0.9vw;
+  color: #FFFFFF;
+  text-wrap: wrap;
+}
+
+.saved-car-line-container-seller {
+  position: relative;
+  width: 100%;
+  height: 2px;
+  background-color: #898989;
+  margin: 0.5vw 0;
+}
+
+.saved-car-offers-line-separator {
+  position: relative;
+  width: 100%;
+  height: 2px;
+  background-color: #898989;
+  margin: 2vw 0;
+}
+
+.saved-car-offer-right-wrapper {
+  display: flex;
+  width: 35%;
+}
+
+.saved-car-stats-price-text {
+  font-size: 1.7vw;
+  color: #ffffff;
+}
+
+.saved-car-stats-price-rating-text {
+  color: #898989;
+  font-size: 1vw;
+}
+
+.saved-car-img {
+  object-fit: scale-down;
+  margin-right: 1vw;
+  width: 10vw;
+  height: auto;
+}
   
+.saved-car-offer-right-wrapper {
+  width: 45%;
+}
+
+@media screen and (max-width: 1350px) {
+
+  .saved-car-offer-car-title {
+    font-size: 1.8vw;
+  }
+
+  .saved-car-stats-text {
+    font-size: 1.2vw;
+  }
+
+  .saved-car-stats-price-text {
+    font-size: 2vw;
+  }
+
+  .saved-car-stats-price-rating-text {
+    font-size: 1.2vw;
+  }
+
+  .saved-car-img {
+    margin-right: 2vw;
+    width: 17vw;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .saved-car-offer-car-title {
+    font-size: 4vw;
+  }
+
+  .saved-car-stats-text {
+    font-size: 2.4vw;
+  }
+
+  .saved-car-stats-price-text {
+    font-size: 4vw;
+  }
+
+  .saved-car-stats-price-rating-text {
+    font-size: 2vw;
+  }
+
+  .saved-car-img {
+    margin-right: 2vw;
+    width: 25vw;
+  }
+}

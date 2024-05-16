@@ -1,6 +1,6 @@
 const Constants = {
-    baseAPIPath: 'http://95.102.88.227/api/',
-    baseAddressPath: 'http://95.102.88.227/'
+    baseAPIPath: 'http://95.102.81.72/api/',
+    baseAddressPath: 'http://95.102.81.72/'
 }
 
 

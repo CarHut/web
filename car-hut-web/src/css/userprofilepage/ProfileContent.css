@@ -1,23 +1,55 @@
 .profile-content-body {
     display: block;
     width: 100%;
-    margin-left: 2em;
+    margin-left: 2vw;
 }
 
 .profile-content-header {
-    font-size: 2em;
+    font-size: 2vw;
     color: #fff;
-    margin-bottom: 2em;
+    margin-bottom: 2vw;
 }
 
 .profile-content-text {
-    font-size: 1em;
+    font-size: 1vw;
     color: #fff;
-    margin-bottom: 1em;
+    margin-bottom: 1vw;
 }
 
 .profile-content-dark-text {
-    font-size: 1em;
+    font-size: 1vw;
     color: #a3a3a3;
-    margin-bottom: 1em;
+    margin-bottom: 1vw;
+}
+
+@media screen and (max-width: 1350px) {
+    .profile-content-header {
+        font-size: 3vw;
+    }
+    
+    .profile-content-text {
+        font-size: 1.5vw;
+    }
+    
+    .profile-content-dark-text {
+        font-size: 1.5vw;
+    }
+    
+}
+
+@media screen and (max-width: 600px) {
+    .profile-content-header {
+        font-size: 5vw;
+        margin: 3vw 0vw;
+    }
+    
+    .profile-content-text {
+        font-size: 3vw;
+        margin-bottom: 2vw;
+    }
+    
+    .profile-content-dark-text {
+        font-size: 3vw;
+        margin-bottom: 2vw;
+    }
 }
