@@ -13,12 +13,11 @@ function PhotosSection({ car }) {
     const [carModel, setCarModel] = useState(car);
 
     useEffect(() => {
-        if (carModel.images === undefined) {
+        if (carModel === undefined || carModel === null) {
             //fetching images from backend
             fetchImages(car.id);
         } else {
-            // adding images from state
-            setImages(carModel.images);
+            setUploadedImages();
         }
     }, [carModel])
 
@@ -30,6 +29,10 @@ function PhotosSection({ car }) {
         const fetchedData = await APIMethods.getImages(carId);
         const imageUrls = fetchedData.map((bytes) => `data:image/png;base64,${bytes}`)
         setImages(imageUrls);
+    }
+
+    const setUploadedImages = () => {
+        setImages(carModel.images.map((bytes) => URL.createObjectURL(bytes)));
     }
 
     const renderPhotoMiniatures = () => {

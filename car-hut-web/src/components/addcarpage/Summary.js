@@ -80,7 +80,7 @@ function Summary() {
         <div>
             <div className='add-car-summary-section'>
                 <div className='add-car-summary-header'>That's it! Now double check whether all information is ok.</div>
-                <div className='line-container'/>
+                <div className='add-car-line-container'/>
                 <div className='add-car-summary-styled-button' onClick={(e) => handleCreatedOffer(e)}>Create offer</div>
                 {showErrorMessage ? <div className='error-text'>Something went wrong!</div> : <div/>}
             </div>

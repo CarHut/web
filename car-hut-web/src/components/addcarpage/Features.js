@@ -74,7 +74,7 @@ function Features() {
     return (
         <div className='add-car-features-section'>
             <div className='add-car-features-header'>What features does YOUR car have?</div>
-            <div className='line-container'/>
+            <div className='add-car-line-container'/>
             {renderFeatures()}
             <Link
                 className='add-car-features-styled-button'

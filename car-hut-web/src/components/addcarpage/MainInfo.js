@@ -118,7 +118,7 @@ function MainInfo() {
     const renderHeaderInput = () => {
         return (
             <div className='add-car-form'>
-                <div className='add-car-main-info-regular-text'>Do you want custom header? Here you go!</div>
+                <div className='add-car-main-info-regular-text'>Do you want custom header? Type in!</div>
                 <input className='add-car-main-info-text-input' maxLength='50' type='text' placeholder='max. 50 characters' onChange={(e) => handleWrittenHeadline(e.target.value)}/>
             </div>
         )
@@ -126,7 +126,7 @@ function MainInfo() {
 
     const renderPriceSlider = () => {
         return (
-            <div className="registration-slider-container">
+            <div className="add-car-price-slider-container">
                 <div className='add-car-label' htmlFor="price" style={{"display": "flex", "alignItems": "center"}}>Price*: <input className='add-car-main-info-text-input' style={{"margin": "0 1em"}} maxLength='7' type='text' placeholder='' value={price} onChange={(e) => handlePriceChange(e.target.value)} pattern='[0-9]'/> €</div>
                 <input
                     type="range"
@@ -144,7 +144,7 @@ function MainInfo() {
 
     const renderMileageSlider = () => {
         return (
-            <div className="registration-slider-container">
+            <div className="add-car-mileage-slider-container">
                 <div className='add-car-label' htmlFor="mileage" style={{"display": "flex", "alignItems": "center"}}>Mileage*: <input className='add-car-main-info-text-input' style={{"margin": "0 1em"}} maxLength='7' type='text' placeholder='' value={mileage} onChange={(e) => handleMileageChange(e.target.value)} pattern='[0-9]'/> km</div>
                 <input
                     type="range"
@@ -162,7 +162,7 @@ function MainInfo() {
 
     const renderRegistrationSlider = () => {
         return (
-            <div className="registration-slider-container">
+            <div className="add-car-registration-slider-container">
                 <div className='add-car-label' htmlFor="registration" style={{"display": "flex", "alignItems": "center"}}>Registration*: <input className='add-car-main-info-text-input' style={{"margin": "0 1em"}} maxLength='4' type='text' placeholder='' value={registration} pattern='[0-9]' onChange={(e) => handleRegistrationChange(e.target.value)}/></div>
                 <input
                     type="range"
@@ -190,27 +190,25 @@ function MainInfo() {
     return (
         <div className='add-car-main-info-section'>
             <div className='add-car-main-info-header'>Let's start with basic data of your car</div>
-            <div className="line-container"/>
+            <div className="add-car-line-container"/>
             <div className='add-car-main-info-row-wrapper'>
                 <div className='add-car-main-info-column-wrapper'>
-                    <div className='add-car-main-info-row-wrapper'>
-                        <div className='add-car-main-info-combobox-entity'>
-                            <div className='label'>Brand*</div>
-                            <div className="add-car-main-info-custom-combobox">
-                                <select id="brandComboBox" className='add-car-main-info-myComboBox' value={selectedBrand} onChange={(e) => handleSelectedBrand(e.target.value)}>
-                                    <option value="all" disabled>Select Brand</option>
-                                    {renderBrands()}
-                                </select>
-                            </div>
+                    <div className='add-car-main-info-combobox-entity'>
+                        <div className='add-car-label'>Brand*</div>
+                        <div className="add-car-main-info-custom-combobox">
+                            <select id="brandComboBox" className='add-car-main-info-myComboBox' value={selectedBrand} onChange={(e) => handleSelectedBrand(e.target.value)}>
+                                <option value="all" disabled>Select Brand</option>
+                                {renderBrands()}
+                            </select>
                         </div>
-                        <div className='add-car-main-info-combobox-entity'>
-                            <div className='label'>Model*</div>
-                            <div className="add-car-main-info-custom-combobox">
-                                <select id="modelComboBox" className={`add-car-main-info-myComboBox ${!selectedBrand ? 'disabled' : ''}`} value={selectedModel} onChange={(e) => handleSelectedModel(e.target.value)} disabled={!selectedBrand}>
-                                    <option value="all" disabled={!selectedBrand}>Select Model</option>
-                                    {renderModels()}
-                                </select>
-                            </div>
+                    </div>
+                    <div className='add-car-main-info-combobox-entity'>
+                        <div className='add-car-label'>Model*</div>
+                        <div className="add-car-main-info-custom-combobox">
+                            <select id="modelComboBox" className={`add-car-main-info-myComboBox ${!selectedBrand ? 'disabled' : ''}`} value={selectedModel} onChange={(e) => handleSelectedModel(e.target.value)} disabled={!selectedBrand}>
+                                <option value="all" disabled={!selectedBrand}>Select Model</option>
+                                {renderModels()}
+                            </select>
                         </div>
                     </div>
                     <div className='add-car-main-info-row-wrapper'>

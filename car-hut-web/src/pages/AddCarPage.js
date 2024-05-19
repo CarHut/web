@@ -36,7 +36,7 @@ function AddCarPage() {
     return (
         <div className='body'>
             <Header/>
-            <div className="current-route-text">work in progress</div>
+            {/* <div className="current-route-text">work in progress</div> */}
             <div className="header-section">
                 <div className='add-car-page-header'>Add car</div>
             </div>

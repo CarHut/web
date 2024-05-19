@@ -43,8 +43,8 @@ function AddPhotos() {
         return (
             uploadedImages.map((image, idx) => {
                 return (
-                    <div className='add-car-photos-uploaded-img'>
-                        <img id={idx} src={URL.createObjectURL(image)}/>
+                    <div className='add-car-photos-uploaded-img-wrapper'>
+                        <img className='add-car-photos-uploaded-img' id={idx} src={URL.createObjectURL(image)}/>
                         <div className='x-mark' onClick={(e) => handleRemovedImage(idx)}/>
                     </div>
                     
@@ -56,7 +56,7 @@ function AddPhotos() {
     return (
         <div className='add-car-photos-section'>
             <div className='add-car-photos-header'>Add photos of you car</div>
-            <div className='line-container'/>
+            <div className='add-car-line-container'/>
             <div className='add-car-photos-columns'>
                 <div className='add-car-photos-column-wrapper'>
                     <img className='add-car-photos-loaded-img' src={loadedImage !== null ? URL.createObjectURL(loadedImage) : ""}/>

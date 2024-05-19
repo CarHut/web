@@ -109,7 +109,7 @@ function AdditionalInfo() {
     
         return (
             <>
-                <div className='label'>Next {type} inspection</div>
+                <div className='add-car-label'>Next {type} inspection</div>
                 <input type='date' value={val} onChange={usedHandleFunction}/>
             </>
         )
@@ -117,10 +117,10 @@ function AdditionalInfo() {
 
     const renderCountries = () => {
         return (
-            <div className='add-car-engine-info-combobox-entity'>
-                <div className='label'>Country of origin</div>
-                <div className="add-car-engine-info-custom-combobox">
-                    <select id="brandComboBox" className='add-car-engine-info-myComboBox' value={countryOfOrigin} onChange={(e) => handleNationChange(e.target.value)}>
+            <div className='add-car-additional-info-combobox-entity'>
+                <div className='add-car-label'>Country of origin</div>
+                <div className="add-car-additional-info-custom-combobox">
+                    <select id="brandComboBox" className='add-car-additional-info-myComboBox' value={countryOfOrigin} onChange={(e) => handleNationChange(e.target.value)}>
                         <option value="all" disabled></option>
                         {nations.map((nation, idx) => (
                             <option key={idx} value={nation}>{nation}</option>
@@ -149,7 +149,7 @@ function AdditionalInfo() {
 
         return (
             <>
-                <div className='label'>{label}</div>
+                <div className='add-car-label'>{label}</div>
                 <form className='add-car-additional-info-form'>
                     <div className='add-car-label-additional-info'>
                         <input type='radio' name='option' value='Yes' onClick={usedHandleFunction}/>
@@ -195,7 +195,7 @@ function AdditionalInfo() {
 
         return (
             <>
-                <div className='label'>{label}</div>
+                <div className='add-car-label'>{label}</div>
                 <input className='add-car-additional-info-text-input' style={{"margin": "1em 1em"}} type='text' placeholder='' value={val} onChange={usedHandleFunction}/>    
             </>
         )
@@ -204,14 +204,14 @@ function AdditionalInfo() {
     return (
         <div className='add-car-additional-info-section'>
             <div className='add-car-additional-info-header'>Additional info</div>
-            <div className="line-container"/>
+            <div className="add-car-line-container"/>
             <div className='add-car-additional-info-row-wrapper'>
                 <div className='add-car-additional-info-column-wrapper'>
                     
-                    <div className='label'>Exterior color</div>
+                    <div className='add-car-label'>Exterior color</div>
                     {renderColors('exterior')}
 
-                    <div className='label'>Interior color</div>
+                    <div className='add-car-label'>Interior color</div>
                     {renderColors('interior')}
 
                     {renderInspectionDate('technical')}
@@ -232,68 +232,68 @@ function AdditionalInfo() {
                     {renderInputBox('emClass', 'Emission class')}
                     
                 </div>
-                <div className='add-car-engine-info-content-wrapper'>
-                    <div className='add-car-engine-info-column-wrapper'>
-                        <div className='add-car-engine-info-small-text-darker'>*Brand</div>
-                        <div className='add-car-engine-info-small-text-darker'>*Model</div>
-                        <div className='add-car-engine-info-small-text-darker'>Headline</div>
-                        <div className='add-car-engine-info-small-text-darker'>*Mileage</div>
-                        <div className='add-car-engine-info-small-text-darker'>*Registration</div>
-                        <div className='add-car-engine-info-small-text-darker'>*Price</div>
-                        <div className='add-car-engine-info-small-text-darker'>*Address</div>
-                        <div className='add-car-engine-info-small-text-darker'>*Engine power</div>
-                        <div className='add-car-engine-info-small-text-darker'>Displacement</div>
-                        <div className='add-car-engine-info-small-text-darker'>*Fuel</div>
-                        <div className='add-car-engine-info-small-text-darker'>Average fuel cons.</div>
-                        <div className='add-car-engine-info-small-text-darker'>City fuel cons.</div>
-                        <div className='add-car-engine-info-small-text-darker'>Highway fuel cons.</div>
-                        <div className='add-car-engine-info-small-text-darker'>*Gearbox</div>
-                        <div className='add-car-engine-info-small-text-darker'>Gears</div>
-                        <div className='add-car-engine-info-small-text-darker'>*Powertrain</div>
-                        <div className='add-car-engine-info-small-text-darker'>Exterior color</div>
-                        <div className='add-car-engine-info-small-text-darker'>Interior color</div>
-                        <div className='add-car-engine-info-small-text-darker'>Next tech. inspection date</div>
-                        <div className='add-car-engine-info-small-text-darker'>Next em. inspection date</div>
-                        <div className='add-car-engine-info-small-text-darker'>Country of origin</div>
-                        <div className='add-car-engine-info-small-text-darker'>Damaged</div>
-                        <div className='add-car-engine-info-small-text-darker'>Parking sensors</div>
-                        <div className='add-car-engine-info-small-text-darker'>Parking cameras</div>
-                        <div className='add-car-engine-info-small-text-darker'>Doors</div>
-                        <div className='add-car-engine-info-small-text-darker'>Seats</div>
-                        <div className='add-car-engine-info-small-text-darker'>No. of previous owners</div>
-                        <div className='add-car-engine-info-small-text-darker'>Energy eff. class</div>
-                        <div className='add-car-engine-info-small-text-darker'>Emission class</div>
+                <div className='add-car-additional-info-content-wrapper'>
+                    <div className='add-car-additional-info-column-wrapper'>
+                        <div className='add-car-additional-info-small-text-darker'>*Brand</div>
+                        <div className='add-car-additional-info-small-text-darker'>*Model</div>
+                        <div className='add-car-additional-info-small-text-darker'>Headline</div>
+                        <div className='add-car-additional-info-small-text-darker'>*Mileage</div>
+                        <div className='add-car-additional-info-small-text-darker'>*Registration</div>
+                        <div className='add-car-additional-info-small-text-darker'>*Price</div>
+                        <div className='add-car-additional-info-small-text-darker'>*Address</div>
+                        <div className='add-car-additional-info-small-text-darker'>*Engine power</div>
+                        <div className='add-car-additional-info-small-text-darker'>Displacement</div>
+                        <div className='add-car-additional-info-small-text-darker'>*Fuel</div>
+                        <div className='add-car-additional-info-small-text-darker'>Average fuel cons.</div>
+                        <div className='add-car-additional-info-small-text-darker'>City fuel cons.</div>
+                        <div className='add-car-additional-info-small-text-darker'>Highway fuel cons.</div>
+                        <div className='add-car-additional-info-small-text-darker'>*Gearbox</div>
+                        <div className='add-car-additional-info-small-text-darker'>Gears</div>
+                        <div className='add-car-additional-info-small-text-darker'>*Powertrain</div>
+                        <div className='add-car-additional-info-small-text-darker'>Exterior color</div>
+                        <div className='add-car-additional-info-small-text-darker'>Interior color</div>
+                        <div className='add-car-additional-info-small-text-darker'>Next tech. inspection date</div>
+                        <div className='add-car-additional-info-small-text-darker'>Next em. inspection date</div>
+                        <div className='add-car-additional-info-small-text-darker'>Country of origin</div>
+                        <div className='add-car-additional-info-small-text-darker'>Damaged</div>
+                        <div className='add-car-additional-info-small-text-darker'>Parking sensors</div>
+                        <div className='add-car-additional-info-small-text-darker'>Parking cameras</div>
+                        <div className='add-car-additional-info-small-text-darker'>Doors</div>
+                        <div className='add-car-additional-info-small-text-darker'>Seats</div>
+                        <div className='add-car-additional-info-small-text-darker'>No. of previous owners</div>
+                        <div className='add-car-additional-info-small-text-darker'>Energy eff. class</div>
+                        <div className='add-car-additional-info-small-text-darker'>Emission class</div>
                     </div>
-                    <div className='add-car-engine-info-column-wrapper'>
-                        <div className='add-car-engine-info-small-text'>{currentCarModel.brandId}</div>
-                        <div className='add-car-engine-info-small-text'>{currentCarModel.modelId}</div>
-                        <div className='add-car-engine-info-small-text'>{currentCarModel.header}</div>
-                        <div className='add-car-engine-info-small-text'>{currentCarModel.mileage} km</div>
-                        <div className='add-car-engine-info-small-text'>{currentCarModel.registration}</div>
-                        <div className='add-car-engine-info-small-text'>{currentCarModel.price} €</div>
-                        <div className='add-car-engine-info-small-text'>{currentCarModel.sellerAddress}</div>
-                        <div className='add-car-engine-info-small-text'>{currentCarModel.enginePower} kW</div>
-                        <div className='add-car-engine-info-small-text'>{currentCarModel.engineDisplacement} cm³</div>  
-                        <div className='add-car-engine-info-small-text'>{currentCarModel.fuel}</div>   
-                        <div className='add-car-engine-info-small-text'>{currentCarModel.fuelConsumptionAvg} l/100km</div>   
-                        <div className='add-car-engine-info-small-text'>{currentCarModel.fuelConsumptionCity} l/100km</div>   
-                        <div className='add-car-engine-info-small-text'>{currentCarModel.fuelConsumptionHighway} l/100km</div> 
-                        <div className='add-car-engine-info-small-text'>{currentCarModel.gearbox}</div>  
-                        <div className='add-car-engine-info-small-text'>{currentCarModel.gearboxGears}</div>  
-                        <div className='add-car-engine-info-small-text'>{currentCarModel.powertrain}</div>            
-                        <div className='add-car-engine-info-small-text'>{exteriorColor}</div>
-                        <div className='add-car-engine-info-small-text'>{interiorColor}</div>
-                        <div className='add-car-engine-info-small-text'>{techInspectionDate}</div>
-                        <div className='add-car-engine-info-small-text'>{emInspectionDate}</div>
-                        <div className='add-car-engine-info-small-text'>{countryOfOrigin}</div>
-                        <div className='add-car-engine-info-small-text'>{damage}</div>
-                        <div className='add-car-engine-info-small-text'>{parkSensors}</div>
-                        <div className='add-car-engine-info-small-text'>{parkCameras}</div>
-                        <div className='add-car-engine-info-small-text'>{doors}</div>
-                        <div className='add-car-engine-info-small-text'>{seats}</div>
-                        <div className='add-car-engine-info-small-text'>{previousOwners}</div>
-                        <div className='add-car-engine-info-small-text'>{energyEffClass}</div>
-                        <div className='add-car-engine-info-small-text'>{emissionClass}</div>            
+                    <div className='add-car-additional-info-column-wrapper'>
+                        <div className='add-car-additional-info-small-text'>{currentCarModel.brandId}</div>
+                        <div className='add-car-additional-info-small-text'>{currentCarModel.modelId}</div>
+                        <div className='add-car-additional-info-small-text'>{currentCarModel.header}</div>
+                        <div className='add-car-additional-info-small-text'>{currentCarModel.mileage} km</div>
+                        <div className='add-car-additional-info-small-text'>{currentCarModel.registration}</div>
+                        <div className='add-car-additional-info-small-text'>{currentCarModel.price} €</div>
+                        <div className='add-car-additional-info-small-text'>{currentCarModel.sellerAddress}</div>
+                        <div className='add-car-additional-info-small-text'>{currentCarModel.enginelPower} kW</div>
+                        <div className='add-car-additional-info-small-text'>{currentCarModel.engineDisplacement} cm³</div>  
+                        <div className='add-car-additional-info-small-text'>{currentCarModel.fuel}</div>   
+                        <div className='add-car-additional-info-small-text'>{currentCarModel.fuelConsumptionAvg} l/100km</div>   
+                        <div className='add-car-additional-info-small-text'>{currentCarModel.fuelConsumptionCity} l/100km</div>   
+                        <div className='add-car-additional-info-small-text'>{currentCarModel.fuelConsumptionHighway} l/100km</div> 
+                        <div className='add-car-additional-info-small-text'>{currentCarModel.gearbox}</div>  
+                        <div className='add-car-additional-info-small-text'>{currentCarModel.gearboxGears}</div>  
+                        <div className='add-car-additional-info-small-text'>{currentCarModel.powertrain}</div>            
+                        <div className='add-car-additional-info-small-text'>{exteriorColor}</div>
+                        <div className='add-car-additional-info-small-text'>{interiorColor}</div>
+                        <div className='add-car-additional-info-small-text'>{techInspectionDate}</div>
+                        <div className='add-car-additional-info-small-text'>{emInspectionDate}</div>
+                        <div className='add-car-additional-info-small-text'>{countryOfOrigin}</div>
+                        <div className='add-car-additional-info-small-text'>{damage}</div>
+                        <div className='add-car-additional-info-small-text'>{parkSensors}</div>
+                        <div className='add-car-additional-info-small-text'>{parkCameras}</div>
+                        <div className='add-car-additional-info-small-text'>{doors}</div>
+                        <div className='add-car-additional-info-small-text'>{seats}</div>
+                        <div className='add-car-additional-info-small-text'>{previousOwners}</div>
+                        <div className='add-car-additional-info-small-text'>{energyEffClass}</div>
+                        <div className='add-car-additional-info-small-text'>{emissionClass}</div>            
                         
                     </div>        
                 </div>

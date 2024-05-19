@@ -1,35 +1,36 @@
 .add-car-photos-section {
     background-color: #181818;
-    margin: 2em 20em;
-    padding: 1em 3em;
+    margin: 2vw 20vw;
+    padding: 1vw 3vw;
     display: block;
 }
 
 .add-car-photos-header {
     color: #ffffff;
-    font-size: 2em;
+    font-size: 2vw;
 }
 
-.line-container {
+.add-car-line-container {
     position: relative;
     width: 100%; 
     height: 2px; 
     background-color: #898989;
-    margin-bottom: 0.3em;
-    margin: 2em 0;
+    margin-bottom: 0.3vw;
+    margin: 2vw 0;
 }
 
 .add-car-photo-styled-button {
     background-color: #313131;
     color: #ffffff;
-    padding: 10px 20px;
-    font-size: 1em;
+    padding: 1vw 2vw;
+    font-size: 1vw;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
     text-align: center;
-    width: 8em;
+    width: 8vw;
+    margin: 2vw 0vw;
 }
 
 .add-car-photo-styled-button:hover {
@@ -49,7 +50,8 @@
 
 .add-car-photos-loaded-img {
     object-fit: scale-down;
-    height: 15em;
+    width: 80%;
+    height: auto;
 }
 
 .add-car-photos-uploaded-images-wrapper {
@@ -57,22 +59,25 @@
     flex-wrap: wrap;
 }
 
-.add-car-photos-uploaded-img {
+.add-car-photos-uploaded-img-wrapper {
     position: relative;
     display: inline-block;
-    object-fit: scale-down;
-    max-width: 100%;
+    margin: 2vw 1vw;
+}
+
+.add-car-photos-uploaded-img {
+    width: 10vw;
     height: auto;
-    height: 5em;
-    margin: 2em 1em;
+    object-fit: scale-down;
 }
 
 .x-mark {
     position: absolute;
-    top: 5px; /* Adjust the top distance as needed */
-    right: 5px; /* Adjust the right distance as needed */
-    width: 20px;
-    height: 20px;
+    top: 0.5vw;
+    right: 0.5vw;
+    width: 1vw;
+    height: 1vw;
+    font-size: 0.9vw;
     background-color: red;
     border-radius: 50%;
     display: flex;
@@ -81,8 +86,59 @@
     cursor: pointer;
     color: white;
     font-weight: bold;
-  }
-  
-  .x-mark::after {
-    content: 'X';
-  }
+}
+
+.x-mark::after {
+    content: '×';
+}
+
+@media screen and (max-width: 1350px) {
+    .add-car-photos-section {
+        margin: 2vw 0vw;
+    }
+    
+    .add-car-photos-header {
+        font-size: 3vw;
+    }
+    
+    .add-car-photo-styled-button {
+        font-size: 1.5vw;
+        width: 12vw;
+        margin: 3vw 0vw;
+    }
+
+    .add-car-photos-uploaded-img {
+        width: 15vw;
+    }
+    
+    .x-mark {
+        width: 1.7vw;
+        height: 1.7vw;
+        font-size: 1.2vw;
+    }
+
+}
+
+@media screen and (max-width: 600px) {
+    
+    .add-car-photos-header {
+        font-size: 5vw;
+    }
+    
+    .add-car-photo-styled-button {
+        font-size: 2.5vw;
+        width: 20vw;
+        margin: 3vw 0vw;
+    }
+
+    .add-car-photos-uploaded-img {
+        width: 15vw;
+    }
+    
+    .x-mark {
+        width: 2vw;
+        height: 2vw;
+        font-size: 1.3vw;
+    }
+
+}

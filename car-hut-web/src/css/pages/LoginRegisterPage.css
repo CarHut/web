@@ -46,6 +46,11 @@
     font-size: 1vw;
 } 
 
+.register-row-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 @media screen and (max-width: 1350px) {
     .login-page-body {
         padding: 2vw 0vw;

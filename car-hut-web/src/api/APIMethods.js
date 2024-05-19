@@ -357,6 +357,18 @@ const APIMethods = {
     getNumberOfFilteredCars: async (url) => {
         const response = await fetch(Constants.baseAPIPath + "carhut/getNumberOfFilteredCars?" + url);
         return await response.json();
+    },
+    registerInitiate: async (registrationBody) => {
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(registrationBody)
+        }
+
+        const response = await fetch(Constants.baseAPIPath + "register/registerInitiate", requestOptions);
+        return response;
     }
 
 }
