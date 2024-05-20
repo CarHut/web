@@ -369,8 +369,51 @@ const APIMethods = {
 
         const response = await fetch(Constants.baseAPIPath + "register/registerInitiate", requestOptions);
         return response;
-    }
+    },
+    verifyAccount: async (token) => {
+        const response = await fetch(Constants.baseAPIPath + `register/verifyAccount?token=${token}`);
+        return response;
+    },
+    getUsernameByUserId: async (userId) => {
+        const response = await fetch(Constants.baseAPIPath + `carhut/getUsernameByUserId?userId=${userId}`);
+        return await response.text();
+    },
+    getFirstNameAndSurnameByUserId: async (userId) => {
+        const response = await fetch(Constants.baseAPIPath + `carhut/getFirstNameAndSurnameByUserId?userId=${userId}`);
+        return await response.text();
+    },
+    getOffersNumByUserId: async (userId) => {
+        const response = await fetch(Constants.baseAPIPath + `carhut/getOffersNumByUserId?userId=${userId}`);
+        return await response.text();
+    },
+    getEmailByUserId: async (userId) => {
+        const response = await fetch(Constants.baseAPIPath + `carhut/getEmailByUserId?userId=${userId}`);
+        return await response.text(); 
+    },
+    getMyListings: async () => {
+        const requestOption = {
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                'Content-Type': 'application/json'
+            }
+        };
 
+        const response = await fetch(Constants.baseAPIPath + `carhut/getMyListings?username=${localStorage.getItem('username')}`, requestOption);
+        return await response.json(); 
+    },
+    removeOffer: async (carId) => {
+        const requestOption = {
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                'Content-Type': 'application/json'
+            }
+        };
+
+        const response = await fetch(Constants.baseAPIPath + `carhut/removeOffer?carId=${carId}`, requestOption);
+        return await response.text(); 
+    }
 }
 
 export default APIMethods;

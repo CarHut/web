@@ -14,10 +14,8 @@ function Features({ car }) {
     }
 
     useEffect(() => {
-        if (car.features === null || car.features === undefined) {
+        if (car.features !== null || car.features !== undefined) {
             fetchFeatures();
-        } else {
-            setFeatures(car.features);
         }
     }, []);
 

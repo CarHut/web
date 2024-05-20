@@ -8,6 +8,9 @@ import LoginRegisterPage from '../../pages/LoginRegisterPage';
 import UserProfilePage from "../../pages/UserProfilePage";
 import PasswordResetPage from "../../pages/PasswordResetPage";
 import AddCarPage from "../../pages/AddCarPage";
+import CheckEmailPage from "../loginregisterpage/CheckEmailPage";
+import SuccessfulVerificationPage from "../loginregisterpage/SuccessfulVerificationPage";
+import MyListings from "../userprofilepage/MyListings";
 
 function Routing() {
 
@@ -38,6 +41,9 @@ function Routing() {
           <Route path='/addCar/addPhotos' element={<AddCarPage/>}/>
           <Route path='/addCar/summary' element={<AddCarPage/>}/>
           <Route path='/addCar/success' element={<AddCarPage/>}/>
+          <Route path='/register/emailSent' element={<CheckEmailPage/>}/>
+          <Route path='/register/successfulVerification' element={<SuccessfulVerificationPage/>}/>
+          <Route path='/userProfile/myListings' element={<UserProfilePage/>}/>
         </Routes>
     );
 }

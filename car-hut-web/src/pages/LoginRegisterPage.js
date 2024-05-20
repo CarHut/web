@@ -99,10 +99,17 @@ function LoginRegisterPage() {
                 case 'INVALID_PASSWORD':
                     setShowRegistrationError(true);
                     setRegistrationErrorMessage('Password contains invalid character/s.');
-                    break;                                       
+                    break; 
+                case 'REGISTRATION_TOKEN_ALREADY_SENT':
+                    setShowRegistrationError(true);
+                    setRegistrationErrorMessage(`E-mail with verification was already sent to ${registerEmail}.`)                                      
                 default:
                     break;
             }
+        }
+
+        if (responseText === 'SUCCESS') {
+            navigate('/register/emailSent', { state: { email: registerEmail} });
         }
 
     }

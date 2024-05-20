@@ -13,9 +13,24 @@ function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength, setL
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
     const [imagesForDisplayedCars, setImagesForDisplayedCars] = useState([]);
+    const [sellerNames, setSellerNames] = useState([]);
+
+    const fetchFirstNameAndSurname = async (userId) => {
+        const username = await APIMethods.getFirstNameAndSurnameByUserId(userId);
+        return username;
+    }
+
+    const fetchSellerInfoOfLoadedCars = async () => {
+        const sellersArray = [];
+        for (let i = 0; i < cars.length; i++) {
+            sellersArray.push(await fetchFirstNameAndSurname(cars[i].sellerId));
+        }
+
+        setSellerNames(sellersArray);
+    }
 
     const fetchCars = async () => {
-        const sortOrder = sortBy[sortBy.length - 1] == 'L' ? "ASC" : "DESC";
+        const sortOrder = sortBy[sortBy.length - 1] == 'L' || sortBy[sortBy.length - 1] == 'O' ? "ASC" : "DESC";
 
         const url = Constants.baseAPIPath + `carhut/getCarsWithFilters?` +
             `&priceFrom=${fetchedState.price.priceFrom}&priceTo=${fetchedState.price.priceTo}&mileageFrom=${fetchedState.mileage.mileageFrom}` +
@@ -50,6 +65,7 @@ function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength, setL
 
     useEffect(() => {
         fetchImagesForDisplayedCars();
+        fetchSellerInfoOfLoadedCars();
     }, [cars])
 
     const fetchImagesForDisplayedCars = async () => {
@@ -90,6 +106,7 @@ function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength, setL
                                     <div className='car-stats-text'>{car.registration}</div>
                                     <div className='car-stats-text'>{car.enginePower}</div>
                                     <div className='car-stats-text'>{car.fuel}</div>
+                                    <div className='car-stats-text'>{new Date(car.dateAdded).toDateString()}</div>
                                 </div>
                                 <div className='car-stats-column'>
                                     <div className='car-stats-text'>{car.bodyType}</div>
@@ -101,7 +118,7 @@ function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength, setL
                                 <div className='car-stats-column'>
                                     <div className='car-stats-text'>Seller</div>
                                     <div className='line-container-seller' />
-                                    <div className='car-stats-text'>{car.sellerId}</div>
+                                    <div className='car-stats-text'>{sellerNames[index]}</div>
                                     <div className='car-stats-text'>{car.sellerAddress}</div>
                                 </div>
                             </div>

@@ -29,10 +29,14 @@ function ProfileNavigation() {
                     <img className='profile-navigation-entity-img' src={require('../../images/userprofilepage/saved_searches.png')}/>
                     <div className='profile-navigation-entity-text'>Saved searches</div>
                 </div>
-                <div className='profile-navigation-entity'>
-                    <img className='profile-navigation-entity-img' src={require('../../images/userprofilepage/saved_searches.png')}/>
+                <Link 
+                    className='profile-navigation-entity'
+                    to={'/userProfile/myListings'}
+                    style={{"textDecoration": "none"}}
+                >
+                    <img className='profile-navigation-entity-img' src={require('../../images/userprofilepage/my_listings.png')}/>
                     <div className='profile-navigation-entity-text'>My listings</div>
-                </div>
+                </Link>
                 <div className='profile-navigation-entity'>
                     <img className='profile-navigation-entity-img' src={require('../../images/userprofilepage/saved_searches.png')}/>
                     <div className='profile-navigation-entity-text'>My inquiries</div>
@@ -67,10 +71,14 @@ function ProfileNavigation() {
                     <img className='mobile-profile-navigation-entity-img' src={require('../../images/userprofilepage/saved_searches.png')}/>
                     <div className='mobile-profile-navigation-entity-text'>Saved searches</div>
                 </div>
-                <div className='mobile-profile-navigation-entity'>
-                    <img className='mobile-profile-navigation-entity-img' src={require('../../images/userprofilepage/saved_searches.png')}/>
+                <Link 
+                    className='mobile-profile-navigation-entity'
+                    to={'/userProfile/myListings'}
+                    style={{"textDecoration": "none"}}
+                >
+                    <img className='mobile-profile-navigation-entity-img' src={require('../../images/userprofilepage/my_listings.png')}/>
                     <div className='mobile-profile-navigation-entity-text'>My listings</div>
-                </div>
+                </Link>
                 <div className='mobile-profile-navigation-entity'>
                     <img className='mobile-profile-navigation-entity-img' src={require('../../images/userprofilepage/saved_searches.png')}/>
                     <div className='mobile-profile-navigation-entity-text'>My inquiries</div>

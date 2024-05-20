@@ -4,6 +4,16 @@ import { useEffect, useState } from 'react';
 
 function CarMainInfo({car}) {
     const [carModel, setCarModel] = useState(car);
+    const [carSellerFullName, setCarSellerFullName] = useState('');
+
+    const fetchSellerFullName = async (sellerId) => {
+        const fullName = await APIMethods.getFirstNameAndSurnameByUserId(sellerId);
+        setCarSellerFullName(fullName);
+    }
+
+    useEffect(() => {
+        fetchSellerFullName(carModel.sellerId);
+    }, []);
 
     const addCarToWishlist = async () => {
         const state = APIMethods.addCarToSavedByUser(-999, localStorage.getItem('username'), carModel.id);
@@ -33,7 +43,7 @@ function CarMainInfo({car}) {
                         </div>
                         <div className='car-offer-main-info-price-status-label'>Good price</div>
                         <div className='car-offer-main-info-line-container'/>
-                        <div className='car-offer-main-info-seller-name-label'>{carModel.sellerId}</div>
+                        <div className='car-offer-main-info-seller-name-label'>{carSellerFullName}</div>
                         <div className='car-offer-main-info-seller-address-label'>{carModel.sellerAddress}</div>
                         <button className='car-offer-main-info-button'>Contant seller</button>
                     </div>

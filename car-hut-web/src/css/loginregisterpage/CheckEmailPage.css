@@ -1,0 +1,27 @@
+.check-email-body {
+    display: block;
+}
+
+.check-email-content-wrapper {
+    background-color: #313131;
+    color: #fff;
+    padding: 2vw 20vw;
+}
+
+.check-email-content-header {
+    font-size: 2vw;
+    color: #fff;
+}
+
+.check-email-content-body {
+    padding: 2vw 0;    
+    border: #181818 solid 1vw;
+}
+
+.check-email-content-body-text {
+    font-size: 1vw;
+    color: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0vw 2vw;
+}

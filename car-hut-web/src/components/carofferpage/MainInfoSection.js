@@ -1,4 +1,3 @@
-import { keyboard, specialCharMap } from '@testing-library/user-event/dist/keyboard';
 import '../../css/carofferpage/MainInfoSection.css';
 import CarMainInfo from './CarMainInfo';
 import PhotosSection from './PhotosSection';

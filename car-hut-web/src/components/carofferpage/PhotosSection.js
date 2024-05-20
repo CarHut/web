@@ -13,7 +13,7 @@ function PhotosSection({ car }) {
     const [carModel, setCarModel] = useState(car);
 
     useEffect(() => {
-        if (carModel === undefined || carModel === null) {
+        if (carModel.images === undefined || carModel.images === null) {
             //fetching images from backend
             fetchImages(car.id);
         } else {
