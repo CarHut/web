@@ -16,10 +16,21 @@ function MainSection({state}) {
         setFetchedState(updatedState);
     }
 
+    useEffect(() => {
+        if (state.sortBy !== undefined && state.sortBy !== null && state.sortBy !== "" && state.sortBy !== " ") {
+            setSortBy(state.sortBy);
+        }
+
+        if (state.offersPerPage !== undefined && state.offersPerPage !== null && state.offersPerPage !== "") {
+            setOffersPerPage(state.offersPerPage);
+        }
+
+    }, [state])
+
     return (
         <div className='section-body-search-list-main-section'>
             <div className='search-list-left-wrapper'>  
-                <UpperNav offersPerPage={offersPerPage} setOffersPerPage={setOffersPerPage} sortBy={sortBy} setSortBy={setSortBy}/>
+                <UpperNav fetchedState={fetchedState} offersPerPage={offersPerPage} setOffersPerPage={setOffersPerPage} sortBy={sortBy} setSortBy={setSortBy}/>
                 <div className='extended-filters-mobile-version'>
                     <ExtendedFilters fetchedState={fetchedState} resultsListLength={resultsListLength} loadingResultsListLength={loadingResultsListLength} 
                     setLoadingResultsListLength={setLoadingResultsListLength} handleStateChange={(e) => handleStateChange(e)}/>

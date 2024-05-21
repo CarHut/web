@@ -100,7 +100,7 @@ function MyListings() {
 
     return (
         <div className='my-listings-wrapper'>
-            <div className='profile-content-header'>Saved cars</div>
+            <div className='profile-content-header'>My listings</div>
             <div className='my-listings-content-wrapper'>
             {renderMyListings()}
             </div>

@@ -1,0 +1,35 @@
+.saved-searches-wrapper {
+    display: block;
+}
+
+.saved-searches-content-wrapper {
+    display: block;
+}
+
+.saved-searches-line-separator {
+    position: relative;
+    width: 100%;
+    height: 2px;
+    background-color: #898989;
+    margin: 2vw 0;
+}
+
+.saved-search-entity {
+    display: flex;
+}
+
+.saved-search-entity-column {
+    display: block;
+    margin-right: 2vw;
+}
+
+.saved-search-entity-text {
+    font-size: 1vw;
+    color: #fff;
+}
+
+.saved-search-entity-text-opacity {
+    font-size: 1vw;
+    color: #fff;
+    opacity: 70%;
+}

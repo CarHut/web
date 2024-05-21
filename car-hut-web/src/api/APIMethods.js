@@ -354,8 +354,16 @@ const APIMethods = {
         const response =  await fetch(Constants.baseAPIPath + 'carhut/addCarToDatabase', requestOptions);
         return response;
     },
-    getNumberOfFilteredCars: async (url) => {
-        const response = await fetch(Constants.baseAPIPath + "carhut/getNumberOfFilteredCars?" + url);
+    getNumberOfFilteredCars: async (url, models) => {
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(models)
+        }
+
+        const response = await fetch(Constants.baseAPIPath + "carhut/getNumberOfFilteredCars?" + url, requestOptions);
         return await response.json();
     },
     registerInitiate: async (registrationBody) => {
@@ -412,6 +420,43 @@ const APIMethods = {
         };
 
         const response = await fetch(Constants.baseAPIPath + `carhut/removeOffer?carId=${carId}`, requestOption);
+        return await response.text(); 
+    },
+    addNewSavedSearch: async (savedSearchEntity) => {
+        const requestOption = {
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(savedSearchEntity)
+        };
+
+        const response = await fetch(Constants.baseAPIPath + `carhut/savedSearches/addNewSavedSearch`, requestOption);
+        return await response.text(); 
+    },
+    getSavedSearchesByUsername: async (username) => {
+        const requestOption = {
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                'Content-Type': 'application/json'
+            }
+        };
+
+        const response = await fetch(Constants.baseAPIPath + `carhut/savedSearches/getSavedSearchesByUsername?username=${username}`, requestOption);
+        return await response.json(); 
+    },
+    getUserIdByUsername: async (username) => {
+        const requestOption = {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                'Content-Type': 'application/json'
+            }
+        };
+
+        const response = await fetch(Constants.baseAPIPath + `carhut/getUserIdByUsername?username=${username}`, requestOption);
         return await response.text(); 
     }
 }

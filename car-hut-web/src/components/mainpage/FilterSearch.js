@@ -18,7 +18,7 @@ function FilterSearch() {
 
     const updateSearchedCarsNumber = async () => {
         try {
-            const result = await updateNumberOfSearchResults(selectedBrand, selectedModel, "", selectedPriceFrom, "", selectedMileageFrom, "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+            const result = await APIMethods.getNumberOfFilteredCars(`brand=${selectedBrand}&model=${selectedModel}&priceFrom=${selectedPriceFrom}&mileageFrom=${selectedMileageFrom}`, null) 
             setSearchedCarsNumber(result);
             setLoadingSearchedCarsNumber(false);
         } catch (error) {

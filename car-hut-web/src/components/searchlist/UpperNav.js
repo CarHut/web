@@ -1,6 +1,7 @@
+import APIMethods from '../../api/APIMethods';
 import '../../css/searchlist/UpperNav.css';
 
-function UpperNav({offersPerPage, setOffersPerPage, sortBy, setSortBy}) {
+function UpperNav({ fetchedState, offersPerPage, setOffersPerPage, sortBy, setSortBy }) {
     
     const handleOffersPerPageChange = (e) => {
         setOffersPerPage(e.target.value);
@@ -47,6 +48,27 @@ function UpperNav({offersPerPage, setOffersPerPage, sortBy, setSortBy}) {
         )
     }
 
+    const saveSearch = async () => {
+        const searchBody = {
+            id: 'NULL',
+            userId: await APIMethods.getUserIdByUsername(localStorage.getItem('username')),
+            sortBy: sortBy,
+            offersPerPage: offersPerPage,
+            brandsAndModels: fetchedState.models,
+            priceFrom: fetchedState.price.priceFrom,
+            priceTo: fetchedState.price.priceTo,
+            mileageFrom: fetchedState.mileage.mileageFrom,
+            mileageTo: fetchedState.mileage.mileageTo,
+            fuelType: fetchedState.fuelType,
+            gearboxType: fetchedState.gearbox,
+            powertrainType: fetchedState.powertrain,
+            powerFrom: fetchedState.power.powerFrom,
+            powerTo: fetchedState.power.powerTo
+        }
+        
+        const response = await APIMethods.addNewSavedSearch(searchBody);
+    }
+
     return (
         <div className='search-list-upper-nav-wrapper'>
             <div className='combobox-entity-upper-nav'>
@@ -57,7 +79,7 @@ function UpperNav({offersPerPage, setOffersPerPage, sortBy, setSortBy}) {
                 <div className='sort-dropdown-label-upper-nav'>Offers per page</div>
                 {renderOfferPerPageComboBox()}
             </div>
-            <div className="styled-button-upper-nav">Save search</div>
+            <div className="styled-button-upper-nav" onClick={() => saveSearch()}>Save search</div>
         </div>
     );
 }

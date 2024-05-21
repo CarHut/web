@@ -44,6 +44,7 @@ function Routing() {
           <Route path='/register/emailSent' element={<CheckEmailPage/>}/>
           <Route path='/register/successfulVerification' element={<SuccessfulVerificationPage/>}/>
           <Route path='/userProfile/myListings' element={<UserProfilePage/>}/>
+          <Route path='/userProfile/savedSearches' element={<UserProfilePage/>}/>
         </Routes>
     );
 }

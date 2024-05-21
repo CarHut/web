@@ -45,7 +45,8 @@ function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength, setL
             const length = await APIMethods.getNumberOfFilteredCars(
             `priceFrom=${fetchedState.price.priceFrom}&priceTo=${fetchedState.price.priceTo}&mileageFrom=${fetchedState.mileage.mileageFrom}` +
             `&mileageTo=${fetchedState.mileage.mileageTo}&fuelType=${fetchedState.fuelType}&gearbox=${fetchedState.gearbox}&powertrain=${fetchedState.powertrain}` +
-            `&powerFrom=${fetchedState.power.powerFrom}&powerTo=${fetchedState.power.powerTo}`
+            `&powerFrom=${fetchedState.power.powerFrom}&powerTo=${fetchedState.power.powerTo}`, 
+                fetchedState.models
             );
 
             setTotalPages(Math.ceil(length / offersPerPage));

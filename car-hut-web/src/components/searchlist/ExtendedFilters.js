@@ -24,6 +24,10 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange, l
 
     useEffect(() => {
         fetchBrands();
+        if (fetchedState.brandsAndModels !== undefined && fetchedState.brandsAndModels !== null) {
+            console.log('been there');
+            setBrandsAndModels(fetchedState.brandsAndModels);
+        }
     }, []);
 
     useEffect(() => {
@@ -279,7 +283,7 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange, l
         return (
             <div className='combobox-entity-extended-filters'>
                 <div className="custom-combobox-extended-filters">
-                    <select id="fuelComboBox" className='my-combobox-extended-filters' onChange={(e) => handleFuelTypeChange(e.target.value)}>
+                    <select id="fuelComboBox" className='my-combobox-extended-filters' value={fuelType} onChange={(e) => handleFuelTypeChange(e.target.value)}>
                         <option key={1} value={""}>Any</option>
                         <option key={2} value={'NotStated'}>Not stated</option>
                         <option key={3} value={'Hybrid'}>Hybrid</option>
@@ -298,7 +302,7 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange, l
         return (
             <div className='combobox-entity-extended-filters'>
                 <div className="custom-combobox-extended-filters">
-                    <select id="gearboxComboBox" className='my-combobox-extended-filters' onChange={(e) => handleGearboxChange(e.target.value)}>
+                    <select id="gearboxComboBox" className='my-combobox-extended-filters' value={gearbox} onChange={(e) => handleGearboxChange(e.target.value)}>
                         <option key={1} value={""}>Any</option>
                         <option key={2} value={'NotStated'}>Not stated</option>
                         <option key={3} value={'Manual'}>Manual</option>
@@ -333,7 +337,7 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange, l
         return (
             <div className='combobox-entity-extended-filters'>
                 <div className="custom-combobox-extended-filters">
-                    <select id="gearboxComboBox" className='my-combobox-extended-filters' onChange={(e) => handlePowertrainChange(e.target.value)}>
+                    <select id="gearboxComboBox" className='my-combobox-extended-filters' value={powertrain} onChange={(e) => handlePowertrainChange(e.target.value)}>
                         <option key={1} value={""}>Any</option>
                         <option key={2} value={'Other'}>Other</option>
                         <option key={3} value={'NotStated'}>Not stated</option>
