@@ -28,13 +28,30 @@ const SocketAPI = {
             window.dispatchEvent(new Event("storage"));
         }
 
+
         return socket;
     },
     fetchChats: async (username) => {
         const response = await fetch(Constants.baseMessagingAPIPath + `/getAllMyChatsByDateDesc?myUsername=${username}`)
         const chatsJson = await response.json();
         return chatsJson;
-    } 
+    },
+    fetchMessagesWithUser: async (myUserId, otherUserId) => {
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                senderId: myUserId,
+                recipientId: otherUserId
+            })
+        };
+
+        const response = await fetch(Constants.baseMessagingAPIPath + '/getLastFiftyMessagesWithUser', requestOptions);
+        const messages = await response.json();
+        return messages;
+    },
 
     
 }

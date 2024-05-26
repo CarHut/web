@@ -46,6 +46,7 @@ function Routing() {
           <Route path='/userProfile/myListings' element={<UserProfilePage/>}/>
           <Route path='/userProfile/savedSearches' element={<UserProfilePage/>}/>
           <Route path='/userProfile/chats' element={<UserProfilePage/>}/>
+          <Route path='/userProfile/chats/with' element={<UserProfilePage/>}/>
         </Routes>
     );
 }

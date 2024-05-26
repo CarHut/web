@@ -5,8 +5,9 @@ import SavedCars from './SavedCars';
 import MyListings from './MyListings';
 import SavedSearches from './SavedSearches';
 import Chats from './Chats';
+import ChatInterface from './ChatInterface';
 
-function ProfileContent() {
+function ProfileContent({ socket }) {
 
     const location = useLocation();
 
@@ -23,7 +24,9 @@ function ProfileContent() {
         else if (location.pathname === '/userProfile/savedSearches') {
             return <SavedSearches/>;
         } else if (location.pathname === '/userProfile/chats') {
-            return <Chats/>;
+            return <Chats socket={socket}/>;
+        } else if (location.pathname === '/userProfile/chats/with') {
+            return <ChatInterface socket={socket}/>;
         }
 
         return <div/>;

@@ -2,7 +2,7 @@ import '../../css/userprofilepage/MainWrapper.css';
 import ProfileContent from './ProfileContent';
 import ProfileNavigation from './ProfileNavigation';
 
-function MainWrapper() {
+function MainWrapper({ socket }) {
     return (
         <div className='section-body-user-page-main-section'>
             <div className='user-page-left-wrapper'>
@@ -10,7 +10,7 @@ function MainWrapper() {
             </div>
             <div className='user-page-vertical-line-container'/>
             <div className='user-page-right-wrapper'>
-                <ProfileContent/>
+                <ProfileContent socket={socket}/>
             </div>
         </div>
     );

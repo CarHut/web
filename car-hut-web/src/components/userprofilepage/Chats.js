@@ -1,10 +1,9 @@
-import { keyboard } from '@testing-library/user-event/dist/keyboard';
 import APIMethods from '../../api/APIMethods';
 import '../../css/userprofilepage/Chats.css';
-
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
-function Chats() {
+function Chats({ socket }) {
 
     const [chats, setChats] = useState([]);
     const [usernames, setUsernames] = useState([]);
@@ -47,9 +46,6 @@ function Chats() {
     }
 
     const renderChats = () => {
-        // if (chats === null || chats === undefined || (chats instanceof Object && chats.constructor === Object)) {
-        //     return;
-        // }
 
         const result = chats.map((chat, idx) => {
             
@@ -58,7 +54,11 @@ function Chats() {
                 const role = usernames[idx].role === 'sender' ? usernames[idx].username : 'You';
 
                 return (
-                    <div className='chats-entity' id={idx} key={idx}>
+                    <Link 
+                        className='chats-entity' id={idx} key={idx}
+                        to={`/userProfile/chats/with?username=${usernames[idx].username}`}
+                        style={{textDecoration: "none"}}
+                    >
                         <img className='chats-entity-img' src={require('../../images/userprofilepage/chats.png')}/>
                         <div className='chats-entity-text-wrapper'>
                             <div className='chats-username'>{usernames[idx].username}</div>
@@ -69,7 +69,7 @@ function Chats() {
                                 <div className='chats-time-delivered-text'>{date}</div>
                             </div>
                         </div>
-                    </div>
+                    </Link>
                 )
             }
         });

@@ -1,0 +1,196 @@
+.chat-interface-wrapper {
+    display: block;
+}
+
+.chat-interface-content-wrapper {
+    display: block;
+    margin-right: 2vw;
+    width: 100%;
+}
+
+.chat-interface-upper-nav {
+    display: flex;
+    background-color: #313131;
+}
+
+.chat-interface-main-body {
+    background-color: #313131;
+    padding: 2vw 0vw;
+    max-height: 25vw;
+    height: 25vw;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.chat-interface-my-message {
+    color: #fff;
+    margin-right: 2vw;
+    font-size: 1vw;
+    word-wrap: break-word;
+    margin-top: 2vw;
+    background-color: blue;
+    padding: 1vw 2vw;
+    border-radius: 2vw;
+}
+
+.chat-interface-other-user-message {
+    color: #fff;
+    margin-left: 2vw;
+    font-size: 1vw;
+    margin-top: 2vw;
+    word-wrap: break-word;
+    background-color: #181818;
+    padding: 1vw 2vw;
+    border-radius: 2vw;
+}
+
+.chat-interface-box {
+    height: 100%;
+    width: 100%;
+    padding: 0vw;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.chat-interface-delivered-time-text {
+    font-size: 0.7vw;
+    color: #fff;
+    padding: 0vw 2vw;
+}
+
+.chat-interface-my-messages-side {
+    max-width: 50%;
+    align-self: flex-end;
+}
+
+.chat-interface-other-messages-side {
+    max-width: 50%;
+    align-self: flex-start;
+}
+
+.chat-interface-input-container {
+    width: 100%;
+    background-color: #313131;
+    display: flex;
+    align-items: center;
+    padding-bottom: 2vw;
+}
+
+.chat-interface-message-input {
+    width: 80%;
+    background-color: #181818;
+    border: none;
+    margin-left: 2vw;
+    margin-right: 1vw;
+    height: 2vw;
+    color: #fff;
+    font-size: 1vw;
+    padding-left: 1vw;
+    border-radius: 1vw;
+}
+
+.chat-interface-message-input:focus {
+}
+
+.chat-interface-arrow-right-button {
+    width: 0;
+    height: 0;
+    border-top: 1vw solid transparent;
+    border-bottom: 1vw solid transparent;
+    border-left: 1.5vw solid #fff; /* Adjust color as needed */
+}
+
+.chat-interface-arrow-right-button:hover {
+    cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+    
+    .chat-interface-wrapper {
+        width: 100%;
+    }
+
+    .chat-interface-content-wrapper {
+        display: block;
+        margin-right: 2vw;
+        width: 90%;
+    }
+    
+    .chat-interface-upper-nav {
+        display: flex;
+        background-color: #313131;
+    }
+    
+    .chat-interface-main-body {
+        padding: 4vw 0vw;
+        max-height: 80vw;
+        height: 80vw;
+    }
+    
+    .chat-interface-my-message {
+        margin-right: 4vw;
+        font-size: 3vw;
+        word-wrap: break-word;
+        margin-top: 2vw;
+        background-color: blue;
+        padding: 1vw 2vw;
+        border-radius: 2vw;
+    }
+    
+    .chat-interface-other-user-message {
+        color: #fff;
+        margin-left: 2vw;
+        font-size: 3vw;
+        margin-top: 2vw;
+        word-wrap: break-word;
+        background-color: #181818;
+        padding: 1vw 2vw;
+        border-radius: 2vw;
+    }
+    
+    .chat-interface-box {
+        height: 100%;
+        width: 100%;
+        padding: 0vw;
+    }
+    
+    .chat-interface-delivered-time-text {
+        font-size: 2vw;
+        padding: 0vw 2vw;
+        margin-top: 1vw;
+    }
+    
+    .chat-interface-my-messages-side {
+        max-width: 50%;
+        align-self: flex-end;
+    }
+    
+    .chat-interface-other-messages-side {
+        max-width: 50%;
+        align-self: flex-start;
+    }
+    
+    .chat-interface-input-container {
+        width: 100%;
+        padding-bottom: 3vw;
+    }
+    
+    .chat-interface-message-input {
+        width: 80%;
+        margin-left: 4vw;
+        height: 5vw;
+        font-size: 3vw;
+    }
+    
+    .chat-interface-message-input:focus {
+    }
+    
+    .chat-interface-arrow-right-button {
+        border-top: 2.5vw solid transparent;
+        border-bottom: 2.5vw solid transparent;
+        border-left: 3vw solid #fff; /* Adjust color as needed */
+        margin-left: 2vw;
+    }
+}
