@@ -8,10 +8,21 @@ import SuccessPage from '../components/addcarpage/SuccessPage';
 import Summary from '../components/addcarpage/Summary';
 import '../css/pages/AddCarPage.css';
 import { useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
+import SocketAPI from '../messaging/SocketAPI';
 
 function AddCarPage() {
 
     const loc = useLocation();
+
+    // Socket reconnecting
+    useEffect(() => {    
+        if (localStorage.getItem('socket') != null && localStorage.getItem('socket') != undefined) {
+            localStorage.removeItem('socket')
+            const socket = SocketAPI.connectToSocket(localStorage.getItem('username'));
+            localStorage.setItem('socket', socket);
+        }
+    }, []);
 
     const renderSection = () => {
         if (loc.pathname === '/addCar/mainInfo') {

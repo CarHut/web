@@ -4,6 +4,7 @@ import Account from './Account';
 import SavedCars from './SavedCars';
 import MyListings from './MyListings';
 import SavedSearches from './SavedSearches';
+import Chats from './Chats';
 
 function ProfileContent() {
 
@@ -21,6 +22,8 @@ function ProfileContent() {
         }
         else if (location.pathname === '/userProfile/savedSearches') {
             return <SavedSearches/>;
+        } else if (location.pathname === '/userProfile/chats') {
+            return <Chats/>;
         }
 
         return <div/>;

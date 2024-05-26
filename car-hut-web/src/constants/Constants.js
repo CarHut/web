@@ -1,6 +1,9 @@
 const Constants = {
-    baseAPIPath: 'http://95.102.81.72/api/',
-    baseAddressPath: 'http://95.102.81.72/'
+    baseAPIPath: 'http://192.168.1.12:8080/api/',
+    baseAddressPath: 'http://192.168.1.12:8080/',
+
+    socketAddress: 'ws://192.168.1.12:8081/chat',
+    baseMessagingAPIPath: 'http://192.168.1.12:8081/api/chat'
 }
 
 

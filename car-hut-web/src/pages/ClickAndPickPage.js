@@ -11,9 +11,21 @@ import CategoriesSection from "../components/clickandpickpage/CategoriesSection"
 import "../css/pages/ClickAndPickPage.css"
 import { useLocation } from "react-router-dom";
 import ColorSection from "../components/clickandpickpage/ColorSection";
+import { useEffect } from "react";
+import SocketAPI from "../messaging/SocketAPI";
+
 
 function ClickAndPickPage() {
     const location = useLocation();
+
+    // Socket reconnecting
+    useEffect(() => {    
+        if (localStorage.getItem('socket') != null && localStorage.getItem('socket') != undefined) {
+            localStorage.removeItem('socket')
+            const socket = SocketAPI.connectToSocket(localStorage.getItem('username'));
+            localStorage.setItem('socket', socket);
+        }
+    }, []);
 
     // Determine which section to render based on the current pathname
     const renderSection = () => {

@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { redirect, useLocation, useNavigate } from 'react-router-dom';
 import { email } from 'react-admin';
 import APIMethods from '../api/APIMethods';
+import SocketAPI from '../messaging/SocketAPI';
 
 function PasswordResetPage() {
 
@@ -43,6 +44,14 @@ function PasswordResetPage() {
         const resetPasswordTokenParam = params.get('resetPasswordToken');
         setResetPasswordToken(resetPasswordTokenParam);
         fetchAccountDetails();
+
+        // Socket reconnecting
+        if (localStorage.getItem('socket') != null && localStorage.getItem('socket') != undefined) {
+            localStorage.removeItem('socket')
+            const socket = SocketAPI.connectToSocket(localStorage.getItem('username'));
+            localStorage.setItem('socket', socket);
+        }
+
     }, []);
 
     return (

@@ -1,4 +1,5 @@
 import Constants from '../../constants/Constants.js';
+import SocketAPI from '../../messaging/SocketAPI.js';
 
 const AuthUtil = {
     login: async (username, password) => {
@@ -21,6 +22,11 @@ const AuthUtil = {
             const token = (await response.text()).valueOf();
             localStorage.setItem('token', token);
             localStorage.setItem('username', username);
+            const socket = SocketAPI.connectToSocket(username);
+            localStorage.setItem('socket', socket);
+            const messages = await SocketAPI.fetchChats(username);
+            localStorage.setItem('chats', JSON.stringify(messages));
+            window.dispatchEvent(new Event("storage"));
             return true;
         }
         catch(error) {
@@ -30,19 +36,12 @@ const AuthUtil = {
         
     },
     logout: async () => {
-
-        // const requestOptions = {
-        //     method: 'GET',
-        //     headers: { 'Content-Type': 'application/json',
-        //                'Authorization': 'Bearer ' + localStorage.getItem('token') },
-        // }
-
-
         const response = await fetch(Constants.baseAddressPath + 'logout')
                         .catch((error) => console.log(error));
 
         localStorage.removeItem('token');
         localStorage.removeItem('username');
+        localStorage.removeItem('socket');
     },
     checkAuth: (...params) => {
         return Promise.resolve();

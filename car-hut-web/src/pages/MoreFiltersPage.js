@@ -4,7 +4,8 @@ import BasicData from "../components/morefilterspage/BasicData";
 import EngineAndPowertrain from "../components/morefilterspage/EngineAndPowertrain";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import updateNumberOfSearchResults from "../utils/RenderTextUtil"; 
+import APIMethods from "../api/APIMethods";
+import SocketAPI from "../messaging/SocketAPI";
 
 function MoreFiltersPage() {
 
@@ -27,10 +28,20 @@ function MoreFiltersPage() {
     const [searchedCarsNumber, setSearchedCarsNumber] = useState(0);
     const [loadingSearchedCarsNumber, setLoadingSearchedCarsNumber] = useState(true);
 
+    // Socket reconnecting
+    useEffect(() => {    
+        if (localStorage.getItem('socket') != null && localStorage.getItem('socket') != undefined) {
+            localStorage.removeItem('socket')
+            const socket = SocketAPI.connectToSocket(localStorage.getItem('username'));
+            localStorage.setItem('socket', socket);
+        }
+    }, []);
+
     const updateSearchedCarsNumber = async () => {
-        const result = await updateNumberOfSearchResults(brand, model, carType, price.priceFrom, price.priceTo, mileage.mileageFrom, mileage.mileageTo, registration.registrationFrom,
-            registration.registrationTo, seatingConfig, doors, location, postalCode, fuelType, power.powerFrom, power.powerTo, displacement.displacementFrom,
-            displacement.displacementTo, gearbox, powertrain);
+        const result = await APIMethods.getNumberOfFilteredCars(`brand=${brand}&model=${model}&carType=${carType}&priceFrom=${price.priceFrom}&priceTo=${price.priceTo}` +
+        `&mileageFrom=${mileage.mileageFrom}&mileageTo=${mileage.mileageTo}&registrationFrom=${registration.registrationFrom}&registrationTo=${registration.registrationTo}` +
+        `&seatingConfig=${seatingConfig}&doors=${doors}&location=${location}&postalCode=${postalCode}&fuelType=${fuelType}&powerFrom=${power.powerFrom}` +
+        `&powerTo=${power.powerTo}&displacementFrom=${displacement.displacementFrom}&displacement=${displacement.displacementTo}&gearbox=${gearbox}&powertrain=${powertrain}`, null)
         
         if (result === null) {
             return;

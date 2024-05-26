@@ -1,14 +1,24 @@
 import '../css/pages/CarOfferPage.css';
 import Header from "../components/maincomponents/Header";
 import CarMainSection from '../components/carofferpage/CarMainSection';
-import { useLocation, Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import SocketAPI from '../messaging/SocketAPI';
 
 function CarOfferPage() {
 
     var loc = useLocation();
 
     const [carId, setCarId] = useState(loc.state.id);
+
+    // Socket reconnecting
+    useEffect(() => {    
+        if (localStorage.getItem('socket') != null && localStorage.getItem('socket') != undefined) {
+            localStorage.removeItem('socket')
+            const socket = SocketAPI.connectToSocket(localStorage.getItem('username'));
+            localStorage.setItem('socket', socket);
+        }
+    }, []);
 
     return (
         <div className="body">

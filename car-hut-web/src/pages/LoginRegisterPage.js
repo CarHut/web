@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import Header from '../components/maincomponents/Header';
 import '../css/pages/LoginRegisterPage.css';
 import AuthUtil from '../utils/auth/AuthUtil';
-import { redirect, useNavigate } from 'react-router-dom';import APIMethods from '../api/APIMethods';
+import { useNavigate } from 'react-router-dom';import APIMethods from '../api/APIMethods';
+import SocketAPI from '../messaging/SocketAPI';
 
 function LoginRegisterPage() {
 
@@ -22,6 +23,15 @@ function LoginRegisterPage() {
     const [showErrorMessage, setShowErrorMessage] = useState(false);
     const navigate = useNavigate();
 
+    // Socket reconnecting
+    useEffect(() => {    
+        if (localStorage.getItem('socket') != null && localStorage.getItem('socket') != undefined) {
+            localStorage.removeItem('socket')
+            const socket = SocketAPI.connectToSocket(localStorage.getItem('username'));
+            localStorage.setItem('socket', socket);
+        }
+    }, []);
+    
     const handleLoginSubmit = async (e) => {
         e.preventDefault();
         const tokenAvailable = await AuthUtil.login(loginEmail, loginPassword); 

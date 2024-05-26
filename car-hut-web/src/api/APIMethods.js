@@ -458,6 +458,18 @@ const APIMethods = {
 
         const response = await fetch(Constants.baseAPIPath + `carhut/getUserIdByUsername?username=${username}`, requestOption);
         return await response.text(); 
+    },
+    removeSavedSearch: async (id) => {
+        const requestOption = {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                'Content-Type': 'application/json'
+            }
+        };
+
+        const response = await fetch(Constants.baseAPIPath + `carhut/savedSearches/removeSavedSearch?savedSearchId=${id}`, requestOption);
+        return response.text();
     }
 }
 

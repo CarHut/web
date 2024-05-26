@@ -23,6 +23,11 @@ function SavedSearches() {
         return resultString.length > 22 ? resultString.substring(22) + "..." : resultString;
     }
 
+    const removeSavedSearch = async (id) => {
+        const response = await APIMethods.removeSavedSearch(id);
+        fetchSavedSearches();
+    }
+
     const renderSavedSearches = () => {
         return (
             <div className='saved-searches-content-wrapper'>
@@ -89,6 +94,7 @@ function SavedSearches() {
                                     <div className='saved-search-entity-text'>{transformBrandsAndModelsToString(savedSearch.brandsAndModels)}</div>
                                 </div>
                             </Link>
+                            <div className='x-button' onClick={() => removeSavedSearch(savedSearch.id)}>×</div>
                             <div className='saved-searches-line-separator'/>
                         </>
                     );
