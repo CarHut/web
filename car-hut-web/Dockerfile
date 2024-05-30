@@ -8,4 +8,4 @@ COPY ./package-lock.json /app/package-lock.json
 
 RUN npm install
 
-CMD ["npm", "run", "start", "HOST=192.168.1.13:3000"]
+CMD ["npm", "run", "start", "HOST=192.168.1.14:3000"]

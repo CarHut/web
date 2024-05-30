@@ -339,8 +339,10 @@ const APIMethods = {
         }
 
         const response = await fetch(Constants.baseAPIPath + 'carhut/getMultipleFeaturesByIds', requestOptions);
-        const data = await response.json();
-        return data;
+        if (response === null) {
+            const data = await response.json();
+            return data;
+        }
     },
     uploadImage: async (imageData) => {
         const response = await fetch(Constants.baseAPIPath + 'carhut/uploadImage', {

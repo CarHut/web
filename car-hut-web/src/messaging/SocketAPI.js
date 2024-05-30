@@ -20,12 +20,13 @@ const SocketAPI = {
         }
 
         socket.onmessage = async () => {
-            console.log('Socket listener: new message.');
-            // fetch newest chats
-            const newestChats = await SocketAPI.fetchChats(localStorage.getItem('username'));
-            localStorage.removeItem('chats');
-            localStorage.setItem('chats', JSON.stringify(newestChats));
-            window.dispatchEvent(new Event("storage"));
+            setTimeout(async () => { 
+                console.log('Socket listener: new message.');
+                const newestChats = await SocketAPI.fetchChats(localStorage.getItem('username')) 
+                localStorage.removeItem('chats');
+                localStorage.setItem('chats', JSON.stringify(newestChats));
+                window.dispatchEvent(new Event("chats"));
+            }, 1000);
         }
 
 

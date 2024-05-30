@@ -10,18 +10,30 @@ function ChatInterface({ socket }) {
     const [myId, setMyId] = useState('');
     const [otherUserId, setOtherUserId] = useState('');
     const [message, setMessage] = useState('');
+    const [newMessage, setNewMessage] = useState();
     const loc = useLocation();
     const queryParams = new URLSearchParams(loc.search);
     const otherUserUsername = queryParams.get('username');
 
     useEffect(() => {
-        window.addEventListener("storage", () => {
-            fetchMessages();
-          });
+        window.addEventListener("chats", async () => {
+            const otherIdNewMessage = await APIMethods.getUserIdByUsername(otherUserUsername);
+            const newChats = JSON.parse(localStorage.getItem('chats'));
+            let newMessage = null;
+
+            for (let i = 0; i < newChats.length; i++) {
+                if (newChats[i].senderId === otherIdNewMessage) {
+                    newMessage = newChats[i];
+                    break;
+                }
+            }
+
+            setNewMessage(newMessage);
+        });
         
-          return () => {
-            window.removeEventListener("storage", () => {});
-          };
+        return () => {
+            window.removeEventListener("chats", () => {});
+        };
     }, []);
 
     useEffect(() => {
@@ -30,7 +42,7 @@ function ChatInterface({ socket }) {
 
     useEffect(() => {
         fetchMessages();
-    }, [myId, otherUserId]);
+    }, [myId, otherUserId, newMessage]);
 
     const setIds = async () => {
         const id = await APIMethods.getUserIdByUsername(localStorage.getItem('username'));

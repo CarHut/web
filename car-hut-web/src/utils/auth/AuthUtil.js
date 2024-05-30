@@ -11,7 +11,7 @@ const AuthUtil = {
                 username: username,
                 password: password
             })
-        }
+        }     
 
         try {
             const response = await fetch(Constants.baseAPIPath + 'auth/authenticate', requestOptions);

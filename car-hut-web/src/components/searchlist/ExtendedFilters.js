@@ -1,8 +1,6 @@
-import { keyboard } from '@testing-library/user-event/dist/keyboard';
 import '../../css/searchlist/ExtendedFilters.css';
 import { useState, useEffect } from 'react';
 import APIMethods from '../../api/APIMethods';
-import { type } from '@testing-library/user-event/dist/type';
 
 function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange, loadingResultsListLength, setLoadingResultsListLength }) {
 
@@ -25,7 +23,6 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange, l
     useEffect(() => {
         fetchBrands();
         if (fetchedState.brandsAndModels !== undefined && fetchedState.brandsAndModels !== null) {
-            console.log('been there');
             setBrandsAndModels(fetchedState.brandsAndModels);
         }
     }, []);

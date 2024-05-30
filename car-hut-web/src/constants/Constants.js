@@ -1,10 +1,12 @@
+const currentPublicIp = '95.103.36.201' 
 const Constants = {
-    baseAPIPath: 'http://192.168.1.12:8080/api/',
-    baseAddressPath: 'http://192.168.1.12:8080/',
+    webAddress: `http://${currentPublicIp}:3000/`,
 
-    socketAddress: 'ws://192.168.1.12:8081/chat',
-    baseMessagingAPIPath: 'http://192.168.1.12:8081/api/chat'
+    baseAPIPath: `http://${currentPublicIp}:8080/api/`,
+    baseAddressPath: `http://${currentPublicIp}:8080/`,
+
+    socketAddress: `ws://${currentPublicIp}:8081/chat`,
+    baseMessagingAPIPath: `http://${currentPublicIp}:8081/api/chat`
 }
-
 
 export default Constants;

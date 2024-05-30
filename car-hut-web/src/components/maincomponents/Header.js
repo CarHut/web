@@ -1,6 +1,7 @@
 import '../../css/maincomponents/Header.css'
 import { Link } from 'react-router-dom';
 import AuthUtil from '../../utils/auth/AuthUtil';
+import Constants from '../../constants/Constants';
 
 function Header() {
 
@@ -43,7 +44,7 @@ function Header() {
                                 >
                                     Add offer
                                 </Link>
-                                <a href='http://localhost:3000/mainPage' className='dropdown-menu-text' onClick={(e) => AuthUtil.logout(e)}>Logout</a>
+                                <a href={`${Constants.webAddress}mainPage`} className='dropdown-menu-text' onClick={(e) => AuthUtil.logout(e)}>Logout</a>
                             </div>
                         </div>
             }

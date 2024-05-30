@@ -47,13 +47,15 @@ function MoreFiltersPage() {
             return;
         }
 
+        console.log(result);
+
         setSearchedCarsNumber(result);
         setLoadingSearchedCarsNumber(false);
     }
 
     useEffect(() => {
         updateSearchedCarsNumber();
-    }, [brand, model, price, mileage, carType, registration, seatingConfig, doors, location, postalCode, fuelType, power, displacement, gearbox, powertrain, loadingSearchedCarsNumber]);
+    }, [loadingSearchedCarsNumber]);
 
     return (
         <div className="body">

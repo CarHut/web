@@ -14,13 +14,13 @@ function Features({ car }) {
     }
 
     useEffect(() => {
-        if (car.features !== null || car.features !== undefined) {
+        if (car.features !== null && car.features !== undefined) {
             fetchFeatures();
         }
     }, []);
 
     const renderFeatures = () => {
-        if (features === null) {
+        if (features === null || features === undefined) {
             return (
                 <div/>
             );

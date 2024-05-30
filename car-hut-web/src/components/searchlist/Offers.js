@@ -1,6 +1,4 @@
-import { keyboard } from '@testing-library/user-event/dist/keyboard';
 import '../../css/searchlist/Offers.css';
-import audiRS3Image from '../../images/searchlist/offers/audiRS3.jpg';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import APIMethods from '../../api/APIMethods';
@@ -43,9 +41,9 @@ function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength, setL
         if (result !== null) {
             setCars(result);
             const length = await APIMethods.getNumberOfFilteredCars(
-            `priceFrom=${fetchedState.price.priceFrom}&priceTo=${fetchedState.price.priceTo}&mileageFrom=${fetchedState.mileage.mileageFrom}` +
-            `&mileageTo=${fetchedState.mileage.mileageTo}&fuelType=${fetchedState.fuelType}&gearbox=${fetchedState.gearbox}&powertrain=${fetchedState.powertrain}` +
-            `&powerFrom=${fetchedState.power.powerFrom}&powerTo=${fetchedState.power.powerTo}`, 
+                `priceFrom=${fetchedState.price.priceFrom}&priceTo=${fetchedState.price.priceTo}&mileageFrom=${fetchedState.mileage.mileageFrom}` +
+                `&mileageTo=${fetchedState.mileage.mileageTo}&fuelType=${fetchedState.fuelType}&gearbox=${fetchedState.gearbox}&powertrain=${fetchedState.powertrain}` +
+                `&powerFrom=${fetchedState.power.powerFrom}&powerTo=${fetchedState.power.powerTo}`, 
                 fetchedState.models
             );
 

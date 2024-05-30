@@ -13,12 +13,12 @@ function Chats({ socket }) {
     }, []);
 
     useEffect(() => {
-        window.addEventListener("storage", () => {
-          fetchChatsFromStorage();
+        window.addEventListener("chats", () => {
+            
         });
       
         return () => {
-          window.removeEventListener("storage", () => {});
+          window.removeEventListener("chats", () => {});
         };
     }, []);
 

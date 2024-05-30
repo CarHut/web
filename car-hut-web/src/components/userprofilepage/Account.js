@@ -2,6 +2,7 @@ import '../../css/userprofilepage/Account.css';
 import { useState, useEffect } from 'react';
 import AuthUtil from '../../utils/auth/AuthUtil.js'
 import APIMethods from '../../api/APIMethods.js';
+import Constants from '../../constants/Constants.js';
 
 function Account() {
     
@@ -52,7 +53,7 @@ function Account() {
                             :   <div/>
                     }
                 </div>
-                <a href='http://localhost:3000/mainPage' className='account-button' onClick={() => AuthUtil.logout()}>
+                <a href={`${Constants.webAddress}mainPage`} className='account-button' onClick={() => AuthUtil.logout()}>
                     <div className='account-button-text'>Log out</div></a>
             </div>
         </div>
