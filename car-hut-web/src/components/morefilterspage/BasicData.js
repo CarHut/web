@@ -14,23 +14,31 @@ function BasicData({brand, setBrand, model, setModel, carType, setCarType,
     const [selectedModel, setSelectedModel] = useState('');
 
     const fetchBrands = async () => {
-        const data = await APIMethods.getAllBrands();
-        
-        if (data === null) {
-            return;
-        }
+        try {
+            const data = await APIMethods.getAllBrands();
+            
+            if (data === null) {
+                return;
+            }
 
-        setBrands(data);
+            setBrands(data);
+        } catch (error) {
+            console.log(`[MoreFiltersPage][BasicData][fetchBrands][ERROR] - Cannot fetch brands. Stack trace message: ${error}`);
+        }
     }
 
     const fetchModelsByBrand = async (brand) => {
-        const data = await APIMethods.getModelsByBrand(brand);
-
-        if (data === null) {
-            return;
+        try {
+            const data = await APIMethods.getModelsByBrand(brand);
+    
+            if (data === null) {
+                return;
+            }
+    
+            setModels(data);
+        } catch (error) {
+            console.log(`[MoreFiltersPage][BasicData][fetchModelsByBrand][ERROR] - Cannot fetch models for brand ${brand}. Stack trace message: ${error}`);
         }
-
-        setModels(data);
     }
 
     useEffect(() => {
@@ -208,7 +216,7 @@ function BasicData({brand, setBrand, model, setModel, carType, setCarType,
         return (
             <div className="basic-data-combobox">
                 <select className={className} onChange={(e) => handleSelectedPrice(e)}>
-                    <option value="">From (€)</option>
+                    <option value="">{className.includes("price-from") ? "From" : "To"} (€)</option>
                     <option key={1000} value={'1000'}>1 000€</option>
                     <option key={2000} value={'2000'}>2 000€</option>
                     <option key={3000} value={'3000'}>3 000€</option>
@@ -240,7 +248,7 @@ function BasicData({brand, setBrand, model, setModel, carType, setCarType,
         return (
             <div className="basic-data-combobox">
                 <select className={className} onChange={(e) => handleSelectedMileage(e)}>
-                    <option value="" >From (km)</option>
+                    <option value="" >{className.includes("mileage-from") ? "From" : "To"} (km)</option>
                     <option key={1000} value={'1000'}>1 000 km</option>
                     <option key={5000} value={'5000'}>5 000 km</option>
                     <option key={10000} value={'10000'}>10 000 km</option>
@@ -257,7 +265,7 @@ function BasicData({brand, setBrand, model, setModel, carType, setCarType,
         return (
             <div className="basic-data-combobox">
                 <select className={className} onChange={(e) => handleSelectedRegistration(e)}>
-                    <option value=""  >From</option>
+                    <option value=""  >{className.includes("registration-from") ? "From" : "To"}</option>
                     <option key={2024} value={'2024'}>2024</option>
                     <option key={2023} value={'2023'}>2023</option>
                     <option key={2022} value={'2022'}>2022</option>
@@ -340,7 +348,7 @@ function BasicData({brand, setBrand, model, setModel, carType, setCarType,
                         <div className='label-basic-data'>Brand</div>
                         <div className="basic-data-combobox">
                             <select id="brandComboBox" className='basic-data-styled-combobox' value={selectedBrand} onChange={(e) => handleSelectedBrand(e)}>
-                                <option value="all" disabled>Select Brand</option>
+                                <option value="all">Select Brand</option>
                                 {renderBrands()}
                             </select>
                         </div>

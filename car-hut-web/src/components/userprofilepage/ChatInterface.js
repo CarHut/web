@@ -17,7 +17,14 @@ function ChatInterface({ socket }) {
 
     useEffect(() => {
         window.addEventListener("chats", async () => {
-            const otherIdNewMessage = await APIMethods.getUserIdByUsername(otherUserUsername);
+            let otherIdNewMessage = null;
+            try {
+                otherIdNewMessage = await APIMethods.getUserIdByUsername(otherUserUsername);
+            } catch (error) {
+                console.log(`[UserProfilePage][ChatInterface][useEffect][ERROR] - Cannot fetch userId by username=${otherUserUsername}. Stack trac message: ${error}`);
+                return;
+            }
+
             const newChats = JSON.parse(localStorage.getItem('chats'));
             let newMessage = null;
 
@@ -45,16 +52,24 @@ function ChatInterface({ socket }) {
     }, [myId, otherUserId, newMessage]);
 
     const setIds = async () => {
-        const id = await APIMethods.getUserIdByUsername(localStorage.getItem('username'));
-        const id2 = await APIMethods.getUserIdByUsername(otherUserUsername);
-        setMyId(id);
-        setOtherUserId(id2);
+        try {
+            const id = await APIMethods.getUserIdByUsername(localStorage.getItem('username'));
+            const id2 = await APIMethods.getUserIdByUsername(otherUserUsername);
+            setMyId(id);
+            setOtherUserId(id2);
+        } catch (error) {
+            console.log(`[UserProfilePage][ChatInterface][setIds][ERROR] - Cannot fetch ids from server. Stack trace message: ${error}`);
+        }
     }
 
     const fetchMessages = async () => {
-        const response = await SocketAPI.fetchMessagesWithUser(myId, otherUserId);
-        console.log(response);
-        setMessages(response);
+        try {
+            const response = await SocketAPI.fetchMessagesWithUser(myId, otherUserId);
+            console.log(response);
+            setMessages(response);
+        } catch (error) {
+            console.log(`[UserProfilePage][ChatInterface][fetchMessages][ERROR] - Cannot fetch messages between id1=${myId} and id2=${otherUserId}. Stack trace message: ${error}`);
+        }
     }
 
     const handleMessageInput = (message) => {
@@ -81,9 +96,7 @@ function ChatInterface({ socket }) {
                 },
                 ...messages
             ])
-            setMessage('');
-            
-            
+            setMessage('');            
         }
     }
 

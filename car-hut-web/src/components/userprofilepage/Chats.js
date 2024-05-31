@@ -77,13 +77,21 @@ function Chats({ socket }) {
     }
 
     const fetchUserIdByUsername = async (username) => {
-        const response = await APIMethods.getUserIdByUsername(username);
-        return response;
+        try {
+            const response = await APIMethods.getUserIdByUsername(username);
+            return response;
+        } catch (error) {
+            console.log(`[UserProfilePage][Chats][fetchUserIdByUsername][ERROR] - Cannot fetch user id from server with username=${username}. Stack trace message: ${error}`);
+        }
     }
 
     const fetchUsernameByUserId = async (userId) => {
-        const response = await APIMethods.getUsernameByUserId(userId); 
-        return response;
+        try {
+            const response = await APIMethods.getUsernameByUserId(userId); 
+            return response;
+        } catch (error) {
+            console.log(`[UserProfilePage][Chats][fetchUsernameByUserId][ERROR] - Cannot fetch username with userId=${userId}. Stack trace message: ${error}`);
+        }
     }
 
     return (

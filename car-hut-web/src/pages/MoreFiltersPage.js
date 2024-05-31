@@ -38,19 +38,24 @@ function MoreFiltersPage() {
     }, []);
 
     const updateSearchedCarsNumber = async () => {
-        const result = await APIMethods.getNumberOfFilteredCars(`brand=${brand}&model=${model}&carType=${carType}&priceFrom=${price.priceFrom}&priceTo=${price.priceTo}` +
-        `&mileageFrom=${mileage.mileageFrom}&mileageTo=${mileage.mileageTo}&registrationFrom=${registration.registrationFrom}&registrationTo=${registration.registrationTo}` +
-        `&seatingConfig=${seatingConfig}&doors=${doors}&location=${location}&postalCode=${postalCode}&fuelType=${fuelType}&powerFrom=${power.powerFrom}` +
-        `&powerTo=${power.powerTo}&displacementFrom=${displacement.displacementFrom}&displacement=${displacement.displacementTo}&gearbox=${gearbox}&powertrain=${powertrain}`, null)
+        try {
+            const result = await APIMethods.getNumberOfFilteredCars(`brand=${brand}&model=${model}&carType=${carType}&priceFrom=${price.priceFrom}&priceTo=${price.priceTo}` +
+            `&mileageFrom=${mileage.mileageFrom}&mileageTo=${mileage.mileageTo}&registrationFrom=${registration.registrationFrom}&registrationTo=${registration.registrationTo}` +
+            `&seatingConfig=${seatingConfig}&doors=${doors}&location=${location}&postalCode=${postalCode}&fuelType=${fuelType}&powerFrom=${power.powerFrom}` +
+            `&powerTo=${power.powerTo}&displacementFrom=${displacement.displacementFrom}&displacement=${displacement.displacementTo}&gearbox=${gearbox}&powertrain=${powertrain}`, null)
+            
+            // Stop loading when the result is null
+            if (result === null) {
+                setLoadingSearchedCarsNumber(false);
+                return;
+            }
+    
+            setSearchedCarsNumber(result);
+            setLoadingSearchedCarsNumber(false);
         
-        if (result === null) {
-            return;
+        } catch (error) {
+            console.log(`[MoreFiltersPage][updateSearchedCarsNumber] - Cannot fetch number of filtered cars. Error: ${error}`);
         }
-
-        console.log(result);
-
-        setSearchedCarsNumber(result);
-        setLoadingSearchedCarsNumber(false);
     }
 
     useEffect(() => {

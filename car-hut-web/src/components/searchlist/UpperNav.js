@@ -1,7 +1,10 @@
 import APIMethods from '../../api/APIMethods';
 import '../../css/searchlist/UpperNav.css';
+import { useState } from 'react';
 
 function UpperNav({ fetchedState, offersPerPage, setOffersPerPage, sortBy, setSortBy }) {
+    
+    const [savedSearchState, setSavedSearchState] = useState(null); 
     
     const handleOffersPerPageChange = (e) => {
         setOffersPerPage(e.target.value);
@@ -49,24 +52,40 @@ function UpperNav({ fetchedState, offersPerPage, setOffersPerPage, sortBy, setSo
     }
 
     const saveSearch = async () => {
-        const searchBody = {
-            id: 'NULL',
-            userId: await APIMethods.getUserIdByUsername(localStorage.getItem('username')),
-            sortBy: sortBy,
-            offersPerPage: offersPerPage,
-            brandsAndModels: fetchedState.models,
-            priceFrom: fetchedState.price.priceFrom,
-            priceTo: fetchedState.price.priceTo,
-            mileageFrom: fetchedState.mileage.mileageFrom,
-            mileageTo: fetchedState.mileage.mileageTo,
-            fuelType: fetchedState.fuelType,
-            gearboxType: fetchedState.gearbox,
-            powertrainType: fetchedState.powertrain,
-            powerFrom: fetchedState.power.powerFrom,
-            powerTo: fetchedState.power.powerTo
+        try {    
+            const searchBody = {
+                id: 'NULL',
+                userId: await APIMethods.getUserIdByUsername(localStorage.getItem('username')),
+                sortBy: sortBy,
+                offersPerPage: offersPerPage,
+                brandsAndModels: fetchedState.models,
+                priceFrom: fetchedState.price.priceFrom,
+                priceTo: fetchedState.price.priceTo,
+                mileageFrom: fetchedState.mileage.mileageFrom,
+                mileageTo: fetchedState.mileage.mileageTo,
+                fuelType: fetchedState.fuelType,
+                gearboxType: fetchedState.gearbox,
+                powertrainType: fetchedState.powertrain,
+                powerFrom: fetchedState.power.powerFrom,
+                powerTo: fetchedState.power.powerTo
+            }
+
+            const response = await APIMethods.addNewSavedSearch(searchBody);
+            
+            if (response.status === 200) {
+                setSavedSearchState(true);
+                const timer = setTimeout(() => setSavedSearchState(null), 5000);
+                clearTimeout(timer);
+            } else {
+                console.log(`[SearchList][UpperNav][saveSearch][ERROR] - Cannot save search.`);
+                setSavedSearchState(false);
+                const timer = setTimeout(() => setSavedSearchState(null), 5000);
+            }
+        } catch (error) {
+            console.log(`[SearchList][UpperNav][saveSearch][ERROR] - Cannot save search. Stack trace message: ${error}`);
+            setSavedSearchState(false);
+            const timer = setTimeout(() => setSavedSearchState(null), 5000);
         }
-        
-        const response = await APIMethods.addNewSavedSearch(searchBody);
     }
 
     return (
@@ -79,7 +98,10 @@ function UpperNav({ fetchedState, offersPerPage, setOffersPerPage, sortBy, setSo
                 <div className='sort-dropdown-label-upper-nav'>Offers per page</div>
                 {renderOfferPerPageComboBox()}
             </div>
-            <div className="styled-button-upper-nav" onClick={() => saveSearch()}>Save search</div>
+            <div className='save-search-wrapper-upper-nav'>
+                <div className="styled-button-upper-nav" onClick={() => saveSearch()}>Save search</div>
+                <div className={`save-search-result-text ${savedSearchState !== null ? savedSearchState ? "success" : "error" : ""}`}>{savedSearchState !== null ? savedSearchState ? "Successfully saved search parameters" : "Couldn't save search parameters" : ""}</div>
+            </div>
         </div>
     );
 }

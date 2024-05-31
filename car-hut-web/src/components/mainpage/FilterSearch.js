@@ -1,9 +1,7 @@
 import '../../css/mainpage/FilterSearch.css';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import updateNumberOfSearchResults from '../../utils/RenderTextUtil';
 import APIMethods from '../../api/APIMethods';
-import { inferTypeFromValues } from 'react-admin';
 
 
 function FilterSearch() {
@@ -22,24 +20,35 @@ function FilterSearch() {
             setSearchedCarsNumber(result);
             setLoadingSearchedCarsNumber(false);
         } catch (error) {
-            console.error('Error:', error);
+            console.error('[MainPage][FilterSearch][updateSearchedCarsNumber]: cannot fetch number of filtered cars. Error: ', error);
+            setLoadingSearchedCarsNumber(false);
         }
     }
 
     useEffect(() => {
         updateSearchedCarsNumber();
-    }, [selectedBrand, selectedModel, selectedPriceFrom, selectedMileageFrom, brands, models]);
+    }, [selectedBrand, selectedModel, selectedPriceFrom, selectedMileageFrom, brands]);
 
     const fetchBrands = async () => {
-        const data = await APIMethods.getAllBrands();
-        setBrands(data);
-        setLoadingSearchedCarsNumber(true);
+        try {
+            const data = await APIMethods.getAllBrands();
+            setBrands(data);
+            setLoadingSearchedCarsNumber(true);
+        } catch (error) {
+            console.error('[MainPage][FilterSearch][fetchBrands]: cannot fetch brands. Error: ', error);
+            setLoadingSearchedCarsNumber(false);
+        }
     }
 
     const fetchModelsByBrand = async (brand) => {
-        const data = await APIMethods.getModelsByBrand(selectedBrand); 
-        setModels(data);
-        setLoadingSearchedCarsNumber(true);
+        try {
+            const data = await APIMethods.getModelsByBrand(selectedBrand); 
+            setModels(data);
+            setLoadingSearchedCarsNumber(true);
+        } catch (error) {
+            console.log(`[MainPage][FilterSearch][fetchModelsByBrand]: cannot fetch models for brand=${brand}. Error: ${error}`)
+            setLoadingSearchedCarsNumber(false);
+        }
     }
 
     useEffect(() => { 
@@ -148,6 +157,29 @@ function FilterSearch() {
         )
     }
 
+    const renderSearchButton = () => {
+        return (
+            <Link
+                to={`/searchList`}
+                state={{
+                    brand: selectedBrand,
+                    model: selectedModel,
+                    price: { priceFrom: selectedPriceFrom, priceTo: ''},
+                    mileage: { mileageFrom: selectedMileageFrom, mileageTo: '' },
+                    fuelType: '',
+                    powertrain: '',
+                    gearbox: '',
+                    power: { powerFrom: '', powerTo: '' },
+                    models: [
+                        { brand: selectedBrand, model: selectedModel }
+                    ]
+                }}
+            >
+                <button className="styled-button-filter-search-main-page">{searchedCarsNumber !== null && !loadingSearchedCarsNumber ? (searchedCarsNumber + " cars") : ("Loading cars")}</button>
+            </Link>
+        );
+    }
+
 
     return (
         <div className='section-body'>
@@ -158,7 +190,7 @@ function FilterSearch() {
                         <div className='label-search-list-main-page'>Brand</div>
                         <div className="custom-combobox-filter-search-main-page">
                             <select id="brandComboBox" className='my-combo-box-search-list-main-page' value={selectedBrand} onChange={(e) => handleSelectedBrand(e.target.value)}>
-                                <option value="all">Select Brand</option>
+                                <option value="">Select Brand</option>
                                 {renderBrands()}
                             </select>
                         </div>
@@ -167,7 +199,7 @@ function FilterSearch() {
                         <div className='label-search-list-main-page'>Model</div>
                         <div className="custom-combobox-filter-search-main-page">
                             <select id="modelComboBox" className={`my-combo-box-search-list-main-page ${!selectedBrand ? 'disabled' : ''}`} value={selectedModel} onChange={(e) => handleSelectedModel(e.target.value)} disabled={!selectedBrand}>
-                                <option value="all" disabled={!selectedBrand}>Select Model</option>
+                                <option value="" disabled={!selectedBrand}>Select Model</option>
                                 {renderModels()}
                             </select>
                         </div>
@@ -187,24 +219,7 @@ function FilterSearch() {
                 </div>
                 <div className="filter-search-links">
                     <Link to={'/moreFiltersPage'} className='more-filters-text-search-list-main-page'>More filters</Link>
-                    <Link
-                        to={`/searchList`}
-                        state={{
-                            brand: selectedBrand,
-                            model: selectedModel,
-                            price: { priceFrom: selectedPriceFrom, priceTo: ''},
-                            mileage: { mileageFrom: selectedMileageFrom, mileageTo: '' },
-                            fuelType: '',
-                            powertrain: '',
-                            gearbox: '',
-                            power: { powerFrom: '', powerTo: '' },
-                            models: [
-                                { brand: selectedBrand, model: selectedModel }
-                            ]
-                        }}
-                    >
-                        <button className="styled-button-filter-search-main-page">{searchedCarsNumber !== null && !loadingSearchedCarsNumber ? (searchedCarsNumber + " cars") : ("Loading cars")}</button>
-                    </Link>
+                    {renderSearchButton()}
                 </div>
             </div>
         </div>

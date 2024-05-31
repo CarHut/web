@@ -20,7 +20,7 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange, l
     const [addBrandAndModelOverlay, setAddBrandAndModelOverlay] = useState(false);
     var brandsAndModelsFetchedTrigger = false;
 
-    useEffect(() => {
+    useEffect(() => { 
         fetchBrands();
         if (fetchedState.brandsAndModels !== undefined && fetchedState.brandsAndModels !== null) {
             setBrandsAndModels(fetchedState.brandsAndModels);
@@ -38,17 +38,26 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange, l
     }, [addBrand]);
 
     const fetchBrands = async () => {
-        const data = await APIMethods.getAllBrands();
-        if (data !== null) {
-            setAddBrands(data);
+        try {
+            const data = await APIMethods.getAllBrands();
+            if (data !== null) {
+                setAddBrands(data);
+            }
+        } catch (error) {
+            console.log(`[SearchList][ExtendedFilters][fetchBrands][ERROR] - Cannot fetch brands. Stack trace message: ${error}`);
         }
     }
 
     const fetchModels = async () => {
-        const data = await APIMethods.getModelsByBrand(addBrand);
-        if (data !== null) {
-            setAddModels(data);
+        try {
+            const data = await APIMethods.getModelsByBrand(addBrand);
+            if (data !== null) {
+                setAddModels(data);
+            }
+        } catch (error) {
+            console.log(`[SearchList][ExtendedFilters][fetchBrands][ERROR] - Cannot fetch models for brand: ${addBrand}. Stack trace message: ${error}`);
         }
+        
     }
 
     const handleRemovalOfABrandsAndModelEntity = (brand, model) => {
@@ -241,7 +250,7 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange, l
     const renderPrice = (type) => {
         return (
             <div className="search-list-extended-filters-slider-container">
-                <div className='current-state-label' htmlFor={type}>From: {type === 'priceFrom' ? price.priceFrom : price.priceTo}€</div>
+                <div className='current-state-label' htmlFor={type}>{type === 'priceFrom' ? "From" : "To" }: {type === 'priceFrom' ? price.priceFrom : price.priceTo}€</div>
                 <input
                     type="range"
                     id={type}
@@ -260,7 +269,7 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange, l
     const renderMileage = (type) => {
         return (
             <div className="search-list-extended-filters-slider-container">
-                <div className='current-state-label' htmlFor={type}>From: {type === 'mileageFrom' ? mileage.mileageFrom : mileage.mileageTo} km</div>
+                <div className='current-state-label' htmlFor={type}>{type === 'mileageFrom' ? "From" : "To"}: {type === 'mileageFrom' ? mileage.mileageFrom : mileage.mileageTo} km</div>
                 <input
                     type="range"
                     id={type === 'mileageFrom' ? mileage.mileageFrom : mileage.mileageTo}
@@ -314,7 +323,7 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange, l
     const renderEnginePower = (type) => {
         return (
             <div className="search-list-extended-filters-slider-container">
-                <div className='current-state-label' htmlFor={type}>From: {type === 'powerFrom' ? power.powerFrom : power.powerTo} kW</div>
+                <div className='current-state-label' htmlFor={type}>{type === 'powerFrom' ? "From" : "To"}: {type === 'powerFrom' ? power.powerFrom : power.powerTo} kW</div>
                 <input
                     type="range"
                     id={type}

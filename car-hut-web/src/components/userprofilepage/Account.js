@@ -20,12 +20,17 @@ function Account() {
     }, []);
 
     const handleResetPassword = async () => {
-        const response = await APIMethods.resetPasswordSendEmail(accountDetails.email); 
-        if (response.status === 200) {
-            setShowResetPasswordSent(true);
-            setShowResetPasswordError(false);
-        } else {
-            setShowResetPasswordSent(false);
+        try {
+            const response = await APIMethods.resetPasswordSendEmail(accountDetails.email); 
+            if (response.status === 200) {
+                setShowResetPasswordSent(true);
+                setShowResetPasswordError(false);
+            } else {
+                setShowResetPasswordSent(false);
+                setShowResetPasswordError(true);
+            }
+        } catch (error) {
+            console.log(`[UserProfilePage][Account][handleResetPassword][ERROR] - Cannot initiate password reset. Stack trace message: ${error}`);
             setShowResetPasswordError(true);
         }
     }

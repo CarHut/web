@@ -1,6 +1,5 @@
 import APIMethods from '../../api/APIMethods';
 import '../../css/carofferpage/TechnicalData.css';
-import CarOfferPage from '../../pages/CarOfferPage';
 import { useState, useEffect } from 'react';
 
 function TechnicalData({car}) { 
@@ -12,15 +11,23 @@ function TechnicalData({car}) {
 
     const fetchExteriorColorStringFromColorId = async () => {
         if (car.exteriorColorId !== undefined || car.exteriorColorId !== null) {
-            const color = await APIMethods.getColorStringNameFromColorId(car.exteriorColorId);
-            setExteriorColor(color);
+            try {
+                const color = await APIMethods.getColorStringNameFromColorId(car.exteriorColorId);
+                setExteriorColor(color);
+            } catch (error) {
+                console.log(`[CarOfferPage][TechnicalData][fetchExteriorColorStringFromColorId][ERROR] - Cannot fetch exterior color for id=${car.exteriorColorId}. Stack trace message: ${error}`);
+            }
         }
     }
 
     const fetchInteriorColorStringFromColorId = async () => {
         if (car.interiorColorId !== undefined || car.interiorColorId !== null) {
-            const color = await APIMethods.getColorStringNameFromColorId(car.exteriorColorId);
-            setInteriorColor(color);
+            try {
+                const color = await APIMethods.getColorStringNameFromColorId(car.exteriorColorId);
+                setInteriorColor(color);
+            } catch (error) {
+                console.log(`[CarOfferPage][TechnicalData][fetchInteriorColorStringFromColorId][ERROR] - Cannot fetch interior color for id=${car.interiorColorId}. Stack trace message: ${error}`);
+            }
         }
     }
 

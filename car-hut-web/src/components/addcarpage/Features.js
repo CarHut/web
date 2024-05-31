@@ -9,12 +9,16 @@ function Features() {
     const loc = useLocation();
     const currentCarModel = loc.state;
     const [features, setFeatures] = useState([]);
-    const [numOfColumns, setNumOfColumns] = useState(4); // IF CHANGED UPDATE WIDTH FOR add-car-features-column-wrapper in Features.css
+    const [numOfColumns, setNumOfColumns] = useState(4); // IF CHANGED, UPDATE WIDTH FOR add-car-features-column-wrapper in Features.css
     const [numOfFeaturesPerColumn, setNumOfFeaturesPerColumn] = useState(1);
     const [selectedFeatures, setSelectedFeatures] = useState([]);
 
     const fetchFeatures = async () => {
-        setFeatures(await APIMethods.getFeatures());
+        try {
+            setFeatures(await APIMethods.getFeatures());
+        } catch (error) {
+            console.log(`[AddCarPage][Features][fetchFeatures][ERROR] - Cannot fetch features. Stack trace message: ${error}`);
+        }
     }
 
     const countFeaturesPerColumn = () => {

@@ -14,20 +14,30 @@ function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength, setL
     const [sellerNames, setSellerNames] = useState([]);
 
     const fetchFirstNameAndSurname = async (userId) => {
-        const username = await APIMethods.getFirstNameAndSurnameByUserId(userId);
-        return username;
+        try {
+            const username = await APIMethods.getFirstNameAndSurnameByUserId(userId);
+            return username;
+        } catch (error) {
+            console.log(`[SearchList][Offers][fetchFirstNameAndSurname][ERROR] - Cannot fetch first name and surname for user id=${userId}. Stack trace message: ${error}`)
+        }
     }
 
     const fetchSellerInfoOfLoadedCars = async () => {
         const sellersArray = [];
+
         for (let i = 0; i < cars.length; i++) {
-            sellersArray.push(await fetchFirstNameAndSurname(cars[i].sellerId));
+            try {
+                sellersArray.push(await fetchFirstNameAndSurname(cars[i].sellerId));
+            } catch (error) {
+                console.log(`[SearchList][Offers][fetchSellerInfoOfLoadedCars][ERROR] - Cannot fetch seller info for sellerId=${cars[i].sellerId}. Stack trace message: ${error}`);
+            }
         }
 
         setSellerNames(sellersArray);
     }
 
     const fetchCars = async () => {
+        
         const sortOrder = sortBy[sortBy.length - 1] == 'L' || sortBy[sortBy.length - 1] == 'O' ? "ASC" : "DESC";
 
         const url = Constants.baseAPIPath + `carhut/getCarsWithFilters?` +
@@ -36,16 +46,29 @@ function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength, setL
             `&powerFrom=${fetchedState.power.powerFrom}&powerTo=${fetchedState.power.powerTo}&sortBy=${sortBy}&sortOrder=${sortOrder}` +
             `&offersPerPage=${offersPerPage}&currentPage=${currentPage}`;
 
-        const result = await APIMethods.getCarsWithFilters(url, fetchedState.models);
+        let result = null;
+        try {
+            result = await APIMethods.getCarsWithFilters(url, fetchedState.models);
+        } catch (error) {
+            console.log(`[SearchList][Offers][fetchCars][ERROR] - Cannot fetch cars (aborting fetching cars and number of available cars). Stack trace message: ${error}`);
+            return;
+        }
 
         if (result !== null) {
             setCars(result);
-            const length = await APIMethods.getNumberOfFilteredCars(
-                `priceFrom=${fetchedState.price.priceFrom}&priceTo=${fetchedState.price.priceTo}&mileageFrom=${fetchedState.mileage.mileageFrom}` +
-                `&mileageTo=${fetchedState.mileage.mileageTo}&fuelType=${fetchedState.fuelType}&gearbox=${fetchedState.gearbox}&powertrain=${fetchedState.powertrain}` +
-                `&powerFrom=${fetchedState.power.powerFrom}&powerTo=${fetchedState.power.powerTo}`, 
-                fetchedState.models
-            );
+
+            let length = 0;
+            try {
+                length = await APIMethods.getNumberOfFilteredCars(
+                    `priceFrom=${fetchedState.price.priceFrom}&priceTo=${fetchedState.price.priceTo}&mileageFrom=${fetchedState.mileage.mileageFrom}` +
+                    `&mileageTo=${fetchedState.mileage.mileageTo}&fuelType=${fetchedState.fuelType}&gearbox=${fetchedState.gearbox}&powertrain=${fetchedState.powertrain}` +
+                    `&powerFrom=${fetchedState.power.powerFrom}&powerTo=${fetchedState.power.powerTo}`, 
+                    fetchedState.models
+                );
+            } catch (error) {
+                console.log(`[SearchList][Offers][fetchCars][ERROR] - Cannot fetch number of filtered cars. Stack trace message: ${error}`);
+                return;
+            }
 
             setTotalPages(Math.ceil(length / offersPerPage));
             setResultsListLength(length);    
@@ -70,13 +93,17 @@ function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength, setL
     const fetchImagesForDisplayedCars = async () => {
         const imageList = [];
         for (let i = 0; i < cars.length; i++) {
-            const data = await APIMethods.getImages(cars[i].id);
-            if (data !== null) {
-                const url = `data:image/png;base64,${data[0]}`;
-                imageList.push(url);
-            } else {
-                imageList.push("no-image-found");
-            }
+            try {
+                const data = await APIMethods.getImages(cars[i].id);
+                if (data !== null) {
+                    const url = `data:image/png;base64,${data[0]}`;
+                    imageList.push(url);
+                } else {
+                    imageList.push("no-image-found");
+                }
+            } catch (error) {
+                console.log(`[SearchList][Offers][fetchImagesForDisplayedCars][ERROR] - Cannot fetch image for car id=${cars[i].id}. Stack trace message: ${error}`);
+            }            
         }
         setImagesForDisplayedCars(imageList);
     } 

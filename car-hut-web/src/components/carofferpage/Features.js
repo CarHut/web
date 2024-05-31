@@ -9,7 +9,11 @@ function Features({ car }) {
 
     const fetchFeatures = async () => {
         if (carModel.features !== undefined || carModel.features !== null) {
-            setFeatures(await APIMethods.getMultipleFeaturesByIds(carModel.features));
+            try {
+                setFeatures(await APIMethods.getMultipleFeaturesByIds(carModel.features));
+            } catch (error) {
+                console.log(`[CarOfferPage][Features][fetchFeatures][ERROR] - Cannot fetch features. Stack trace message: ${error}`);
+            }
         }
     }
 

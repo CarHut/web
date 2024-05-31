@@ -7,8 +7,12 @@ function CarMainInfo({car}) {
     const [carSellerFullName, setCarSellerFullName] = useState('');
 
     const fetchSellerFullName = async (sellerId) => {
-        const fullName = await APIMethods.getFirstNameAndSurnameByUserId(sellerId);
-        setCarSellerFullName(fullName);
+        try {
+            const fullName = await APIMethods.getFirstNameAndSurnameByUserId(sellerId);
+            setCarSellerFullName(fullName);
+        } catch (error) {
+            console.log(`[CarOfferPage][CarMainInfo][fetchSellerFullName][ERROR] - Cannot fetch full name of seller with id=${sellerId}. Stack trace message: ${error}`);
+        }
     }
 
     useEffect(() => {
@@ -16,7 +20,11 @@ function CarMainInfo({car}) {
     }, []);
 
     const addCarToWishlist = async () => {
-        const state = APIMethods.addCarToSavedByUser(-999, localStorage.getItem('username'), carModel.id);
+        try {
+            const state = await APIMethods.addCarToSavedByUser(-999, localStorage.getItem('username'), carModel.id);
+        } catch (error) {
+            console.log(`[CarOfferPage][CarMainInfo][addCarToWishList][ERROR] - Cannot add car to wishlist. Stack trace message: ${error}`);
+        }
     }
 
     return (

@@ -1,8 +1,7 @@
 import '../css/pages/PasswordResetPage.css';
 import Header from '../components/maincomponents/Header';
 import { useState, useEffect } from 'react';
-import { redirect, useLocation, useNavigate } from 'react-router-dom';
-import { email } from 'react-admin';
+import { useLocation, useNavigate } from 'react-router-dom';
 import APIMethods from '../api/APIMethods';
 import SocketAPI from '../messaging/SocketAPI';
 
@@ -18,8 +17,12 @@ function PasswordResetPage() {
     const location = useLocation();
 
     const fetchAccountDetails = async () => {
-        const data = await APIMethods.getUserDetailsInfo();
-        setAccountDetails(data);
+        try {
+            const data = await APIMethods.getUserDetailsInfo();
+            setAccountDetails(data);
+        } catch (error) {
+            console.log(`[PasswordResetPage][fetchAccountDetails][ERROR] - Cannot fetch user detail info. Stack trace message: ${error}`);
+        }
     }
 
     const handlePasswordReset = async (e) => {
@@ -30,12 +33,16 @@ function PasswordResetPage() {
             return;
         }
 
-        const response = await APIMethods.resetPasswordInitiate(resetPasswordToken, newPassword, repeatNewPassword, accountDetails.email);
-        
-        if (response.status === 200) {
-            navigate("/userProfile/account")
-        } else {
-            console.log("there was a error.");
+        try {
+            const response = await APIMethods.resetPasswordInitiate(resetPasswordToken, newPassword, repeatNewPassword, accountDetails.email);
+            
+            if (response.status === 200) {
+                navigate("/userProfile/account")
+            } else {
+                console.log(`[PasswordResetPage][handlePasswordReset][ERROR] - Cannot initiate password reset. Something went wrong internally on server.`);
+            }
+        } catch (error) {
+            console.log(`[PasswordResetPage][handlePasswordReset][ERROR] - Cannot initiate password reset. Stack trace message: ${error}`);
         }
     }
 

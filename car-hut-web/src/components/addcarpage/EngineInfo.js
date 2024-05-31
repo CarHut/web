@@ -23,15 +23,27 @@ function EngineInfo() {
     const [gears, setGears] = useState('Not stated');
 
     const fetchFuelTypes = async () => {
-        setFuelTypes(await APIMethods.getFuelTypes());
+        try {
+            setFuelTypes(await APIMethods.getFuelTypes());
+        } catch (error) {
+            console.log(`[AddCarPage][EngineInfo][fetchFuelTypes][ERROR] - Cannot fetch fuel types. Stack trace message: ${error}`);
+        }
     }
 
     const fetchGearboxTypes = async () => {
-        setGearboxTypes(await APIMethods.getGearboxTypes());
+        try {
+            setGearboxTypes(await APIMethods.getGearboxTypes());   
+        } catch (error) {
+            console.log(`[AddCarPage][EngineInfo][fetchFuelTypes][ERROR] - Cannot fetch gearbox types. Stack trace message: ${error}`);
+        }
     }
 
     const fetchPowertrainTypes = async () => {
-        setPowertrainTypes(await APIMethods.getPowertrainTypes());
+        try {
+            setPowertrainTypes(await APIMethods.getPowertrainTypes());
+        } catch (error) {
+            console.log(`[AddCarPage][EngineInfo][fetchFuelTypes][ERROR] - Cannot fetch powertrain types. Stack trace message: ${error}`);    
+        }
     }
 
     useEffect(() => {

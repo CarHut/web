@@ -2,21 +2,33 @@ import { Link, useLocation } from 'react-router-dom';
 import '../../css/addcarpage/AddPhotos.css';
 import { useState } from 'react';
 import APIMethods from '../../api/APIMethods';
+import LoadingCircle from '../maincomponents/LoadingCircle';
 
 function AddPhotos() {
+
+    const UploadingState = {
+        NOT_UPLOADING: "NOT_UPLOADING",
+        UPLOADING: "UPLOADING",
+        UPLOAD_ERROR: "UPLOAD_ERROR",
+        UPLOAD_SUCCESS: "UPLOAD_SUCCESS"        
+    };
 
     const loc = useLocation();
     const currentCarModel = loc.state;
     const [loadedImage, setLoadedImage] = useState(null);
     const [uploadedImages, setUploadedImages] = useState([]);
+    const [uploadingImageState, setUploadingImageState] = useState(UploadingState.NOT_UPLOADING);
 
     const handleLoadedImage = (image) => {
         setLoadedImage(image);
     }
 
     const uploadImage = async () => {
-        if (!loadedImage) {
-            console.log('No image was uploaded yet!');
+        setUploadingImageState(UploadingState.UPLOADING);
+
+        if (!loadedImage || uploadingImageState === UploadingState.UPLOADING) {
+            console.log('[AddCarPage][AddPhotos][uploadImage][WARN] - No image was uploaded yet or image is still uploading.');
+            setUploadingImageState(UploadingState.UPLOAD_ERROR);
             return;
         }
 
@@ -26,10 +38,17 @@ function AddPhotos() {
 
         try {
             const response = await APIMethods.uploadImage(formData);
+
+            if (response.status !== 200) {
+                setUploadingImageState(UploadingState.UPLOAD_ERROR);
+                return;
+            }
+
             const newUploadedImages = [...uploadedImages, loadedImage];
             setUploadedImages(newUploadedImages);
+            setUploadingImageState(UploadingState.UPLOAD_SUCCESS);
         } catch (error) {
-            console.error('Error uploading image:', error);
+            console.error(`[AddCarPage][AddPhotos][uploadImage][ERROR] - Cannot upload image to server. Stack trace message: ${error}`);
             return;
         }
     }
@@ -61,7 +80,14 @@ function AddPhotos() {
                 <div className='add-car-photos-column-wrapper'>
                     <img className='add-car-photos-loaded-img' src={loadedImage !== null ? URL.createObjectURL(loadedImage) : ""}/>
                     <div><input type='file' accept="image/png, image/jpg, image/jpeg" onChange={(e) => handleLoadedImage(e.target.files[0])}/></div>
-                    <div className='add-car-photo-styled-button' onClick={uploadImage}>Upload image</div>            
+                    <div className='add-car-photo-styled-button' onClick={() => uploadImage()}>Upload image</div>  
+                    {uploadingImageState === UploadingState.UPLOADING ? <LoadingCircle/> : <div/>}          
+                    {uploadingImageState === UploadingState.UPLOAD_SUCCESS 
+                        ? <div className='add-photos-upload-text success'>Failed to upload image.</div>
+                        : uploadingImageState === UploadingState.UPLOAD_ERROR
+                            ? <div className='add-photos-upload-text error'>Successfully uploaded image.</div>
+                            : <div/>
+                    }
                 </div>
                 <div className='add-car-photos-column-wrapper'>
                     <div className='add-car-photos-header'>Added photos</div>
@@ -72,8 +98,7 @@ function AddPhotos() {
             </div>
             <Link
                 to={"/addCar/summary"}
-                className='add-car-styled-button'
-                style={{textDecoration: "none"}}
+                className='add-photos-styled-button'
                 state={{
                     brandId: currentCarModel.brandId,
                     modelId: currentCarModel.modelId,

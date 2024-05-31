@@ -23,12 +23,17 @@ function PhotosSection({ car }) {
 
     const fetchImages = async (carId) => {
         if (carId === null || carId === undefined) {
+            console.log(`[CarOfferPage][PhotosSection][fetchImages][WARN] - Cannot fetch images because carId is null or undefined.`);
             return;
         }
 
-        const fetchedData = await APIMethods.getImages(carId);
-        const imageUrls = fetchedData.map((bytes) => `data:image/png;base64,${bytes}`)
-        setImages(imageUrls);
+        try {
+            const fetchedData = await APIMethods.getImages(carId);
+            const imageUrls = fetchedData.map((bytes) => `data:image/png;base64,${bytes}`)
+            setImages(imageUrls);
+        } catch (error) {
+            console.log(`[CarOfferPage][PhotosSection][fetchImages][ERROR] - Cannot fetch images from server for carId=${carId}. Stack trace message: ${error}`);
+        }
     }
 
     const setUploadedImages = () => {

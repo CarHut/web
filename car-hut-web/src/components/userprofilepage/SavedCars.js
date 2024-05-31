@@ -1,7 +1,6 @@
 import '../../css/userprofilepage/SavedCars.css';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import audiRS3Image from '../../images/searchlist/offers/audiRS3.jpg';
 import APIMethods from '../../api/APIMethods';
 
 function SavedCars() {
@@ -10,7 +9,11 @@ function SavedCars() {
     const [imagesForDisplayedCars, setImagesForDisplayedCars] = useState([]);
 
     const fetchSavedCarsByUserId = async () => {
-        setCars(await APIMethods.getSavedCarsByUsername());
+        try {
+            setCars(await APIMethods.getSavedCarsByUsername());
+        } catch (error) {
+            console.log(`[UserProfilePage][SavedCars][fetchSavedCarsByUserId][ERROR] - Cannot fetch saved cars. Stack trace message: ${error}`);
+        }
     }
 
     useEffect(() => {
@@ -18,8 +21,12 @@ function SavedCars() {
     }, []);
 
     const removeCarFromWishList = async (id) => {
-        const response = APIMethods.removeSavedCarByUsername(id);
-        fetchSavedCarsByUserId();
+        try {
+            const response = APIMethods.removeSavedCarByUsername(id);
+            fetchSavedCarsByUserId();
+        } catch (error) {
+            console.log(`[UserProfilePage][SavedCars][removeCarFromWishList][ERROR] - Cannot remove car from wishlist with id=${id}. Stack trace message: ${error}`);
+        }
     }
 
     useEffect(() => {
@@ -29,13 +36,18 @@ function SavedCars() {
     const fetchImagesForDisplayedCars = async () => {
         const imageList = [];
         for (let i = 0; i < cars.length; i++) {
-            const data = await APIMethods.getImages(cars[i].id);
-            if (data !== null) {
-                const url = `data:image/png;base64,${data[0]}`;
-                imageList.push(url);
-            } else {
-                imageList.push("no-image-found");
+            try {
+                const data = await APIMethods.getImages(cars[i].id);
+                if (data !== null) {
+                    const url = `data:image/png;base64,${data[0]}`;
+                    imageList.push(url);
+                } else {
+                    imageList.push("no-image-found");
+                }
+            } catch (error) {
+                console.log(`[UserProfilePage][SavedCars][fetchImagesForDisplayedCars][ERROR] - Cannot fetch images for displayed car with id=${cars[i].id}. Stack trace message: ${error}`);
             }
+            
         }
         setImagesForDisplayedCars(imageList);
     } 

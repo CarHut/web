@@ -57,7 +57,7 @@ function EngineAndPowertrain({fuelType, setFuelType, power, setPower, displaceme
         return (
             <div className="custom-combobox-engine-and-powertrain">
                 <select className={className} onChange={(e) => handleSelectedPower(e)}>
-                    <option value="">From (kw)</option>
+                    <option value="">{className.includes("power-from") ? "From" : "To"} (kw)</option>
                     <option key={25} value={'25'}>25 kw</option>
                     <option key={50} value={'50'}>50 kw</option>
                     <option key={70} value={'70'}>70 kw</option>
@@ -90,7 +90,7 @@ function EngineAndPowertrain({fuelType, setFuelType, power, setPower, displaceme
         return (
             <div className="custom-combobox-engine-and-powertrain">
                 <select className={className} onChange={(e) => handleSelectedDisplacement(e)}>
-                    <option value="">From (cm³)</option>
+                    <option value="">{className.includes("displacement-from") ? "From" : "To"} (cm³)</option>
                     <option key={1000} value={'1000'}>1000 cm³</option>
                     <option key={1200} value={'1200'}>1200 cm³</option>
                     <option key={1500} value={'1500'}>1500 cm³</option>

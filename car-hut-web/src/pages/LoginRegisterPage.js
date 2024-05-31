@@ -34,10 +34,15 @@ function LoginRegisterPage() {
     
     const handleLoginSubmit = async (e) => {
         e.preventDefault();
-        const tokenAvailable = await AuthUtil.login(loginEmail, loginPassword); 
-        setIsTokenSet(tokenAvailable);
-        if (!tokenAvailable) {
+        try {
+            const tokenAvailable = await AuthUtil.login(loginEmail, loginPassword); 
+            setIsTokenSet(tokenAvailable);
+            if (!tokenAvailable) {
+                setShowErrorMessage(true);
+            }
+        } catch (error) {
             setShowErrorMessage(true);
+            console.log(`[LoginRegisterPage][handleLoginSubmit][ERROR] - Cannot login user into system. Stack trace message: ${error}`);
         }
     }
 
@@ -53,75 +58,80 @@ function LoginRegisterPage() {
             repeatPassword: repeatRegisterPassword
         }
 
-        const response = await APIMethods.registerInitiate(registerBody);
-        const responseText = await response.text();
-        
-        if (responseText !== 'Successfully initiated registration.') {
-            switch (responseText) {
-                case 'SUCCESS':
-                    setShowRegistrationError(false);
-                    setRegistrationErrorMessage('');
-                    break;
-                case 'INVALID_FIRST_NAME':
-                    setShowRegistrationError(true);
-                    setRegistrationErrorMessage('Invalid first name.');
-                    break;
-                case 'INVALID_SURNAME':
-                    setShowRegistrationError(true);
-                    setRegistrationErrorMessage('Invalid surname.');
-                    break;
-                case 'INVALID_USERNAME':
-                    setShowRegistrationError(true);
-                    setRegistrationErrorMessage('Invalid username.');
-                    break;
-                case 'USERNAME_IN_USE':
-                    setShowRegistrationError(true);
-                    setRegistrationErrorMessage('Username is already used.');
-                    break;
-                case 'PASSWORDS_DO_NOT_MATCH':
-                    setShowRegistrationError(true);
-                    setRegistrationErrorMessage('Passwords do not match.');
-                    break;
-                case 'INVALID_EMAIL':
-                    setShowRegistrationError(true);
-                    setRegistrationErrorMessage('Invalid e-mail.');
-                    break;
-                case 'EMAIL_IN_USE':
-                    setShowRegistrationError(true);
-                    setRegistrationErrorMessage('E-mail is already used.');
-                    break;
-                case 'SHORT_PASSWORD':
-                    setShowRegistrationError(true);
-                    setRegistrationErrorMessage('Password must have atleast 8-characters.');
-                    break;
-                case 'PASSWORD_DOES_NOT_CONTAIN_UPPER_CHARACTER':
-                    setShowRegistrationError(true);
-                    setRegistrationErrorMessage('Password must contain atleast one upper character.');
-                    break;
-                case 'PASSWORD_DOES_NOT_CONTAIN_DIGIT':
-                    setShowRegistrationError(true);
-                    setRegistrationErrorMessage('Password must contain atleast one digit.');
-                    break;
-                case 'PASSWORD_DOES_NOT_CONTAIN_SPECIAL_CHARACTER':
-                    setShowRegistrationError(true);
-                    setRegistrationErrorMessage('Password must contain atleast one special character (e.g. \'@\',\'_\',..).');
-                    break;
-                case 'INVALID_PASSWORD':
-                    setShowRegistrationError(true);
-                    setRegistrationErrorMessage('Password contains invalid character/s.');
-                    break; 
-                case 'REGISTRATION_TOKEN_ALREADY_SENT':
-                    setShowRegistrationError(true);
-                    setRegistrationErrorMessage(`E-mail with verification was already sent to ${registerEmail}.`)                                      
-                default:
-                    break;
+        try {
+            const response = await APIMethods.registerInitiate(registerBody);
+            const responseText = await response.text();
+            
+            if (responseText !== 'Successfully initiated registration.') {
+                switch (responseText) {
+                    case 'SUCCESS':
+                        setShowRegistrationError(false);
+                        setRegistrationErrorMessage('');
+                        break;
+                    case 'INVALID_FIRST_NAME':
+                        setShowRegistrationError(true);
+                        setRegistrationErrorMessage('Invalid first name.');
+                        break;
+                    case 'INVALID_SURNAME':
+                        setShowRegistrationError(true);
+                        setRegistrationErrorMessage('Invalid surname.');
+                        break;
+                    case 'INVALID_USERNAME':
+                        setShowRegistrationError(true);
+                        setRegistrationErrorMessage('Invalid username.');
+                        break;
+                    case 'USERNAME_IN_USE':
+                        setShowRegistrationError(true);
+                        setRegistrationErrorMessage('Username is already used.');
+                        break;
+                    case 'PASSWORDS_DO_NOT_MATCH':
+                        setShowRegistrationError(true);
+                        setRegistrationErrorMessage('Passwords do not match.');
+                        break;
+                    case 'INVALID_EMAIL':
+                        setShowRegistrationError(true);
+                        setRegistrationErrorMessage('Invalid e-mail.');
+                        break;
+                    case 'EMAIL_IN_USE':
+                        setShowRegistrationError(true);
+                        setRegistrationErrorMessage('E-mail is already used.');
+                        break;
+                    case 'SHORT_PASSWORD':
+                        setShowRegistrationError(true);
+                        setRegistrationErrorMessage('Password must have atleast 8-characters.');
+                        break;
+                    case 'PASSWORD_DOES_NOT_CONTAIN_UPPER_CHARACTER':
+                        setShowRegistrationError(true);
+                        setRegistrationErrorMessage('Password must contain atleast one upper character.');
+                        break;
+                    case 'PASSWORD_DOES_NOT_CONTAIN_DIGIT':
+                        setShowRegistrationError(true);
+                        setRegistrationErrorMessage('Password must contain atleast one digit.');
+                        break;
+                    case 'PASSWORD_DOES_NOT_CONTAIN_SPECIAL_CHARACTER':
+                        setShowRegistrationError(true);
+                        setRegistrationErrorMessage('Password must contain atleast one special character (e.g. \'@\',\'_\',..).');
+                        break;
+                    case 'INVALID_PASSWORD':
+                        setShowRegistrationError(true);
+                        setRegistrationErrorMessage('Password contains invalid character/s.');
+                        break; 
+                    case 'REGISTRATION_TOKEN_ALREADY_SENT':
+                        setShowRegistrationError(true);
+                        setRegistrationErrorMessage(`E-mail with verification was already sent to ${registerEmail}.`)                                      
+                    default:
+                        break;
+                }
             }
-        }
 
-        if (responseText === 'SUCCESS') {
-            navigate('/register/emailSent', { state: { email: registerEmail} });
+            if (responseText === 'SUCCESS') {
+                navigate('/register/emailSent', { state: { email: registerEmail} });
+            }
+        } catch (error) {
+            console.log(`[LoginRegisterPage][handleRegisterSubmit][ERROR] - Cannot register user. Stack trace message: ${error}`);
+            setShowRegistrationError(true);
+            setRegistrationErrorMessage('Internal error. Please try again later.');     
         }
-
     }
 
     useEffect(() => {

@@ -8,8 +8,12 @@ function SavedSearches() {
     const [savedSearches, setSavedSearches] = useState([]);
 
     const fetchSavedSearches = async () => {
-        const response = await APIMethods.getSavedSearchesByUsername(localStorage.getItem('username'));
-        setSavedSearches(response);
+        try {
+            const response = await APIMethods.getSavedSearchesByUsername(localStorage.getItem('username'));
+            setSavedSearches(response);
+        } catch (error) {
+            console.log(`[UserProfilePage][SavedSearches][fetchSavedSearches][ERROR] - Cannot fetch saved searches. Stack trace message: ${error}`);
+        }
     }
 
     useEffect(() => {
@@ -24,8 +28,12 @@ function SavedSearches() {
     }
 
     const removeSavedSearch = async (id) => {
-        const response = await APIMethods.removeSavedSearch(id);
-        fetchSavedSearches();
+        try {
+            const response = await APIMethods.removeSavedSearch(id);
+            fetchSavedSearches();
+        } catch (error) {
+            console.log(`[UserProfilePage][SavedSearches][removeSavedSearch][ERROR] - Cannot remove saved search from server. Stack trace message: ${error}`);
+        }
     }
 
     const renderSavedSearches = () => {

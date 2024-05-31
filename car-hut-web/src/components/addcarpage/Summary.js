@@ -1,7 +1,7 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import '../../css/addcarpage/Summary.css';
 import CarMainSection from '../carofferpage/CarMainSection';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import APIMethods from '../../api/APIMethods';
 
 function Summary() {
@@ -13,13 +13,26 @@ function Summary() {
 
     const handleCreatedOffer = async () => {
 
-        const brandId = await APIMethods.getBrandIdFromBrandName(carModel.brandId);
-        const modelId = await APIMethods.getModelIdByModelName(carModel.modelId, brandId);
-        
+        let brandId = "";
+        let modelId = "";
+        try {
+            brandId = await APIMethods.getBrandIdFromBrandName(carModel.brandId);
+            modelId = await APIMethods.getModelIdByModelName(carModel.modelId, brandId);    
+        } catch (error) {
+            console.log(`[AddCarPage][Summary][handleCreatedOffer][ERROR] - Cannot fetch brandId or modelId from server. Stack trace message: ${error}`);
+            setShowErrorMessage(true);
+            return;
+        }
         const featureIds = [];
 
         for (const feature of carModel.features) {
-            featureIds.push(await APIMethods.getFeatureIdByFeatureName(feature));
+            try {
+                featureIds.push(await APIMethods.getFeatureIdByFeatureName(feature));
+            } catch (error) {
+                console.log(`[AddCarPage][Summary][handleCreatedOffer][ERROR] - Cannot fetch featureId from server (feature=${feature}). Stack trace message: ${error}`);
+                setShowErrorMessage(true);
+                return;
+            }
         }
 
         const requestOptions = {
@@ -66,14 +79,17 @@ function Summary() {
             })
         };
 
-        const response = await APIMethods.addCarToDatabase(requestOptions);
-        
-        if (response.status === 200) {
-            nav('/addCar/success');
-        } else {
+        try {
+            const response = await APIMethods.addCarToDatabase(requestOptions);
+            if (response.status === 200) {
+                nav('/addCar/success');
+            } else {
+                setShowErrorMessage(true);
+            }
+        } catch (error) {
+            console.log(`[AddCarPage][Summary][handleCreatedOffer][ERROR] - Cannot save car offer to server. Stack trace message: ${error}`);
             setShowErrorMessage(true);
         }
-        
     }
 
     return (
@@ -82,7 +98,7 @@ function Summary() {
                 <div className='add-car-summary-header'>That's it! Now double check whether all information is ok.</div>
                 <div className='add-car-line-container'/>
                 <div className='add-car-summary-styled-button' onClick={(e) => handleCreatedOffer(e)}>Create offer</div>
-                {showErrorMessage ? <div className='error-text'>Something went wrong!</div> : <div/>}
+                {showErrorMessage ? <div className='error-text'>Something went wrong! Try again later.</div> : <div/>}
             </div>
             {carModel === undefined ? <div/> : <CarMainSection carId={null} carModel={carModel}/>}
         </div>

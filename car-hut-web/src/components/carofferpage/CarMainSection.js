@@ -15,8 +15,12 @@ function CarMainSection({ carId, carModel }) {
         if (carId === null) {
             setCar(carModel);
         } else {
-            const data = await APIMethods.getCarWithId(carId);
-            setCar(data);
+            try {   
+                const data = await APIMethods.getCarWithId(carId);
+                setCar(data);
+            } catch (error) {
+                console.log(`[CarOfferPage][CarMainSection][fetchCar][ERROR] - Cannot fetch car data from server. Stack trace message: ${error}`);
+            }
         }
     } 
 

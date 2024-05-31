@@ -10,7 +10,6 @@ function MainInfo() {
     const [models, setModels] = useState([]);
     const [selectedBrand, setSelectedBrand] = useState('Not picked');
     const [selectedModel, setSelectedModel] = useState('Not picked');
-    const [reactCarModel, setReactCarModel] = useState({});
     const [header, setHeader] = useState('Not set');
     const [mileage, setMileage] = useState('Not set');
     const [registration, setRegistration] = useState('Not set');
@@ -26,14 +25,21 @@ function MainInfo() {
     }, [selectedBrand]);
 
     const fetchBrands = async () => {
-        const data = await APIMethods.getAllBrands();
-        console.log(data);
-        setBrands(data);
+        try {
+            const data = await APIMethods.getAllBrands();
+            setBrands(data);
+        } catch (error) {
+            console.log(`[AddCarPage][MainInfo][fetchBrands][ERROR] - Cannot fetch brands. Stack trace message: ${error}`);
+        }
     }
 
     const fetchModels = async (selectedBrand) => {
-        const data = await APIMethods.getModelsByBrandName(selectedBrand);
-        setModels(data);
+        try {
+            const data = await APIMethods.getModelsByBrandName(selectedBrand);
+            setModels(data);
+        } catch (error) {
+            console.log(`[AddCarPage][MainInfo][fetchModels][ERROR] - Cannot fetch models for brand=${selectedBrand}. Stack trace message ${error}`);
+        }
     }
 
     const handleSelectedBrand = (brand) => {
@@ -197,7 +203,7 @@ function MainInfo() {
                         <div className='add-car-label'>Brand*</div>
                         <div className="add-car-main-info-custom-combobox">
                             <select id="brandComboBox" className='add-car-main-info-myComboBox' value={selectedBrand} onChange={(e) => handleSelectedBrand(e.target.value)}>
-                                <option value="all" disabled>Select Brand</option>
+                                <option value="all">Select Brand</option>
                                 {renderBrands()}
                             </select>
                         </div>

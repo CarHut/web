@@ -10,15 +10,27 @@ function SellerInfo({car}) {
     const [sellerEmail, setSellerEmail] = useState('');
     
     const fetchOffersNum = async () => {
-        setOffersNum(await APIMethods.getOffersNumByUserId(car.sellerId));
+        try {
+            setOffersNum(await APIMethods.getOffersNumByUserId(car.sellerId));
+        } catch (error) {
+            console.log(`[CarOfferPage][SellerInfo][fetchOffersNum][ERROR] - Cannot fetch offers number from sellerId=${car.sellerId}. Stack trace message: ${error}`);
+        }
     }
 
     const fetchSellerFullName = async () => {
-        setSellerFullName(await APIMethods.getFirstNameAndSurnameByUserId(car.sellerId));
+        try {
+            setSellerFullName(await APIMethods.getFirstNameAndSurnameByUserId(car.sellerId));
+        } catch (error) {
+            console.log(`[CarOfferPage][SellerInfo][fetchSellerFullName][ERROR] - Cannot fetch seller full name from sellerId=${car.sellerId}. Stack trace message: ${error}`);
+        }
     }
 
     const fetchSellerEmail = async () => {
-        setSellerEmail(await APIMethods.getEmailByUserId(car.sellerId));
+        try {
+            setSellerEmail(await APIMethods.getEmailByUserId(car.sellerId));
+        } catch (error) {
+            console.log(`[CarOfferPage][SellerInfo][fetchSellerFullName][ERROR] - Cannot fetch seller email from sellerId=${car.sellerId}. Stack trace message: ${error}`);
+        }
     }
 
     useEffect(() => {

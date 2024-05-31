@@ -88,8 +88,29 @@
     font-weight: bold;
 }
 
+.add-photos-styled-button {
+    background-color: #313131;
+    font-size: 1vw;
+    text-decoration: none;
+    color: #fff;
+    width: 8vw;
+    height: 3vw;
+}
+
 .x-mark::after {
     content: '×';
+}
+
+.add-photos-upload-text {
+    font-size: 1vw;
+}
+
+.add-photos-upload-text.success {
+    color: green;
+}
+
+.add-photos-upload-text.error {
+    color: red;
 }
 
 @media screen and (max-width: 1350px) {

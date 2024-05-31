@@ -121,7 +121,7 @@ function AdditionalInfo() {
                 <div className='add-car-label'>Country of origin</div>
                 <div className="add-car-additional-info-custom-combobox">
                     <select id="brandComboBox" className='add-car-additional-info-myComboBox' value={countryOfOrigin} onChange={(e) => handleNationChange(e.target.value)}>
-                        <option value="all" disabled></option>
+                        <option value=""></option>
                         {nations.map((nation, idx) => (
                             <option key={idx} value={nation}>{nation}</option>
                         ))}

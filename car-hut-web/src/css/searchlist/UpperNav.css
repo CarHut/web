@@ -88,6 +88,22 @@ select {
     color: #000;
 }
 
+.save-search-wrapper-upper-nav {
+    display: block;
+}
+
+.save-search-result-text {
+    font-size: 1vw;
+}
+
+.save-search-result-text.success {
+    color: green;
+}
+
+.save-search-result-text.error {
+    color: red;
+}
+
 @media screen and (max-width: 1350px) {
   .combobox-entity-upper-nav {
       display: block;

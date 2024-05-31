@@ -10,8 +10,12 @@ function MyListings() {
     const [imagesForDisplayedCars, setImagesForDisplayedCars] = useState([]);
 
     const fetchMyListings = async () => {
-        const response =await APIMethods.getMyListings(); 
-        setCars(response);
+        try {
+            const response = await APIMethods.getMyListings(); 
+            setCars(response);
+        } catch (error) {
+            console.log(`[UserProfilePage][MyListings][fetchMyListings][ERROR] - Cannot fetch listings from server. Stack trac message: ${error}`);
+        }
     }
 
     useEffect(() => {
@@ -19,8 +23,12 @@ function MyListings() {
     }, []);
 
     const removeOffer = async (id) => {
-        const response = await APIMethods.removeOffer(id);
-        fetchMyListings();
+        try {
+            const response = await APIMethods.removeOffer(id);
+            fetchMyListings();
+        } catch (error) {
+            console.log(`[UserProfilePage][MyListings][removeOffer][ERROR] - Cannot remove offer with id=${id}. Stack trace message: ${error}`);
+        }
     }
 
     useEffect(() => {
@@ -30,12 +38,16 @@ function MyListings() {
     const fetchImagesForDisplayedCars = async () => {
         const imageList = [];
         for (let i = 0; i < cars.length; i++) {
-            const data = await APIMethods.getImages(cars[i].id);
-            if (data !== null) {
-                const url = `data:image/png;base64,${data[0]}`;
-                imageList.push(url);
-            } else {
-                imageList.push("no-image-found");
+            try {
+                const data = await APIMethods.getImages(cars[i].id);
+                if (data !== null) {
+                    const url = `data:image/png;base64,${data[0]}`;
+                    imageList.push(url);
+                } else {
+                    imageList.push("no-image-found");
+                }
+            } catch (error) {
+                console.log(`[UserProfilePage][MyListings][fetchImagesForDisplayedCars][ERROR] - Cannot fetch images for displayed car with id=${cars[i].id}. Stack trace message: ${error}`);
             }
         }
         setImagesForDisplayedCars(imageList);
