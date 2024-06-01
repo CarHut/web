@@ -2,13 +2,17 @@ import APIMethods from '../../api/APIMethods';
 import '../../css/userprofilepage/Chats.css';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import LoadingCircle from '../maincomponents/LoadingCircle';
 
 function Chats({ socket }) {
 
     const [chats, setChats] = useState([]);
     const [usernames, setUsernames] = useState([]);
 
+    const [loading, setLoading] = useState(false);
+
     useEffect(() => {
+        setLoading(true);
         fetchChatsFromStorage();
     }, []);
 
@@ -28,6 +32,7 @@ function Chats({ socket }) {
 
     const fetchChatsFromStorage = () => {
         setChats(JSON.parse(localStorage.getItem('chats')));
+        setLoading(false);
     }
 
 
@@ -73,6 +78,7 @@ function Chats({ socket }) {
                 )
             }
         });
+
         return result;
     }
 
@@ -98,6 +104,7 @@ function Chats({ socket }) {
         <div className='chats-wrapper'>
             <div className='profile-content-header'>Chats</div>
             <div className='chats-content-wrapper'>
+                {loading ? <LoadingCircle/> : <div/>}
                 {renderChats()}
             </div>
         </div>

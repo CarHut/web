@@ -4,6 +4,8 @@ import '../css/pages/LoginRegisterPage.css';
 import AuthUtil from '../utils/auth/AuthUtil';
 import { useNavigate } from 'react-router-dom';import APIMethods from '../api/APIMethods';
 import SocketAPI from '../messaging/SocketAPI';
+import { findAllByDisplayValue } from '@testing-library/react';
+import LoadingCircle from '../components/maincomponents/LoadingCircle';
 
 function LoginRegisterPage() {
 
@@ -16,6 +18,8 @@ function LoginRegisterPage() {
     const [surname, setSurname] = useState('');
     const [username, setUsername] = useState('');
     
+    const [loading, setLoading] = useState(false);
+
     const [showRegistrationError, setShowRegistrationError] = useState(false);
     const [registrationErrorMessage, setRegistrationErrorMessage] = useState('');
 
@@ -34,14 +38,17 @@ function LoginRegisterPage() {
     
     const handleLoginSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
         try {
             const tokenAvailable = await AuthUtil.login(loginEmail, loginPassword); 
             setIsTokenSet(tokenAvailable);
             if (!tokenAvailable) {
                 setShowErrorMessage(true);
             }
+            setLoading(false);
         } catch (error) {
             setShowErrorMessage(true);
+            setLoading(false);
             console.log(`[LoginRegisterPage][handleLoginSubmit][ERROR] - Cannot login user into system. Stack trace message: ${error}`);
         }
     }
@@ -169,6 +176,7 @@ function LoginRegisterPage() {
                             </div>
                             {showErrorMessage ? <div className='error-text'>Invalid username or password</div> : ""}
                             <button type='submit'>Login</button>
+                            {loading ? <LoadingCircle/> : <div/>}
                         </form>
                     </div>
                     <div className='register-wrapper'>

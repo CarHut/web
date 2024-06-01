@@ -2,6 +2,7 @@ import '../../css/userprofilepage/MyListings.css';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import APIMethods from '../../api/APIMethods';
+import LoadingCircle from '../maincomponents/LoadingCircle';
 
 
 function MyListings() {
@@ -9,12 +10,17 @@ function MyListings() {
     const [cars, setCars] = useState([]);
     const [imagesForDisplayedCars, setImagesForDisplayedCars] = useState([]);
 
+    const [loading, setLoading] = useState(false);
+
     const fetchMyListings = async () => {
+        setLoading(true);
         try {
             const response = await APIMethods.getMyListings(); 
             setCars(response);
+            setLoading(false);
         } catch (error) {
             console.log(`[UserProfilePage][MyListings][fetchMyListings][ERROR] - Cannot fetch listings from server. Stack trac message: ${error}`);
+            setLoading(false);
         }
     }
 
@@ -114,7 +120,8 @@ function MyListings() {
         <div className='my-listings-wrapper'>
             <div className='profile-content-header'>My listings</div>
             <div className='my-listings-content-wrapper'>
-            {renderMyListings()}
+                {loading ? <LoadingCircle/> : <div/>}
+                {renderMyListings()}
             </div>
         </div>
     )

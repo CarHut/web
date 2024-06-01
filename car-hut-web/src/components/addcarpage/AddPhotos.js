@@ -83,9 +83,9 @@ function AddPhotos() {
                     <div className='add-car-photo-styled-button' onClick={() => uploadImage()}>Upload image</div>  
                     {uploadingImageState === UploadingState.UPLOADING ? <LoadingCircle/> : <div/>}          
                     {uploadingImageState === UploadingState.UPLOAD_SUCCESS 
-                        ? <div className='add-photos-upload-text success'>Failed to upload image.</div>
+                        ? <div className='add-photos-upload-text success'>Successfully uploaded image.</div>
                         : uploadingImageState === UploadingState.UPLOAD_ERROR
-                            ? <div className='add-photos-upload-text error'>Successfully uploaded image.</div>
+                            ? <div className='add-photos-upload-text error'>Failed to upload image.</div>
                             : <div/>
                     }
                 </div>

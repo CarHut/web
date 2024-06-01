@@ -2,17 +2,23 @@ import '../../css/userprofilepage/SavedSearches.css';
 import { useEffect, useState } from 'react';
 import APIMethods from '../../api/APIMethods';
 import { Link } from 'react-router-dom';
+import LoadingCircle from '../maincomponents/LoadingCircle';
 
 function SavedSearches() {
 
     const [savedSearches, setSavedSearches] = useState([]);
 
+    const [loading, setLoading] = useState(false);
+
     const fetchSavedSearches = async () => {
+        setLoading(true);
         try {
             const response = await APIMethods.getSavedSearchesByUsername(localStorage.getItem('username'));
             setSavedSearches(response);
+            setLoading(false);
         } catch (error) {
             console.log(`[UserProfilePage][SavedSearches][fetchSavedSearches][ERROR] - Cannot fetch saved searches. Stack trace message: ${error}`);
+            setLoading(false);
         }
     }
 
@@ -115,6 +121,7 @@ function SavedSearches() {
     return (
         <div className='saved-searches-wrapper'>
             <div className='profile-content-header'>Saved searches</div>
+            {loading ? <LoadingCircle/> : <div/>}
             {renderSavedSearches()}
         </div>
     );

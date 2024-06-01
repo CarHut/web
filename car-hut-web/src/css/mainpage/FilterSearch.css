@@ -11,11 +11,6 @@ img {
     align-items: center;
 }
 
-.combobox-entity-filter-search {
-    display: block;
-    padding: 1vw;
-}
-
 .label-search-list-main-page {
     color: #fff;
     font-size: 1vw;
@@ -32,47 +27,6 @@ select {
     padding: 0;
     margin: 0;
     cursor: pointer;
-}
-  
-.custom-combobox-filter-search-main-page {
-    position: relative;
-    width: 10vw; 
-    height: 2vw;
-    font-size: 1vw;
-}
-  
-/* Style the custom combobox arrow */
-.custom-combobox-filter-search-main-page::after {
-  content: '\25BC'; /* Unicode arrow down character */
-  color: #D9D9D9; /* Adjust the color as needed */
-  position: absolute;
-  top: 50%;
-  right: 1vw;
-  transform: translateY(-50%);
-}
-
-/* Style the custom combobox options */
-.my-combo-box-search-list-main-page {
-  width: 100%;
-  border: 1px solid #D9D9D9;
-  border-radius: 5px;
-  color: #D9D9D9;
-  background-color: #313131;
-  height: 100%;
-  padding-left: 1vw;
-  font-size: 1vw;
-}
-
-/* Optional: Style the dropdown options */
-.my-combo-box-search-list-main-page option {
-  background-color: #fff;
-  color: #000;
-}
-
-.my-combo-box-search-list-main-page.disabled {
-    box-shadow: none; /* Reset shadow when disabled */
-    opacity: 0.7; /* Adjust opacity to indicate disabled state */
-    /* Add any additional styles to visually indicate disabled state */
 }
 
 .right-wrapper {
@@ -118,14 +72,6 @@ select {
   .section-body {
       margin: 2vw 0;
   }
-    
-  .custom-combobox-filter-search-main-page {
-      width: 18vw; 
-  }
-
-  .my-combo-box-search-list-main-page {
-    width: 100%;
-  }
 
   .comboboxes {
     display: flex;
@@ -139,24 +85,10 @@ select {
   .section-body {
       margin: 4vw 0;
   }
-    
-  .comboboxes {
-    display: flex;
-    flex-wrap: wrap;
-  }
-
-  .custom-combobox-filter-search-main-page {
-      width: 25vw; 
-      height: 5vw;
-  }
-
-  .my-combo-box-search-list-main-page {
-    width: 100%;
-    font-size: 2vw;
-  }
   
   .comboboxes {
     display: flex;
+    flex-wrap: wrap;
   }
 
   .label-search-list-main-page {

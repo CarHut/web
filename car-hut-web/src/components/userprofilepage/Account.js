@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import AuthUtil from '../../utils/auth/AuthUtil.js'
 import APIMethods from '../../api/APIMethods.js';
 import Constants from '../../constants/Constants.js';
+import LoadingCircle from '../../components/maincomponents/LoadingCircle.js';
 
 function Account() {
     
@@ -10,9 +11,18 @@ function Account() {
     const [showResetPasswordSent, setShowResetPasswordSent] = useState(false);
     const [showResetPasswordError, setShowResetPasswordError] = useState(false);
 
+    const [loadingAccountDetails, setLoadingAccountDetails] = useState(false);
+
     const fetchAccountDetails = async () => {
-        const data = await APIMethods.getUserDetailsInfo();
-        setAccountDetails(data);
+        setLoadingAccountDetails(true);
+        try {
+            const data = await APIMethods.getUserDetailsInfo();
+            setAccountDetails(data);
+            setLoadingAccountDetails(false);
+        } catch (error) {
+            console.log(`[UserProfilePage][Account][fetchAccountDetails][ERROR] - Cannot fetch account details. Stack trace message: ${error}`);
+            setLoadingAccountDetails(false);
+        }
     }
 
     useEffect(() => {
@@ -38,6 +48,7 @@ function Account() {
     return (
         <div className='account-wrapper'>
             <div className='profile-content-header'>Account</div>
+            {loadingAccountDetails ? <LoadingCircle/> : <div/>}
             <div className='account-main-info-wrapper'>
                 <div className='account-main-info-column-entity'>
                     <div className='profile-content-dark-text'>Username</div>

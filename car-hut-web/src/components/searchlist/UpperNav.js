@@ -1,57 +1,64 @@
 import APIMethods from '../../api/APIMethods';
 import '../../css/searchlist/UpperNav.css';
 import { useState } from 'react';
+import LoadingCircle from '../../components/maincomponents/LoadingCircle';
+import ComboBox from '../maincomponents/ComboBox';
 
 function UpperNav({ fetchedState, offersPerPage, setOffersPerPage, sortBy, setSortBy }) {
     
     const [savedSearchState, setSavedSearchState] = useState(null); 
     
+    const [loading, setLoading] = useState(false);
+
     const handleOffersPerPageChange = (e) => {
-        setOffersPerPage(e.target.value);
+        setOffersPerPage(e);
     }
     
     const handleSortByChange = (e) => {
-        setSortBy(e.target.value);
+        setSortBy(e);
     }
 
     const renderSortComboBox = () => {
+
+        const options = [
+            { key: '-1', value: '', textValue: '--'},
+            { key: '1', value: "PFL", textValue: 'Price - from lowest' },
+            { key: '2', value: "PFH", textValue: 'Price - from highest' },
+            { key: '3', value: "AFL", textValue: 'Alphabetically - A to Z' },
+            { key: '4', value: "AFH", textValue: 'Alphabetically - Z to A' },
+            { key: '5', value: "MFL", textValue: 'Mileage - from lowest' },
+            { key: '6', value: "MFH", textValue: 'Mileage - from highest' },
+            { key: '7', value: "SFL", textValue: 'Power - from lowest' },
+            { key: '8', value: "SFH", textValue: 'Power - from highest' },
+            { key: '9', value: "DAO", textValue: 'Date added - oldest' },
+            { key: '10', value: "DAN", textValue: 'Date added - newest' }
+        ];
+
         return (
-            <div className="custom-combobox-upper-nav">
-                <select id="brandComboBox" className='my-combobox-upper-nav' value={sortBy} onChange={handleSortByChange}>
-                    <option value="">--</option>
-                    <option value="PFL" key={1}>Price - from lowest</option>
-                    <option value="PFH" key={2}>Price - from highest</option>
-                    <option value="AFL" key={3}>Alphabetically - A to Z</option>
-                    <option value="AFH" key={4}>Alphabetically - Z to A</option>
-                    <option value="MFL" key={5}>Mileage - from lowest</option>
-                    <option value="MFH" key={6}>Mileage - from highest</option>
-                    <option value="SFL" key={7}>Power - from lowest</option>
-                    <option value="SFH" key={8}>Power - from highest</option>
-                    <option value="DAO" key={9}>Date added - oldest</option>
-                    <option value="DAN" key={10}>Date added - newest</option>
-                </select>
-            </div>
+            <ComboBox label={'Sort by'} width={"10vw"} height={"3vw"} optionValues={options} onChangeHandler={(e) => handleSortByChange(e.target.value)}/>
         )
     }
 
     const renderOfferPerPageComboBox = () => {
+        
+        const options = [
+            { key: '', value: '', textValue: '--' },
+            { key: '', value: '5', textValue: '5' },
+            { key: '', value: '10', textValue: '10' },
+            { key: '', value: '15', textValue: '15' },
+            { key: '', value: '20', textValue: '20' },
+            { key: '', value: '30', textValue: '30' },
+            { key: '', value: '50', textValue: '50' },
+            { key: '', value: '100', textValue: '100' }
+        ]
+
         return (
-            <div className="custom-combobox-upper-nav">
-                <select id="brandComboBox" className='my-combobox-upper-nav' value={offersPerPage} onChange={handleOffersPerPageChange}>
-                    <option value="" disabled>--</option>
-                    <option value={5} key={5}>5</option>
-                    <option value={10} key={10}>10</option>
-                    <option value={15} key={15}>15</option>
-                    <option value={20} key={20}>20</option>
-                    <option value={30} key={30}>30</option>
-                    <option value={50} key={50}>50</option>
-                    <option value={100} key={100}>100</option>
-                </select>
-            </div>
+            <ComboBox label={'Offers per page'} width={'10vw'} height={'3vw'} optionValues={options} onChangeHandler={(e) => handleOffersPerPageChange(e.target.value)}/>
         )
     }
 
     const saveSearch = async () => {
+        setLoading(true);
         try {    
             const searchBody = {
                 id: 'NULL',
@@ -74,33 +81,29 @@ function UpperNav({ fetchedState, offersPerPage, setOffersPerPage, sortBy, setSo
             
             if (response.status === 200) {
                 setSavedSearchState(true);
-                const timer = setTimeout(() => setSavedSearchState(null), 5000);
-                clearTimeout(timer);
+                setTimeout(() => setSavedSearchState(null), 5000);
             } else {
                 console.log(`[SearchList][UpperNav][saveSearch][ERROR] - Cannot save search.`);
                 setSavedSearchState(false);
-                const timer = setTimeout(() => setSavedSearchState(null), 5000);
+                setTimeout(() => setSavedSearchState(null), 5000);
             }
+            setLoading(false);
         } catch (error) {
             console.log(`[SearchList][UpperNav][saveSearch][ERROR] - Cannot save search. Stack trace message: ${error}`);
             setSavedSearchState(false);
-            const timer = setTimeout(() => setSavedSearchState(null), 5000);
+            setLoading(false);
+            setTimeout(() => setSavedSearchState(null), 5000);
         }
     }
 
     return (
         <div className='search-list-upper-nav-wrapper'>
-            <div className='combobox-entity-upper-nav'>
-                <div className='sort-dropdown-label-upper-nav'>Sort by</div>
-                {renderSortComboBox()}
-            </div>
-            <div className='combobox-entity-upper-nav'>
-                <div className='sort-dropdown-label-upper-nav'>Offers per page</div>
-                {renderOfferPerPageComboBox()}
-            </div>
+            {renderSortComboBox()}
+            {renderOfferPerPageComboBox()}
             <div className='save-search-wrapper-upper-nav'>
                 <div className="styled-button-upper-nav" onClick={() => saveSearch()}>Save search</div>
                 <div className={`save-search-result-text ${savedSearchState !== null ? savedSearchState ? "success" : "error" : ""}`}>{savedSearchState !== null ? savedSearchState ? "Successfully saved search parameters" : "Couldn't save search parameters" : ""}</div>
+                {loading ? <LoadingCircle/> : <div/>}
             </div>
         </div>
     );

@@ -139,6 +139,19 @@
     opacity: 80%;
 }
 
+.car-main-info-add-to-wishlist-text {
+    font-size: 1vw;
+    word-break: keep-all;
+}
+
+.car-main-info-add-to-wishlist-text.success {
+    color: green;
+}
+
+.car-main-info-add-to-wishlist-text.error {
+    color: red;
+}
+
 @media screen and (max-width: 1350px) {
     
     .section-car-offer-main-info-wrapper {

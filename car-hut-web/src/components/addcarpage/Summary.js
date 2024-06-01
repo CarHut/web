@@ -3,6 +3,7 @@ import '../../css/addcarpage/Summary.css';
 import CarMainSection from '../carofferpage/CarMainSection';
 import { useState } from 'react';
 import APIMethods from '../../api/APIMethods';
+import LoadingCircle from '../../components/maincomponents/LoadingCircle'
 
 function Summary() {
     
@@ -11,7 +12,11 @@ function Summary() {
     const [carModel, setCarModel] = useState(loc.state);
     const [showErrorMessage, setShowErrorMessage] = useState(false);
 
+    const [loading, setLoading] = useState(false);
+
     const handleCreatedOffer = async () => {
+
+        setLoading(true);
 
         let brandId = "";
         let modelId = "";
@@ -21,6 +26,7 @@ function Summary() {
         } catch (error) {
             console.log(`[AddCarPage][Summary][handleCreatedOffer][ERROR] - Cannot fetch brandId or modelId from server. Stack trace message: ${error}`);
             setShowErrorMessage(true);
+            setLoading(false);
             return;
         }
         const featureIds = [];
@@ -31,6 +37,7 @@ function Summary() {
             } catch (error) {
                 console.log(`[AddCarPage][Summary][handleCreatedOffer][ERROR] - Cannot fetch featureId from server (feature=${feature}). Stack trace message: ${error}`);
                 setShowErrorMessage(true);
+                setLoading(false);
                 return;
             }
         }
@@ -89,7 +96,9 @@ function Summary() {
         } catch (error) {
             console.log(`[AddCarPage][Summary][handleCreatedOffer][ERROR] - Cannot save car offer to server. Stack trace message: ${error}`);
             setShowErrorMessage(true);
+            setLoading(false);
         }
+        setLoading(false);
     }
 
     return (
@@ -98,6 +107,7 @@ function Summary() {
                 <div className='add-car-summary-header'>That's it! Now double check whether all information is ok.</div>
                 <div className='add-car-line-container'/>
                 <div className='add-car-summary-styled-button' onClick={(e) => handleCreatedOffer(e)}>Create offer</div>
+                {loading ? <LoadingCircle/> : <div/>}
                 {showErrorMessage ? <div className='error-text'>Something went wrong! Try again later.</div> : <div/>}
             </div>
             {carModel === undefined ? <div/> : <CarMainSection carId={null} carModel={carModel}/>}

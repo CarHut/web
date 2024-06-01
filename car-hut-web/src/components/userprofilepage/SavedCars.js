@@ -2,18 +2,26 @@ import '../../css/userprofilepage/SavedCars.css';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import APIMethods from '../../api/APIMethods';
+import LoadingCircle from '../maincomponents/LoadingCircle';
 
 function SavedCars() {
  
     const [cars, setCars] = useState([]);
     const [imagesForDisplayedCars, setImagesForDisplayedCars] = useState([]);
 
+    const [loading, setLoading] = useState(false);
+
     const fetchSavedCarsByUserId = async () => {
-        try {
-            setCars(await APIMethods.getSavedCarsByUsername());
-        } catch (error) {
-            console.log(`[UserProfilePage][SavedCars][fetchSavedCarsByUserId][ERROR] - Cannot fetch saved cars. Stack trace message: ${error}`);
-        }
+        setLoading(true);
+        setTimeout(async () => {
+            try {
+                setCars(await APIMethods.getSavedCarsByUsername());
+                setLoading(false);
+            } catch (error) {
+                console.log(`[UserProfilePage][SavedCars][fetchSavedCarsByUserId][ERROR] - Cannot fetch saved cars. Stack trace message: ${error}`);
+                setLoading(false);
+            }
+        }, 1000);
     }
 
     useEffect(() => {
@@ -113,7 +121,8 @@ function SavedCars() {
         <div className='saved-cars-wrapper'>
             <div className='profile-content-header'>Saved cars</div>
             <div className='saved-cars-content-wrapper'>
-            {renderSavedCars()}
+                {loading ? <LoadingCircle/> : <div/>}
+                {renderSavedCars()}
             </div>
         </div>
     )

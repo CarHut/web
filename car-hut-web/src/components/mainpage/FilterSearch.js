@@ -2,7 +2,7 @@ import '../../css/mainpage/FilterSearch.css';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import APIMethods from '../../api/APIMethods';
-
+import ComboBox from '../maincomponents/ComboBox';
 
 function FilterSearch() {
     const [brands, setBrands] = useState([]);
@@ -84,77 +84,82 @@ function FilterSearch() {
     }
 
     const renderBrands = () => {
-        if (brands !== null) {
-            return (
-                brands.map(brand => (
-                    <option key={brand.id} value={brand.brand}>{brand.brand}</option>
-                ))
-            )
-        } else {
-            return (
-                <option value={""}/>
-            )
-        }
-        
+        const options = [];
+
+        // Push empty option
+        options.push({ key: '-1', value: '', textValue: 'Select brand'});
+
+        brands.map(brand => {
+            options.push({ key: brand.id, value: brand.brand, textValue: brand.brand});
+        });
+
+        return (
+            <ComboBox label={'Brands'} width={'10vw'} height={'3vw'} optionValues={options} onChangeHandler={(e) => handleSelectedBrand(e.target.value)}/>
+        )        
     }
 
     const renderModels = () => {
-        if (models !== null) {
-            return (
-                models.map(model => (
-                    <option key={model.id} value={model.model}>{model.model}</option>
-                ))
-            )
-        } else {
-            return (
-                <option value={""}/>
-            )
-        }
+        const options = [];
+
+        // Push empty option
+        options.push({ key: '-1', value: '', textValue: 'Select model'});
+
+        models.map(model => {
+            options.push({ key: model.id, value: model.model, textValue: model.model});
+        });
+
+        return (
+            <ComboBox label={'Models'} width={'10vw'} height={'3vw'} optionValues={options} onChangeHandler={(e) => handleSelectedModel(e.target.value)}/>
+        ) 
     }
 
     const renderPriceComboBox = () => {
+        const optionValues = [
+            {key: -1, value: '', textValue: "Select price"},
+            {key: 1000, value: '1000', textValue: "1 000€"},
+            {key: 2000, value: '2000', textValue: "2 000€"},
+            {key: 3000, value: '3000', textValue: "3 000€"},
+            {key: 4000, value: '4000', textValue: "4 000€"},
+            {key: 5000, value: '5000', textValue: "5 000€"},
+            {key: 6000, value: '6000', textValue: "6 000€"},
+            {key: 7000, value: '7000', textValue: "7 000€"},
+            {key: 8000, value: '8000', textValue: "8 000€"},
+            {key: 9000, value: '9000', textValue: "9 000€"},
+            {key: 10000, value: '10000', textValue: '10 000€'},
+            {key: 20000, value: '20000', textValue: '20 000€'},
+            {key: 30000, value: '30000', textValue: '30 000€'},
+            {key: 40000, value: '40000', textValue: '40 000€'},
+            {key: 50000, value: '50000', textValue: '50 000€'},
+            {key: 60000, value: '60000', textValue: '60 000€'},
+            {key: 70000, value: '70000', textValue: '70 000€'},
+            {key: 80000, value: '80000', textValue: '80 000€'},
+            {key: 90000, value: '90000', textValue: '90 000€'},
+            {key: 100000, value: '100000', textValue: '100 000€'},
+            {key: 150000, value: '150000', textValue: '150 000€'},
+            {key: 200000, value: '200000', textValue: '200 000€'},
+            {key: 0, value:'priceMore', textValue: 'More'}
+        ];
+
         return (
-            <select id="priceComboBox" className='my-combo-box-search-list-main-page' onChange={(e) => handleSelectedPriceFrom(e.target.value)}>
-                <option value="">Select Price</option>
-                <option key={1000} value={'1000'}>1 000€</option>
-                <option key={2000} value={'2000'}>2 000€</option>
-                <option key={3000} value={'3000'}>3 000€</option>
-                <option key={4000} value={'4000'}>4 000€</option>
-                <option key={5000} value={'5000'}>5 000€</option>
-                <option key={6000} value={'6000'}>6 000€</option>
-                <option key={7000} value={'7000'}>7 000€</option>
-                <option key={8000} value={'8000'}>8 000€</option>
-                <option key={9000} value={'9000'}>9 000€</option>
-                <option key={10000} value={'10000'}>10 000€</option>
-                <option key={20000} value={'20000'}>20 000€</option>
-                <option key={30000} value={'30000'}>30 000€</option>
-                <option key={40000} value={'40000'}>40 000€</option>
-                <option key={50000} value={'50000'}>50 000€</option>
-                <option key={60000} value={'60000'}>60 000€</option>
-                <option key={70000} value={'70000'}>70 000€</option>
-                <option key={80000} value={'80000'}>80 000€</option>
-                <option key={90000} value={'90000'}>90 000€</option>
-                <option key={100000} value={'100000'}>100 000€</option>
-                <option key={150000} value={'150000'}>150 000€</option>
-                <option key={200000} value={'200000'}>200 000€</option>
-                <option key={0} value={'priceMore'}>More</option>
-            </select>
+            <ComboBox label={'Price from'} width={"10vw"} height={"3vw"} optionValues={optionValues}  onChangeHandler={(e) => handleSelectedPriceFrom(e.target.value)}/>
         );
     }
 
     const renderMileageComboBox = () => {
+        const optionValues = [
+            {key: -1, value: '', textValue: "Select mileage"},
+            {key: 1000, value: '1000', textValue: "1 000 km"},
+            {key: 5000, value: '5000', textValue: "5 000 km"},
+            {key: 10000, value: '10000', textValue: "10 000 km"},
+            {key: 50000, value: '50000', textValue: "50 000 km"},
+            {key: 100000, value: '100000', textValue: "100 000 km"},
+            {key: 200000, value: '200000', textValue: "200 000 km"},
+            {key: 0, value: '0', textValue: "More"}
+        ];
+
         return (
-            <select id="mileageComboBox" className='my-combo-box-search-list-main-page' onChange={(e) => handleSelectedMileageFrom(e.target.value)}> 
-                <option value="">Select Mileage</option> 
-                <option key={1000} value={'1000'}>1 000 km</option>
-                <option key={5000} value={'5000'}>5 000 km</option>
-                <option key={10000} value={'10000'}>10 000 km</option>
-                <option key={50000} value={'50000'}>50 000 km</option>
-                <option key={100000} value={'100000'}>100 000 km</option>
-                <option key={200000} value={'200000'}>200 000 km</option>
-                <option key={0} value={'mileageMore'}>More</option>
-            </select>
-        )
+            <ComboBox label={'Mileage from'} width={"10vw"} height={"3vw"} optionValues={optionValues}  onChangeHandler={(e) => handleSelectedMileageFrom(e.target.value)}/>
+        );
     }
 
     const renderSearchButton = () => {
@@ -186,36 +191,10 @@ function FilterSearch() {
             <img className='img-basic-data' src={require('../../images/mainpage/find_car.png')}/>
             <div className='right-wrapper'>
                 <div className='comboboxes'>
-                    <div className='combobox-entity-filter-search'>
-                        <div className='label-search-list-main-page'>Brand</div>
-                        <div className="custom-combobox-filter-search-main-page">
-                            <select id="brandComboBox" className='my-combo-box-search-list-main-page' value={selectedBrand} onChange={(e) => handleSelectedBrand(e.target.value)}>
-                                <option value="">Select Brand</option>
-                                {renderBrands()}
-                            </select>
-                        </div>
-                    </div>
-                    <div className='combobox-entity-filter-search'>
-                        <div className='label-search-list-main-page'>Model</div>
-                        <div className="custom-combobox-filter-search-main-page">
-                            <select id="modelComboBox" className={`my-combo-box-search-list-main-page ${!selectedBrand ? 'disabled' : ''}`} value={selectedModel} onChange={(e) => handleSelectedModel(e.target.value)} disabled={!selectedBrand}>
-                                <option value="" disabled={!selectedBrand}>Select Model</option>
-                                {renderModels()}
-                            </select>
-                        </div>
-                    </div>
-                    <div className='combobox-entity-filter-search'>
-                        <div className='label-search-list-main-page'>Price from</div>
-                        <div className="custom-combobox-filter-search-main-page">
-                            {renderPriceComboBox()}
-                        </div>
-                    </div>
-                    <div className='combobox-entity-filter-search'>
-                        <div className='label-search-list-main-page'>Mileage from</div>
-                        <div className="custom-combobox-filter-search-main-page">
-                            {renderMileageComboBox()}
-                        </div>
-                    </div>
+                    {renderBrands()}
+                    {renderModels()}
+                    {renderPriceComboBox()}
+                    {renderMileageComboBox()}
                 </div>
                 <div className="filter-search-links">
                     <Link to={'/moreFiltersPage'} className='more-filters-text-search-list-main-page'>More filters</Link>
