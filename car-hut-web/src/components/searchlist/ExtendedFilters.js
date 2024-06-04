@@ -1,6 +1,8 @@
 import '../../css/searchlist/ExtendedFilters.css';
 import { useState, useEffect } from 'react';
 import APIMethods from '../../api/APIMethods';
+import ComboBox from '../../components/maincomponents/ComboBox';
+import RangeSlider from '../maincomponents/RangeSlider.js';
 
 function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange, loadingResultsListLength, setLoadingResultsListLength }) {
 
@@ -19,6 +21,18 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange, l
 
     const [addBrandAndModelOverlay, setAddBrandAndModelOverlay] = useState(false);
     var brandsAndModelsFetchedTrigger = false;
+
+    const comboBoxSizingWidth = {
+        standardSize: "10vw",
+        mediumSize:   "20vw",
+        smallSize:    "40vw"
+    };
+
+    const comboBoxSizingHeight = {
+        standardSize: "2vw",
+        mediumSize:   "4vw",
+        smallSize:    "7vw"
+    }
 
     useEffect(() => { 
         fetchBrands();
@@ -97,28 +111,8 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange, l
                 <div className='search-list-extended-filters-brandAndModel-add-button' onClick={() => handleAddBrandAndModelOverlay()}>Add +</div>
                 {addBrandAndModelOverlay === true 
                     ?   <div className='search-list-extended-filters-brandAndModel-add-overlay'>
-                            <div className='combobox-entity-extended-filters'>
-                                <div className='current-state-label'>Brand</div>
-                                <div className="custom-combobox-extended-filters">
-                                    <select id="brandComboBox" className='my-combobox-extended-filters' value={addBrand} onChange={(e) => handleSelectedAddBrand(e)}>
-                                        <option key={0} value={''} onChange={(e) => handleSelectedAddBrand(e)}>All</option>
-                                        {addBrands.map(brand => (
-                                            <option key={brand.id} value={brand.brand}>{brand.brand}</option>
-                                        ))}
-                                    </select>
-                                </div>
-                            </div>
-                            <div className='combobox-entity-extended-filters'>
-                                <div className='current-state-label'>Model</div>
-                                <div className="custom-combobox-extended-filters">
-                                    <select id="modelComboBox" className={`my-combobox-extended-filters ${addBrand === '' ? 'disabled' : ''}`} value={addModel} onChange={(e) => handleSelectedAddModel(e)} disabled={addBrand === ''}>
-                                        <option key={0} value={''} onChange={(e) => handleSelectedAddBrand(e)}>All</option>
-                                        {addModels.map(model => (
-                                            <option key={model.id} value={model.model}>{model.model}</option>
-                                        ))}
-                                    </select>
-                                </div>
-                            </div>
+                            <ComboBox label={'Brand'} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={addBrands.map((brand) => new Object({ key: brand.id, value: brand.brand, textValue: brand.brand }))} onChangeHandler={(e) => handleSelectedAddBrand(e)}/>
+                            <ComboBox label={'Model'} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={addModels.map((model) => new Object({ key: model.id, value: model.model, textValue: model.model }))} onChangeHandler={(e) => handleSelectedAddModel(e)}/>
                         </div>
                     :   <div className=''></div> 
                 }
@@ -247,113 +241,95 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange, l
         setLoadingResultsListLength(true);
     }
 
-    const renderPrice = (type) => {
+    const renderPriceRangeSlider = (type) => {
+        const typeOfSliderStringVal = type === 'priceFrom' ? 'From: ' : 'To: ';
         return (
-            <div className="search-list-extended-filters-slider-container">
-                <div className='current-state-label' htmlFor={type}>{type === 'priceFrom' ? "From" : "To" }: {type === 'priceFrom' ? price.priceFrom : price.priceTo}€</div>
-                <input
-                    type="range"
-                    id={type}
-                    name={type}
-                    min={type === "priceFrom" ? "0" : price.priceFrom === "" ? "0" : price.priceFrom}
-                    max={type === 'priceTo' ? "500000" : price.priceTo === "" ? "500000" : price.priceTo}
-                    step="500"
-                    value={type === 'priceFrom' ? price.priceFrom : price.priceTo}
-                    onChange={(e) => handlePriceChange(e.target.value, type === "priceFrom" ? 0 : 1)}
-                    onMouseLeave ={() => onPriceChanged()}
-                />
-            </div>
-        )
+            <RangeSlider sliderLabel={`${typeOfSliderStringVal} ${type === 'priceFrom' ? price.priceFrom : price.priceTo}€`} 
+                changingValue={type === 'priceFrom' ? price.priceFrom : price.priceTo} 
+                minValue={type === "priceFrom" ? "0" : price.priceFrom === "" ? "0" : price.priceFrom}
+                maxValue={type === 'priceTo' ? "500000" : price.priceTo === "" ? "500000" : price.priceTo}
+                step={'500'}
+                onChangeHandler={(e) => handlePriceChange(e.target.value, type === "priceFrom" ? 0 : 1)}
+                onMouseLeaveHandler={() => onPriceChanged()}
+                sliderWidth={'90%'}
+            />
+        );
     }
 
     const renderMileage = (type) => {
+        const typeOfSliderStringVal = type === 'mileageFrom' ? 'From: ' : 'To: ';
         return (
-            <div className="search-list-extended-filters-slider-container">
-                <div className='current-state-label' htmlFor={type}>{type === 'mileageFrom' ? "From" : "To"}: {type === 'mileageFrom' ? mileage.mileageFrom : mileage.mileageTo} km</div>
-                <input
-                    type="range"
-                    id={type === 'mileageFrom' ? mileage.mileageFrom : mileage.mileageTo}
-                    name={type === 'mileageFrom' ? mileage.mileageFrom : mileage.mileageTo}
-                    min={type === 'mileageFrom' ? "0" : mileage.mileageFrom === '' ? "0" : mileage.mileageFrom}
-                    max={type === 'mileageTo' ? "500000" : mileage.mileageTo === '' ? "500000" : mileage.mileageTo}
-                    step="500"
-                    value={type === 'mileageFrom' ? mileage.mileageFrom : mileage.mileageTo}
-                    onChange={(e) => handleMileageChange(e.target.value, type === 'mileageFrom' ? 0 : 1)}
-                    onMouseLeave={() => onMileageChanged()}
-                />
-            </div>
-        )
+            <RangeSlider sliderLabel={`${typeOfSliderStringVal} ${type === 'mileageFrom' ? mileage.mileageFrom : mileage.mileageTo} km`} 
+                changingValue={type === 'mileageFrom' ? mileage.mileageFrom : mileage.mileageTo} 
+                minValue={type === 'mileageFrom' ? "0" : mileage.mileageFrom === '' ? "0" : mileage.mileageFrom}
+                maxValue={type === 'mileageTo' ? "500000" : mileage.mileageTo === '' ? "500000" : mileage.mileageTo}
+                step={'500'}
+                onChangeHandler={(e) => handleMileageChange(e.target.value, type === 'mileageFrom' ? 0 : 1)}
+                onMouseLeaveHandler={() => onMileageChanged()}
+                sliderWidth={'90%'}
+            />
+        );
     }
 
     const renderFuelTypes = () => {
+        const options = [
+            { key: '1', value: '',           textValue: 'Any'        },          
+            { key: '2', value: 'NotStated',  textValue: 'Not stated' }, 
+            { key: '3', value: 'Hybrid',     textValue: 'Hybrid'     }, 
+            { key: '4', value: 'Diesel',     textValue: 'Diesel'     },
+            { key: '5', value: 'Petrol',     textValue: 'Petrol'     }, 
+            { key: '6', value: 'Electric',   textValue: 'Electric'   },  
+            { key: '7', value: 'LPG',        textValue: 'LPG'        },   
+            { key: '8', value: 'CNG',        textValue: 'CNG'        }     
+        ];
+
         return (
-            <div className='combobox-entity-extended-filters'>
-                <div className="custom-combobox-extended-filters">
-                    <select id="fuelComboBox" className='my-combobox-extended-filters' value={fuelType} onChange={(e) => handleFuelTypeChange(e.target.value)}>
-                        <option key={1} value={""}>Any</option>
-                        <option key={2} value={'NotStated'}>Not stated</option>
-                        <option key={3} value={'Hybrid'}>Hybrid</option>
-                        <option key={4} value={'Diesel'}>Diesel</option>
-                        <option key={5} value={'Petrol'}>Petrol</option>
-                        <option key={6} value={'Electric'}>Electric</option>
-                        <option key={7} value={'LPG'}>LPG</option>
-                        <option key={8} value={'CNG'}>CNG</option>
-                    </select>
-                </div>
-            </div>
-        )
+            <ComboBox label={'Fuel type'} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={options} onChangeHandler={(e) => handleFuelTypeChange(e.target.value)}/>
+        );
     }
 
     const renderGearboxTypes = () => {
+        const options = [
+            { key: '9', value: '',            textValue: 'Any'         },    
+            { key: '10', value: 'NotStated',   textValue: 'Not stated'  },   
+            { key: '11', value: 'Manual',      textValue: 'Manual'      },     
+            { key: '12', value: 'Automatic',   textValue: 'Automatic'   },       
+            { key: '13', value: 'Sequential',  textValue: 'Sequential'  }   
+        ];
+
         return (
-            <div className='combobox-entity-extended-filters'>
-                <div className="custom-combobox-extended-filters">
-                    <select id="gearboxComboBox" className='my-combobox-extended-filters' value={gearbox} onChange={(e) => handleGearboxChange(e.target.value)}>
-                        <option key={1} value={""}>Any</option>
-                        <option key={2} value={'NotStated'}>Not stated</option>
-                        <option key={3} value={'Manual'}>Manual</option>
-                        <option key={4} value={'Automatic'}>Automatic</option>
-                        <option key={5} value={'Sequential'}>Sequential</option>
-                    </select>
-                </div>
-            </div>
-        )
+            <ComboBox label={'Gearbox'} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={options} onChangeHandler={(e) => handleGearboxChange(e.target.value)}/>
+        );
     }
 
     const renderEnginePower = (type) => {
+        const typeOfSliderStringVal = type === 'powerFrom' ? 'From: ' : 'To: ';
         return (
-            <div className="search-list-extended-filters-slider-container">
-                <div className='current-state-label' htmlFor={type}>{type === 'powerFrom' ? "From" : "To"}: {type === 'powerFrom' ? power.powerFrom : power.powerTo} kW</div>
-                <input
-                    type="range"
-                    id={type}
-                    name={type}
-                    min={type === 'powerFrom' ? "0" : power.powerFrom === '' ? "0" : power.powerFrom}
-                    max={type === 'powerTo' ? "1000" : power.powerTo === '' ? "1000" : power.powerTo}
-                    step="1"
-                    value={type === 'powerFrom' ? power.powerFrom : power.powerTo}
-                    onChange={(e) => handlePowerChange(e.target.value, type === 'powerFrom' ? 0 : 1)}
-                    onMouseLeave ={() => onPowerChanged()}
-                />
-            </div>
-        )
+            <RangeSlider sliderLabel={`${typeOfSliderStringVal} ${type === 'powerFrom' ? power.powerFrom : power.powerTo} kW`} 
+                sliderWidth={'90%'}
+                changingValue={type === 'powerFrom' ? power.powerFrom : power.powerTo} 
+                minValue={type === 'powerFrom' ? "0" : power.powerFrom === '' ? "0" : power.powerFrom}
+                maxValue={type === 'powerTo' ? "1000" : power.powerTo === '' ? "1000" : power.powerTo}
+                step={'1'}
+                onChangeHandler={(e) => handlePowerChange(e.target.value, type === 'powerFrom' ? 0 : 1)}
+                onMouseLeaveHandler={() => onPowerChanged()}
+            />
+        );
     }
 
     const renderPowertrainTypes = () => {
+        const options = [
+            { key: '14', value: '',           textValue: 'Any'               },   
+            { key: '15', value: 'Other',      textValue: 'Other'             },   
+            { key: '16', value: 'NotStated',  textValue: 'Not stated'        },     
+            { key: '17', value: 'RearWheel',  textValue: 'Rear-wheel drive'  },       
+            { key: '18', value: 'FrontWheel', textValue: 'Front-wheel drive' },    
+            { key: '19', value: 'AllWheel',   textValue: 'All-wheel drive'   }  
+        ];
+
         return (
-            <div className='combobox-entity-extended-filters'>
-                <div className="custom-combobox-extended-filters">
-                    <select id="gearboxComboBox" className='my-combobox-extended-filters' value={powertrain} onChange={(e) => handlePowertrainChange(e.target.value)}>
-                        <option key={1} value={""}>Any</option>
-                        <option key={2} value={'Other'}>Other</option>
-                        <option key={3} value={'NotStated'}>Not stated</option>
-                        <option key={4} value={'RearWheel'}>Rear-wheel drive</option>
-                        <option key={5} value={'FrontWheel'}>Front-wheel drive</option>
-                        <option key={6} value={'AllWheel'}>All-wheel drive</option>
-                    </select>
-                </div>
-            </div>
-        )
+            <ComboBox label={'Powetrain'} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={options} onChangeHandler={(e) => handlePowertrainChange(e.target.value)}/> 
+        );
     }
 
     const handleFiltersVisibility = () => {
@@ -372,8 +348,8 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange, l
                 </div>
                 <div className='search-list-extended-filters-section' style={visibleFilters === true ? {visibility: "visible", display: "block"} : {visibility: "hidden", display: "none"}}>
                     <div className='search-list-extended-filters-section-label'>Price</div>
-                    {renderPrice("priceFrom")}
-                    {renderPrice("priceTo")}
+                    {renderPriceRangeSlider("priceFrom")}
+                    {renderPriceRangeSlider("priceTo")}
                 </div>
                 <div className='search-list-extended-filters-section' style={visibleFilters === true ? {visibility: "visible", display: "block"} : {visibility: "hidden", display: "none"}}>
                     <div className='search-list-extended-filters-section-label'>Mileage</div>
@@ -381,15 +357,12 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange, l
                     {renderMileage('mileageTo')}
                 </div>
                 <div className='search-list-extended-filters-section' style={visibleFilters === true ? {visibility: "visible", display: "block"} : {visibility: "hidden", display: "none"}}>
-                    <div className='search-list-extended-filters-section-label'>Fuel type</div>
                     {renderFuelTypes()}
                 </div>
                 <div className='search-list-extended-filters-section' style={visibleFilters === true ? {visibility: "visible", display: "block"} : {visibility: "hidden", display: "none"}}>
-                    <div className='search-list-extended-filters-section-label'>Gearbox</div>
                     {renderGearboxTypes()}
                 </div>
                 <div className='search-list-extended-filters-section' style={visibleFilters === true ? {visibility: "visible", display: "block"} : {visibility: "hidden", display: "none"}}>
-                    <div className='search-list-extended-filters-section-label'>Powertrain</div>
                     {renderPowertrainTypes()}
                 </div>
                 <div className='search-list-extended-filters-section' style={visibleFilters === true ? {visibility: "visible", display: "block"} : {visibility: "hidden", display: "none"}}>

@@ -6,6 +6,18 @@ import ComboBox from '../maincomponents/ComboBox';
 
 function UpperNav({ fetchedState, offersPerPage, setOffersPerPage, sortBy, setSortBy }) {
     
+    const comboBoxSizingWidth = {
+        standardSize: "10vw",
+        mediumSize:   "20vw",
+        smallSize:    "30vw"
+    };
+
+    const comboBoxSizingHeight = {
+        standardSize: "2vw",
+        mediumSize:   "4vw",
+        smallSize:    "6vw"
+    }
+
     const [savedSearchState, setSavedSearchState] = useState(null); 
     
     const [loading, setLoading] = useState(false);
@@ -35,8 +47,8 @@ function UpperNav({ fetchedState, offersPerPage, setOffersPerPage, sortBy, setSo
         ];
 
         return (
-            <ComboBox label={'Sort by'} width={"10vw"} height={"3vw"} optionValues={options} onChangeHandler={(e) => handleSortByChange(e.target.value)}/>
-        )
+            <ComboBox label={'Sort by'} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={options} onChangeHandler={(e) => handleSortByChange(e.target.value)}/>
+        );
     }
 
     const renderOfferPerPageComboBox = () => {
@@ -53,7 +65,7 @@ function UpperNav({ fetchedState, offersPerPage, setOffersPerPage, sortBy, setSo
         ]
 
         return (
-            <ComboBox label={'Offers per page'} width={'10vw'} height={'3vw'} optionValues={options} onChangeHandler={(e) => handleOffersPerPageChange(e.target.value)}/>
+            <ComboBox label={'Offers per page'} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={options} onChangeHandler={(e) => handleOffersPerPageChange(e.target.value)}/>
         )
     }
 
@@ -98,13 +110,15 @@ function UpperNav({ fetchedState, offersPerPage, setOffersPerPage, sortBy, setSo
 
     return (
         <div className='search-list-upper-nav-wrapper'>
-            {renderSortComboBox()}
-            {renderOfferPerPageComboBox()}
-            <div className='save-search-wrapper-upper-nav'>
-                <div className="styled-button-upper-nav" onClick={() => saveSearch()}>Save search</div>
-                <div className={`save-search-result-text ${savedSearchState !== null ? savedSearchState ? "success" : "error" : ""}`}>{savedSearchState !== null ? savedSearchState ? "Successfully saved search parameters" : "Couldn't save search parameters" : ""}</div>
-                {loading ? <LoadingCircle/> : <div/>}
-            </div>
+            <div className='search-list-upper-nav-content'>
+                {renderSortComboBox()}
+                {renderOfferPerPageComboBox()}
+                <div className='save-search-wrapper-upper-nav'>
+                    <div className="styled-button-upper-nav" onClick={() => saveSearch()}>Save search</div>
+                    <div className={`save-search-result-text ${savedSearchState !== null ? savedSearchState ? "success" : "error" : ""}`}>{savedSearchState !== null ? savedSearchState ? "Successfully saved search parameters" : "Couldn't save search parameters" : ""}</div>
+                    {loading ? <LoadingCircle/> : <div/>}
+                </div>
+            </div>     
         </div>
     );
 }

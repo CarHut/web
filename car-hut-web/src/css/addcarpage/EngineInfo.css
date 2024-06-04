@@ -25,8 +25,9 @@
 }
 
 .add-car-engine-info-column-wrapper {
-    width: 48%;
     display: block;
+    height: 100%;
+    width: 50%;
 }
 
 .add-car-engine-info-small-text-darker {
@@ -46,50 +47,8 @@
 .add-car-engine-info-content-wrapper {
     display: flex;
     justify-content: space-around;
-    width: 100%;
-}
-
-.add-car-engine-info-custom-combobox {
-    position: relative;
-    width: 13vw; 
-    height: 2vw;
-    margin-right: 5vw;
-}
-
-.add-car-engine-info-combobox-entity {
-  display: block;
-  padding-right: 1vw;
-  padding-bottom: 1vw;
-}
-  
-  .add-car-engine-info-custom-combobox::after {
-    content: '\25BC'; 
-    color: #D9D9D9; 
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-  }
-  
-  .add-car-engine-info-myComboBox {
-    width: 100%;
-    border: 1px solid #D9D9D9;
-    border-radius: 5px;
-    font-size: 1vw;
-    color: #D9D9D9;
-    background-color: #313131;
+    width: 50%;
     height: 100%;
-    padding-left: 1vw;
-  }
-  
-  .add-car-engine-info-myComboBox option {
-    background-color: #fff;
-    color: #000;
-  }
-
-.add-car-engine-info-myComboBox.disabled {
-    box-shadow: none; 
-    opacity: 0.7;
 }
 
 .add-car-engine-info-text-input {
@@ -99,14 +58,6 @@
     color: #a3a3a3;
     border: solid #a3a3a3 1px;
     border-radius: 5px;
-}
-
-.add-car-engine-power-slider-container {
-    width: 15vw;
-}
-
-.add-car-displacement-slider-container {
-    width: 15vw;
 }
 
 @media screen and (max-width: 1350px) {
@@ -130,27 +81,10 @@
     .add-car-engine-info-small-text {
         font-size: 1.5vw;
     }
-    
-    .add-car-engine-info-custom-combobox {
-        width: 17vw; 
-        height: 4vw;
-    }
-      
-    .add-car-engine-info-myComboBox {
-      font-size: 1.5vw;
-    }
-    
+
     .add-car-engine-info-text-input {
         width: 17vw;
         height: 4vw;
-    }
-
-    .add-car-engine-power-slider-container {
-        width: 20vw;
-    }
-
-    .add-car-displacement-slider-container {
-        width: 20vw;
     }
 }
 
@@ -176,36 +110,9 @@
         font-size: 2.5vw;
     }
     
-    .add-car-engine-info-custom-combobox {
-        width: 30vw; 
-        height: 6vw;
-    }
-      
-    .add-car-engine-info-myComboBox {
-      font-size: 2.5vw;
-    }
-    
     .add-car-engine-info-text-input {
         width: 30vw;
         height: 6vw;
-    }
-
-    .add-car-engine-power-slider-container {
-        width: 40vw;
-    }
-
-    .add-car-displacement-slider-container {
-        width: 40vw;
-    }
-
-    .add-car-engine-power-slider-container
-    input {
-        height: 5vw;
-    }
-
-    .add-car-displacement-slider-container
-    input {
-        height: 5vw;
     }
 
     .add-car-engine-info-row-wrapper {

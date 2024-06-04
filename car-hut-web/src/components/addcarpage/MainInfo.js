@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom';
 import APIMethods from '../../api/APIMethods';
 import '../../css/addcarpage/MainInfo.css';
 import { useState, useEffect } from 'react';
+import ComboBox from '../maincomponents/ComboBox';
+import RangeSlider from '../maincomponents/RangeSlider';
 
 
 function MainInfo() {
@@ -15,6 +17,18 @@ function MainInfo() {
     const [registration, setRegistration] = useState('Not set');
     const [price, setPrice] = useState('Not stated');
     const [sellerAddress, setSellerAddress] = useState('Not stated');
+
+    const comboBoxSizingWidth = {
+        standardSize: "10vw",
+        mediumSize:   "20vw",
+        smallSize:    "40vw"
+    };
+
+    const comboBoxSizingHeight = {
+        standardSize: "2vw",
+        mediumSize:   "4vw",
+        smallSize:    "7vw"
+    }
 
     useEffect(() => {
         fetchBrands();
@@ -107,18 +121,20 @@ function MainInfo() {
 
     const renderBrands = () => {
         return (
-            brands.map(brand => (
-                <option key={brand.id} value={brand.brand}>{brand.brand}</option>
-            ))
-        )
+            <ComboBox label={'Select brand'} width={comboBoxSizingWidth} height={comboBoxSizingHeight} 
+                optionValues={brands.map((brand) => new Object({ key: brand.id, value: brand.brand, textValue: brand.brand }))} 
+                onChangeHandler={(e) => handleSelectedBrand(e.target.value)}
+            />
+        );
     }
 
     const renderModels = () => {
         return (
-            models.map(model => (
-                <option key={model.id} value={model.model}>{model.model}</option>
-            ))
-        )
+            <ComboBox label={'Selected model'} width={comboBoxSizingWidth} height={comboBoxSizingHeight}
+                optionValues={models.map((model) => new Object({ key: model.id, value: model.model, textValue: model.model}))}
+                onChangeHandler={(e) => handleSelectedModel(e.target.value)}
+            />
+        );
     }
 
     const renderHeaderInput = () => {
@@ -132,56 +148,44 @@ function MainInfo() {
 
     const renderPriceSlider = () => {
         return (
-            <div className="add-car-price-slider-container">
-                <div className='add-car-label' htmlFor="price" style={{"display": "flex", "alignItems": "center"}}>Price*: <input className='add-car-main-info-text-input' style={{"margin": "0 1em"}} maxLength='7' type='text' placeholder='' value={price} onChange={(e) => handlePriceChange(e.target.value)} pattern='[0-9]'/> €</div>
-                <input
-                    type="range"
-                    id="price"
-                    name="price"
-                    min="0"
-                    max="999999"
-                    step="5"
-                    value={price}
-                    onChange={(e) => handlePriceChange(e.target.value)}
-                />
-            </div>
-        )
+            <RangeSlider 
+                sliderLabel={`Price: ${price} €`} 
+                sliderWidth={'100%'} 
+                changingValue={price}
+                minValue={'0'}
+                maxValue={'999999'}
+                step={'5'}
+                onChangeHandler={(e) => handlePriceChange(e.target.value)}
+            />
+        );
     }
 
     const renderMileageSlider = () => {
         return (
-            <div className="add-car-mileage-slider-container">
-                <div className='add-car-label' htmlFor="mileage" style={{"display": "flex", "alignItems": "center"}}>Mileage*: <input className='add-car-main-info-text-input' style={{"margin": "0 1em"}} maxLength='7' type='text' placeholder='' value={mileage} onChange={(e) => handleMileageChange(e.target.value)} pattern='[0-9]'/> km</div>
-                <input
-                    type="range"
-                    id="mileage"
-                    name="mileage"
-                    min="0"
-                    max="1000000"
-                    step="1"
-                    value={mileage}
-                    onChange={(e) => handleMileageChange(e.target.value)}
-                />
-            </div>
-        )
+            <RangeSlider 
+                sliderLabel={`Mileage: ${mileage} km`} 
+                sliderWidth={'100%'} 
+                changingValue={mileage}
+                minValue={'0'}
+                maxValue={'1000000'}
+                step={'1'}
+                onChangeHandler={(e) => handleMileageChange(e.target.value)}
+            />
+        );
     }
 
     const renderRegistrationSlider = () => {
         return (
-            <div className="add-car-registration-slider-container">
-                <div className='add-car-label' htmlFor="registration" style={{"display": "flex", "alignItems": "center"}}>Registration*: <input className='add-car-main-info-text-input' style={{"margin": "0 1em"}} maxLength='4' type='text' placeholder='' value={registration} pattern='[0-9]' onChange={(e) => handleRegistrationChange(e.target.value)}/></div>
-                <input
-                    type="range"
-                    id="fromRegistration"
-                    name="fromRegistration"
-                    min="1900"
-                    max="2024"
-                    step="1"
-                    value={registration}
-                    onChange={(e) => handleRegistrationChange(e.target.value)}
-                />
-            </div>
-        )
+            <RangeSlider 
+                sliderLabel={`Registration: ${registration} km`} 
+                sliderWidth={'100%'} 
+                changingValue={registration}
+                minValue={'1900'}
+                maxValue={'2024'}
+                step={'1'}
+                onChangeHandler={(e) => handleRegistrationChange(e.target.value)}
+            />
+        );
     }
 
     const renderAddressSection = () => {
@@ -199,24 +203,8 @@ function MainInfo() {
             <div className="add-car-line-container"/>
             <div className='add-car-main-info-row-wrapper'>
                 <div className='add-car-main-info-column-wrapper'>
-                    <div className='add-car-main-info-combobox-entity'>
-                        <div className='add-car-label'>Brand*</div>
-                        <div className="add-car-main-info-custom-combobox">
-                            <select id="brandComboBox" className='add-car-main-info-myComboBox' value={selectedBrand} onChange={(e) => handleSelectedBrand(e.target.value)}>
-                                <option value="all">Select Brand</option>
-                                {renderBrands()}
-                            </select>
-                        </div>
-                    </div>
-                    <div className='add-car-main-info-combobox-entity'>
-                        <div className='add-car-label'>Model*</div>
-                        <div className="add-car-main-info-custom-combobox">
-                            <select id="modelComboBox" className={`add-car-main-info-myComboBox ${!selectedBrand ? 'disabled' : ''}`} value={selectedModel} onChange={(e) => handleSelectedModel(e.target.value)} disabled={!selectedBrand}>
-                                <option value="all" disabled={!selectedBrand}>Select Model</option>
-                                {renderModels()}
-                            </select>
-                        </div>
-                    </div>
+                    {renderBrands()}
+                    {renderModels()}
                     <div className='add-car-main-info-row-wrapper'>
                         {renderHeaderInput()}
                     </div>

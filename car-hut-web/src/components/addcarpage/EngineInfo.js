@@ -1,8 +1,10 @@
 import { useLocation } from 'react-router-dom';
 import APIMethods from '../../api/APIMethods';
 import '../../css/addcarpage/EngineInfo.css';
-import { useEffect, useState, useSyncExternalStore } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import ComboBox from '../maincomponents/ComboBox';
+import RangeSlider from '../maincomponents/RangeSlider';
 
 function EngineInfo() {
 
@@ -21,6 +23,18 @@ function EngineInfo() {
     const [cityFuelCons, setCityFuelCons] = useState('Not stated');
     const [highwayFuelCons, setHighwayFuelCons] = useState('Not stated');
     const [gears, setGears] = useState('Not stated');
+
+    const comboBoxSizingWidth = {
+        standardSize: "10vw",
+        mediumSize:   "20vw",
+        smallSize:    "40vw"
+    };
+
+    const comboBoxSizingHeight = {
+        standardSize: "2vw",
+        mediumSize:   "4vw",
+        smallSize:    "7vw"
+    }
 
     const fetchFuelTypes = async () => {
         try {
@@ -127,54 +141,39 @@ function EngineInfo() {
 
     const renderEnginePower = () => {
         return (
-            <div className="add-car-engine-power-slider-container">
-                <div className='add-car-label' htmlFor="enginePower" style={{"display": "flex", "alignItems": "center"}}>Engine power*: <input className='add-car-engine-info-text-input' style={{"margin": "0 1em"}} maxLength='4' type='text' placeholder='' value={enginePower} onChange={(e) => handlePowerChange(e.target.value)} pattern='[0-9]'/> kW</div>
-                <input
-                    type="range"
-                    id="enginePower"
-                    name="enginePower"
-                    min="0"
-                    max="2000"
-                    step="1"
-                    value={enginePower}
-                    onChange={(e) => handlePowerChange(e.target.value)}
-                />
-            </div>
-        )
+            <RangeSlider 
+                sliderLabel={`Engine power: ${enginePower} kW`} 
+                sliderWidth={'100%'} 
+                changingValue={enginePower}
+                minValue={'0'}
+                maxValue={'2000'}
+                step={'1'}
+                onChangeHandler={(e) => handlePowerChange(e.target.value)}
+            />
+        );
     }
 
     const renderDisplacement = () => {
         return (
-            <div className="add-car-displacement-slider-container">
-                <div className='add-car-label' htmlFor="displacement" style={{"display": "flex", "alignItems": "center"}}>Displacement*: <input className='add-car-engine-info-text-input' style={{"margin": "0 1em"}} maxLength='5' type='text' placeholder='' value={displacement} onChange={(e) => handleDisplacementChange(e.target.value)} pattern='[0-9]'/> cm³</div>
-                <input
-                    type="range"
-                    id="displacement"
-                    name="displacement"
-                    min="0"
-                    max="20000"
-                    step="1"
-                    value={displacement}
-                    onChange={(e) => handleDisplacementChange(e.target.value)}
-                />
-            </div>
-        )
+            <RangeSlider 
+                sliderLabel={`Displacement: ${displacement} cm³`} 
+                sliderWidth={'100%'} 
+                changingValue={displacement}
+                minValue={'0'}
+                maxValue={'20000'}
+                step={'1'}
+                onChangeHandler={(e) => handleDisplacementChange(e.target.value)}
+            />
+        );
     }
 
     const renderFuelTypes = () => {
         return (
-            <div className='add-car-engine-info-combobox-entity'>
-                <div className='add-car-label'>Fuel*</div>
-                <div className="add-car-engine-info-custom-combobox">
-                    <select id="brandComboBox" className='add-car-engine-info-myComboBox' value={fuel} onChange={(e) => handleSelectedFuel(e.target.value)}>
-                        <option value="all" disabled>Select fuel type</option>
-                        {fuelTypes.map((fuel, idx) => (
-                            <option key={idx} value={fuel}>{fuel}</option>
-                        ))}
-                    </select>
-                </div>
-            </div>
-        )
+            <ComboBox label={'Fuel'} width={comboBoxSizingWidth} height={comboBoxSizingHeight} 
+                optionValues={fuelTypes.map((fuelType, idx) => new Object({ key: idx, value: fuelType, textValue: fuelType}))}
+                onChangeHandler={(e) => handleSelectedFuel(e.target.value)}
+            />
+        );
     }
 
     const renderFuelConsumption = () => {
@@ -190,18 +189,11 @@ function EngineInfo() {
 
     const renderGearboxTypes = () => {
         return (
-            <div className='add-car-engine-info-combobox-entity'>
-                <div className='add-car-label'>Gearbox*</div>
-                <div className="add-car-engine-info-custom-combobox">
-                    <select id="brandComboBox" className='add-car-engine-info-myComboBox' value={gearbox} onChange={(e) => handleSelectedGearbox(e.target.value)}>
-                        <option value="all" disabled>Select gearbox</option>
-                        {gearboxTypes.map((gearbox, idx) => (
-                            <option key={idx} value={gearbox}>{gearbox}</option>
-                        ))}
-                    </select>
-                </div>
-            </div>
-        )
+            <ComboBox label={'Gearbox'} width={comboBoxSizingWidth} height={comboBoxSizingHeight}
+                optionValues={gearboxTypes.map((gearboxType, idx) => new Object({ key: idx, value: gearboxType, textValue: gearboxType }))}
+                onChangeHandler={(e) => handleSelectedGearbox(e.target.value)}
+            />
+        );
     }
 
     const renderGears = () => {
@@ -215,18 +207,11 @@ function EngineInfo() {
 
     const renderPowertrainTypes = () => {
         return (
-            <div className='add-car-engine-info-combobox-entity'>
-                <div className='add-car-label'>Powertrain*</div>
-                <div className="add-car-engine-info-custom-combobox">
-                    <select id="brandComboBox" className='add-car-engine-info-myComboBox' value={powertrain} onChange={(e) => handleSelectedPowertrain(e.target.value)}>
-                        <option value="all" disabled>Select powertrain</option>
-                        {powertrainTypes.map((powertrain, idx) => (
-                            <option key={idx} value={powertrain}>{powertrain}</option>
-                        ))}
-                    </select>
-                </div>
-            </div>
-        )
+            <ComboBox label={'Powertrain'} width={comboBoxSizingWidth} height={comboBoxSizingHeight}
+                optionValues={powertrainTypes.map((powertrainType, idx) => new Object({ key: idx, value: powertrainType, textValue: powertrainType }))}
+                onChangeHandler={(e) => handleSelectedPowertrain(e.target.value)}
+            />
+        );
     }
 
     return (

@@ -2,74 +2,20 @@
     background-color: #313131;
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
+    padding-bottom: 1vw;
+    padding-top: 1vw;
     margin-bottom: 1vw;
-    padding-bottom: 2vw;
-    padding-top: 2vw;
 }
 
-.combobox-entity-upper-nav {
-    display: block;
-    padding: 1vw;
-}
-
-.sort-dropdown-label-upper-nav {
-    color: #fff;
-    font-size: 1vw;
-    padding-bottom: 0.4vw;
-}
-
-select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background: transparent;
-    border: none;
-    outline: none;
-    padding: 0;
-    margin: 0;
-    cursor: pointer;
-}
-  
-.custom-combobox-upper-nav {
-    position: relative;
-    width: 10vw; 
-    height: 2vw;
-}
-  
-  .custom-combobox-upper-nav::after {
-    content: '\25BC';
-    color: #D9D9D9;
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-  }
-  
-  .my-combobox-upper-nav {
-    width: 100%;
-    border: 1px solid #D9D9D9;
-    border-radius: 5px;
-    font-size: 1vw;
-    color: #D9D9D9;
-    background-color: #313131;
-    height: 100%;
-    padding-left: 1vw;
-  }
-  
-  .my-combobox-upper-nav option {
-    background-color: #fff;
-    color: #000;
-  }
-
-.my-combobox-upper-nav.disabled {
-    box-shadow: none; 
-    opacity: 0.7; 
+.search-list-upper-nav-content {
+    display: flex;
+    width: 90%;
+    align-items: center;
 }
 
 .styled-button-upper-nav {
-    margin-right: 1vw;
     background-color: #313131;
     height: 100%;
     color: #ffffff;
@@ -105,27 +51,6 @@ select {
 }
 
 @media screen and (max-width: 1350px) {
-  .combobox-entity-upper-nav {
-      display: block;
-      padding: 1vw;
-  }
-
-  .sort-dropdown-label-upper-nav {
-      color: #fff;
-      font-size: 2vw;
-      padding-bottom: 0.4vw;
-  }
-    
-  .custom-combobox-upper-nav {
-      position: relative;
-      width: 15vw; 
-      height: 3vw;
-  }
-    
-  .my-combobox-upper-nav {
-    font-size: 1.5vw;
-  }
-
   .styled-button-upper-nav {
       font-size: 1.5vw;
   }
@@ -136,27 +61,6 @@ select {
       margin-bottom: 1vw;
       padding-bottom: 4vw;
       padding-top: 4vw;
-  }
-
-  .combobox-entity-upper-nav {
-      display: block;
-      padding: 1vw;
-  }
-
-  .sort-dropdown-label-upper-nav {
-      color: #fff;
-      font-size: 4vw;
-      padding-bottom: 0.4vw;
-  }
-    
-  .custom-combobox-upper-nav {
-      position: relative;
-      width: 25vw; 
-      height: 6vw;
-  }
-    
-  .my-combobox-upper-nav {
-    font-size: 3vw;
   }
 
   .styled-button-upper-nav {

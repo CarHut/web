@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import nations from '../../resources/Nations'; 
 import APIMethods from '../../api/APIMethods';
-import { render } from '@testing-library/react';
+import ComboBox from '../maincomponents/ComboBox';
 
 function AdditionalInfo() {
 
@@ -25,6 +25,17 @@ function AdditionalInfo() {
     const [techInspectionDate, setTechInspectionDate] = useState('Not stated');
     const [colors, setColors] = useState([]);
 
+    const comboBoxSizingWidth = {
+        standardSize: "10vw",
+        mediumSize:   "20vw",
+        smallSize:    "40vw"
+    };
+
+    const comboBoxSizingHeight = {
+        standardSize: "2vw",
+        mediumSize:   "4vw",
+        smallSize:    "7vw"
+    }
 
     const fetchColors = async () => {
         setColors(await APIMethods.getColors())
@@ -117,18 +128,11 @@ function AdditionalInfo() {
 
     const renderCountries = () => {
         return (
-            <div className='add-car-additional-info-combobox-entity'>
-                <div className='add-car-label'>Country of origin</div>
-                <div className="add-car-additional-info-custom-combobox">
-                    <select id="brandComboBox" className='add-car-additional-info-myComboBox' value={countryOfOrigin} onChange={(e) => handleNationChange(e.target.value)}>
-                        <option value=""></option>
-                        {nations.map((nation, idx) => (
-                            <option key={idx} value={nation}>{nation}</option>
-                        ))}
-                    </select>
-                </div>
-            </div>
-        )
+            <ComboBox label={'Country of origin'} width={comboBoxSizingWidth} height={comboBoxSizingHeight}
+                optionValues={nations.map((nation, idx) => new Object({ key: idx, value: nation, textValue: nation }))}
+                onChangeHandler={(e) => handleNationChange(e.target.value)}
+            />
+        );
     }
 
     const renderBooleanStatusRadioButtons = (type, label) => {
