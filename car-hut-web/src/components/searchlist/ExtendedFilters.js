@@ -34,6 +34,12 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange, l
         smallSize:    "7vw"
     }
 
+    const rangeSliderSizingWidth = {
+        standardSize: "90%",
+        mediumSize:   "100%",
+        smallSize:    "90%"
+    };
+
     useEffect(() => { 
         fetchBrands();
         if (fetchedState.brandsAndModels !== undefined && fetchedState.brandsAndModels !== null) {
@@ -251,7 +257,7 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange, l
                 step={'500'}
                 onChangeHandler={(e) => handlePriceChange(e.target.value, type === "priceFrom" ? 0 : 1)}
                 onMouseLeaveHandler={() => onPriceChanged()}
-                sliderWidth={'90%'}
+                sliderWidth={rangeSliderSizingWidth}
             />
         );
     }
@@ -266,7 +272,7 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange, l
                 step={'500'}
                 onChangeHandler={(e) => handleMileageChange(e.target.value, type === 'mileageFrom' ? 0 : 1)}
                 onMouseLeaveHandler={() => onMileageChanged()}
-                sliderWidth={'90%'}
+                sliderWidth={rangeSliderSizingWidth}
             />
         );
     }
@@ -306,7 +312,7 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange, l
         const typeOfSliderStringVal = type === 'powerFrom' ? 'From: ' : 'To: ';
         return (
             <RangeSlider sliderLabel={`${typeOfSliderStringVal} ${type === 'powerFrom' ? power.powerFrom : power.powerTo} kW`} 
-                sliderWidth={'90%'}
+                sliderWidth={rangeSliderSizingWidth}
                 changingValue={type === 'powerFrom' ? power.powerFrom : power.powerTo} 
                 minValue={type === 'powerFrom' ? "0" : power.powerFrom === '' ? "0" : power.powerFrom}
                 maxValue={type === 'powerTo' ? "1000" : power.powerTo === '' ? "1000" : power.powerTo}

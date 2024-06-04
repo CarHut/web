@@ -30,6 +30,13 @@ function MainInfo() {
         smallSize:    "7vw"
     }
 
+    const rangeSliderSizingWidth = {
+        standardSize: "20vw",
+        mediumSize:   "30vw",
+        smallSize:    "80vw"
+    };
+
+
     useEffect(() => {
         fetchBrands();
     }, []);
@@ -150,7 +157,7 @@ function MainInfo() {
         return (
             <RangeSlider 
                 sliderLabel={`Price: ${price} €`} 
-                sliderWidth={'100%'} 
+                sliderWidth={rangeSliderSizingWidth} 
                 changingValue={price}
                 minValue={'0'}
                 maxValue={'999999'}
@@ -164,7 +171,7 @@ function MainInfo() {
         return (
             <RangeSlider 
                 sliderLabel={`Mileage: ${mileage} km`} 
-                sliderWidth={'100%'} 
+                sliderWidth={rangeSliderSizingWidth} 
                 changingValue={mileage}
                 minValue={'0'}
                 maxValue={'1000000'}
@@ -177,8 +184,8 @@ function MainInfo() {
     const renderRegistrationSlider = () => {
         return (
             <RangeSlider 
-                sliderLabel={`Registration: ${registration} km`} 
-                sliderWidth={'100%'} 
+                sliderLabel={`Registration: ${registration}`} 
+                sliderWidth={rangeSliderSizingWidth} 
                 changingValue={registration}
                 minValue={'1900'}
                 maxValue={'2024'}

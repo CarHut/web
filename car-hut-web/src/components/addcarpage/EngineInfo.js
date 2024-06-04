@@ -36,6 +36,12 @@ function EngineInfo() {
         smallSize:    "7vw"
     }
 
+    const rangeSliderSizingWidth = {
+        standardSize: "20vw",
+        mediumSize:   "30vw",
+        smallSize:    "80vw"
+    };
+
     const fetchFuelTypes = async () => {
         try {
             setFuelTypes(await APIMethods.getFuelTypes());
@@ -143,7 +149,7 @@ function EngineInfo() {
         return (
             <RangeSlider 
                 sliderLabel={`Engine power: ${enginePower} kW`} 
-                sliderWidth={'100%'} 
+                sliderWidth={rangeSliderSizingWidth} 
                 changingValue={enginePower}
                 minValue={'0'}
                 maxValue={'2000'}
@@ -157,7 +163,7 @@ function EngineInfo() {
         return (
             <RangeSlider 
                 sliderLabel={`Displacement: ${displacement} cm³`} 
-                sliderWidth={'100%'} 
+                sliderWidth={rangeSliderSizingWidth} 
                 changingValue={displacement}
                 minValue={'0'}
                 maxValue={'20000'}

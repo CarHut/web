@@ -34,6 +34,7 @@ function MainSection({state}) {
                 <div className='extended-filters-mobile-version'>
                     <ExtendedFilters fetchedState={fetchedState} resultsListLength={resultsListLength} loadingResultsListLength={loadingResultsListLength} 
                     setLoadingResultsListLength={setLoadingResultsListLength} handleStateChange={(e) => handleStateChange(e)}/>
+                    <hr/>
                 </div>
                 <Offers offersPerPage={offersPerPage} sortBy={sortBy} fetchedState={fetchedState} setResultsListLength={setResultsListLength} setLoadingResultsListLength={setLoadingResultsListLength} loadingResultsListLength={loadingResultsListLength}/>
             </div>
