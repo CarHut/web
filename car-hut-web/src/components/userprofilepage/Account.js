@@ -4,6 +4,7 @@ import AuthUtil from '../../utils/auth/AuthUtil.js'
 import APIMethods from '../../api/APIMethods.js';
 import Constants from '../../constants/Constants.js';
 import LoadingCircle from '../../components/maincomponents/LoadingCircle.js';
+import RegularButton from '../maincomponents/RegularButton.js';
 
 function Account() {
     
@@ -12,6 +13,19 @@ function Account() {
     const [showResetPasswordError, setShowResetPasswordError] = useState(false);
 
     const [loadingAccountDetails, setLoadingAccountDetails] = useState(false);
+
+    const regularButtonSizingWidth = {
+        standardSize: "6vw",
+        mediumSize:   "12vw",
+        smallSize:    "15vw"
+    };
+
+    const regularButtonSizingHeight = {
+        standardSize: "3vw",
+        mediumSize:   "5vw",
+        smallSize:    "8vw"
+    }
+
 
     const fetchAccountDetails = async () => {
         setLoadingAccountDetails(true);
@@ -69,8 +83,13 @@ function Account() {
                             :   <div/>
                     }
                 </div>
-                <a href={`${Constants.webAddress}mainPage`} className='account-button' onClick={() => AuthUtil.logout()}>
-                    <div className='account-button-text'>Log out</div></a>
+                <a href={`${Constants.webAddress}mainPage`} onClick={() => AuthUtil.logout()}>
+                    <RegularButton 
+                        label={'Log out'} 
+                        buttonWidth={regularButtonSizingWidth} 
+                        buttonHeight={regularButtonSizingHeight}
+                    />
+                </a>
             </div>
         </div>
     );

@@ -1,0 +1,28 @@
+.regular-button {
+    background-color: #313131;
+    color: #ffffff;
+    padding: 0.8vw 1vw;
+    font-size: 1.1vw;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 1.3vw;
+}
+
+.regular-button:hover {
+    background-color: #D9D9D9;
+    color: #000;
+}
+
+@media screen and (max-width: 1350px) {
+    .regular-button {
+        font-size: 2vw;
+    }   
+}
+
+@media screen and (max-width: 600px) {
+    .regular-button {
+        font-size: 3vw;
+    }
+}

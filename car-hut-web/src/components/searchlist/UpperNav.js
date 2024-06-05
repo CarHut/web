@@ -3,6 +3,7 @@ import '../../css/searchlist/UpperNav.css';
 import { useState } from 'react';
 import LoadingCircle from '../../components/maincomponents/LoadingCircle';
 import ComboBox from '../maincomponents/ComboBox';
+import RegularButton from '../maincomponents/RegularButton';
 
 function UpperNav({ fetchedState, offersPerPage, setOffersPerPage, sortBy, setSortBy }) {
     
@@ -16,6 +17,18 @@ function UpperNav({ fetchedState, offersPerPage, setOffersPerPage, sortBy, setSo
         standardSize: "2vw",
         mediumSize:   "4vw",
         smallSize:    "6vw"
+    }
+
+    const regularButtonSizingWidth = {
+        standardSize: "8vw",
+        mediumSize:   "14vw",
+        smallSize:    "20vw"
+    };
+
+    const regularButtonSizingHeight = {
+        standardSize: "4vw",
+        mediumSize:   "6vw",
+        smallSize:    "10vw"
     }
 
     const [savedSearchState, setSavedSearchState] = useState(null); 
@@ -114,7 +127,13 @@ function UpperNav({ fetchedState, offersPerPage, setOffersPerPage, sortBy, setSo
                 {renderSortComboBox()}
                 {renderOfferPerPageComboBox()}
                 <div className='save-search-wrapper-upper-nav'>
-                    <div className="styled-button-upper-nav" onClick={() => saveSearch()}>Save search</div>
+                    <RegularButton 
+                        label={'Save search'} 
+                        buttonWidth={regularButtonSizingWidth} 
+                        buttonHeight={regularButtonSizingHeight} 
+                        color={"#181818"}
+                        onClickHandler={(e) => saveSearch()}
+                    />
                     <div className={`save-search-result-text ${savedSearchState !== null ? savedSearchState ? "success" : "error" : ""}`}>{savedSearchState !== null ? savedSearchState ? "Successfully saved search parameters" : "Couldn't save search parameters" : ""}</div>
                     {loading ? <LoadingCircle/> : <div/>}
                 </div>

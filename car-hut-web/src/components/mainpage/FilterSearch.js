@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import APIMethods from '../../api/APIMethods';
 import ComboBox from '../maincomponents/ComboBox';
+import RegularButton from '../maincomponents/RegularButton';
 
 function FilterSearch() {
     const [brands, setBrands] = useState([]);
@@ -24,6 +25,18 @@ function FilterSearch() {
         standardSize: "2vw",
         mediumSize:   "4vw",
         smallSize:    "6vw"
+    }
+
+    const regularButtonSizingWidth = {
+        standardSize: "8vw",
+        mediumSize:   "14vw",
+        smallSize:    "25vw"
+    };
+
+    const regularButtonSizingHeight = {
+        standardSize: "4vw",
+        mediumSize:   "6vw",
+        smallSize:    "10vw"
     }
 
     const updateSearchedCarsNumber = async () => {
@@ -192,7 +205,11 @@ function FilterSearch() {
                     ]
                 }}
             >
-                <button className="styled-button-filter-search-main-page">{searchedCarsNumber !== null && !loadingSearchedCarsNumber ? (searchedCarsNumber + " cars") : ("Loading cars")}</button>
+                <RegularButton 
+                    label={searchedCarsNumber !== null && !loadingSearchedCarsNumber ? (searchedCarsNumber + " cars") : ("Loading cars")} 
+                    buttonWidth={regularButtonSizingWidth}
+                    buttonHeight={regularButtonSizingHeight}
+                />
             </Link>
         );
     }

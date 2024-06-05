@@ -3,6 +3,7 @@ import '../../css/addcarpage/AddPhotos.css';
 import { useState } from 'react';
 import APIMethods from '../../api/APIMethods';
 import LoadingCircle from '../maincomponents/LoadingCircle';
+import RegularButton from '../maincomponents/RegularButton';
 
 function AddPhotos() {
 
@@ -18,6 +19,18 @@ function AddPhotos() {
     const [loadedImage, setLoadedImage] = useState(null);
     const [uploadedImages, setUploadedImages] = useState([]);
     const [uploadingImageState, setUploadingImageState] = useState(UploadingState.NOT_UPLOADING);
+
+    const buttonSizingWidth = {
+        standardSize: '6vw',
+        mediumSize: '10vw',
+        smallSize: '15vw'
+    }
+    
+    const buttonSizingHeight = {
+        standardSize: '3vw',
+        mediumSize: '5vw',
+        smallSize: '6vw'
+    }
 
     const handleLoadedImage = (image) => {
         setLoadedImage(image);
@@ -98,7 +111,6 @@ function AddPhotos() {
             </div>
             <Link
                 to={"/addCar/summary"}
-                className='add-photos-styled-button'
                 state={{
                     brandId: currentCarModel.brandId,
                     modelId: currentCarModel.modelId,
@@ -133,7 +145,11 @@ function AddPhotos() {
                     images: uploadedImages
                 }}
             >
-                Next    
+                <RegularButton
+                    label={'Next'}
+                    buttonWidth={buttonSizingWidth}
+                    buttonHeight={buttonSizingHeight}
+                />
             </Link>
         </div>
     );

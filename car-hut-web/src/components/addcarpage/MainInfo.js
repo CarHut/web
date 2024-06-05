@@ -4,6 +4,8 @@ import '../../css/addcarpage/MainInfo.css';
 import { useState, useEffect } from 'react';
 import ComboBox from '../maincomponents/ComboBox';
 import RangeSlider from '../maincomponents/RangeSlider';
+import TextInputField from '../maincomponents/TextInputField';
+import RegularButton from '../maincomponents/RegularButton';
 
 
 function MainInfo() {
@@ -36,6 +38,29 @@ function MainInfo() {
         smallSize:    "80vw"
     };
 
+    const textInputFieldSizingWidth = {
+        standardSize: "20vw",
+        mediumSize:   "30vw",
+        smallSize:    "70vw"
+    };
+
+    const textInputFieldSizingHeight = {
+        standardSize: "2vw",
+        mediumSize:   "4vw",
+        smallSize:    "6vw"
+    }
+
+    const buttonSizingWidth = {
+        standardSize: '6vw',
+        mediumSize: '10vw',
+        smallSize: '15vw'
+    }
+    
+    const buttonSizingHeight = {
+        standardSize: '3vw',
+        mediumSize: '5vw',
+        smallSize: '6vw'
+    }
 
     useEffect(() => {
         fetchBrands();
@@ -148,7 +173,15 @@ function MainInfo() {
         return (
             <div className='add-car-form'>
                 <div className='add-car-main-info-regular-text'>Do you want custom header? Type in!</div>
-                <input className='add-car-main-info-text-input' maxLength='50' type='text' placeholder='max. 50 characters' onChange={(e) => handleWrittenHeadline(e.target.value)}/>
+                <TextInputField 
+                    type={'text'} 
+                    textFieldPlaceHolder={'max. 50 characters'}
+                    onChangeHandler={(e) => handleWrittenHeadline(e.target.value)}
+                    width={textInputFieldSizingWidth}
+                    height={textInputFieldSizingHeight}
+                    maxCharacters={50}
+                    color={"#313131"}
+                />
             </div>
         )
     }
@@ -199,7 +232,14 @@ function MainInfo() {
         return (
             <>
                 <div className='add-car-label' htmlFor="address">Address*</div>
-                <input className='add-car-main-info-text-input' maxLength={512} type='text' placeholder='' value={sellerAddress} pattern='[0-9]' onChange={(e) => handleSellerAddressChange(e.target.value)}/>                        
+                <TextInputField 
+                    type={'text'}
+                    onChangeHandler={(e) => handleSellerAddressChange(e.target.value)}
+                    width={textInputFieldSizingWidth}
+                    height={textInputFieldSizingHeight}
+                    maxCharacters={512}
+                    color={"#313131"}
+                />
             </>
         )
     }
@@ -249,7 +289,6 @@ function MainInfo() {
             </div>
             <div className='add-car-main-info-small-text-darker'>* necessary to fill</div>
             <Link
-                className='add-car-styled-button'
                 style={{"textDecoration": "none"}}
                 state={{
                     brandId: selectedBrand,
@@ -262,7 +301,11 @@ function MainInfo() {
                 }}
                 to={'/addCar/engineInfo'}
             >
-                Next
+                <RegularButton
+                    label={'Next'}
+                    buttonWidth={buttonSizingWidth}
+                    buttonHeight={buttonSizingHeight}
+                />
             </Link>
         </div>
     )

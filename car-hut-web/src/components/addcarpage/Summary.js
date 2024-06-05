@@ -4,6 +4,7 @@ import CarMainSection from '../carofferpage/CarMainSection';
 import { useState } from 'react';
 import APIMethods from '../../api/APIMethods';
 import LoadingCircle from '../../components/maincomponents/LoadingCircle'
+import RegularButton from '../maincomponents/RegularButton';
 
 function Summary() {
     
@@ -13,6 +14,18 @@ function Summary() {
     const [showErrorMessage, setShowErrorMessage] = useState(false);
 
     const [loading, setLoading] = useState(false);
+
+    const buttonSizingWidth = {
+        standardSize: '15vw',
+        mediumSize: '25vw',
+        smallSize: '35vw'
+    }
+    
+    const buttonSizingHeight = {
+        standardSize: '4vw',
+        mediumSize: '6vw',
+        smallSize: '8vw'
+    }
 
     const handleCreatedOffer = async () => {
 
@@ -106,7 +119,12 @@ function Summary() {
             <div className='add-car-summary-section'>
                 <div className='add-car-summary-header'>That's it! Now double check whether all information is ok.</div>
                 <div className='add-car-line-container'/>
-                <div className='add-car-summary-styled-button' onClick={(e) => handleCreatedOffer(e)}>Create offer</div>
+                <RegularButton
+                    label={'Create offer'}
+                    buttonWidth={buttonSizingWidth}
+                    buttonHeight={buttonSizingHeight}
+                    onClickHandler={(e) => handleCreatedOffer(e)}
+                />
                 {loading ? <LoadingCircle/> : <div/>}
                 {showErrorMessage ? <div className='error-text'>Something went wrong! Try again later.</div> : <div/>}
             </div>

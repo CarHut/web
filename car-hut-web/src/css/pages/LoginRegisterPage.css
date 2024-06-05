@@ -20,25 +20,8 @@
     margin-bottom: 1vw;
 }
 
-.input-label {
-    font-size: 1vw;
-    margin-bottom: 0.5vw;
-}
-
-.input-container {
-
-}
-
 .register-wrapper {
     display: block;
-}
-
-.login-input {
-    margin-bottom: 1vw;
-}
-
-.register-input {
-    margin-bottom: 1vw;
 }
 
 .error-text {
@@ -49,6 +32,13 @@
 .register-row-wrapper {
     display: flex;
     flex-wrap: wrap;
+    gap: 1vw;
+}
+
+.login-register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
 }
 
 @media screen and (max-width: 1350px) {

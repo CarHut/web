@@ -52,15 +52,6 @@
     height: 100%;
 }
 
-.add-car-additional-info-text-input {
-    width: 13vw;
-    height: 2vw;
-    background-color: #313131;
-    color: #a3a3a3;
-    border: solid #a3a3a3 1px;
-    border-radius: 5px;
-}
-
 .add-car-additional-info-form {
     display: flex;
     flex-wrap: wrap;
@@ -105,11 +96,6 @@
         margin-bottom: 1vw;
     }
     
-    .add-car-additional-info-text-input {
-        width: 17vw;
-        height: 4vw;
-    }
-    
     .add-car-label-additional-info {
         font-size: 1.5vw;
     }
@@ -135,11 +121,6 @@
     
     .add-car-additional-info-small-text {
         font-size: 2.5vw;
-    }
-    
-    .add-car-additional-info-text-input {
-        width: 30vw;
-        height: 6vw;
     }
     
     .add-car-label-additional-info {

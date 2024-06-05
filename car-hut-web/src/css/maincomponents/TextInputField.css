@@ -1,0 +1,39 @@
+.text-input-field-wrapper {
+    display: block;
+}
+
+.text-input-field-label {
+    font-size: 1vw;
+    margin-bottom: .5vw;
+}
+
+.text-input-field-style {
+    font-size: .8vw;
+    background-color: #181818;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    height: 2vw;
+    padding-left: 1vw;
+}
+
+@media screen and (max-width: 1350px) {
+    .text-input-field-label {
+        font-size: 2vw;
+    }
+    
+    .text-input-field-style {
+        font-size: 1.5vw;
+        height: 2vw;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .text-input-field-label {
+        font-size: 3vw;
+    }
+    
+    .text-input-field-style {
+        font-size: 2vw;
+    }
+}

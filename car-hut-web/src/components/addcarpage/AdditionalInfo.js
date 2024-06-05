@@ -4,6 +4,8 @@ import { useLocation, Link } from 'react-router-dom';
 import nations from '../../resources/Nations'; 
 import APIMethods from '../../api/APIMethods';
 import ComboBox from '../maincomponents/ComboBox';
+import TextInputField from '../maincomponents/TextInputField';
+import RegularButton from '../maincomponents/RegularButton';
 
 function AdditionalInfo() {
 
@@ -35,6 +37,30 @@ function AdditionalInfo() {
         standardSize: "2vw",
         mediumSize:   "4vw",
         smallSize:    "7vw"
+    }
+
+    const textInputFieldSizingWidth = {
+        standardSize: "10vw",
+        mediumSize:   "30vw",
+        smallSize:    "70vw"
+    };
+
+    const textInputFieldSizingHeight = {
+        standardSize: "2vw",
+        mediumSize:   "4vw",
+        smallSize:    "6vw"
+    }
+
+    const buttonSizingWidth = {
+        standardSize: '6vw',
+        mediumSize: '10vw',
+        smallSize: '15vw'
+    }
+    
+    const buttonSizingHeight = {
+        standardSize: '3vw',
+        mediumSize: '5vw',
+        smallSize: '6vw'
     }
 
     const fetchColors = async () => {
@@ -200,7 +226,14 @@ function AdditionalInfo() {
         return (
             <>
                 <div className='add-car-label'>{label}</div>
-                <input className='add-car-additional-info-text-input' style={{"margin": "1em 1em"}} type='text' placeholder='' value={val} onChange={usedHandleFunction}/>    
+                <TextInputField
+                    width={textInputFieldSizingWidth}
+                    height={textInputFieldSizingHeight}
+                    color={'#313131'}
+                    type={'text'}
+                    onChangeHandler={usedHandleFunction}
+                    textFieldValue={val}
+                /> 
             </>
         )
     }
@@ -339,7 +372,11 @@ function AdditionalInfo() {
                 }}
                 to={'/addCar/features'}
             >
-                Next
+                <RegularButton
+                    label={'Next'}
+                    buttonWidth={buttonSizingWidth}
+                    buttonHeight={buttonSizingHeight}
+                />
             </Link>
         </div>
     );

@@ -4,8 +4,9 @@ import '../css/pages/LoginRegisterPage.css';
 import AuthUtil from '../utils/auth/AuthUtil';
 import { useNavigate } from 'react-router-dom';import APIMethods from '../api/APIMethods';
 import SocketAPI from '../messaging/SocketAPI';
-import { findAllByDisplayValue } from '@testing-library/react';
 import LoadingCircle from '../components/maincomponents/LoadingCircle';
+import RegularButton from '../components/maincomponents/RegularButton';
+import TextInputField from '../components/maincomponents/TextInputField';
 
 function LoginRegisterPage() {
 
@@ -26,6 +27,31 @@ function LoginRegisterPage() {
     const [isTokenSet, setIsTokenSet] = useState(false);
     const [showErrorMessage, setShowErrorMessage] = useState(false);
     const navigate = useNavigate();
+
+    const regularButtonSizingWidth = {
+        standardSize: "7vw",
+        mediumSize:   "12vw",
+        smallSize:    "15vw"
+    };
+
+    const regularButtonSizingHeight = {
+        standardSize: "3vw",
+        mediumSize:   "5vw",
+        smallSize:    "8vw"
+    }
+
+    const textInputFieldSizingWidth = {
+        standardSize: "10vw",
+        mediumSize:   "15vw",
+        smallSize:    "28vw"
+    };
+
+    const textInputFieldSizingHeight = {
+        standardSize: "2vw",
+        mediumSize:   "3vw",
+        smallSize:    "4vw"
+    }
+
 
     // Socket reconnecting
     useEffect(() => {    
@@ -154,91 +180,89 @@ function LoginRegisterPage() {
                 <section className='main-wrapper'>
                     <div className='login-wrapper'>
                         <div className='header-label'>Login</div>
-                        <form onSubmit={(e) => handleLoginSubmit(e)}>
-                            <div className='input-container'>
-                                <div className='input-label'>Username</div>
-                                <input 
-                                    value={loginEmail}
-                                    placeholder='Enter email'
-                                    onChange={(e) => {setLoginEmail(e.target.value)}}
-                                    className='login-input'
-                                />
-                            </div>
-                            <div className='input-container'>
-                                <div className='input-label'>Password</div>
-                                <input 
-                                    value={loginPassword}
-                                    type={'password'}
-                                    placeholder='Enter password'
-                                    onChange={(e) => {setLoginPassword(e.target.value)}}
-                                    className='login-input'
-                                />
-                            </div>
+                        <form className='login-register-form' onSubmit={(e) => handleLoginSubmit(e)}>
+                            <TextInputField 
+                                label={'Username'}
+                                width={textInputFieldSizingWidth}
+                                height={textInputFieldSizingHeight}
+                                textFieldValue={loginEmail}
+                                textFieldPlaceHolder={'Enter username'}
+                                onChangeHandler={(e) => {setLoginEmail(e.target.value)}}
+                            />
+                            <TextInputField 
+                                label={'Password'}
+                                width={textInputFieldSizingWidth}
+                                height={textInputFieldSizingHeight}
+                                textFieldValue={loginPassword}
+                                textFieldPlaceHolder={'Enter password'}
+                                onChangeHandler={(e) => {setLoginPassword(e.target.value)}}
+                                type={'password'}
+                            />
                             {showErrorMessage ? <div className='error-text'>Invalid username or password</div> : ""}
-                            <button type='submit'>Login</button>
+                            <RegularButton 
+                                label={'Login'} 
+                                color={'#181818'} 
+                                buttonWidth={regularButtonSizingWidth} 
+                                buttonHeight={regularButtonSizingHeight}
+                            />
                             {loading ? <LoadingCircle/> : <div/>}
                         </form>
                     </div>
                     <div className='register-wrapper'>
                         <div className='header-label'>Register</div>
-                        <form onSubmit={(e) => handleRegisterSubmit(e)}>
+                        <form className='login-register-form' onSubmit={(e) => handleRegisterSubmit(e)}>
                             <div className='register-row-wrapper'>
-                                <div className='input-container'>
-                                    <div className='input-label'>First name</div>
-                                    <input 
-                                        value={firstName}
-                                        placeholder='Enter first name'
-                                        onChange={(e) => {setFirstName(e.target.value)}}
-                                        className='register-input'
-                                    />
-                                </div>
-                                <div className='input-container' style={{marginLeft: "1vw"}}>
-                                    <div className='input-label'>Surname</div>
-                                    <input 
-                                        value={surname}
-                                        placeholder='Enter surname'
-                                        onChange={(e) => {setSurname(e.target.value)}}
-                                        className='register-input'
-                                    />
-                                </div>
-                            </div>
-                            <div className='input-container'>
-                                <div className='input-label'>Username</div>
-                                <input 
-                                    value={username}
-                                    placeholder='Enter username'
-                                    onChange={(e) => {setUsername(e.target.value)}}
-                                    className='register-input'
+                                <TextInputField 
+                                    label={'First name'}
+                                    width={textInputFieldSizingWidth}
+                                    height={textInputFieldSizingHeight}
+                                    textFieldValue={firstName}
+                                    onChangeHandler={(e) => {setFirstName(e.target.value)}}
+                                />
+                                <TextInputField 
+                                    label={'Surname'}
+                                    width={textInputFieldSizingWidth}
+                                    height={textInputFieldSizingHeight}
+                                    textFieldValue={surname}
+                                    onChangeHandler={(e) => {setSurname(e.target.value)}}
                                 />
                             </div>
-                            <div className='input-container'>
-                                <div className='input-label'>Email</div>
-                                <input 
-                                    value={registerEmail}
-                                    placeholder='Enter email'
-                                    onChange={(e) => {setRegisterEmail(e.target.value)}}
-                                    className='register-input'
-                                />
-                            </div>
-                            <div className='input-container'>
-                                <div className='input-label'>Password</div>
-                                <input 
-                                    value={registerPassword}
-                                    placeholder='Enter password'
-                                    onChange={(e) => {setRegisterPassword(e.target.value)}}
-                                    className='register-input'
-                                />
-                            </div>
-                            <div className='input-container'>
-                                <div className='input-label'>Repeat password</div>
-                                <input 
-                                    value={repeatRegisterPassword}
-                                    placeholder='Enter password'
-                                    onChange={(e) => {setRepeatRegisterPassword(e.target.value)}}
-                                    className='register-input'
-                                />
-                            </div>
-                            <button type='submit'>Register</button>
+                            <TextInputField 
+                                label={'Username'}
+                                width={textInputFieldSizingWidth}
+                                height={textInputFieldSizingHeight}
+                                textFieldValue={username}
+                                onChangeHandler={(e) => {setUsername(e.target.value)}}
+                            />
+                            <TextInputField 
+                                label={'Email'}
+                                width={textInputFieldSizingWidth}
+                                height={textInputFieldSizingHeight}
+                                textFieldValue={registerEmail}
+                                onChangeHandler={(e) => {setRegisterEmail(e.target.value)}}
+                            />
+                            <TextInputField 
+                                label={'Password'}
+                                width={textInputFieldSizingWidth}
+                                height={textInputFieldSizingHeight}
+                                textFieldValue={registerPassword}
+                                onChangeHandler={(e) => {setRegisterPassword(e.target.value)}}
+                                type={'password'}
+                            />
+                            <TextInputField 
+                                label={'Repeat password'}
+                                width={textInputFieldSizingWidth}
+                                height={textInputFieldSizingHeight}
+                                textFieldValue={repeatRegisterPassword}
+                                onChangeHandler={(e) => {setRepeatRegisterPassword(e.target.value)}}
+                                type={'password'}
+                            />
+                            <RegularButton 
+                                label={'Register'} 
+                                color={'#181818'} 
+                                buttonWidth={regularButtonSizingWidth} 
+                                buttonHeight={regularButtonSizingHeight}
+                            />
                             {showRegistrationError ? <div className='error-text'>{registrationErrorMessage}</div> : ""}
                         </form>
                     </div>

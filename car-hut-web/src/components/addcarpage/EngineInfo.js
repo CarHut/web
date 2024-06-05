@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ComboBox from '../maincomponents/ComboBox';
 import RangeSlider from '../maincomponents/RangeSlider';
+import TextInputField from '../maincomponents/TextInputField';
+import RegularButton from '../maincomponents/RegularButton';
 
 function EngineInfo() {
 
@@ -41,6 +43,30 @@ function EngineInfo() {
         mediumSize:   "30vw",
         smallSize:    "80vw"
     };
+
+    const textInputFieldSizingWidth = {
+        standardSize: "10vw",
+        mediumSize:   "30vw",
+        smallSize:    "70vw"
+    };
+
+    const textInputFieldSizingHeight = {
+        standardSize: "2vw",
+        mediumSize:   "4vw",
+        smallSize:    "6vw"
+    }
+
+    const buttonSizingWidth = {
+        standardSize: '3vw',
+        mediumSize: '10vw',
+        smallSize: '15vw'
+    }
+    
+    const buttonSizingHeight = {
+        standardSize: '3vw',
+        mediumSize: '5vw',
+        smallSize: '6vw'
+    }
 
     const fetchFuelTypes = async () => {
         try {
@@ -186,9 +212,39 @@ function EngineInfo() {
         return (
             <>
                 <div className='add-car-label'>Fuel consumption</div>
-                <div className='add-car-label'><input className='add-car-engine-info-text-input' style={{"margin": "1em 1em"}} type='text' placeholder='' value={avgFuelCons} onChange={(e) => handleFuelAvgConsumption(e.target.value)} pattern='[0-9]'/>l/100km (average)</div>
-                <div className='add-car-label'><input className='add-car-engine-info-text-input' style={{"margin": "1em 1em"}} type='text' placeholder='' value={cityFuelCons} onChange={(e) => handleFuelCityConsumption(e.target.value)} pattern='[0-9]'/>l/100km (city)</div>
-                <div className='add-car-label'><input className='add-car-engine-info-text-input' style={{"margin": "1em 1em"}} type='text' placeholder='' value={highwayFuelCons} onChange={(e) => handleFuelHighwayConsumption(e.target.value)} pattern='[0-9]'/>l/100km (highway)</div>     
+                <div className='add-car-label'>
+                    <TextInputField 
+                        width={textInputFieldSizingWidth} 
+                        height={textInputFieldSizingHeight} 
+                        type={'text'} 
+                        textFieldValue={avgFuelCons}
+                        onChangeHandler={(e) => handleFuelAvgConsumption(e.target.value)}
+                        color={'#313131'}
+                    />
+                    l/100km (average)
+                </div>
+                <div className='add-car-label'>
+                    <TextInputField 
+                        width={textInputFieldSizingWidth} 
+                        height={textInputFieldSizingHeight} 
+                        type={'text'} 
+                        textFieldValue={cityFuelCons}
+                        onChangeHandler={(e) => handleFuelCityConsumption(e.target.value)}
+                        color={'#313131'}
+                    />
+                    l/100km (city)
+                </div>
+                <div className='add-car-label'>
+                    <TextInputField 
+                        width={textInputFieldSizingWidth} 
+                        height={textInputFieldSizingHeight} 
+                        type={'text'} 
+                        textFieldValue={highwayFuelCons}
+                        onChangeHandler={(e) => handleFuelHighwayConsumption(e.target.value)}
+                        color={'#313131'}
+                    />
+                    l/100km (highway)
+                </div>
             </>
         )
     }
@@ -206,7 +262,14 @@ function EngineInfo() {
         return (
             <>
                 <div className='add-car-label'>Gears</div>
-                <input className='add-car-engine-info-text-input' style={{"margin": "1em 1em"}} type='text' placeholder='' value={gears} onChange={(e) => handleGearsChange(e.target.value)} pattern='[0-9]'/>    
+                <TextInputField 
+                    width={textInputFieldSizingWidth} 
+                    height={textInputFieldSizingHeight} 
+                    type={'text'} 
+                    textFieldValue={gears}
+                    onChangeHandler={(e) => handleGearsChange(e.target.value)}
+                    color={'#313131'}
+                />
             </>
         )
     }
@@ -275,7 +338,6 @@ function EngineInfo() {
             </div>
             <div className='add-car-main-info-small-text-darker'>* necessary to fill</div>
             <Link
-                className='add-car-styled-button'
                 style={{"textDecoration": "none"}}
                 state={{
                     brandId: currentCarModel.brandId,
@@ -297,7 +359,11 @@ function EngineInfo() {
                 }}
                 to={'/addCar/additionalInfo'}
             >
-                Next
+                <RegularButton 
+                    label={'Next'}
+                    buttonWidth={buttonSizingWidth}
+                    buttonHeight={buttonSizingHeight}
+                />
             </Link>
         </div>           
     );

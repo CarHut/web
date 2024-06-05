@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import APIMethods from '../../api/APIMethods';
 import ComboBox from '../../components/maincomponents/ComboBox';
 import RangeSlider from '../maincomponents/RangeSlider.js';
+import RegularButton from '../maincomponents/RegularButton.js';
 
 function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange, loadingResultsListLength, setLoadingResultsListLength }) {
 
@@ -39,6 +40,18 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange, l
         mediumSize:   "100%",
         smallSize:    "90%"
     };
+
+    const regularButtonSizingWidth = {
+        standardSize: "6vw",
+        mediumSize:   "9vw",
+        smallSize:    "15vw"
+    };
+
+    const regularButtonSizingHeight = {
+        standardSize: "3vw",
+        mediumSize:   "4vw",
+        smallSize:    "8vw"
+    }
 
     useEffect(() => { 
         fetchBrands();
@@ -107,6 +120,15 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange, l
     }
 
     const renderBrandsAndModelsEntities = () => {
+        const renderedBrands = [];
+        const renderedModels = [];
+        
+        renderedBrands.push({ key: '-1', value: '', textValue: 'Select brand' });
+        addBrands.map((brand) => renderedBrands.push(new Object({ key: brand.id, value: brand.brand, textValue: brand.brand })));
+
+        renderedModels.push({ key: '-1', value: '', textValue: 'Select model' });
+        addModels.map((model) => renderedModels.push(new Object({ key: model.id, value: model.model, textValue: model.model })));
+
         return (
             <div className='search-list-extended-filters-brandAndModel-section-content'>
                 {brandsAndModels.map((car, index) => {
@@ -114,11 +136,17 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange, l
                         <div key={index} className='search-list-extended-filters-brandAndModel-entity'>{car.brand} {car.model} <div className='x' onClick={() => handleRemovalOfABrandsAndModelEntity(car.brand, car.model)}/></div>
                     )
                 })}
-                <div className='search-list-extended-filters-brandAndModel-add-button' onClick={() => handleAddBrandAndModelOverlay()}>Add +</div>
+                <RegularButton 
+                    label={'Add +'} 
+                    buttonWidth={regularButtonSizingWidth}
+                    buttonHeight={regularButtonSizingHeight}
+                    color={"#181818"}
+                    onClickHandler={(e) => handleAddBrandAndModelOverlay()} 
+                />
                 {addBrandAndModelOverlay === true 
                     ?   <div className='search-list-extended-filters-brandAndModel-add-overlay'>
-                            <ComboBox label={'Brand'} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={addBrands.map((brand) => new Object({ key: brand.id, value: brand.brand, textValue: brand.brand }))} onChangeHandler={(e) => handleSelectedAddBrand(e)}/>
-                            <ComboBox label={'Model'} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={addModels.map((model) => new Object({ key: model.id, value: model.model, textValue: model.model }))} onChangeHandler={(e) => handleSelectedAddModel(e)}/>
+                            <ComboBox label={'Brand'} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={renderedBrands} onChangeHandler={(e) => handleSelectedAddBrand(e)}/>
+                            <ComboBox label={'Model'} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={renderedModels} onChangeHandler={(e) => handleSelectedAddModel(e)}/>
                         </div>
                     :   <div className=''></div> 
                 }

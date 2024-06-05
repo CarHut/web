@@ -11,30 +11,6 @@
     margin-right: 3vw;
 }
 
-.account-button {
-    display: flex;
-    align-items: center;
-    background-color: #313131;
-    border: none;
-    height: 3vw;
-    width: 8vw;
-    color: #fff;
-    text-decoration: none;
-    font-size: 1vw;
-    transition-duration: 0.4s;
-    cursor: pointer;
-    border-radius: 8px;
-}
-  
-.account-button:hover {
-    background-color: #a3a3a3; 
-    color: #181818
-}
-
-.account-button-text {
-    margin-left: 1vw;
-}
-
 .profile-content-text-forgot-password {
     color: #a3a3a3;
     text-decoration: underline;

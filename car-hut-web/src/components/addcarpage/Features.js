@@ -3,6 +3,7 @@ import { useLocation, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import APIMethods from '../../api/APIMethods';
 import SellerInfo from '../carofferpage/SellerInfo';
+import RegularButton from '../maincomponents/RegularButton';
 
 function Features() {
 
@@ -12,6 +13,18 @@ function Features() {
     const [numOfColumns, setNumOfColumns] = useState(4); // IF CHANGED, UPDATE WIDTH FOR add-car-features-column-wrapper in Features.css
     const [numOfFeaturesPerColumn, setNumOfFeaturesPerColumn] = useState(1);
     const [selectedFeatures, setSelectedFeatures] = useState([]);
+
+    const buttonSizingWidth = {
+        standardSize: '6vw',
+        mediumSize: '10vw',
+        smallSize: '15vw'
+    }
+    
+    const buttonSizingHeight = {
+        standardSize: '3vw',
+        mediumSize: '5vw',
+        smallSize: '6vw'
+    }
 
     const fetchFeatures = async () => {
         try {
@@ -81,7 +94,6 @@ function Features() {
             <div className='add-car-line-container'/>
             {renderFeatures()}
             <Link
-                className='add-car-features-styled-button'
                 style={{"textDecoration": "none"}}
                 state={{
                     brandId: currentCarModel.brandId,
@@ -117,7 +129,11 @@ function Features() {
                 }}
                 to={'/addCar/addPhotos'}
             >
-                Next
+                <RegularButton
+                    label={'Next'}
+                    buttonWidth={buttonSizingWidth}
+                    buttonHeight={buttonSizingHeight}
+                />
             </Link>
         </div>
     );
