@@ -1,7 +1,7 @@
 .section-body-engine-and-powertrain {
     background-color: #181818;
     margin: 2vw 20vw;
-    padding: 1vw 3vw;
+    padding: 1vw 3vw 4vw 3vw;
     display: block;
 }
 
@@ -91,7 +91,7 @@
 
 .power-wrapper {
     display: flex;
-    gap: 2vw;
+    gap: 1vw;
 }
 
 .gearbox-wrapper-engine-and-powertrain {
@@ -112,6 +112,12 @@
   font-size: 1em;
   margin-bottom: 0.5vw;
   margin-right: 2vw;
+}
+
+.engine-and-powertrain-combobox-image-item {
+  width: 2vw;
+  height: auto;
+  object-fit: scale-down;
 }
 
 @media screen and (max-width: 1350px) {
@@ -140,6 +146,10 @@
   .section-body-engine-and-powertrain {
     padding-bottom: 10vw;  
   }
+
+  .engine-and-powertrain-combobox-image-item {
+    width: 4vw;
+  }
 }
 
 @media screen and (max-width: 600px) {
@@ -154,4 +164,17 @@
     flex-direction: column;
     gap: 4vw;
   }
+
+  .line-container-engine-and-powertrain {
+    margin: 4vw 0;
+  }
+
+  .engine-and-powertrain-combobox-image-item {
+    width: 6vw;
+  }
+
+  .power-wrapper {
+    gap: 4vw;
+  }
+
 }

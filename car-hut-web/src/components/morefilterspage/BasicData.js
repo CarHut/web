@@ -3,6 +3,7 @@ import '../../css/morefilterspage/BasicData.css'
 import React, { useState, useEffect } from 'react';
 import ComboBox from '../maincomponents/ComboBox';
 import TextInputField from '../maincomponents/TextInputField';
+import { WithListContext } from 'react-admin';
 
 function BasicData({brand, setBrand, model, setModel, carType, setCarType, 
                     price, setPrice, mileage, setMileage, registration, setRegistration,
@@ -457,23 +458,33 @@ function BasicData({brand, setBrand, model, setModel, carType, setCarType,
             <div className='line-container-basic-data'/>
             <div className='lower-section-wrapper-basic-data'>
                 <div className='lower-section-left-basic-data'>
-                    <div className='lower-combobox-wrapper-basic-data'>   
+                    <div className='lower-combobox-wrapper-basic-data'>
+                        <img className='basic-data-combobox-image-item' src={require('../../images/morefilterspage/price_tag.png')}/>
                         {renderPrice('price-from')}
                         {renderPrice('price-to')}
                     </div>
-                    <div className='lower-combobox-wrapper-basic-data'>   
+                    <div className='lower-combobox-wrapper-basic-data'>
+                        <img className='basic-data-combobox-image-item' src={require('../../images/caroffer/mileage.png')}/>   
                         {renderMileage('mileage-from')}
                         {renderMileage('mileage-to')}
                     </div>
-                    <div className='lower-combobox-wrapper-basic-data'>   
+                    <div className='lower-combobox-wrapper-basic-data'>
+                        <img className='basic-data-combobox-image-item' src={require('../../images/morefilterspage/date.png')}/>   
                         {renderRegistration('registration-from')}
                         {renderRegistration('registration-to')}
                     </div>
                 </div>
                 <div className='lower-section-right-basic-data'>
-                    {renderSeatingConfig()}
-                    {renderDoors()}
                     <div className='lower-combobox-wrapper-basic-data'>
+                        <img className='basic-data-combobox-image-item' src={require('../../images/morefilterspage/seat.png')}/>  
+                        {renderSeatingConfig()}
+                    </div>
+                    <div className='lower-combobox-wrapper-basic-data'>
+                        <img className='basic-data-combobox-image-item' src={require('../../images/morefilterspage/door.png')}/>  
+                        {renderDoors()}
+                    </div>
+                    <div className='lower-combobox-wrapper-basic-data'>
+                        <img className='basic-data-combobox-image-item' src={require('../../images/morefilterspage/location.png')}/>  
                         {renderLocation()}
                         {renderPostalCodeTextField()}
                     </div>

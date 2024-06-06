@@ -172,22 +172,29 @@ function EngineAndPowertrain({fuelType, setFuelType, power, setPower, displaceme
             <div className='section-header-engine-and-powertrain'>Engine and powertrain</div>
             <div className='line-container-engine-and-powertrain'/>
             <div className='engine-and-powertrain-rows'>
-                {renderFuelTypes()}
+                <div className='power-wrapper'>
+                    <img className='engine-and-powertrain-combobox-image-item' src={require('../../images/caroffer/fuel.png')}/>
+                    {renderFuelTypes()}
+                </div>
                 <div className='line-wrapper-engine-and-powertrain'>
                     <div className='power-wrapper'>
+                        <img className='engine-and-powertrain-combobox-image-item' src={require('../../images/caroffer/power.png')}/>
                         {renderEnginePower('power-from')}
                         {renderEnginePower('power-to')}
                     </div>
-                    <div className='gearbox-wrapper-engine-and-powertrain'>
+                    <div className='power-wrapper'>
+                        <img className='engine-and-powertrain-combobox-image-item' src={require('../../images/caroffer/gearbox.png')}/>
                         {renderGearboxTypes()}
                     </div>
                 </div>
                 <div className='line-wrapper-engine-and-powertrain'>
                     <div className='power-wrapper'>
+                        <img className='engine-and-powertrain-combobox-image-item' src={require('../../images/morefilterspage/pistons.png')}/>
                         {renderDisplacement('displacement-from')}
                         {renderDisplacement('displacement-to')}
                     </div>
-                    <div className='gearbox-wrapper-engine-and-powertrain'>
+                    <div className='power-wrapper'>
+                        <img className='engine-and-powertrain-combobox-image-item' src={require('../../images/morefilterspage/powertrain.png')}/>
                         {renderPowertrain()}
                     </div>
                 </div>
