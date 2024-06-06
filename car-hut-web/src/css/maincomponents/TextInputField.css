@@ -17,6 +17,12 @@
     padding-left: 1vw;
 }
 
+.text-input-field-style:focus {
+    outline: none;
+    border-color: #2196F3; 
+    box-shadow: 0 0 5px rgba(33, 150, 243, 0.7); 
+}
+
 @media screen and (max-width: 1350px) {
     .text-input-field-label {
         font-size: 2vw;

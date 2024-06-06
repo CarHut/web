@@ -39,6 +39,12 @@
     padding-right: 4vw;
 }
 
+.engine-and-powertrain-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 2vw;
+}
+
 .custom-checkbox-engine-and-power {
     position: relative;
     cursor: pointer;
@@ -83,50 +89,9 @@
     justify-content: space-between;
 }
 
-.custom-combobox-engine-and-powertrain {
-    position: relative;
-    width: 13vw; 
-    height: 2vw;
-}
-
-.combobox-entity-engine-and-powertrain {
-  display: block;
-  padding-right: 1vw;
-  padding-bottom: 1vw;
-}
-
-.custom-combobox-engine-and-powertrain::after {
-  content: '\25BC';
-  color: #D9D9D9; 
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
-}
-
-.my-combobox-engine-and-powertrain {
-  width: 100%;
-  border: 1px solid #D9D9D9;
-  border-radius: 5px;
-  font-size: 14px;
-  color: #D9D9D9;
-  background-color: #313131;
-  height: 100%;
-  padding-left: 1vw;
-}
-
-.my-combobox-engine-and-powertrain option {
-  background-color: #fff;
-  color: #000;
-}
-
-.my-combobox-engine-and-powertrain.disabled {
-    box-shadow: none; 
-    opacity: 0.7;
-}
-
 .power-wrapper {
     display: flex;
+    gap: 2vw;
 }
 
 .gearbox-wrapper-engine-and-powertrain {
@@ -150,22 +115,9 @@
 }
 
 @media screen and (max-width: 1350px) {
+
   .section-body-engine-and-powertrain {
       margin: 2vw 0vw;
-  }
-
-  .custom-combobox-engine-and-powertrain {
-      width: 25vw; 
-      height: 5vw;
-  }
-
-  .combobox-entity-engine-and-powertrain {
-    margin-top: 2vw;
-    margin-right: 5vw;
-  }
-
-  .my-combobox-engine-and-powertrain {
-    font-size: 1.8vw;
   }
 
   .label-engine-and-powertrain {
@@ -176,7 +128,8 @@
   }
 
   .line-wrapper-engine-and-powertrain {
-    display: block;
+    display: flex;
+
   }
 
   .section-header-engine-and-powertrain {
@@ -186,5 +139,19 @@
 
   .section-body-engine-and-powertrain {
     padding-bottom: 10vw;  
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .engine-and-powertrain-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 4vw;
+  }
+
+  .line-wrapper-engine-and-powertrain {
+    display: flex;
+    flex-direction: column;
+    gap: 4vw;
   }
 }

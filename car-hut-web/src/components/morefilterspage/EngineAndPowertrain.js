@@ -1,26 +1,40 @@
 import '../../css/morefilterspage/EngineAndPowertrain.css';
+import ComboBox from '../maincomponents/ComboBox';
 
 function EngineAndPowertrain({fuelType, setFuelType, power, setPower, displacement, setDisplacement,
         gearbox, setGearbox, powertrain, setPowertrain, setLoadingSearchedCarsNumber}) {
+           
+
+    const comboBoxSizingWidth = {
+        standardSize: "10vw",
+        mediumSize:   "20vw",
+        smallSize:    "25vw"
+    };
+    
+    const comboBoxSizingHeight = {
+        standardSize: "2vw",
+        mediumSize:   "4vw",
+        smallSize:    "6vw"
+    }
 
     const handleSelectedFuelType = (fuel) => {
         setFuelType(fuel);
         setLoadingSearchedCarsNumber(true);
     }
 
-    const handleSelectedPower = (e) => {
-        if (e.target.className == 'my-combobox-engine-and-powertrain power-from') {
+    const handleSelectedPower = (type, e) => {
+        if (type === 'power-from') {
             setPower({ ...power, powerFrom: e.target.value });
-        } else if (e.target.className == 'my-combobox-engine-and-powertrain power-to') {
+        } else if (type === 'power-to') {
             setPower({ ...power, powerTo: e.target.value });
         }
         setLoadingSearchedCarsNumber(true);
     }
 
-    const handleSelectedDisplacement = (e) => {
-        if (e.target.className == 'my-combobox-engine-and-powertrain displacement-from') {
+    const handleSelectedDisplacement = (type, e) => {
+        if (type === 'displacement-from') {
             setDisplacement({ ...displacement, displacementFrom: e.target.value });
-        } else if (e.target.className == 'my-combobox-engine-and-powertrain displacement-to') {
+        } else if (type === 'displacement-to') {
             setDisplacement({ ...displacement, displacementTo: e.target.value });
         }
         setLoadingSearchedCarsNumber(true);
@@ -37,132 +51,143 @@ function EngineAndPowertrain({fuelType, setFuelType, power, setPower, displaceme
     }
 
     const renderFuelTypes = () => {
+        const options = [
+            { key: '1', value: '',          textValue: 'All'        }, 
+            { key: '2', value: 'Petrol',    textValue: 'Petrol'     }, 
+            { key: '3', value: 'Diesel',    textValue: 'Diesel'     },    
+            { key: '4', value: 'Electric',  textValue: 'Electric'   },       
+            { key: '5', value: 'Hybrid',    textValue: 'Hybrid'     },     
+            { key: '6', value: 'LPG',       textValue: 'LPG'        },    
+            { key: '7', value: 'CNG',       textValue: 'CNG'        },    
+            { key: '8', value: 'NotStated', textValue: 'Not stated' }        
+        ];
+
         return (
-            <div className="custom-combobox-engine-and-powertrain">
-                <select className='my-combobox-engine-and-powertrain' onChange={(e) => handleSelectedFuelType(e.target.value)}>
-                    <option key={1} value="">All</option>
-                    <option key={2} value={'Petrol'}>Petrol</option>
-                    <option key={3} value={'Diesel'}>Diesel</option>
-                    <option key={4} value={'Electric'}>Electric</option>
-                    <option key={5} value={'Hybrid'}>Hybrid</option>
-                    <option key={6} value={'LPG'}>LPG</option>
-                    <option key={7} value={'CNG'}>CNG</option>
-                    <option key={8} value={'NotStated'}>Not stated</option>
-                </select>
-            </div>
-        )
+            <ComboBox
+                label={'Fuel type'}
+                width={comboBoxSizingWidth}
+                height={comboBoxSizingHeight}
+                optionValues={options}
+                onChangeHandler={(e) => handleSelectedFuelType(e.target.value)}
+            />
+        );
     }
 
     const renderEnginePower = (className) => {
+        const options = [
+            { key: '-1',  value: "",            textValue: className.includes("power-from") ? "From" : "To" },
+            { key: '25',  value: '25',          textValue: '25 kw'                                          },           
+            { key: '50',  value: '50',          textValue: '50 kw'                                          },           
+            { key: '70',  value: '70',          textValue: '70 kw'                                          },           
+            { key: '100', value: '100',         textValue: '100 kw'                                         },            
+            { key: '150', value: '150',         textValue: '150 kw'                                         },            
+            { key: '200', value: '200',         textValue: '200 kw'                                         },            
+            { key: '250', value: '250',         textValue: '250 kw'                                         },            
+            { key: '300', value: '300',         textValue: '300 kw'                                         },            
+            { key: '0',   value: 'powerMoref',  textValue: 'More'                                           }          
+        ];                                                     
+
         return (
-            <div className="custom-combobox-engine-and-powertrain">
-                <select className={className} onChange={(e) => handleSelectedPower(e)}>
-                    <option value="">{className.includes("power-from") ? "From" : "To"} (kw)</option>
-                    <option key={25} value={'25'}>25 kw</option>
-                    <option key={50} value={'50'}>50 kw</option>
-                    <option key={70} value={'70'}>70 kw</option>
-                    <option key={100} value={'100'}>100 kw</option>
-                    <option key={150} value={'150'}>150 kw</option>
-                    <option key={200} value={'200'}>200 kw</option>
-                    <option key={250} value={'250'}>250 kw</option>
-                    <option key={300} value={'300'}>300 kw</option>
-                    <option key={0} value={'powerMoref'}>More</option>
-                </select>
-            </div>
-        )
+            <ComboBox
+                label={className.includes("power-from") ? "Power from" : "Power to"}
+                width={comboBoxSizingWidth}
+                height={comboBoxSizingHeight}
+                optionValues={options}
+                onChangeHandler={(e) => handleSelectedPower(className, e)}
+            />
+        );
     } 
 
     const renderGearboxTypes = () => {
+
+        const options = [
+            { key: '1', value: "",              textValue: 'All'        },
+            { key: '2', value: "Manual",        textValue: 'Manual'     }, 
+            { key: '3', value: "Automatic",     textValue: 'Automatic'  }, 
+            { key: '4', value: "Sequential",    textValue: 'Sequential' },  
+            { key: '5', value: "NotStated",     textValue: 'Not stated' } 
+        ];
+
         return (
-            <div className="custom-combobox-engine-and-powertrain">
-                <select className='my-combobox-engine-and-powertrain' onChange={(e) => handleSelectedGearbox(e.target.value)}>
-                    <option key={1} value="">All</option>
-                    <option key={2} value="Manual">Manual</option>
-                    <option key={3} value="Automatic">Automatic</option>
-                    <option key={4} value="Sequential">Sequential</option>
-                    <option key={5} value="NotStated">Not stated</option>
-                </select>
-            </div>
-        )
+            <ComboBox
+                label={'Gearbox'}
+                width={comboBoxSizingWidth}
+                height={comboBoxSizingHeight}
+                optionValues={options}
+                onChangeHandler={(e) => handleSelectedGearbox(e.target.value)}
+            />
+        );
     }
 
     const renderDisplacement = (className) => {
+
+        const options = [
+            { key: '-1',   value: '',                  textValue: className.includes("displacement-from") ? "From" : "To" },
+            { key: '1000', value: '1000',              textValue: '1000 cm³'                                              },
+            { key: '1200', value: '1200',              textValue: '1200 cm³'                                              },
+            { key: '1500', value: '1500',              textValue: '1500 cm³'                                              },
+            { key: '1700', value: '1700',              textValue: '1700 cm³'                                              },
+            { key: '2000', value: '2000',              textValue: '2000 cm³'                                              },
+            { key: '3000', value: '3000',              textValue: '3000 cm³'                                              },
+            { key: '4000', value: '4000',              textValue: '4000 cm³'                                              },
+            { key: '5000', value: '5000',              textValue: '5000 cm³'                                              },
+            { key: '6000', value: '6000',              textValue: '6000 cm³'                                              },
+            { key: '0',    value: 'displacementMoref', textValue: 'More'                                                  }
+        ];
+
         return (
-            <div className="custom-combobox-engine-and-powertrain">
-                <select className={className} onChange={(e) => handleSelectedDisplacement(e)}>
-                    <option value="">{className.includes("displacement-from") ? "From" : "To"} (cm³)</option>
-                    <option key={1000} value={'1000'}>1000 cm³</option>
-                    <option key={1200} value={'1200'}>1200 cm³</option>
-                    <option key={1500} value={'1500'}>1500 cm³</option>
-                    <option key={1700} value={'1700'}>1700 cm³</option>
-                    <option key={2000} value={'2000'}>2000 cm³</option>
-                    <option key={3000} value={'3000'}>3000 cm³</option>
-                    <option key={4000} value={'4000'}>4000 cm³</option>
-                    <option key={5000} value={'5000'}>5000 cm³</option>
-                    <option key={6000} value={'6000'}>6000 cm³</option>
-                    <option key={0} value={'displacementMoref'}>More</option>
-                </select>
-            </div>
-        )
+            <ComboBox
+                label={className.includes("displacement-from") ? "Displacement from" : "Displacement to"}
+                width={comboBoxSizingWidth}
+                height={comboBoxSizingHeight}
+                optionValues={options}
+                onChangeHandler={(e) => handleSelectedDisplacement(className, e)}
+            />
+        );
     }
 
     const renderPowertrain = () => {
+        const options = [
+            { key: '1', value: "",           textValue: 'All'               },    
+            { key: '2', value: "NotStated",  textValue: 'Not stated'        }, 
+            { key: '3', value: "Other",      textValue: 'Other'             },
+            { key: '4', value: "FrontWheel", textValue: 'Front-wheel drive' }, 
+            { key: '5', value: "RearWheel",  textValue: 'Rear-wheel drive'  },    
+            { key: '6', value: "AllWheel",   textValue: 'All-wheel drive'   } 
+        ];
+
         return (
-            <div className="custom-combobox-engine-and-powertrain">
-                <select className='my-combobox-engine-and-powertrain' onChange={(e) => handleSelectedPowertrain(e.target.value)}>
-                    <option key={1} value="">All</option>
-                    <option key={2} value="NotStated">Not stated</option>
-                    <option key={3} value="Other">Other</option>
-                    <option key={4} value="FrontWheel">Front-wheel drive</option>
-                    <option key={5} value="RearWheel">Rear-wheel drive</option>
-                    <option key={6} value="AllWheel">All-wheel drive</option>
-                </select>
-            </div>
-        )
+            <ComboBox
+                label={'Powertrain'}
+                width={comboBoxSizingWidth}
+                height={comboBoxSizingHeight}
+                optionValues={options}
+                onChangeHandler={(e) => handleSelectedPowertrain(e.target.value)}
+            />
+        );
     }
 
     return (
         <div className="section-body-engine-and-powertrain">
             <div className='section-header-engine-and-powertrain'>Engine and powertrain</div>
             <div className='line-container-engine-and-powertrain'/>
-            <div className='fuel-type-wrapper'>
-                <div className='combobox-entity-engine-and-powertrain'>
-                    <div className='label-engine-and-powertrain'>Fuel type</div>
-                    {renderFuelTypes()}
-                </div>
-            </div>
-            <div className='line-wrapper-engine-and-powertrain'>
-                <div className='power-wrapper'>
-                    <div className='combobox-entity-engine-and-powertrain'>
-                        <div className='label-engine-and-powertrain'>Power</div>
-                        {renderEnginePower('my-combobox-engine-and-powertrain power-from')}
+            <div className='engine-and-powertrain-rows'>
+                {renderFuelTypes()}
+                <div className='line-wrapper-engine-and-powertrain'>
+                    <div className='power-wrapper'>
+                        {renderEnginePower('power-from')}
+                        {renderEnginePower('power-to')}
                     </div>
-                    <div className='combobox-entity-engine-and-powertrain'>
-                        <div className='label-engine-and-powertrain'>{'\0'}</div>
-                        {renderEnginePower('my-combobox-engine-and-powertrain power-to')}
-                    </div>
-                </div>
-                <div className='gearbox-wrapper-engine-and-powertrain'>
-                    <div className='combobox-entity-engine-and-powertrain'>
-                        <div className='label-engine-and-powertrain'>Gearbox</div>
+                    <div className='gearbox-wrapper-engine-and-powertrain'>
                         {renderGearboxTypes()}
                     </div>
                 </div>
-            </div>
-            <div className='line-wrapper-engine-and-powertrain'>
-                <div className='power-wrapper'>
-                    <div className='combobox-entity-engine-and-powertrain'>
-                        <div className='label-engine-and-powertrain'>Displacement</div>
-                        {renderDisplacement('my-combobox-engine-and-powertrain displacement-from')}
+                <div className='line-wrapper-engine-and-powertrain'>
+                    <div className='power-wrapper'>
+                        {renderDisplacement('displacement-from')}
+                        {renderDisplacement('displacement-to')}
                     </div>
-                    <div className='combobox-entity-engine-and-powertrain'>
-                        <div className='label-engine-and-powertrain'>{'\0'}</div>
-                        {renderDisplacement('my-combobox-engine-and-powertrain displacement-to')}
-                    </div>
-                </div>
-                <div className='gearbox-wrapper-engine-and-powertrain'>
-                    <div className='combobox-entity-engine-and-powertrain'>
-                        <div className='label-engine-and-powertrain'>Powertrain</div>
+                    <div className='gearbox-wrapper-engine-and-powertrain'>
                         {renderPowertrain()}
                     </div>
                 </div>

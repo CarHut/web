@@ -1,7 +1,8 @@
-import { radiantDarkTheme } from 'react-admin';
 import APIMethods from '../../api/APIMethods';
 import '../../css/morefilterspage/BasicData.css'
 import React, { useState, useEffect } from 'react';
+import ComboBox from '../maincomponents/ComboBox';
+import TextInputField from '../maincomponents/TextInputField';
 
 function BasicData({brand, setBrand, model, setModel, carType, setCarType, 
                     price, setPrice, mileage, setMileage, registration, setRegistration,
@@ -12,6 +13,30 @@ function BasicData({brand, setBrand, model, setModel, carType, setCarType,
     const [models, setModels] = useState([]);
     const [selectedBrand, setSelectedBrand] = useState('');
     const [selectedModel, setSelectedModel] = useState('');
+
+    const comboBoxSizingWidth = {
+        standardSize: "10vw",
+        mediumSize:   "20vw",
+        smallSize:    "25vw"
+    };
+
+    const comboBoxSizingHeight = {
+        standardSize: "2vw",
+        mediumSize:   "4vw",
+        smallSize:    "6vw"
+    }
+
+    const textInputFieldSizingWidth = {
+        standardSize: "10vw",
+        mediumSize:   "15vw",
+        smallSize:    "28vw"
+    };
+
+    const textInputFieldSizingHeight = {
+        standardSize: "2vw",
+        mediumSize:   "3vw",
+        smallSize:    "4vw"
+    }
 
     const fetchBrands = async () => {
         try {
@@ -72,28 +97,30 @@ function BasicData({brand, setBrand, model, setModel, carType, setCarType,
         setLoadingSearchedCarsNumber(true);
     }
 
-    const handleSelectedPrice = (e) => {
-        if (e.target.className == 'basic-data-styled-combobox price-from') {
+    const handleSelectedPrice = (type, e) => {
+
+
+        if (type === 'price-from') {
             setPrice({ ...price, priceFrom: e.target.value });
-        } else if (e.target.className == 'basic-data-styled-combobox price-to') {
+        } else if (type === 'price-to') {
             setPrice({ ...price, priceTo: e.target.value });
         }
         setLoadingSearchedCarsNumber(true);
     }
 
-    const handleSelectedMileage = (e) => {
-        if (e.target.className == 'basic-data-styled-combobox mileage-from') {
+    const handleSelectedMileage = (type, e) => {
+        if (type === 'mileage-from') {
             setMileage({ ...mileage, mileageFrom: e.target.value });
-        } else if (e.target.className == 'basic-data-styled-combobox mileage-to') {
+        } else if (type === 'mileage-to') {
             setMileage({ ...mileage, mileageTo: e.target.value });
         }
         setLoadingSearchedCarsNumber(true);
     }
 
-    const handleSelectedRegistration = (e) => {
-        if (e.target.className == 'basic-data-styled-combobox registration-from') {
+    const handleSelectedRegistration = (type, e) => {
+        if (type === 'registration-from') {
             setRegistration({ ...registration, registrationFrom: e.target.value });
-        } else if (e.target.className == 'basic-data-styled-combobox registration-to') {
+        } else if (type === 'registration-to') {
             setRegistration({ ...registration, registrationTo: e.target.value });
         }
         setLoadingSearchedCarsNumber(true);
@@ -110,19 +137,35 @@ function BasicData({brand, setBrand, model, setModel, carType, setCarType,
     }
 
     const renderBrands = () => {
+        const options = [];
+        options.push({ key: '-1', value: '', textValue: 'Select brand' });
+        brands.map((brand) => options.push({ key: brand.id, value: brand.brand, textValue: brand.brand }));
+
         return (
-            brands.map(brand => (
-                <option key={brand.id} value={brand.brand}>{brand.brand}</option>
-            ))
-        )
+            <ComboBox 
+                label={'Brand'} 
+                width={comboBoxSizingWidth} 
+                height={comboBoxSizingHeight} 
+                optionValues={options}
+                onChangeHandler={(e) => handleSelectedBrand(e)}
+            />
+        );
     }
 
     const renderModels = () => {
+        const options = [];
+        options.push({ key: '-1', value: '', textValue: 'Select model' });
+        models.map((model) => options.push({ key: model.id, value: model.model, textValue: model.model }));
+
         return (
-            models.map(model => (
-                <option key={model.id} value={model.model}>{model.model}</option>
-            ))
-        )
+            <ComboBox 
+                label={'Model'} 
+                width={comboBoxSizingWidth} 
+                height={comboBoxSizingHeight} 
+                optionValues={options}
+                onChangeHandler={(e) => handleSelectedModel(e)}
+            />
+        );
     }
 
     const renderCarTypes = () => {
@@ -213,130 +256,189 @@ function BasicData({brand, setBrand, model, setModel, carType, setCarType,
     }
 
     const renderPrice = (className) => {
+
+        const options = [
+            { key: '-1',     value: '',          textValue: className.includes("price-from") ? "From €"  : "To €"  },
+            { key: '1000',   value: '1000',      textValue: '1 000€'                                               },           
+            { key: '2000',   value: '2000',      textValue: '2 000€'                                               },           
+            { key: '3000',   value: '3000',      textValue: '3 000€'                                               },           
+            { key: '4000',   value: '4000',      textValue: '4 000€'                                               },           
+            { key: '5000',   value: '5000',      textValue: '5 000€'                                               },           
+            { key: '6000',   value: '6000',      textValue: '6 000€'                                               },           
+            { key: '7000',   value: '7000',      textValue: '7 000€'                                               },           
+            { key: '8000',   value: '8000',      textValue: '8 000€'                                               },           
+            { key: '9000',   value: '9000',      textValue: '9 000€'                                               },           
+            { key: '10000',  value: '10000',     textValue: '10 000€'                                              }, 
+            { key: '20000',  value: '20000',     textValue: '20 000€'                                              },   
+            { key: '30000',  value: '30000',     textValue: '30 000€'                                              },   
+            { key: '40000',  value: '40000',     textValue: '40 000€'                                              },   
+            { key: '50000',  value: '50000',     textValue: '50 000€'                                              },   
+            { key: '60000',  value: '60000',     textValue: '60 000€'                                              },   
+            { key: '70000',  value: '70000',     textValue: '70 000€'                                              },   
+            { key: '80000',  value: '80000',     textValue: '80 000€'                                              },   
+            { key: '90000',  value: '90000',     textValue: '90 000€'                                              },   
+            { key: '100000', value: '100000',    textValue: '100 000€'                                             }, 
+            { key: '150000', value: '150000',    textValue: '150 000€'                                             },  
+            { key: '200000', value: '200000',    textValue: '200 000€'                                             }, 
+            { key: '0',      value: 'priceMore', textValue: 'More'                                                 }
+        ];
+
         return (
-            <div className="basic-data-combobox">
-                <select className={className} onChange={(e) => handleSelectedPrice(e)}>
-                    <option value="">{className.includes("price-from") ? "From" : "To"} (€)</option>
-                    <option key={1000} value={'1000'}>1 000€</option>
-                    <option key={2000} value={'2000'}>2 000€</option>
-                    <option key={3000} value={'3000'}>3 000€</option>
-                    <option key={4000} value={'4000'}>4 000€</option>
-                    <option key={5000} value={'5000'}>5 000€</option>
-                    <option key={6000} value={'6000'}>6 000€</option>
-                    <option key={7000} value={'7000'}>7 000€</option>
-                    <option key={8000} value={'8000'}>8 000€</option>
-                    <option key={9000} value={'9000'}>9 000€</option>
-                    <option key={10000} value={'10000'}>10 000€</option>
-                    <option key={20000} value={'20000'}>20 000€</option>
-                    <option key={30000} value={'30000'}>30 000€</option>
-                    <option key={40000} value={'40000'}>40 000€</option>
-                    <option key={50000} value={'50000'}>50 000€</option>
-                    <option key={60000} value={'60000'}>60 000€</option>
-                    <option key={70000} value={'70000'}>70 000€</option>
-                    <option key={80000} value={'80000'}>80 000€</option>
-                    <option key={90000} value={'90000'}>90 000€</option>
-                    <option key={100000} value={'100000'}>100 000€</option>
-                    <option key={150000} value={'150000'}>150 000€</option>
-                    <option key={200000} value={'200000'}>200 000€</option>
-                    <option key={0} value={'priceMore'}>More</option>
-                </select>
-            </div>
-        )
+            <ComboBox
+                label={className.includes("price-from") ? "Price from" : "Price to"}
+                width={comboBoxSizingWidth}
+                height={comboBoxSizingHeight}
+                optionValues={options}
+                onChangeHandler={(e) => handleSelectedPrice(className, e)}
+            />
+        );
     }
 
     const renderMileage = (className) => {
+        const options = [
+            { key: '-1',     value: '', textValue: className.includes("mileage-from") ? "From km" : "To km" },
+            { key: '1000',   value: '1000',         textValue: '1 000 km'                                   },            
+            { key: '5000',   value: '5000',         textValue: '5 000 km'                                   },        
+            { key: '10000',  value: '10000',        textValue: '10 000 km'                                  },         
+            { key: '50000',  value: '50000',        textValue: '50 000 km'                                  },         
+            { key: '100000', value: '100000',       textValue: '100 000 km'                                 },          
+            { key: '200000', value: '200000',       textValue: '200 000 km'                                 },          
+            { key: '0',      value: 'mileageMore',  textValue: 'More'                                       }    
+        ];
+
         return (
-            <div className="basic-data-combobox">
-                <select className={className} onChange={(e) => handleSelectedMileage(e)}>
-                    <option value="" >{className.includes("mileage-from") ? "From" : "To"} (km)</option>
-                    <option key={1000} value={'1000'}>1 000 km</option>
-                    <option key={5000} value={'5000'}>5 000 km</option>
-                    <option key={10000} value={'10000'}>10 000 km</option>
-                    <option key={50000} value={'50000'}>50 000 km</option>
-                    <option key={100000} value={'100000'}>100 000 km</option>
-                    <option key={200000} value={'200000'}>200 000 km</option>
-                    <option key={0} value={'mileageMore'}>More</option>
-                </select>
-            </div>
-        )
+            <ComboBox
+                label={className.includes("mileage-from") ? "Mileage from" : "Mileage to"}
+                width={comboBoxSizingWidth}
+                height={comboBoxSizingHeight}
+                optionValues={options}
+                onChangeHandler={(e) => handleSelectedMileage(className, e)}
+            />
+        );
+
     }
 
     const renderRegistration = (className) => {
+
+        const options = [
+            { key: '-1', value: '', textValue: className.includes("registration-from") ? "From" : "To" },
+            { key: '2024', value: '2024',               textValue: '2024'                              },
+            { key: '2023', value: '2023',               textValue: '2023'                              },
+            { key: '2022', value: '2022',               textValue: '2022'                              },
+            { key: '2021', value: '2021',               textValue: '2021'                              },
+            { key: '2020', value: '2020',               textValue: '2020'                              },
+            { key: '2019', value: '2019',               textValue: '2019'                              },
+            { key: '2018', value: '2018',               textValue: '2018'                              },
+            { key: '2017', value: '2017',               textValue: '2017'                              },
+            { key: '2016', value: '2016',               textValue: '2016'                              },
+            { key: '2015', value: '2015',               textValue: '2015'                              },
+            { key: '2014', value: '2014',               textValue: '2014'                              },
+            { key: '2013', value: '2013',               textValue: '2013'                              },
+            { key: '2012', value: '2012',               textValue: '2012'                              },
+            { key: '2011', value: '2011',               textValue: '2011'                              },
+            { key: '2010', value: '2010',               textValue: '2010'                              },
+            { key: '2009', value: '2009',               textValue: '2009'                              },
+            { key: '2008', value: '2008',               textValue: '2008'                              },
+            { key: '2007', value: '2007',               textValue: '2007'                              },
+            { key: '2006', value: '2006',               textValue: '2006'                              },
+            { key: '2005', value: '2005',               textValue: '2005'                              },
+            { key: '2004', value: '2004',               textValue: '2004'                              },
+            { key: '2003', value: '2003',               textValue: '2003'                              },
+            { key: '2002', value: '2002',               textValue: '2002'                              },
+            { key: '2001', value: '2001',               textValue: '2001'                              },
+            { key: '2000', value: '2000',               textValue: '2000'                              },
+            { key: '1999', value: '1999',               textValue: '1999'                              },
+            { key: '1998', value: '1998',               textValue: '1998'                              },
+            { key: '1997', value: '1997',               textValue: '1997'                              },
+            { key: '1996', value: '1996',               textValue: '1996'                              },
+            { key: '1995', value: '1995',               textValue: '1995'                              },
+            { key: '1990', value: '1990',               textValue: '1990'                              },
+            { key: '1985', value: '1985',               textValue: '1985'                              },
+            { key: '1980', value: '1980',               textValue: '1980'                              },
+            { key: '1970', value: '1970',               textValue: '1970'                              },
+            { key: '1960', value: '1960',               textValue: '1960'                              },
+            { key: 'xxxx', value: 'registrationOlder',  textValue: 'Older'                             } 
+        ];
+
         return (
-            <div className="basic-data-combobox">
-                <select className={className} onChange={(e) => handleSelectedRegistration(e)}>
-                    <option value=""  >{className.includes("registration-from") ? "From" : "To"}</option>
-                    <option key={2024} value={'2024'}>2024</option>
-                    <option key={2023} value={'2023'}>2023</option>
-                    <option key={2022} value={'2022'}>2022</option>
-                    <option key={2021} value={'2021'}>2021</option>
-                    <option key={2020} value={'2020'}>2020</option>
-                    <option key={2019} value={'2019'}>2019</option>
-                    <option key={2018} value={'2018'}>2018</option>
-                    <option key={2017} value={'2017'}>2017</option>
-                    <option key={2016} value={'2016'}>2016</option>
-                    <option key={2015} value={'2015'}>2015</option>
-                    <option key={2014} value={'2014'}>2014</option>
-                    <option key={2013} value={'2013'}>2013</option>
-                    <option key={2012} value={'2012'}>2012</option>
-                    <option key={2011} value={'2011'}>2011</option>
-                    <option key={2010} value={'2010'}>2010</option>
-                    <option key={2009} value={'2009'}>2009</option>
-                    <option key={2008} value={'2008'}>2008</option>
-                    <option key={2007} value={'2007'}>2007</option>
-                    <option key={2006} value={'2006'}>2006</option>
-                    <option key={2005} value={'2005'}>2005</option>
-                    <option key={2004} value={'2004'}>2004</option>
-                    <option key={2003} value={'2003'}>2003</option>
-                    <option key={2002} value={'2002'}>2002</option>
-                    <option key={2001} value={'2001'}>2001</option>
-                    <option key={2000} value={'2000'}>2000</option>
-                    <option key={1999} value={'1999'}>1999</option>
-                    <option key={1998} value={'1998'}>1998</option>
-                    <option key={1997} value={'1997'}>1997</option>
-                    <option key={1996} value={'1996'}>1996</option>
-                    <option key={1995} value={'1995'}>1995</option>
-                    <option key={1990} value={'1990'}>1990</option>
-                    <option key={1985} value={'1985'}>1985</option>
-                    <option key={1980} value={'1980'}>1980</option>
-                    <option key={1970} value={'1970'}>1970</option>
-                    <option key={1960} value={'1960'}>1960</option>
-                    <option key={0} value={'registrationOlder'}>Older</option>
-                </select>
-            </div>
-        )
+            <ComboBox 
+                label={className.includes("registration-from") ? "Registration from" : "Registration to"}
+                width={comboBoxSizingWidth}
+                height={comboBoxSizingHeight}
+                optionValues={options}
+                onChangeHandler={(e) => handleSelectedRegistration(className, e)}
+            />
+        );
     }
 
     const renderSeatingConfig = () => {
+        const options = [
+            { key: '-1', value: '',       textValue: 'No. of seats' },
+            { key: '2',  value: "seats2", textValue: '2'            },
+            { key: '3',  value: "seats3", textValue: '3'            },
+            { key: '4',  value: "seats4", textValue: '4'            },
+            { key: '5',  value: "seats5", textValue: '5'            },
+            { key: '6',  value: "seats6", textValue: '6'            },
+            { key: '7',  value: "seats7", textValue: '7'            },
+            { key: '8',  value: "seatsMore", textValue: 'More'      }
+        ]; 
+
         return (
-            <div className="basic-data-combobox">
-                <select className='basic-data-styled-combobox' onChange={(e) => handleSelectedSeatingConfig(e)}>
-                    <option value="">No. of seast</option>
-                    <option key={2} value="seats2">2</option>
-                    <option key={3} value="seats3">3</option>
-                    <option key={4} value="seats4">4</option>
-                    <option key={5} value="seats5">5</option>
-                    <option key={6} value="seats6">6</option>
-                    <option key={7} value="seats7">7</option>
-                    <option key={8} value="seatsMore">More</option>
-                </select>
-            </div>
-        )
+            <ComboBox 
+                label={'Seating configuration'}
+                width={comboBoxSizingWidth}
+                height={comboBoxSizingHeight}
+                optionValues={options}
+                onChangeHandler={(e) => handleSelectedSeatingConfig(e)}
+            />
+        );
     }
 
     const renderDoors = () => {
+
+        const options = [
+            { key: '-1', value: "",        textValue: 'No. of doors' }, 
+            { key: '23', value: "doors23", textValue: '2/3'          },  
+            { key: '45', value: "doors45", textValue: '4/5'          },   
+            { key: '67', value: "doors67", textValue: '6/7'          }   
+        ];
+
         return (
-            <div className="basic-data-combobox">
-                <select className='basic-data-styled-combobox' onChange={(e) => handleSelectedDoors(e)}>
-                    <option value="" >No. of doors</option>
-                    <option key={23} value="doors23">2/3</option>
-                    <option key={45} value="doors45">4/5</option>
-                    <option key={67} value="doors67">6/7</option>
-                </select>
-            </div>
-        )
+            <ComboBox
+                label={'Doors'}
+                width={comboBoxSizingWidth}
+                height={comboBoxSizingHeight}
+                optionValues={options}
+                onChangeHandler={(e) => handleSelectedDoors(e)}
+            />
+        );
     }
 
+    const renderLocation = () => {
+        const options = [
+            { key: '-1', value: '', textValue: 'In development'}
+        ];
+
+        return (
+            <ComboBox
+                label={'Location'}
+                width={comboBoxSizingWidth}
+                height={comboBoxSizingHeight}
+                optionValues={options}
+            />
+        );
+    }
+
+    const renderPostalCodeTextField = () => {
+        return (
+            <TextInputField
+                label={'Postal code'}
+                width={textInputFieldSizingWidth}
+                height={textInputFieldSizingHeight} 
+                type={'text'}
+            />
+        );
+    }
 
     return (
         <div className='section-body-basic-data'>
@@ -344,24 +446,8 @@ function BasicData({brand, setBrand, model, setModel, carType, setCarType,
             <div className='line-container-basic-data'/>
             <div className='upper-section-wrapper-basic-data'>
                 <div className='upper-section-left-basic-data'>
-                    <div className='basic-data-combobox-entity'>
-                        <div className='label-basic-data'>Brand</div>
-                        <div className="basic-data-combobox">
-                            <select id="brandComboBox" className='basic-data-styled-combobox' value={selectedBrand} onChange={(e) => handleSelectedBrand(e)}>
-                                <option value="all">Select Brand</option>
-                                {renderBrands()}
-                            </select>
-                        </div>
-                    </div>
-                    <div className='basic-data-combobox-entity'>
-                        <div className='label-basic-data'>Model</div>
-                        <div className="basic-data-combobox">
-                            <select id="modelComboBox" className={`basic-data-styled-combobox ${!selectedBrand ? 'disabled' : ''}`} value={selectedModel} onChange={(e) => handleSelectedModel(e)} disabled={!selectedBrand}>
-                                <option value="all" disabled={!selectedBrand}>Select Model</option>
-                                {renderModels()}
-                            </select>
-                        </div>
-                    </div>
+                    {renderBrands()}
+                    {renderModels()}
                 </div>
                 <div className='upper-section-right-basic-data'>   
                     <div className='label-basic-data'>Car type</div>
@@ -372,74 +458,24 @@ function BasicData({brand, setBrand, model, setModel, carType, setCarType,
             <div className='lower-section-wrapper-basic-data'>
                 <div className='lower-section-left-basic-data'>
                     <div className='lower-combobox-wrapper-basic-data'>   
-                        <div className='lower-combobox-content-basic-data'>
-                            <div className='basic-data-combobox-entity'>
-                            <div className='label-basic-data'>Price</div>
-                                {renderPrice('basic-data-styled-combobox price-from')}
-                            </div>
-                            <div className='basic-data-combobox-entity'>   
-                                <div className='label-basic-data'>{'\0'}</div>
-                                {renderPrice('basic-data-styled-combobox price-to')}
-                            </div>
-                        </div>
+                        {renderPrice('price-from')}
+                        {renderPrice('price-to')}
                     </div>
                     <div className='lower-combobox-wrapper-basic-data'>   
-                        <div className='lower-combobox-content-basic-data'>
-                            <div className='basic-data-combobox-entity'>
-                                <div className='label-basic-data'>Mileage</div>
-                                {renderMileage('basic-data-styled-combobox mileage-from')}
-                            </div>
-                            <div className='basic-data-combobox-entity'>
-                                <div className='label-basic-data'>{'\0'}</div>
-                                {renderMileage('basic-data-styled-combobox mileage-to')}
-                            </div>
-                        </div>
+                        {renderMileage('mileage-from')}
+                        {renderMileage('mileage-to')}
                     </div>
                     <div className='lower-combobox-wrapper-basic-data'>   
-                        <div className='lower-combobox-content-basic-data'>
-                            <div className='basic-data-combobox-entity'>
-                                <div className='label-basic-data'>Registration</div>
-                                {renderRegistration('basic-data-styled-combobox registration-from')}
-                            </div>
-                            <div className='basic-data-combobox-entity'>
-                                <div className='label-basic-data'>{'\0'}</div>
-                                {renderRegistration('basic-data-styled-combobox registration-to')}
-                            </div>
-                        </div>
+                        {renderRegistration('registration-from')}
+                        {renderRegistration('registration-to')}
                     </div>
                 </div>
                 <div className='lower-section-right-basic-data'>
+                    {renderSeatingConfig()}
+                    {renderDoors()}
                     <div className='lower-combobox-wrapper-basic-data'>
-                        <div className='lower-combobox-content-basic-data'>
-                            <div className='basic-data-combobox-entity'>
-                                <div className='label-basic-data'>Seating configuration</div>
-                                {renderSeatingConfig()}
-                            </div>
-                        </div>
-                    </div>
-                    <div className='lower-combobox-wrapper-basic-data'>
-                        <div className='lower-combobox-content-basic-data'>
-                            <div className='basic-data-combobox-entity'>
-                                <div className='label-basic-data'>Doors</div>
-                                {renderDoors()}
-                            </div>
-                        </div>
-                    </div>
-                    <div className='lower-combobox-wrapper-basic-data'>
-                        <div className='lower-combobox-content-basic-data'>
-                            <div className='basic-data-combobox-entity'>
-                                <div className='label-basic-data'>Location</div>
-                                <div className="basic-data-combobox">
-                                    <select className='basic-data-styled-combobox'>
-                                        <option value="" disabled ></option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div className="custom-input-container-basic-data">
-                                <div className='label-basic-data'>{'\0'}</div>
-                                <input type="text" id="customInput" className="custom-input-basic-data" placeholder="Postal code"/>
-                            </div>
-                        </div>      
+                        {renderLocation()}
+                        {renderPostalCodeTextField()}
                     </div>
                 </div>
             </div>

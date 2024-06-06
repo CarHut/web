@@ -70,8 +70,15 @@
 
   .comboboxes-filter-search {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
     gap: 3vw;
+    margin-bottom: 5vw;
+  }
+
+  .combobox-filter-search-item {
+    flex: 1 0 auto;
   }
 
 }

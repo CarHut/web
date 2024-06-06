@@ -18,7 +18,7 @@ function FilterSearch() {
     const comboBoxSizingWidth = {
         standardSize: "10vw",
         mediumSize:   "20vw",
-        smallSize:    "30vw"
+        smallSize:    "25vw"
     };
 
     const comboBoxSizingHeight = {
@@ -28,15 +28,15 @@ function FilterSearch() {
     }
 
     const regularButtonSizingWidth = {
-        standardSize: "8vw",
+        standardSize: "10vw",
         mediumSize:   "14vw",
         smallSize:    "25vw"
     };
 
     const regularButtonSizingHeight = {
-        standardSize: "4vw",
+        standardSize: "3vw",
         mediumSize:   "6vw",
-        smallSize:    "10vw"
+        smallSize:    "8vw"
     }
 
     const updateSearchedCarsNumber = async () => {
@@ -220,10 +220,18 @@ function FilterSearch() {
             <img className='img-filter-search' src={require('../../images/mainpage/find_car.png')}/>
             <div className='right-wrapper'>
                 <div className='comboboxes-filter-search'>
-                    {renderBrands()}
-                    {renderModels()}
-                    {renderPriceComboBox()}
-                    {renderMileageComboBox()}
+                    <div className='combobox-filter-search-item'>
+                        {renderBrands()}
+                    </div>
+                    <div className='combobox-filter-search-item'>
+                        {renderModels()}    
+                    </div>
+                    <div className='combobox-filter-search-item'>
+                        {renderPriceComboBox()}       
+                    </div>
+                    <div className='combobox-filter-search-item'>
+                        {renderMileageComboBox()}
+                    </div>
                 </div>
                 <div className="filter-search-links">
                     <Link to={'/moreFiltersPage'} className='more-filters-text-search-list-main-page'>More filters</Link>
