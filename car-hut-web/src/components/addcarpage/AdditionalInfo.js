@@ -147,7 +147,7 @@ function AdditionalInfo() {
         return (
             <>
                 <div className='add-car-label'>Next {type} inspection</div>
-                <input type='date' value={val} onChange={usedHandleFunction}/>
+                <input type='date' style={{width: "20vw"}} value={val} onChange={usedHandleFunction}/>
             </>
         )
     }

@@ -5,7 +5,7 @@ import ComboBox from '../maincomponents/ComboBox';
 import TextInputField from '../maincomponents/TextInputField';
 import { WithListContext } from 'react-admin';
 
-function BasicData({brand, setBrand, model, setModel, carType, setCarType, 
+function BasicData({brand, setBrand, model, setModel, carTypes, setCarTypes, 
                     price, setPrice, mileage, setMileage, registration, setRegistration,
                     seatingConfig, setSeatingConfig, doors, setDoors, location, setLocation,
                     postalCode, setPostalCode, setLoadingSearchedCarsNumber}) {
@@ -94,13 +94,17 @@ function BasicData({brand, setBrand, model, setModel, carType, setCarType,
     }
 
     const handleSelectedCarType = (type) => {
-        setCarType(type);
+        if (carTypes.includes(type)) {
+            const temp = [...carTypes];
+            temp.splice(carTypes.indexOf(type), 1);
+            setCarTypes(temp);
+        } else {
+            setCarTypes([type, ...carTypes])
+        }
         setLoadingSearchedCarsNumber(true);
     }
 
     const handleSelectedPrice = (type, e) => {
-
-
         if (type === 'price-from') {
             setPrice({ ...price, priceFrom: e.target.value });
         } else if (type === 'price-to') {
@@ -178,8 +182,7 @@ function BasicData({brand, setBrand, model, setModel, carType, setCarType,
                         <div className='car-type-bottom-label-basic-data'>Sedan</div>
                     </div>
                     <div className='custom-checkbox-basic-data'>
-                        <input type="checkbox"/>
-                        <span className="checkmark-basic-data" onClick={() => handleSelectedCarType("Sedan")}></span>
+                        <input className='basic-data-input' type="checkbox" onClick={() => handleSelectedCarType("Sedan")}></input> 
                     </div>
                 </div>
                 <div className='car-type-entity-basic-data'>
@@ -188,8 +191,7 @@ function BasicData({brand, setBrand, model, setModel, carType, setCarType,
                         <div className='car-type-bottom-label-basic-data'>Hatchback</div>
                     </div>
                     <div className='custom-checkbox-basic-data'>
-                        <input type="checkbox"/>
-                        <span className="checkmark-basic-data" onClick={() => handleSelectedCarType("Hatchback")}></span>
+                        <input className='basic-data-input' type="checkbox" onClick={() => handleSelectedCarType("Hatchback")}></input> 
                     </div>
                 </div>
                 <div className='car-type-entity-basic-data'>
@@ -198,8 +200,7 @@ function BasicData({brand, setBrand, model, setModel, carType, setCarType,
                         <div className='car-type-bottom-label-basic-data'>Combi</div>
                     </div>
                     <div className='custom-checkbox-basic-data'>
-                        <input type="checkbox"/>
-                        <span className="checkmark-basic-data" onClick={() => handleSelectedCarType("Combi")}></span>
+                        <input className='basic-data-input' type="checkbox" onClick={() => handleSelectedCarType("Combi")}></input>        
                     </div>
                 </div>
                 <div className='car-type-entity-basic-data'>
@@ -208,8 +209,7 @@ function BasicData({brand, setBrand, model, setModel, carType, setCarType,
                         <div className='car-type-bottom-label-basic-data'>SUV</div>
                     </div>
                     <div className='custom-checkbox-basic-data'>
-                        <input type="checkbox"/>
-                        <span className="checkmark-basic-data" onClick={() => handleSelectedCarType("SUV")}></span>
+                        <input className='basic-data-input' type="checkbox" onClick={() => handleSelectedCarType("SUV")}></input> 
                     </div>
                 </div>
                 <div className='car-type-entity-basic-data'>
@@ -218,8 +218,7 @@ function BasicData({brand, setBrand, model, setModel, carType, setCarType,
                         <div className='car-type-bottom-label-basic-data'>Coupé</div>
                     </div>
                     <div className='custom-checkbox-basic-data'>
-                        <input type="checkbox"/>
-                        <span className="checkmark-basic-data" onClick={() => handleSelectedCarType("Coupé")}></span>
+                        <input className='basic-data-input' type="checkbox" onClick={() => handleSelectedCarType("Coupe")}></input> 
                     </div>
                 </div>
                 <div className='car-type-entity-basic-data'>
@@ -228,8 +227,7 @@ function BasicData({brand, setBrand, model, setModel, carType, setCarType,
                         <div className='car-type-bottom-label-basic-data'>Cabriolet</div>
                     </div>
                     <div className='custom-checkbox-basic-data'>
-                        <input type="checkbox"/>
-                        <span className="checkmark-basic-data" onClick={() => handleSelectedCarType("Cabriolet")}></span>
+                        <input className='basic-data-input' type="checkbox" onClick={() => handleSelectedCarType("Cabriolet")}></input>     
                     </div>
                 </div>
                 <div className='car-type-entity-basic-data'>
@@ -238,8 +236,7 @@ function BasicData({brand, setBrand, model, setModel, carType, setCarType,
                         <div className='car-type-bottom-label-basic-data'>Minivan</div>
                     </div>
                     <div className='custom-checkbox-basic-data'>
-                        <input type="checkbox"/>
-                        <span className="checkmark-basic-data" onClick={() => handleSelectedCarType("Minivan")}></span>
+                        <input className='basic-data-input' type="checkbox" onClick={() => handleSelectedCarType("Minivan")}></input> 
                     </div>
                 </div>
                 <div className='car-type-entity-basic-data'>
@@ -248,8 +245,7 @@ function BasicData({brand, setBrand, model, setModel, carType, setCarType,
                         <div className='car-type-bottom-label-basic-data'>Other</div>
                     </div>
                     <div className='custom-checkbox-basic-data'>
-                        <input type="checkbox"/>
-                        <span className="checkmark-basic-data" onClick={() => handleSelectedCarType("Other")}></span>
+                        <input className='basic-data-input' type="checkbox" onClick={() => handleSelectedCarType("Other")}></input> 
                     </div>
                 </div>
             </div>
@@ -437,6 +433,7 @@ function BasicData({brand, setBrand, model, setModel, carType, setCarType,
                 width={textInputFieldSizingWidth}
                 height={textInputFieldSizingHeight} 
                 type={'text'}
+                color={"#313131"}
             />
         );
     }

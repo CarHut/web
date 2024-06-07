@@ -40,15 +40,32 @@ function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength, setL
         
         const sortOrder = sortBy[sortBy.length - 1] == 'L' || sortBy[sortBy.length - 1] == 'O' ? "ASC" : "DESC";
 
-        const url = Constants.baseAPIPath + `carhut/getCarsWithFilters?` +
-            `&priceFrom=${fetchedState.price.priceFrom}&priceTo=${fetchedState.price.priceTo}&mileageFrom=${fetchedState.mileage.mileageFrom}` +
-            `&mileageTo=${fetchedState.mileage.mileageTo}&fuelType=${fetchedState.fuelType}&gearbox=${fetchedState.gearbox}&powertrain=${fetchedState.powertrain}` +
-            `&powerFrom=${fetchedState.power.powerFrom}&powerTo=${fetchedState.power.powerTo}&sortBy=${sortBy}&sortOrder=${sortOrder}` +
-            `&offersPerPage=${offersPerPage}&currentPage=${currentPage}`;
+        const carHutFilterObject = {
+            brand: fetchedState.brand,
+            model: fetchedState.model,
+            carTypes: fetchedState.carTypes,
+            priceFrom: fetchedState.price.priceFrom,
+            priceTo: fetchedState.price.priceTo,
+            mileageFrom: fetchedState.mileage.mileageFrom,
+            mileageTo: fetchedState.mileage.mileageTo,
+            registrationFrom: fetchedState.registrationFrom,
+            registrationTo: fetchedState.registrationTo,
+            seatingConfig: fetchedState.seatingConfig,
+            doors: fetchedState.doors,
+            location: fetchedState.location,
+            postalCode: fetchedState.postalCode,
+            fuelType: fetchedState.fuelType,
+            powerFrom: fetchedState.power.powerFrom,
+            powerTo: fetchedState.power.powerTo,
+            displacementFrom: fetchedState.displacementFrom,
+            displacementTo: fetchedState.displacementTo,
+            gearbox: fetchedState.gearbox,
+            models: fetchedState.models
+        };
 
         let result = null;
         try {
-            result = await APIMethods.getCarsWithFilters(url, fetchedState.models);
+            result = await APIMethods.getCarsWithFilters(carHutFilterObject, sortBy, sortOrder, offersPerPage, currentPage);
         } catch (error) {
             console.log(`[SearchList][Offers][fetchCars][ERROR] - Cannot fetch cars (aborting fetching cars and number of available cars). Stack trace message: ${error}`);
             return;
@@ -59,12 +76,7 @@ function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength, setL
 
             let length = 0;
             try {
-                length = await APIMethods.getNumberOfFilteredCars(
-                    `priceFrom=${fetchedState.price.priceFrom}&priceTo=${fetchedState.price.priceTo}&mileageFrom=${fetchedState.mileage.mileageFrom}` +
-                    `&mileageTo=${fetchedState.mileage.mileageTo}&fuelType=${fetchedState.fuelType}&gearbox=${fetchedState.gearbox}&powertrain=${fetchedState.powertrain}` +
-                    `&powerFrom=${fetchedState.power.powerFrom}&powerTo=${fetchedState.power.powerTo}`, 
-                    fetchedState.models
-                );
+                length = await APIMethods.getNumberOfFilteredCars(carHutFilterObject);
             } catch (error) {
                 console.log(`[SearchList][Offers][fetchCars][ERROR] - Cannot fetch number of filtered cars. Stack trace message: ${error}`);
                 return;

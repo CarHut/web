@@ -57,7 +57,7 @@ function EngineInfo() {
     }
 
     const buttonSizingWidth = {
-        standardSize: '3vw',
+        standardSize: '5vw',
         mediumSize: '10vw',
         smallSize: '15vw'
     }

@@ -25,7 +25,9 @@
 }
 
 .add-car-engine-info-column-wrapper {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
     height: 100%;
     width: 50%;
 }
@@ -86,7 +88,9 @@
     
     .add-car-engine-info-column-wrapper {
         width: 100%;
-        display: block;
+        display: flex;
+        flex-direction: column;
+        gap: 5vw;
     }
     
     .add-car-engine-info-small-text-darker {
@@ -98,6 +102,8 @@
     }
 
     .add-car-engine-info-row-wrapper {
-        display: block;
+        display: flex;
+        flex-direction: column;
+        gap: 15vw;
     }
 }

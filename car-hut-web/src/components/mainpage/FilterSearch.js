@@ -41,7 +41,30 @@ function FilterSearch() {
 
     const updateSearchedCarsNumber = async () => {
         try {
-            const result = await APIMethods.getNumberOfFilteredCars(`brand=${selectedBrand}&model=${selectedModel}&priceFrom=${selectedPriceFrom}&mileageFrom=${selectedMileageFrom}`, null) 
+            const carHutCarFilterObject = {
+                brand: selectedBrand,
+                model: selectedModel,
+                carTypes: null,
+                priceFrom: selectedPriceFrom,
+                priceTo: null,
+                mileageFrom: selectedMileageFrom,
+                mileageTo: null,
+                registrationFrom: null,
+                registrationTo: null,
+                seatingConfig: null,
+                doors: null,
+                location: null,
+                postalCode: null,
+                fuelType: null,
+                powerFrom: null,
+                powerTo: null,
+                displacementFrom: null,
+                displacementTo: null,
+                gearbox: null,
+                models: null
+            }
+
+            const result = await APIMethods.getNumberOfFilteredCars(carHutCarFilterObject);
             setSearchedCarsNumber(result);
             setLoadingSearchedCarsNumber(false);
         } catch (error) {

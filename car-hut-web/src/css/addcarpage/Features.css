@@ -23,6 +23,7 @@
     display: flex;
     width: 100%;
     justify-content: space-between;
+    margin-bottom: 3vw;
 }
 
 .add-car-features-column-wrapper {
@@ -108,5 +109,9 @@
     
     .add-car-features-styled-button {
         font-size: 2.5vw;
+    }
+
+    .add-car-features-row-wrapper {
+        margin-bottom: 1vw;
     }
 }

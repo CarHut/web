@@ -168,6 +168,9 @@ select {
 
   .search-list-extended-filters-padding-wrapper {
       padding: 4vw;
+      display: flex;
+      flex-direction: column;
+      gap: 3vw;
   }
 
   .search-list-extended-filters-header {

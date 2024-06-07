@@ -45,10 +45,11 @@ const APIMethods = {
         const data  = await response.json();
         return data;
     },
-    getCarsWithFilters: async (url, models) => {
-        const response = await fetch(url, {
+    getCarsWithFilters: async (carHutCarFilterObject, sortBy, sortOrder, offersPerPage, currentPage) => {
+        console.log(Constants.baseAPIPath)
+        const response = await fetch(Constants.baseAPIPath + `carhut/getCarsWithFilters?sortBy=${sortBy}&sortOrder=${sortOrder}&offersPerPage=${offersPerPage}&currentPage=${currentPage}`, {
             method: 'POST',
-            body: JSON.stringify(models),
+            body: JSON.stringify(carHutCarFilterObject),
             headers: {
                'Content-Type': 'application/json'
             }
@@ -212,16 +213,16 @@ const APIMethods = {
         const response =  await fetch(Constants.baseAPIPath + 'carhut/addCarToDatabase', requestOptions);
         return response;
     },
-    getNumberOfFilteredCars: async (url, models) => {
+    getNumberOfFilteredCars: async (carHutFilterObject) => {
         const requestOptions = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(models)
+            body: JSON.stringify(carHutFilterObject)
         }
 
-        const response = await fetch(Constants.baseAPIPath + "carhut/getNumberOfFilteredCars?" + url, requestOptions);
+        const response = await fetch(Constants.baseAPIPath + "carhut/getNumberOfFilteredCars", requestOptions);
         return await response.json();
     },
     registerInitiate: async (registrationBody) => {

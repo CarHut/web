@@ -25,10 +25,11 @@
 }
 
 .add-car-additional-info-column-wrapper {
-    display: block;
     height: 100%;
     width: 50%;
-    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
 }
 
 .add-car-additional-info-small-text-darker {
@@ -108,11 +109,16 @@
     }
     
     .add-car-additional-info-row-wrapper {
-        display: block;
+        display: flex;
+        flex-direction: column;
+        gap: 15vw;
     }
     
     .add-car-additional-info-column-wrapper {
         width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 5vw;
     }
     
     .add-car-additional-info-small-text-darker {

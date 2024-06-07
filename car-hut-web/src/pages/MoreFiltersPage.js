@@ -11,7 +11,7 @@ function MoreFiltersPage() {
 
     const [brand, setBrand] = useState("");
     const [model, setModel] = useState("");
-    const [carType, setCarType] = useState("");
+    const [carTypes, setCarTypes] = useState([]);
     const [price, setPrice] = useState({priceFrom: "", priceTo: ""});
     const [mileage, setMileage] = useState({mileageFrom: "", mileageTo: ""});
     const [registration, setRegistration] = useState({registrationFrom: '', registrationTo: ''});
@@ -39,10 +39,30 @@ function MoreFiltersPage() {
 
     const updateSearchedCarsNumber = async () => {
         try {
-            const result = await APIMethods.getNumberOfFilteredCars(`brand=${brand}&model=${model}&carType=${carType}&priceFrom=${price.priceFrom}&priceTo=${price.priceTo}` +
-            `&mileageFrom=${mileage.mileageFrom}&mileageTo=${mileage.mileageTo}&registrationFrom=${registration.registrationFrom}&registrationTo=${registration.registrationTo}` +
-            `&seatingConfig=${seatingConfig}&doors=${doors}&location=${location}&postalCode=${postalCode}&fuelType=${fuelType}&powerFrom=${power.powerFrom}` +
-            `&powerTo=${power.powerTo}&displacementFrom=${displacement.displacementFrom}&displacement=${displacement.displacementTo}&gearbox=${gearbox}&powertrain=${powertrain}`, null)
+            const carHutFilterObject = {
+                brand: brand,
+                model: model,
+                carTypes: carTypes,
+                priceFrom: price.priceFrom,
+                priceTo: price.priceTo,
+                mileageFrom: mileage.mileageFrom,
+                mileageTo: mileage.mileageTo,
+                registrationFrom: registration.registrationFrom,
+                registrationTo: registration.registrationTo,
+                seatingConfig: seatingConfig,
+                doors: doors,
+                location: location,
+                postalCode: postalCode,
+                fuelType: fuelType,
+                powerFrom: power.powerFrom,
+                powerTo: power.powerTo,
+                displacementFrom: displacement.displacementFrom,
+                displacementTo: displacement.displacementTo,
+                gearbox: gearbox,
+                models: null
+            }
+
+            const result = await APIMethods.getNumberOfFilteredCars(carHutFilterObject);
             
             // Stop loading when the result is null
             if (result === null) {
@@ -73,7 +93,7 @@ function MoreFiltersPage() {
                     state={{
                         brand: brand,
                         model: model,
-                        carType: carType,
+                        carTypes: carTypes,
                         price: price,
                         mileage: mileage,
                         registration: registration,
@@ -85,14 +105,14 @@ function MoreFiltersPage() {
                         power: power,
                         displacement: displacement,
                         gearbox: gearbox,
-                        powertrain: powertrain,
-                        models: [ { brand: brand, model: model} ]
+                        models: null,
+                        models: [ { brand: brand, model: model } ]
                     }}
                 > 
                     <button className="styled-search-button-more-filters">{searchedCarsNumber !== null && !loadingSearchedCarsNumber ? (searchedCarsNumber + ' cars') : ('Loading cars')}</button>
                 </Link>
             </div>
-            <BasicData brand={brand} setBrand={setBrand} model={model} setModel={setModel} carType={carType} setCarType={setCarType} price={price} setPrice={setPrice} 
+            <BasicData brand={brand} setBrand={setBrand} model={model} setModel={setModel} carTypes={carTypes} setCarTypes={setCarTypes} price={price} setPrice={setPrice} 
                     mileage={mileage} setMileage={setMileage} registration={registration} setRegistration={setRegistration} seatingConfig={seatingConfig} setSeatingConfig={setSeatingConfig}
                     doors={doors} setDoors={setDoors} location={location} setLocation={setLocation} postalCode={postalCode} setPostalCode={setPostalCode} setLoadingSearchedCarsNumber={setLoadingSearchedCarsNumber}/>
             <EngineAndPowertrain fuelType={fuelType} setFuelType={setFuelType} power={power} setPower={setPower} displacement={displacement} setDisplacement={setDisplacement}

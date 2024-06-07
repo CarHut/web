@@ -84,7 +84,7 @@ function EngineAndPowertrain({fuelType, setFuelType, power, setPower, displaceme
             { key: '200', value: '200',         textValue: '200 kw'                                         },            
             { key: '250', value: '250',         textValue: '250 kw'                                         },            
             { key: '300', value: '300',         textValue: '300 kw'                                         },            
-            { key: '0',   value: 'powerMoref',  textValue: 'More'                                           }          
+            { key: '0',   value: 'powerMore',   textValue: 'More'                                           }          
         ];                                                     
 
         return (
@@ -132,7 +132,7 @@ function EngineAndPowertrain({fuelType, setFuelType, power, setPower, displaceme
             { key: '4000', value: '4000',              textValue: '4000 cm³'                                              },
             { key: '5000', value: '5000',              textValue: '5000 cm³'                                              },
             { key: '6000', value: '6000',              textValue: '6000 cm³'                                              },
-            { key: '0',    value: 'displacementMoref', textValue: 'More'                                                  }
+            { key: '0',    value: 'displacementMore', textValue: 'More'                                                  }
         ];
 
         return (
