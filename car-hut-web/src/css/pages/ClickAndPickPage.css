@@ -1,5 +1,6 @@
 .body {
     background-color: #313131;
+    min-height: 100vh;
 }
 
 .click-and-pick-page-header {

@@ -1,5 +1,6 @@
 .body {
     background-color: #313131;
+    min-height: 100vh;
 }
 
 .search-list-page-header {

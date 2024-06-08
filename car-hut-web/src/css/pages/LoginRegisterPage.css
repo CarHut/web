@@ -2,6 +2,7 @@
     background-color: #313131;
     color: #fff;
     padding: 2vw 20vw;
+    min-height: 100vh;
 }
 
 .main-wrapper {

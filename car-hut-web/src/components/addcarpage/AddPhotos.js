@@ -49,21 +49,9 @@ function AddPhotos() {
         formData.append('image', loadedImage);
         formData.append('username', localStorage.getItem('username'));
 
-        try {
-            const response = await APIMethods.uploadImage(formData);
-
-            if (response.status !== 200) {
-                setUploadingImageState(UploadingState.UPLOAD_ERROR);
-                return;
-            }
-
-            const newUploadedImages = [...uploadedImages, loadedImage];
-            setUploadedImages(newUploadedImages);
-            setUploadingImageState(UploadingState.UPLOAD_SUCCESS);
-        } catch (error) {
-            console.error(`[AddCarPage][AddPhotos][uploadImage][ERROR] - Cannot upload image to server. Stack trace message: ${error}`);
-            return;
-        }
+        const newUploadedImages = [...uploadedImages, loadedImage];
+        setUploadedImages(newUploadedImages);
+        setUploadingImageState(UploadingState.UPLOAD_SUCCESS);
     }
 
     const handleRemovedImage = (indexOfRemovedImg) => {

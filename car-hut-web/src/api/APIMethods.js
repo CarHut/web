@@ -46,7 +46,6 @@ const APIMethods = {
         return data;
     },
     getCarsWithFilters: async (carHutCarFilterObject, sortBy, sortOrder, offersPerPage, currentPage) => {
-        console.log(Constants.baseAPIPath)
         const response = await fetch(Constants.baseAPIPath + `carhut/getCarsWithFilters?sortBy=${sortBy}&sortOrder=${sortOrder}&offersPerPage=${offersPerPage}&currentPage=${currentPage}`, {
             method: 'POST',
             body: JSON.stringify(carHutCarFilterObject),

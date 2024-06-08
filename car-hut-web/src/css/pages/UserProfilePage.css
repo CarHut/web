@@ -1,5 +1,6 @@
 .user-profile-body {
     background-color: #313131;
+    min-height: 100vh;
 }
 
 .user-profile-page-header {
