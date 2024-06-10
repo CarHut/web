@@ -26,19 +26,19 @@ function AddCarPage() {
     }, []);
 
     const renderSection = () => {
-        if (loc.pathname === '/addCar/mainInfo') {
+        if (loc.pathname.includes('/addCar/mainInfo')) {
             return <MainInfo/>;
-        } else if (loc.pathname === '/addCar/engineInfo') {
+        } else if (loc.pathname.includes('/addCar/engineInfo')) {
             return <EngineInfo/>;
-        } else if (loc.pathname === '/addCar/additionalInfo') {
+        } else if (loc.pathname.includes('/addCar/additionalInfo')) {
             return <AdditionalInfo/>;
-        } else if (loc.pathname === '/addCar/features') {
+        } else if (loc.pathname.includes('/addCar/features')) {
             return <Features/>;
-        } else if (loc.pathname === '/addCar/addPhotos') {
+        } else if (loc.pathname.includes('/addCar/addPhotos')) {
             return <AddPhotos/>;
-        } else if (loc.pathname === '/addCar/summary') {
+        } else if (loc.pathname.includes('/addCar/summary')) {
             return <Summary/>;
-        } else if (loc.pathname === '/addCar/success') {
+        } else if (loc.pathname.includes('/addCar/success')) {
             return <SuccessPage/>;
         }
 

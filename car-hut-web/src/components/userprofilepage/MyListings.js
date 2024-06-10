@@ -65,13 +65,10 @@ function MyListings() {
         for (let i = 0; i < cars.length; i++) {
             const car = cars[i];
             const imageSrc = imagesForDisplayedCars[i];
-            
+
             offerElements.push(<div>
                 <Link
-                    to={'/carOffer'}
-                    state={{
-                        id: car.id
-                    }}
+                    to={`/carOffer?${car.id}`}
                     style={{textDecoration: 'none'}}
                 >
                     <div className='my-listing-offer-wrapper' key={i}>

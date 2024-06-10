@@ -11,26 +11,31 @@
 input[type="range"] {
     background: black;
     padding: 0vw 1vw 1.5vw 1vw;
-    border: none;
     border-radius: 20px;
 }
 
 input[type="range"]::-webkit-slider-runnable-track {
     background: #a8a8a8;
     margin: 0vw 0.8vw;
-    width: auto;
+    width: 80%;
+    height: 8px;
+    border-radius: 5px;
 }
 
 input[type="range"]::-moz-range-track {
     background: #a8a8a8;
     margin: 0vw 0.8vw;
-    width: auto;
+    width: 80%;
+    height: 8px;
+    border-radius: 5px;
 }
 
 input[type="range"]::-ms-track {
     background: #a8a8a8;
     margin: 0vw 0.8vw;
-    width: auto;
+    width: 80%;
+    height: 8px;
+    border-radius: 5px;
 }
 
 input[type="range"]::-webkit-slider-thumb {
@@ -42,6 +47,7 @@ input[type="range"]::-webkit-slider-thumb {
     background-size: cover;
     cursor: pointer;
     transform: translateY(1.3vw);
+    border: none;
 }
 
 input[type="range"]::-moz-range-thumb {
@@ -51,6 +57,7 @@ input[type="range"]::-moz-range-thumb {
     background-size: cover;
     cursor: pointer;
     transform: translateY(1.3vw);
+    border: none;
 }
 
 input[type="range"]::-ms-thumb {
@@ -60,6 +67,7 @@ input[type="range"]::-ms-thumb {
     background-size: cover;
     cursor: pointer;
     transform: translateY(1.3vw);
+    border: none;
 }
 
 @media screen and (max-width: 1350px) {
@@ -74,10 +82,12 @@ input[type="range"]::-ms-thumb {
 
     input[type="range"]::-webkit-slider-runnable-track {
         margin: 0vw 1.3vw;
+        width: 90%;
     }
     
     input[type="range"]::-moz-range-track {
         margin: 0vw 1.3vw;
+        width: 90%;
     }
     
     input[type="range"]::-ms-track {
@@ -109,7 +119,7 @@ input[type="range"]::-ms-thumb {
     }
     
     input[type="range"] {
-        padding: 5vw 4vw 8vw 4vw;
+        padding: 3vw 4vw 8vw 4vw;
         border: none;
         border-radius: 20px;
     }
@@ -117,19 +127,19 @@ input[type="range"]::-ms-thumb {
     input[type="range"]::-webkit-slider-thumb {
         width: 8vw;
         height: 8vw;
-        transform: translateY(3vw);
+        transform: translateY(5vw);
     }
     
     input[type="range"]::-moz-range-thumb {
         width: 8vw;
         height: 8vw;
-        transform: translateY(3vw);
+        transform: translateY(5vw);
     }
     
     input[type="range"]::-ms-thumb {
         width: 8vw;
         height: 8vw;
-        transform: translateY(3vw);
+        transform: translateY(5vw);
     }
 
     input[type="range"]::-webkit-slider-runnable-track {

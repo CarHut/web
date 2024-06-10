@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import APIMethods from '../../api/APIMethods';
 import ComboBox from '../maincomponents/ComboBox';
 import RegularButton from '../maincomponents/RegularButton';
+import StateUtil from '../../utils/StateUtil';
 
 function FilterSearch() {
     const [brands, setBrands] = useState([]);
@@ -211,22 +212,26 @@ function FilterSearch() {
     }
 
     const renderSearchButton = () => {
+        const state = {
+            brand: selectedBrand,
+            model: selectedModel,
+            price: { priceFrom: selectedPriceFrom, priceTo: ''},
+            mileage: { mileageFrom: selectedMileageFrom, mileageTo: '' },
+            fuelType: '',
+            powertrain: '',
+            gearbox: '',
+            power: { powerFrom: '', powerTo: '' },
+            models: [
+                { brand: selectedBrand, model: selectedModel }
+            ]
+        }
+
+        const flattenedState = StateUtil.flattenState(state);
+        const searchParams = new URLSearchParams(flattenedState).toString();
+
         return (
             <Link
-                to={`/searchList`}
-                state={{
-                    brand: selectedBrand,
-                    model: selectedModel,
-                    price: { priceFrom: selectedPriceFrom, priceTo: ''},
-                    mileage: { mileageFrom: selectedMileageFrom, mileageTo: '' },
-                    fuelType: '',
-                    powertrain: '',
-                    gearbox: '',
-                    power: { powerFrom: '', powerTo: '' },
-                    models: [
-                        { brand: selectedBrand, model: selectedModel }
-                    ]
-                }}
+                to={`/searchList?${searchParams}`}
             >
                 <RegularButton 
                     label={searchedCarsNumber !== null && !loadingSearchedCarsNumber ? (searchedCarsNumber + " cars") : ("Loading cars")} 

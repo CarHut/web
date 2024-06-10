@@ -1,16 +1,12 @@
 import '../../css/loginregisterpage/CheckEmailPage.css';
 import Header from '../maincomponents/Header';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 function CheckEmailPage() {
 
     const loc = useLocation();
-    const [email, setEmail] = useState('');
-
-    useEffect(() => {
-        setEmail(loc.state.email);
-    }, []);
+    const [email, setEmail] = useState(new URLSearchParams(loc.search).get('email'));
 
     return (
         <div className='check-email-body'>

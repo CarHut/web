@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import APIMethods from '../../api/APIMethods';
 import { Link } from 'react-router-dom';
 import LoadingCircle from '../maincomponents/LoadingCircle';
+import StateUtil from '../../utils/StateUtil';
 
 function SavedSearches() {
 
@@ -46,34 +47,36 @@ function SavedSearches() {
         return (
             <div className='saved-searches-content-wrapper'>
                 {savedSearches.map((savedSearch) => {
+                    const state = {
+                        sortBy: savedSearch.sortBy,
+                        offersPerPage: savedSearch.offersPerPage,
+                        price: {
+                            priceFrom: savedSearch.priceFrom,
+                            priceTo: savedSearch.priceTo
+                        },
+                        mileage: {
+                            mileageFrom: savedSearch.mileageFrom,
+                            mileageTo: savedSearch.mileageTo
+                        },
+                        power: {
+                            powerFrom: savedSearch.powerFrom,
+                            powerTo: savedSearch.powerTo
+                        },
+                        fuelType: savedSearch.fuelType,
+                        gearbox: savedSearch.gearboxType,
+                        powertrain: savedSearch.powertrainType,
+                        models: savedSearch.brandsAndModels
+                    };
+
+                    const flattenedState = StateUtil.flattenState(state);
+                    const searchParams = new URLSearchParams(flattenedState).toString();
+
                     return (
                         <>
                             <Link 
                                 className='saved-search-entity'
-                                to={"/searchList"}
+                                to={`/searchList?${searchParams}`}
                                 style={{textDecoration: "none"}}
-                                state={
-                                    {
-                                        sortBy: savedSearch.sortBy,
-                                        offersPerPage: savedSearch.offersPerPage,
-                                        price: {
-                                            priceFrom: savedSearch.priceFrom,
-                                            priceTo: savedSearch.priceTo
-                                        },
-                                        mileage: {
-                                            mileageFrom: savedSearch.mileageFrom,
-                                            mileageTo: savedSearch.mileageTo
-                                        },
-                                        power: {
-                                            powerFrom: savedSearch.powerFrom,
-                                            powerTo: savedSearch.powerTo
-                                        },
-                                        fuelType: savedSearch.fuelType,
-                                        gearbox: savedSearch.gearboxType,
-                                        powertrain: savedSearch.powertrainType,
-                                        models: savedSearch.brandsAndModels
-                                    }
-                                }
                             >
                                 <div className='saved-search-entity-column'>
                                     <div className='saved-search-entity-text-opacity'>Sort by</div>

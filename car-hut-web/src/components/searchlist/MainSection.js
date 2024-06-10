@@ -17,15 +17,14 @@ function MainSection({state}) {
     }
 
     useEffect(() => {
-        if (state.sortBy !== undefined && state.sortBy !== null && state.sortBy !== "" && state.sortBy !== " ") {
-            setSortBy(state.sortBy);
+        if (fetchedState.sortBy !== undefined && fetchedState.sortBy !== null && fetchedState.sortBy !== "" && fetchedState.sortBy !== " ") {
+            setSortBy(fetchedState.sortBy);
         }
 
-        if (state.offersPerPage !== undefined && state.offersPerPage !== null && state.offersPerPage !== "") {
-            setOffersPerPage(state.offersPerPage);
+        if (fetchedState.offersPerPage !== undefined && fetchedState.offersPerPage !== null && fetchedState.offersPerPage !== "") {
+            setOffersPerPage(fetchedState.offersPerPage);
         }
-
-    }, [state])
+    }, [fetchedState])
 
     return (
         <div className='section-body-search-list-main-section'>

@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import APIMethods from '../../api/APIMethods';
 import LoadingCircle from '../maincomponents/LoadingCircle';
-import Constants from '../../constants/Constants.js'
 
 function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength, setLoadingResultsListLength, loadingResultsListLength}) {
 
@@ -128,10 +127,7 @@ function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength, setL
 
             offerElements.push(
                 <Link
-                    to={'/carOffer'}
-                    state={{
-                        id: car.id
-                    }}
+                    to={`/carOffer?carId=${car.id}`}
                     style={{ textDecoration: 'none' }}
                     key={index}
                 >

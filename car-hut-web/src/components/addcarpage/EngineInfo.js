@@ -258,6 +258,41 @@ function EngineInfo() {
         );
     }
 
+    const renderNextButton = () => {
+        const state = {
+            brandId: currentCarModel.brandId,
+            modelId: currentCarModel.modelId,
+            header: currentCarModel.header,
+            mileage: currentCarModel.mileage,
+            registration: currentCarModel.registration,
+            price: currentCarModel.price,
+            sellerAddress: currentCarModel.sellerAddress,
+            enginePower: enginePower,
+            engineDisplacement: displacement,
+            fuel: fuel,
+            fuelConsumptionAvg: avgFuelCons,
+            fuelConsumptionCity: cityFuelCons,
+            fuelConsumptionHighway: highwayFuelCons,
+            gearbox: gearbox,
+            gearboxGears: gears,
+            powertrain: powertrain
+        };
+        
+        return (
+            <Link
+                style={{"textDecoration": "none"}}
+                to={`/addCar/additionalInfo`}
+                state={state}
+            >
+                <RegularButton 
+                    label={'Next'}
+                    buttonWidth={buttonSizingWidth}
+                    buttonHeight={buttonSizingHeight}
+                />
+            </Link>
+        );
+    }
+
     return (
         <div className='add-car-engine-info-section'>
             <div className='add-car-engine-info-header'>Engine info</div>
@@ -312,34 +347,7 @@ function EngineInfo() {
                 </div>
             </div>
             <div className='add-car-main-info-small-text-darker'>* necessary to fill</div>
-            <Link
-                style={{"textDecoration": "none"}}
-                state={{
-                    brandId: currentCarModel.brandId,
-                    modelId: currentCarModel.modelId,
-                    header: currentCarModel.header,
-                    mileage: currentCarModel.mileage,
-                    registration: currentCarModel.registration,
-                    price: currentCarModel.price,
-                    sellerAddress: currentCarModel.sellerAddress,
-                    enginePower: enginePower,
-                    engineDisplacement: displacement,
-                    fuel: fuel,
-                    fuelConsumptionAvg: avgFuelCons,
-                    fuelConsumptionCity: cityFuelCons,
-                    fuelConsumptionHighway: highwayFuelCons,
-                    gearbox: gearbox,
-                    gearboxGears: gears,
-                    powertrain: powertrain
-                }}
-                to={'/addCar/additionalInfo'}
-            >
-                <RegularButton 
-                    label={'Next'}
-                    buttonWidth={buttonSizingWidth}
-                    buttonHeight={buttonSizingHeight}
-                />
-            </Link>
+            {renderNextButton()}
         </div>           
     );
 }

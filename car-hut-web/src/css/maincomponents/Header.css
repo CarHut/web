@@ -108,4 +108,10 @@ h1 {
     .dropdown-menu-text {
         font-size: 3vw;
     }
+    
+    .header-tab {
+        font-size: 4vw;
+        color: #fff;
+        text-decoration: none;
+    }
 }

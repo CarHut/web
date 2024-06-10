@@ -10,7 +10,7 @@ function CarOfferPage() {
 
     var loc = useLocation();
 
-    const [carId, setCarId] = useState(loc.state.id);
+    const [carId, setCarId] = useState(new URLSearchParams(loc.search).get('carId'));
 
     // Socket reconnecting
     useEffect(() => {    

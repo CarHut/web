@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import APIMethods from "../api/APIMethods";
 import SocketAPI from "../messaging/SocketAPI";
 import Footer from "../components/maincomponents/Footer";
+import StateUtil from '../utils/StateUtil';
 
 function MoreFiltersPage() {
 
@@ -83,36 +84,46 @@ function MoreFiltersPage() {
         updateSearchedCarsNumber();
     }, [loadingSearchedCarsNumber]);
 
-    return (
-        <div className="body">
-            <Header/>
-            {/* <div className="current-route-text">Main page -> Detailed search</div> */}
+    const renderSearchButton = () => {
+        const state = {
+            brand: brand,
+            model: model,
+            carTypes: carTypes,
+            price: price,
+            mileage: mileage,
+            registration: registration,
+            seatingConfig: seatingConfig,
+            doors: doors,
+            location: location,
+            postalCode: postalCode,
+            fuelType: fuelType,
+            power: power,
+            displacement: displacement,
+            gearbox: gearbox,
+            models: null,
+            models: [ { brand: brand, model: model } ]
+        };
+
+        const flattenedState = StateUtil.flattenState(state);
+        const searchParams = new URLSearchParams(flattenedState).toString();
+
+        return (
             <div className="header-section-more-filters">
                 <div className="more-filters-page-header">Detailed search - find exactly what you want!</div>
                 <Link
-                    to={`/searchList`}
-                    state={{
-                        brand: brand,
-                        model: model,
-                        carTypes: carTypes,
-                        price: price,
-                        mileage: mileage,
-                        registration: registration,
-                        seatingConfig: seatingConfig,
-                        doors: doors,
-                        location: location,
-                        postalCode: postalCode,
-                        fuelType: fuelType,
-                        power: power,
-                        displacement: displacement,
-                        gearbox: gearbox,
-                        models: null,
-                        models: [ { brand: brand, model: model } ]
-                    }}
+                    to={`/searchList?${searchParams}`}
                 > 
                     <button className="styled-search-button-more-filters">{searchedCarsNumber !== null && !loadingSearchedCarsNumber ? (searchedCarsNumber + ' cars') : ('Loading cars')}</button>
                 </Link>
             </div>
+        );
+    }
+
+    return (
+        <div className="body">
+            <Header/>
+            {/* <div className="current-route-text">Main page -> Detailed search</div> */}
+            {renderSearchButton()}
             <BasicData brand={brand} setBrand={setBrand} model={model} setModel={setModel} carTypes={carTypes} setCarTypes={setCarTypes} price={price} setPrice={setPrice} 
                     mileage={mileage} setMileage={setMileage} registration={registration} setRegistration={setRegistration} seatingConfig={seatingConfig} setSeatingConfig={setSeatingConfig}
                     doors={doors} setDoors={setDoors} location={location} setLocation={setLocation} postalCode={postalCode} setPostalCode={setPostalCode} setLoadingSearchedCarsNumber={setLoadingSearchedCarsNumber}/>

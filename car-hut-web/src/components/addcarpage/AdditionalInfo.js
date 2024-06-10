@@ -6,6 +6,7 @@ import APIMethods from '../../api/APIMethods';
 import ComboBox from '../maincomponents/ComboBox';
 import TextInputField from '../maincomponents/TextInputField';
 import RegularButton from '../maincomponents/RegularButton';
+import StateUtil from '../../utils/StateUtil';
 
 function AdditionalInfo() {
 
@@ -238,6 +239,55 @@ function AdditionalInfo() {
         )
     }
 
+    const renderNextButton = () => {
+        const state = {
+            brandId: currentCarModel.brandId,
+            modelId: currentCarModel.modelId,
+            header: currentCarModel.header,
+            mileage: currentCarModel.mileage,
+            registration: currentCarModel.registration,
+            price: currentCarModel.price,
+            sellerAddress: currentCarModel.sellerAddress,
+            enginePower: currentCarModel.enginePower,
+            engineDisplacement: currentCarModel.engineDisplacement,
+            fuel: currentCarModel.fuel,
+            fuelConsumptionAvg: currentCarModel.fuelConsumptionAvg,
+            fuelConsumptionCity: currentCarModel.fuelConsumptionCity,
+            fuelConsumptionHighway: currentCarModel.fuelConsumptionHighway,
+            gearbox: currentCarModel.gearbox,
+            gearboxGears: currentCarModel.gearboxGears,
+            powertrain: currentCarModel.powertrain,
+            exteriorColorId: exteriorColor,
+            interiorColorId: interiorColor,
+            technicalInspectionDate: techInspectionDate,
+            emissionInspectionDate: emInspectionDate,
+            countryOfOrigin: countryOfOrigin,
+            damageStatus: damage,
+            parkingSensors: parkSensors,
+            parkingCameras: parkCameras,
+            doors: doors,
+            seats: seats,
+            previousOwners: previousOwners,
+            energyEffClass: energyEffClass,
+            emissionClass: emissionClass
+        }
+
+        return (
+            <Link
+                className='add-car-styled-button'
+                style={{"textDecoration": "none"}}
+                to={`/addCar/features`}
+                state={state}
+            >
+                <RegularButton
+                    label={'Next'}
+                    buttonWidth={buttonSizingWidth}
+                    buttonHeight={buttonSizingHeight}
+                />
+            </Link>
+        );
+    }
+
     return (
         <div className='add-car-additional-info-section'>
             <div className='add-car-additional-info-header'>Additional info</div>
@@ -336,48 +386,7 @@ function AdditionalInfo() {
                 </div>
             </div>
             <div className='add-car-main-info-small-text-darker'>* necessary to fill</div>
-            <Link
-                className='add-car-styled-button'
-                style={{"textDecoration": "none"}}
-                state={{
-                    brandId: currentCarModel.brandId,
-                    modelId: currentCarModel.modelId,
-                    header: currentCarModel.header,
-                    mileage: currentCarModel.mileage,
-                    registration: currentCarModel.registration,
-                    price: currentCarModel.price,
-                    sellerAddress: currentCarModel.sellerAddress,
-                    enginePower: currentCarModel.enginePower,
-                    engineDisplacement: currentCarModel.engineDisplacement,
-                    fuel: currentCarModel.fuel,
-                    fuelConsumptionAvg: currentCarModel.fuelConsumptionAvg,
-                    fuelConsumptionCity: currentCarModel.fuelConsumptionCity,
-                    fuelConsumptionHighway: currentCarModel.fuelConsumptionHighway,
-                    gearbox: currentCarModel.gearbox,
-                    gearboxGears: currentCarModel.gearboxGears,
-                    powertrain: currentCarModel.powertrain,
-                    exteriorColorId: exteriorColor,
-                    interiorColorId: interiorColor,
-                    technicalInspectionDate: techInspectionDate,
-                    emissionInspectionDate: emInspectionDate,
-                    countryOfOrigin: countryOfOrigin,
-                    damageStatus: damage,
-                    parkingSensors: parkSensors,
-                    parkingCameras: parkCameras,
-                    doors: doors,
-                    seats: seats,
-                    previousOwners: previousOwners,
-                    energyEffClass: energyEffClass,
-                    emissionClass: emissionClass
-                }}
-                to={'/addCar/features'}
-            >
-                <RegularButton
-                    label={'Next'}
-                    buttonWidth={buttonSizingWidth}
-                    buttonHeight={buttonSizingHeight}
-                />
-            </Link>
+            {renderNextButton()}
         </div>
     );
 }

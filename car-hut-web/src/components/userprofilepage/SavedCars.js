@@ -69,10 +69,7 @@ function SavedCars() {
             
             offerElements.push(<div>
                 <Link
-                    to={'/carOffer'}
-                    state={{
-                        id: car.id
-                    }}
+                    to={`/carOffer?${car.id}`}
                     style={{textDecoration: 'none'}}
                 >
                     <div className='saved-car-offer-wrapper' key={i}>

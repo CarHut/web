@@ -4,6 +4,7 @@ import APIMethods from '../../api/APIMethods';
 import ComboBox from '../../components/maincomponents/ComboBox';
 import RangeSlider from '../maincomponents/RangeSlider.js';
 import RegularButton from '../maincomponents/RegularButton.js';
+import { combine2Validators } from 'react-admin';
 
 function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange, loadingResultsListLength, setLoadingResultsListLength }) {
 
@@ -97,6 +98,10 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange, l
         setBrandsAndModels(brandsAndModels.filter((brandAndModel) => brandAndModel.brand !== brand || brandAndModel.model !== model));
         var updatedFetchedState = {...fetchedState};
         updatedFetchedState.models = updatedFetchedState.models.filter((brandAndModel) => brandAndModel.brand !== brand || brandAndModel.model != model);
+        if (brand === fetchedState.brand) {
+            updatedFetchedState.brand = '';
+            updatedFetchedState.model = '';
+        }
         handleStateChange(updatedFetchedState);
         setLoadingResultsListLength(true);
     }
@@ -250,6 +255,7 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange, l
                 }
                 updatedState.models = updatedModels;
                 setBrandsAndModels(updatedModels);
+                console.log(updatedState);
                 handleStateChange(updatedState);
             }
         }

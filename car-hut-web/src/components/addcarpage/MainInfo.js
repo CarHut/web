@@ -7,6 +7,7 @@ import RangeSlider from '../maincomponents/RangeSlider';
 import TextInputField from '../maincomponents/TextInputField';
 import RegularButton from '../maincomponents/RegularButton';
 import { validQueryParams } from 'react-admin';
+import StateUtil from '../../utils/StateUtil';
 
 
 function MainInfo() {
@@ -253,6 +254,32 @@ function MainInfo() {
         )
     }
 
+    const renderNextButton = () => {
+        const state = {
+            brandId: selectedBrand,
+            modelId: selectedModel,
+            header: header,
+            mileage: mileage,
+            registration: registration,
+            price: price,
+            sellerAddress: sellerAddress
+        };
+
+        return (
+            <Link
+                style={{"textDecoration": "none"}}
+                to={`/addCar/engineInfo`}
+                state={state}
+            >
+                <RegularButton
+                    label={'Next'}
+                    buttonWidth={buttonSizingWidth}
+                    buttonHeight={buttonSizingHeight}
+                />
+            </Link>
+        );
+    }
+
     return (
         <div className='add-car-main-info-section'>
             <div className='add-car-main-info-header'>Let's start with basic data of your car</div>
@@ -297,25 +324,7 @@ function MainInfo() {
                 </div>
             </div>
             <div className='add-car-main-info-small-text-darker'>* necessary to fill</div>
-            <Link
-                style={{"textDecoration": "none"}}
-                state={{
-                    brandId: selectedBrand,
-                    modelId: selectedModel,
-                    header: header,
-                    mileage: mileage,
-                    registration: registration,
-                    price: price,
-                    sellerAddress: sellerAddress
-                }}
-                to={'/addCar/engineInfo'}
-            >
-                <RegularButton
-                    label={'Next'}
-                    buttonWidth={buttonSizingWidth}
-                    buttonHeight={buttonSizingHeight}
-                />
-            </Link>
+            {renderNextButton()}
         </div>
     )
 }

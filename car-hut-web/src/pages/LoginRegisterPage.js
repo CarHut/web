@@ -163,7 +163,7 @@ function LoginRegisterPage() {
 
             if (responseText === 'SUCCESS') {
                 setRegisterLoading(false);
-                navigate('/register/emailSent', { state: { email: registerEmail} });
+                navigate(`/register/emailSent?email=${registerEmail}`);
             }
             setRegisterLoading(false);
         } catch (error) {
