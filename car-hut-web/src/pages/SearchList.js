@@ -4,6 +4,7 @@ import MainSection from '../components/searchlist/MainSection.js';
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import SocketAPI from '../messaging/SocketAPI.js';
+import Footer from '../components/maincomponents/Footer.js';
 
 function SearchList() {
 
@@ -24,6 +25,7 @@ function SearchList() {
             {/* <div className="current-route-text">Main page -> Search list</div> */}
             <div className="search-list-page-header">Search list</div>
             <MainSection state={loc.state}/>
+            <Footer/>
         </div>
     );
 }

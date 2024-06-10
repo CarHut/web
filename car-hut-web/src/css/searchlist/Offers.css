@@ -84,6 +84,8 @@
 
 .car-img {
     object-fit: scale-down;
+    max-width: 85%;
+    max-height: 85%;
     margin-right: 1vw;
 }
 

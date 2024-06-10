@@ -32,8 +32,17 @@ function TechnicalData({car}) {
     }
 
     useEffect(() => {
-        fetchExteriorColorStringFromColorId();
-        fetchInteriorColorStringFromColorId();
+        if (car.exteriorColorId === undefined) {
+            fetchExteriorColorStringFromColorId();
+        } else {
+            setExteriorColor(car.exteriorColorId);
+        }
+
+        if (car.interiorColorId === undefined) {
+            fetchInteriorColorStringFromColorId();
+        } else {
+            setInteriorColor(car.interiorColorId);
+        }
     }, []);
 
 

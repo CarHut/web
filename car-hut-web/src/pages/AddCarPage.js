@@ -10,6 +10,7 @@ import '../css/pages/AddCarPage.css';
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import SocketAPI from '../messaging/SocketAPI';
+import Footer from '../components/maincomponents/Footer';
 
 function AddCarPage() {
 
@@ -52,6 +53,7 @@ function AddCarPage() {
                 <div className='add-car-page-header'>Add car</div>
             </div>
             {renderSection()}
+            <Footer/>
         </div>
     );
 

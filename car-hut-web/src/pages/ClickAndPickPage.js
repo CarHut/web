@@ -13,6 +13,7 @@ import { useLocation } from "react-router-dom";
 import ColorSection from "../components/clickandpickpage/ColorSection";
 import { useEffect } from "react";
 import SocketAPI from "../messaging/SocketAPI";
+import Footer from "../components/maincomponents/Footer";
 
 
 function ClickAndPickPage() {
@@ -61,6 +62,7 @@ function ClickAndPickPage() {
             <div className="click-and-pick-page-header">Click and pick - find your car with our guidance</div>
             {renderSection()}
             <CategoriesSection/>
+            <Footer/>
         </div>
     );
 }

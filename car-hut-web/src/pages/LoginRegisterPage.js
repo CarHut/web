@@ -2,11 +2,13 @@ import { useState, useEffect } from 'react';
 import Header from '../components/maincomponents/Header';
 import '../css/pages/LoginRegisterPage.css';
 import AuthUtil from '../utils/auth/AuthUtil';
-import { useNavigate } from 'react-router-dom';import APIMethods from '../api/APIMethods';
+import { useNavigate } from 'react-router-dom';
+import APIMethods from '../api/APIMethods';
 import SocketAPI from '../messaging/SocketAPI';
 import LoadingCircle from '../components/maincomponents/LoadingCircle';
 import RegularButton from '../components/maincomponents/RegularButton';
 import TextInputField from '../components/maincomponents/TextInputField';
+import Footer from '../components/maincomponents/Footer';
 
 function LoginRegisterPage() {
 
@@ -20,6 +22,7 @@ function LoginRegisterPage() {
     const [username, setUsername] = useState('');
     
     const [loading, setLoading] = useState(false);
+    const [registerLoading, setRegisterLoading] = useState(false);
 
     const [showRegistrationError, setShowRegistrationError] = useState(false);
     const [registrationErrorMessage, setRegistrationErrorMessage] = useState('');
@@ -80,6 +83,7 @@ function LoginRegisterPage() {
     }
 
     const handleRegisterSubmit = async (e) => {
+        setRegisterLoading(true);
         e.preventDefault();
 
         const registerBody = {
@@ -158,11 +162,14 @@ function LoginRegisterPage() {
             }
 
             if (responseText === 'SUCCESS') {
+                setRegisterLoading(false);
                 navigate('/register/emailSent', { state: { email: registerEmail} });
             }
+            setRegisterLoading(false);
         } catch (error) {
             console.log(`[LoginRegisterPage][handleRegisterSubmit][ERROR] - Cannot register user. Stack trace message: ${error}`);
             setShowRegistrationError(true);
+            setRegisterLoading(false);
             setRegistrationErrorMessage('Internal error. Please try again later.');     
         }
     }
@@ -264,10 +271,12 @@ function LoginRegisterPage() {
                                 buttonHeight={regularButtonSizingHeight}
                             />
                             {showRegistrationError ? <div className='error-text'>{registrationErrorMessage}</div> : ""}
+                            {registerLoading ? <LoadingCircle/> : <div/>}
                         </form>
                     </div>
                 </section>
             </div>
+            <Footer/>
         </div>
         
     );

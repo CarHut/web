@@ -4,6 +4,10 @@ import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import APIMethods from '../api/APIMethods';
 import SocketAPI from '../messaging/SocketAPI';
+import TextInputField from '../components/maincomponents/TextInputField';
+import RegularButton from '../components/maincomponents/RegularButton';
+import LoadingCircle from '../components/maincomponents/LoadingCircle';
+import Footer from '../components/maincomponents/Footer';
 
 function PasswordResetPage() {
 
@@ -13,8 +17,34 @@ function PasswordResetPage() {
     const [repeatNewPassword, setRepeatNewPassword] = useState("");
     const [showErrorMessage, setShowErrorMessage] = useState(false);
 
+    const [loading, setLoading] = useState(false);
+
     const navigate = useNavigate();
     const location = useLocation();
+
+    const textInputFieldSizingWidth = {
+        standardSize: "10vw",
+        mediumSize:   "30vw",
+        smallSize:    "50vw"
+    };
+
+    const textInputFieldSizingHeight = {
+        standardSize: "2vw",
+        mediumSize:   "4vw",
+        smallSize:    "6vw"
+    }
+
+    const buttonSizingWidth = {
+        standardSize: '10vw',
+        mediumSize: '15vw',
+        smallSize: '25vw'
+    }
+    
+    const buttonSizingHeight = {
+        standardSize: '4vw',
+        mediumSize: '6vw',
+        smallSize: '10vw'
+    }
 
     const fetchAccountDetails = async () => {
         try {
@@ -26,10 +56,12 @@ function PasswordResetPage() {
     }
 
     const handlePasswordReset = async (e) => {
+        setLoading(true);
         e.preventDefault();
 
         if (newPassword !== repeatNewPassword) {
             setShowErrorMessage(true);
+            setLoading(false);
             return;
         }
 
@@ -41,8 +73,11 @@ function PasswordResetPage() {
             } else {
                 console.log(`[PasswordResetPage][handlePasswordReset][ERROR] - Cannot initiate password reset. Something went wrong internally on server.`);
             }
+
+            setLoading(false);
         } catch (error) {
             console.log(`[PasswordResetPage][handlePasswordReset][ERROR] - Cannot initiate password reset. Stack trace message: ${error}`);
+            setLoading(false);
         }
     }
 
@@ -69,32 +104,35 @@ function PasswordResetPage() {
                     <div className='password-reset-header'>
                         Please enter new password
                     </div>
-                    <form onSubmit={(e) => handlePasswordReset(e)}>
-                        <div className='input-container'>
-                            <div className='input-label'>New password</div>
-                            <input 
-                                value={newPassword}
-                                type={'password'}
-                                placeholder=''
-                                onChange={(e) => {setNewPassword(e.target.value)}}
-                                className='login-input'
-                            />
-                        </div>
-                        <div className='input-container'>
-                            <div className='input-label'>Repeat new password</div>
-                            <input 
-                                value={repeatNewPassword}
-                                type={'password'}
-                                placeholder=''
-                                onChange={(e) => {setRepeatNewPassword(e.target.value)}}
-                                className='login-input'
-                            />
-                        </div>
+                    <form className='reset-password-form-wrapper' onSubmit={(e) => handlePasswordReset(e)}>
+                        <TextInputField
+                            label={'New password'}
+                            width={textInputFieldSizingWidth}
+                            height={textInputFieldSizingHeight}
+                            textFieldValue={newPassword}
+                            onChangeHandler={(e) => {setNewPassword(e.target.value)}}
+                            type={'password'}    
+                        />
+                        <TextInputField
+                            label={'Repeat new password'}
+                            width={textInputFieldSizingWidth}
+                            height={textInputFieldSizingHeight}
+                            textFieldValue={repeatNewPassword}
+                            onChangeHandler={(e) => {setRepeatNewPassword(e.target.value)}}
+                            type={'password'}    
+                        />
                         {showErrorMessage ? <div className='error-text'>Passwords are not the same.</div> : ""}
-                        <button type='submit'>Login</button>
+                        <RegularButton
+                            label={'Change password'}
+                            buttonWidth={buttonSizingWidth}
+                            buttonHeight={buttonSizingHeight}
+                            color={'#181818'}
+                        />
+                        {loading ? <LoadingCircle/> : <div/>}
                     </form>
                 </div>
             </div>
+            <Footer/>
         </div>
     );
 }

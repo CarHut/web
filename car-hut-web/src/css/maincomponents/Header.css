@@ -3,6 +3,7 @@ header {
     height: 6vw;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 0 20vw;
     padding-top: 1vw;
     position: relative;
@@ -72,6 +73,12 @@ h1 {
     color: #fff;
     margin: 1vw;
     cursor: pointer;
+    text-decoration: none;
+}
+
+.header-tab {
+    font-size: 2vw;
+    color: #fff;
     text-decoration: none;
 }
 

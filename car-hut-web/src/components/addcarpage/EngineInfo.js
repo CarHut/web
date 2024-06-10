@@ -99,60 +99,23 @@ function EngineInfo() {
     }, []);
 
     const handlePowerChange = (e) => {
-        if (e.length < enginePower.length) {
-            setEnginePower(e);
-            return;
-        }
-
-        // Handling numbers input
-        if (e.charCodeAt(e.length - 1) > 47 && e.charCodeAt(e.length - 1) < 58) {
-            setEnginePower(e);
-        }
-
-        if (!isNaN(parseInt(e)) && e.length === 4) {
-            if (parseInt(e) > 2000) {
-                setEnginePower('2000');
-            }
-        }
+        setEnginePower(e);
     }
 
     const handleDisplacementChange = (e) => {
-        if (e.length < displacement.length) {
-            setDisplacement(e);
-            return;
-        }
-
-        // Handling numbers input
-        if (e.charCodeAt(e.length - 1) > 47 && e.charCodeAt(e.length - 1) < 58) {
-            setDisplacement(e);
-        }
-
-        if (!isNaN(parseInt(e)) && e.length === 5) {
-            if (parseInt(e) > 20000) {
-                setDisplacement('20000');
-            }
-        }
+        setDisplacement(e);
     }
 
     const handleFuelAvgConsumption = (e) => {
-        if (e.length < displacement.length) {
-            setAvgFuelCons(e);
-            return;
-        }
+        setAvgFuelCons(e)
     }
 
     const handleFuelCityConsumption = (e) => {
-        if (e.length < displacement.length) {
-            setCityFuelCons(e);
-            return;
-        }
+        setCityFuelCons(e);
     }
 
     const handleFuelHighwayConsumption = (e) => {
-        if (e.length < displacement.length) {
-            setHighwayFuelCons(e);
-            return;
-        }
+        setHighwayFuelCons(e);
     }
 
     const handleSelectedFuel = (e) => {
@@ -200,9 +163,13 @@ function EngineInfo() {
     }
 
     const renderFuelTypes = () => {
+        const options = [];
+        options.push(new Object({ key: '-1', value: '', textValue: 'Select fuel type'}));
+        fuelTypes.map((fuelType, idx) => options.push(new Object({ key: idx, value: fuelType, textValue: fuelType})));
+
         return (
             <ComboBox label={'Fuel'} width={comboBoxSizingWidth} height={comboBoxSizingHeight} 
-                optionValues={fuelTypes.map((fuelType, idx) => new Object({ key: idx, value: fuelType, textValue: fuelType}))}
+                optionValues={options}
                 onChangeHandler={(e) => handleSelectedFuel(e.target.value)}
             />
         );
@@ -250,9 +217,13 @@ function EngineInfo() {
     }
 
     const renderGearboxTypes = () => {
+        const options = [];
+        options.push(new Object({ key: '-1', value: '', textValue: 'Select gearbox'}));
+        gearboxTypes.map((gearboxType, idx) => options.push(new Object({ key: idx, value: gearboxType, textValue: gearboxType })));
+
         return (
             <ComboBox label={'Gearbox'} width={comboBoxSizingWidth} height={comboBoxSizingHeight}
-                optionValues={gearboxTypes.map((gearboxType, idx) => new Object({ key: idx, value: gearboxType, textValue: gearboxType }))}
+                optionValues={options}
                 onChangeHandler={(e) => handleSelectedGearbox(e.target.value)}
             />
         );
@@ -275,9 +246,13 @@ function EngineInfo() {
     }
 
     const renderPowertrainTypes = () => {
+        const options = [];
+        options.push(new Object({ key: '-1', value: '', textValue: 'Select powertrain'}));
+        powertrainTypes.map((powertrainType, idx) => options.push(new Object({ key: idx, value: powertrainType, textValue: powertrainType })));
+
         return (
             <ComboBox label={'Powertrain'} width={comboBoxSizingWidth} height={comboBoxSizingHeight}
-                optionValues={powertrainTypes.map((powertrainType, idx) => new Object({ key: idx, value: powertrainType, textValue: powertrainType }))}
+                optionValues={options}
                 onChangeHandler={(e) => handleSelectedPowertrain(e.target.value)}
             />
         );

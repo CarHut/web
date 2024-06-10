@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import APIMethods from "../api/APIMethods";
 import SocketAPI from "../messaging/SocketAPI";
+import Footer from "../components/maincomponents/Footer";
 
 function MoreFiltersPage() {
 
@@ -117,6 +118,7 @@ function MoreFiltersPage() {
                     doors={doors} setDoors={setDoors} location={location} setLocation={setLocation} postalCode={postalCode} setPostalCode={setPostalCode} setLoadingSearchedCarsNumber={setLoadingSearchedCarsNumber}/>
             <EngineAndPowertrain fuelType={fuelType} setFuelType={setFuelType} power={power} setPower={setPower} displacement={displacement} setDisplacement={setDisplacement}
                     gearbox={gearbox} setGearbox={setGearbox} powertrain={powertrain} setPowertrain={setPowertrain} setLoadingSearchedCarsNumber={setLoadingSearchedCarsNumber}/>
+            <Footer/>
         </div>
     );
 }

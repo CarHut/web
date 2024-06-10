@@ -6,6 +6,7 @@ import ComboBox from '../maincomponents/ComboBox';
 import RangeSlider from '../maincomponents/RangeSlider';
 import TextInputField from '../maincomponents/TextInputField';
 import RegularButton from '../maincomponents/RegularButton';
+import { validQueryParams } from 'react-admin';
 
 
 function MainInfo() {
@@ -152,18 +153,26 @@ function MainInfo() {
     }
 
     const renderBrands = () => {
+        const options = [];
+        options.push(new Object({ key: '-1', value: '', textValue: 'Select brand'}));
+        brands.map((brand) => options.push(new Object({ key: brand.id, value: brand.brand, textValue: brand.brand })));
+
         return (
             <ComboBox label={'Select brand'} width={comboBoxSizingWidth} height={comboBoxSizingHeight} 
-                optionValues={brands.map((brand) => new Object({ key: brand.id, value: brand.brand, textValue: brand.brand }))} 
+                optionValues={options} 
                 onChangeHandler={(e) => handleSelectedBrand(e.target.value)}
             />
         );
     }
 
     const renderModels = () => {
+        const options = [];
+        options.push(new Object({ key: '-1', value: '', textValue: 'Select model'}));
+        models.map((model) => options.push( new Object({ key: model.id, value: model.model, textValue: model.model})));
+        
         return (
             <ComboBox label={'Selected model'} width={comboBoxSizingWidth} height={comboBoxSizingHeight}
-                optionValues={models.map((model) => new Object({ key: model.id, value: model.model, textValue: model.model}))}
+                optionValues={options}
                 onChangeHandler={(e) => handleSelectedModel(e.target.value)}
             />
         );

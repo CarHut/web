@@ -5,6 +5,7 @@ import ClickAndPick from '../components/mainpage/ClickAndPick.js';
 import CarNews from '../components/mainpage/CarNews.js';
 import { useEffect } from 'react';
 import SocketAPI from '../messaging/SocketAPI.js';
+import Footer from '../components/maincomponents/Footer.js';
 
 function MainPage() {
     
@@ -23,6 +24,7 @@ function MainPage() {
             <FilterSearch/>
             <ClickAndPick/>
             <CarNews/>
+            <Footer/>
         </div>
     );
 }

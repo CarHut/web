@@ -4,6 +4,7 @@ import CarMainSection from '../components/carofferpage/CarMainSection';
 import { useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import SocketAPI from '../messaging/SocketAPI';
+import Footer from '../components/maincomponents/Footer';
 
 function CarOfferPage() {
 
@@ -26,6 +27,7 @@ function CarOfferPage() {
             {/* <div className="current-route-text">in development</div> */}
             <div className="car-offer-page-header">You've picked</div>
             <CarMainSection carId={carId} car={null}/>
+            <Footer/>
         </div>
     );
 

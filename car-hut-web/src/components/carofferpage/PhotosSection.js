@@ -1,7 +1,7 @@
-import { getAllByTestId } from '@testing-library/react';
 import '../../css/carofferpage/PhotosSection.css';
 import { useEffect, useState } from 'react';
 import APIMethods from '../../api/APIMethods';
+import LoadingCircle from '../../components/maincomponents/LoadingCircle';
 
 function PhotosSection({ car }) {
 
@@ -11,6 +11,8 @@ function PhotosSection({ car }) {
     // Images (when adding car they are in state, when looking for already added car web app must fetch images from backend via base_image_path)
     const [images, setImages] = useState([]);
     const [carModel, setCarModel] = useState(car);
+    
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         if (carModel.images === undefined || carModel.images === null) {
@@ -22,7 +24,9 @@ function PhotosSection({ car }) {
     }, [carModel])
 
     const fetchImages = async (carId) => {
+        setLoading(true)
         if (carId === null || carId === undefined) {
+            setLoading(false);
             console.log(`[CarOfferPage][PhotosSection][fetchImages][WARN] - Cannot fetch images because carId is null or undefined.`);
             return;
         }
@@ -31,7 +35,9 @@ function PhotosSection({ car }) {
             const fetchedData = await APIMethods.getImages(carId);
             const imageUrls = fetchedData.map((bytes) => `data:image/png;base64,${bytes}`)
             setImages(imageUrls);
+            setLoading(false);
         } catch (error) {
+            setLoading(false);
             console.log(`[CarOfferPage][PhotosSection][fetchImages][ERROR] - Cannot fetch images from server for carId=${carId}. Stack trace message: ${error}`);
         }
     }
@@ -72,6 +78,7 @@ function PhotosSection({ car }) {
 
     return (
         <div className='section-car-offer-photos-section-body'>
+            {loading ? <LoadingCircle/> : <div/>}
             {images.length !== 0 ? renderPhotoMiniatures() : <div/>}
             {images.length !== 0 ? renderMainPhoto() : <div/>}
             {images.length !== 0 ? renderCurrentPageLabel() : <div/>}

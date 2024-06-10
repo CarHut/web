@@ -63,12 +63,14 @@ function ChatInterface({ socket }) {
     }
 
     const fetchMessages = async () => {
+        // This means that if there are no messages then start new chat
         try {
             const response = await SocketAPI.fetchMessagesWithUser(myId, otherUserId);
             console.log(response);
             setMessages(response);
         } catch (error) {
-            console.log(`[UserProfilePage][ChatInterface][fetchMessages][ERROR] - Cannot fetch messages between id1=${myId} and id2=${otherUserId}. Stack trace message: ${error}`);
+            console.log(`[UserProfilePage][ChatInterface][fetchMessages][WARN] - Cannot fetch messages between id1=${myId} and id2=${otherUserId}. Creating new chat.`);
+            setMessage([]);
         }
     }
 
@@ -122,7 +124,7 @@ function ChatInterface({ socket }) {
 
     return (
         <div className='chat-interface-wrapper'>
-            <div className='profile-content-header'>Chat with {}</div>
+            <div className='profile-content-header'>Chat with <div style={{fontWeight: "bold"}}>{otherUserUsername}</div></div>
             <div className='chat-interface-content-wrapper'>
                 <div className='chat-interface-upper-nav'>
                     // HEADER TO DO

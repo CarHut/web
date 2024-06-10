@@ -1,12 +1,12 @@
 .seller-info-body {
     display: block;
     background-color: #313131;
-    margin-top: 1.5em;
-    padding: 2em 2em;
+    margin-top: 1.5vw;
+    padding: 2vw 2vw;
 }
 
 .seller-info-header {
-    font-size: 2em;
+    font-size: 2vw;
     color: #fff;
 }
 
@@ -48,6 +48,23 @@
     opacity: 70%;
 }
 
+.seller-info-content-header-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 1vw;
+}
+
+.seller-info-chat-img {
+    width: 2vw;
+    height: auto;
+    object-fit: scale-down;
+}
+
+.seller-info-error-text {
+    color: red;
+    font-size: 1vw;
+}
+
 @media screen and (max-width: 1350px) {
     
     .seller-info-header {
@@ -57,12 +74,44 @@
 
 @media screen and (max-width: 600px) {
     .seller-info-body {
-        margin-top: 5vw;
         padding: 5vw 5vw;
     }
     
     .seller-info-header {
         font-size: 5vw;
+    }
+    
+    .seller-info-content-body-name-text {
+        font-size: 4vw;
+    }
+    
+    .seller-info-content-body-text {
+        font-size: 3vw;
+    }
+    
+    .seller-info-content-column-wrapper {
+        margin-right: 5vw;
+    }
+    
+    .seller-info-content-row-wrapper {
+        display: flex;
+        margin: 3vw 0vw;
+    }
+    
+    .seller-info-content-body-text-opacity {
+        font-size: 3vw;
+    }
+    
+    .seller-info-content-header-wrapper {
+        gap: 3vw;
+    }
+    
+    .seller-info-chat-img {
+        width: 4vw;
+    }
+
+    .seller-info-error-text {
+        font-size: 3vw;
     }
 
 }

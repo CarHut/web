@@ -3,6 +3,7 @@ import MainWrapper from '../components/userprofilepage/MainWrapper';
 import '../css/pages/UserProfilePage.css';
 import { useEffect, useState } from 'react';
 import SocketAPI from '../messaging/SocketAPI';
+import Footer from '../components/maincomponents/Footer';
 
 function UserProfilePage() {
 
@@ -24,6 +25,7 @@ function UserProfilePage() {
             {/* <div className='current-route-text'>in development</div> */}
             <div className='user-profile-page-header'>Profile</div>
             <MainWrapper socket={socket}/>
+            <Footer/>
         </div>
     )
 
