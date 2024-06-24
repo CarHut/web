@@ -1,4 +1,4 @@
-const currentPublicIp = '192.168.1.12' 
+const currentPublicIp = 'localhost' 
 const Constants = {
     webAddress: `http://${currentPublicIp}:3000/`,
 

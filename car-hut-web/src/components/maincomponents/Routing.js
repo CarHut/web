@@ -8,12 +8,14 @@ import UserProfilePage from "../../pages/UserProfilePage";
 import PasswordResetPage from "../../pages/PasswordResetPage";
 import AddCarPage from "../../pages/AddCarPage";
 import CheckEmailPage from "../loginregisterpage/CheckEmailPage";
+import DefaultPage from "../../pages/DefaultPage";
 import SuccessfulVerificationPage from "../loginregisterpage/SuccessfulVerificationPage";
 
 function Routing() {
 
     return (
         <Routes>
+          <Route path="/" element={<DefaultPage/>}/>
           <Route path="/mainPage" element={<MainPage/>} />
           <Route path="/moreFiltersPage" element={<MoreFiltersPage/>} />
           <Route path='/searchList' element={<SearchList/>}/>

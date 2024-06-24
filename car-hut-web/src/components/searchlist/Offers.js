@@ -123,7 +123,7 @@ function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength, setL
         const offerElements = [];
         for (let index = 0; index < cars.length; index++) {
             const car = cars[index];
-            const imageSrc = imagesForDisplayedCars[index];
+            const imageSrc = imagesForDisplayedCars[index] === 'data:image/png;base64,undefined' ? require('../../images/carhut_logo.png') : imagesForDisplayedCars[index];
 
             offerElements.push(
                 <Link
@@ -133,6 +133,7 @@ function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength, setL
                 >
                     <div className='offer-wrapper' key={index}>
                         <div className='offer-left-wrapper'>
+                            <div className='car-stats-text'>{new Date(car.dateAdded).toLocaleDateString()}</div>
                             <div className='offer-car-title'>{car.header}</div>
                             <div className='car-stats-wrapper'>
                                 <div className='car-stats-column'>

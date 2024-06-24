@@ -1,3 +1,4 @@
+import APIMethods from '../../api/APIMethods.js';
 import Constants from '../../constants/Constants.js';
 import SocketAPI from '../../messaging/SocketAPI.js';
 
@@ -48,6 +49,18 @@ const AuthUtil = {
     },
     getPermissions: () => {
         return Promise.resolve();
+    },
+    oauth2GoogleLogin: async (code) => {
+        const response = await fetch(Constants.baseAPIPath + `auth/getGoogleToken?code=${code}`);
+        const token = await response.json();
+        localStorage.setItem("token", token.token);
+        localStorage.setItem("username", token.username)
+        window.location.replace(Constants.webAddress + 'mainPage');
+    },
+    initiateOauth2GoogleLogin: async () => {
+        const response = await fetch(Constants.baseAPIPath + `auth/getGoogleAuthUrl`);
+        const redirectUrl = await response.json();
+        window.open(redirectUrl.url);
     }
 };
 

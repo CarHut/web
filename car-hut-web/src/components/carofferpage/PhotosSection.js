@@ -79,9 +79,9 @@ function PhotosSection({ car }) {
     return (
         <div className='section-car-offer-photos-section-body'>
             {loading ? <LoadingCircle/> : <div/>}
-            {images.length !== 0 ? renderPhotoMiniatures() : <div/>}
+            {images.length !== 0 ? renderPhotoMiniatures() : <img className='main-photo-img' src={require('../../images/carhut_logo.png')}/>}
             {images.length !== 0 ? renderMainPhoto() : <div/>}
-            {images.length !== 0 ? renderCurrentPageLabel() : <div/>}
+            {images.length !== 0 ? renderCurrentPageLabel() : <div className='current-page-label'>No images</div>}
         </div>
     );
 }

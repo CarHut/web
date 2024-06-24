@@ -21,6 +21,7 @@
 
 .add-car-main-info-content-wrapper {
     display: flex;
+    flex-direction: row;
     justify-content: space-around;
     height: 100%;
     width: 50%;
@@ -70,6 +71,21 @@
     margin-top: 1vw;
 }
 
+.add-car-main-info-content-current-state {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.current-state-text {
+    font-size: 1.5vw;
+    color: #fff;
+}
+
+.add-car-main-info-img {
+    display: none;
+    visibility: hidden;
+}
 
 @media screen and (max-width: 1350px) {
     .add-car-main-info-section {
@@ -142,5 +158,22 @@
         display: flex;
         flex-direction: column;
         gap: 15vw;
+    }
+
+    .current-state-text {
+        font-size: 5vw;
+        color: #fff;
+    }
+
+    .add-car-main-info-img {
+        width: 8vw;
+        height: auto;
+        object-fit: scale-down;
+        visibility: visible;
+        display: flex;
+    }
+
+    .add-car-main-info-content-current-state {
+        width: 100%;
     }
 }

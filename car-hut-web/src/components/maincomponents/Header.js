@@ -7,13 +7,27 @@ import { useEffect, useState } from 'react';
 function Header() {
 
     const [isUserLogged, setIsUserLogged] = useState(false);
+    const [isMobileWidth, setIsMobileWidth] = useState(window.innerWidth < 600 ? true : false);
+    const [isBurgerMenuVisible, setIsBurgerMenuVisible] = useState(false);
+
+    const handleWindowResize = () => {
+        if (window.innerWidth < 600) {
+            setIsMobileWidth(true);
+        } else {
+            setIsMobileWidth(false);
+        }
+    }
 
     useEffect(() => {
+        window.addEventListener('resize', handleWindowResize);
         checkIfUserIsLogged();
+        return (() => {
+            window.removeEventListener('resize', handleWindowResize);
+        });
     }, [])
 
     const checkIfUserIsLogged = () => {
-        if (localStorage.getItem('username') === null) {
+        if (localStorage.getItem('token') === null) {
             setIsUserLogged(false);
         } else {
             setIsUserLogged(true);
@@ -75,26 +89,68 @@ function Header() {
         )
     }
 
-    const renderAddOfferTab = () => {
+    const renderBurgerMenu = () => {
         return (
-            <Link
-                className='header-tab'
-                to={renderRoutingToAddOffer()}
-            >
-                Add offer
-            </Link>
+            <div>
+                <img className='burger-menu-img' src={require('../../images/burger_menu.png')} onClick={() => setIsBurgerMenuVisible(!isBurgerMenuVisible)}/>
+                { isBurgerMenuVisible === true 
+                    ?   <div className='burger-menu-overlay'>
+                            <div style={{display: "flex", justifyContent: "center"}} onClick={() => setIsBurgerMenuVisible(false)}>
+                                {renderLogo()}
+                            </div>
+                            <div className='burger-menu-content'>
+                                <Link
+                                    className='burger-menu-text'
+                                    to={renderRoutingToAddOffer()}
+                                    onClick={() => setIsBurgerMenuVisible(false)}
+                                >
+                                    Add offer
+                                </Link>
+                                <div className='burger-menu-line'/>                        
+                            </div>
+                        </div>
+                    : <div/>   
+                }
+            </div>
+            
         );
     }
 
+    const renderStandardHeader = () => {
+        return (
+            <header>
+                {renderLogo()}
+                <Link
+                    className='header-tab'
+                    to={renderRoutingToAddOffer()}
+                >
+                    Add offer
+                </Link>
+                {localStorage.getItem('token') === null && localStorage.getItem('username') === null 
+                    ?   renderStandardLogin()
+                    :   renderLoggedUser()
+                }
+            </header>
+        );
+    }
+
+    const renderMobileHeader = () => {
+        return (
+            <header>
+                {renderBurgerMenu()}
+                {renderLogo()}
+                {localStorage.getItem('token') === null && localStorage.getItem('username') === null 
+                    ?   renderStandardLogin()
+                    :   renderLoggedUser()
+                }
+            </header>
+        )
+    }
+
     return (
-        <header>
-            {renderLogo()}
-            {renderAddOfferTab()}
-            {localStorage.getItem('token') === null && localStorage.getItem('username') === null 
-                ?   renderStandardLogin()
-                :   renderLoggedUser()
-            }
-        </header>
+        <>
+            { isMobileWidth === true ? renderMobileHeader() : renderStandardHeader() }
+        </>
     );
 }
 

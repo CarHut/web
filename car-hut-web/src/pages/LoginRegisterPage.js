@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Header from '../components/maincomponents/Header';
 import '../css/pages/LoginRegisterPage.css';
 import AuthUtil from '../utils/auth/AuthUtil';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import APIMethods from '../api/APIMethods';
 import SocketAPI from '../messaging/SocketAPI';
 import LoadingCircle from '../components/maincomponents/LoadingCircle';
@@ -14,21 +14,23 @@ function LoginRegisterPage() {
 
     const [loginEmail, setLoginEmail] = useState('');
     const [loginPassword, setLoginPassword] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [isTokenSet, setIsTokenSet] = useState(false);
+    const [showErrorMessage, setShowErrorMessage] = useState(false);
+
     const [registerEmail, setRegisterEmail] = useState('');
     const [registerPassword, setRegisterPassword] = useState('');
     const [repeatRegisterPassword, setRepeatRegisterPassword] = useState('');
     const [firstName, setFirstName] = useState('');
     const [surname, setSurname] = useState('');
     const [username, setUsername] = useState('');
-    
-    const [loading, setLoading] = useState(false);
-    const [registerLoading, setRegisterLoading] = useState(false);
 
+    const [registerLoading, setRegisterLoading] = useState(false);
     const [showRegistrationError, setShowRegistrationError] = useState(false);
     const [registrationErrorMessage, setRegistrationErrorMessage] = useState('');
+    
+    const [user, setUser] = useState(null);
 
-    const [isTokenSet, setIsTokenSet] = useState(false);
-    const [showErrorMessage, setShowErrorMessage] = useState(false);
     const navigate = useNavigate();
 
     const regularButtonSizingWidth = {
@@ -81,6 +83,12 @@ function LoginRegisterPage() {
             console.log(`[LoginRegisterPage][handleLoginSubmit][ERROR] - Cannot login user into system. Stack trace message: ${error}`);
         }
     }
+
+    useEffect(() => {
+        if (isTokenSet) {
+            navigate('/userProfile');
+        } 
+    }, [isTokenSet]);
 
     const handleRegisterSubmit = async (e) => {
         setRegisterLoading(true);
@@ -174,11 +182,9 @@ function LoginRegisterPage() {
         }
     }
 
-    useEffect(() => {
-        if (isTokenSet) {
-            navigate('/userProfile');
-        } 
-    }, [isTokenSet]);
+    const handleGoogleLogin = () => {
+        AuthUtil.initiateOauth2GoogleLogin();
+    }
 
     return (
         <div>
@@ -214,6 +220,18 @@ function LoginRegisterPage() {
                             />
                             {loading ? <LoadingCircle/> : <div/>}
                         </form>
+                    </div>
+                    <div className='separator-wrapper'>
+                        <div className='separator-line'/>   
+                        <div className='sign-in-link-text'>Or sign in</div>
+                        <div className='separator-line'/>
+                    </div>
+                    <div className='separator-wrapper'> 
+                        <img 
+                            className='media-img' 
+                            src={require('../images/google.png')}
+                            onClick={() => handleGoogleLogin()}
+                        />
                     </div>
                     <div className='register-wrapper'>
                         <div className='header-label'>Register</div>

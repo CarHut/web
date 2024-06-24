@@ -2,27 +2,25 @@ import APIMethods from '../../api/APIMethods';
 import '../../css/carofferpage/Features.css';
 import { useEffect, useState } from 'react';
 
-function Features({ car }) {
+function Features({ car, stateType }) {
 
     const [carModel, setCarModel] = useState(car);
     const [features, setFeatures] = useState([]);
 
     const fetchFeatures = async () => {
-        if (carModel.features !== undefined || carModel.features !== null) {
-            try {
+        try {
+            if (stateType === 'add') {
+                setFeatures(carModel.features);
+            } else {
                 setFeatures(await APIMethods.getMultipleFeaturesByIds(carModel.features));
-            } catch (error) {
-                console.log(`[CarOfferPage][Features][fetchFeatures][ERROR] - Cannot fetch features. Stack trace message: ${error}`);
             }
+        } catch (error) {
+            console.log(`[CarOfferPage][Features][fetchFeatures][ERROR] - Cannot fetch features. Stack trace message: ${error}`);
         }
     }
 
     useEffect(() => {
-        if (car.features === undefined) {
-            fetchFeatures();
-        } else {
-            setFeatures(car.features)
-        }
+        fetchFeatures();
     }, []);
 
     const renderFeatures = () => {

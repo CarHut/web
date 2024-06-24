@@ -139,7 +139,7 @@ function Summary() {
                 {loading ? <LoadingCircle/> : <div/>}
                 {showErrorMessage ? <div className='error-text'>Something went wrong! Try again later.</div> : <div/>}
             </div>
-            {carModel === undefined ? <div/> : <CarMainSection carId={null} carModel={carModel}/>}
+            {carModel === undefined ? <div/> : <CarMainSection carId={null} carModel={carModel} stateType={'add'}/>}
         </div>
     );
 }

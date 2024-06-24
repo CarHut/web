@@ -64,6 +64,18 @@ function Account() {
         }
     }
 
+    const getAccountAge = () => {
+        const dateRegistered = new Date(accountDetails.dateRegistered);
+        const currentDate = new Date();
+        let diff = currentDate - dateRegistered;
+
+        const years = Math.floor(diff / (365 * 24 * 60 * 60 * 1000));
+        diff -= years * (365 * 24 * 60 * 60 * 1000);
+        const days = Math.floor(diff / (24 * 60 * 60 * 1000));
+
+        return `${years} years and ${days} days`;
+    }
+
     return (
         <div className='account-wrapper'>
             <div className='profile-content-header'>Account</div>
@@ -72,12 +84,14 @@ function Account() {
                 <div className='account-main-info-column-entity'>
                     <div className='profile-content-dark-text'>Username</div>
                     <div className='profile-content-dark-text'>E-mail</div>
+                    <div className='profile-content-dark-text'>Account age</div>
                     <div className='profile-content-dark-text'>Phone No.</div>
                     <div className='profile-content-dark-text'>Password</div>
                 </div>
                 <div className='account-main-info-column-entity'>
                     <div className='profile-content-text'>{accountDetails.username}</div>
                     <div className='profile-content-text'>{accountDetails.email}</div>
+                    <div className='profile-content-text'>{getAccountAge()}</div>
                     <div className='profile-content-text'>+421 000 000 000</div>
                     <div className='profile-content-text'>**********</div>
                     <div className='profile-content-text-forgot-password' onClick={handleResetPassword}>Change my password</div>

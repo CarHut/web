@@ -2,7 +2,8 @@ import { Link } from 'react-router-dom';
 import APIMethods from '../../api/APIMethods';
 import '../../css/carofferpage/SellerInfo.css';
 import { useEffect, useState } from 'react';
-import { RemoveItemButton } from 'react-admin';
+import Star from '../maincomponents/Star';
+import RateSellerOverlay from '../maincomponents/RateSellerOverlay';
 
 
 function SellerInfo({car}) {
@@ -11,10 +12,22 @@ function SellerInfo({car}) {
     const [sellerFullName, setSellerFullName] = useState('');
     const [sellerEmail, setSellerEmail] = useState('');
     const [sellerUsername, setSellerUsername] = useState('');
+    const [sellerRating, setSellerRating] = useState(null);
     const [canAccessChat, setCanAccessChat] = useState(false);
 
     const [showSendMessageError, setShowSendMessageError] = useState(false);
+    const [showRateSellerOverlay, setShowRateSellerOverlay] = useState(false);
 
+    const fetchSellerRating = async () => {
+        try {
+            const rating = await APIMethods.getSellerRating(car.sellerId);
+            setSellerRating(rating);
+        } catch (error) {
+            setSellerRating(null);
+            console.log(`[CarOfferPage][SellerInfo][fetchSellerRating][ERROR] - Cannot fetch seller rating with sellerId=${car.sellerId}. Stack trace message: ${error}`);
+        }
+        
+    }
 
     const fetchOffersNum = async () => {
         try {
@@ -73,6 +86,7 @@ function SellerInfo({car}) {
         fetchSellerFullName();
         fetchSellerEmail();
         fetchSellerUsername();
+        fetchSellerRating();
         handleChatAccessibility();
     }, []);
 
@@ -88,17 +102,23 @@ function SellerInfo({car}) {
                         to={pickRoute()}
                     >
                         <img className='seller-info-chat-img' src={require('../../images/userprofilepage/chats.png')}/>
-                    </Link>            
+                    </Link>   
+                    <Star width={"3vw"} height={"3vw"} color={"#fffff"} rotation={"0"} onClickHandler={(e) => { e.preventDefault(); setShowRateSellerOverlay(!showRateSellerOverlay); }}/>        
+                    {showRateSellerOverlay ? <RateSellerOverlay/> : <div/>}         
                     {showSendMessageError ? <div className='seller-info-error-text'>Cannot send message to yourself!</div> : <div/>}
                 </div>
                 <div className='seller-info-content-row-wrapper'>
                     <div className='seller-info-content-column-wrapper'>
                         <div className='seller-info-content-body-text-opacity'>E-mail</div>
                         <div className='seller-info-content-body-text-opacity'>Offers posted</div>
+                        <div className='seller-info-content-body-text-opacity'>Seller rating</div>
+                        <div className='seller-info-content-body-text-opacity'>Number of ratings</div>
                     </div>
                     <div className='seller-info-content-column-wrapper'>
                         <div className='seller-info-content-body-text'>{sellerEmail}</div>
                         <div className='seller-info-content-body-text'>{offersNum}</div>
+                        <div className='seller-info-content-body-text'>{sellerRating === null ? 'No rating' : sellerRating.rating}</div>
+                        <div className='seller-info-content-body-text'>{sellerRating === null ? 0 : sellerRating.numOfRatings}</div>
                     </div>
                 </div>
             </div>

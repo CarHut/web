@@ -9,12 +9,14 @@
 }
 
 input[type="range"] {
+    -webkit-appearance: none;
     background: black;
     padding: 0vw 1vw 1.5vw 1vw;
     border-radius: 20px;
 }
 
 input[type="range"]::-webkit-slider-runnable-track {
+    -webkit-appearance: none;
     background: #a8a8a8;
     margin: 0vw 0.8vw;
     width: 80%;
@@ -23,6 +25,7 @@ input[type="range"]::-webkit-slider-runnable-track {
 }
 
 input[type="range"]::-moz-range-track {
+    -webkit-appearance: none;
     background: #a8a8a8;
     margin: 0vw 0.8vw;
     width: 80%;
@@ -31,6 +34,7 @@ input[type="range"]::-moz-range-track {
 }
 
 input[type="range"]::-ms-track {
+    -webkit-appearance: none;
     background: #a8a8a8;
     margin: 0vw 0.8vw;
     width: 80%;
@@ -51,6 +55,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 input[type="range"]::-moz-range-thumb {
+    -webkit-appearance: none;
     width: 2vw;
     height: 2vw;
     background: url('../../images/maincomponents/slider_pointer.png') no-repeat;
@@ -61,6 +66,7 @@ input[type="range"]::-moz-range-thumb {
 }
 
 input[type="range"]::-ms-thumb {
+    -webkit-appearance: none;
     width: 2vw;
     height: 2vw;
     background: url('../../images/maincomponents/slider_pointer.png') no-repeat;
@@ -92,6 +98,7 @@ input[type="range"]::-ms-thumb {
     
     input[type="range"]::-ms-track {
         margin: 0vw 1.3vw;
+        width: 90%;
     }
     
     input[type="range"]::-webkit-slider-thumb {
@@ -127,19 +134,19 @@ input[type="range"]::-ms-thumb {
     input[type="range"]::-webkit-slider-thumb {
         width: 8vw;
         height: 8vw;
-        transform: translateY(5vw);
+        transform: translateY(3vw);
     }
     
     input[type="range"]::-moz-range-thumb {
         width: 8vw;
         height: 8vw;
-        transform: translateY(5vw);
+        transform: translateY(3vw);
     }
     
     input[type="range"]::-ms-thumb {
         width: 8vw;
         height: 8vw;
-        transform: translateY(5vw);
+        transform: translateY(3vw);
     }
 
     input[type="range"]::-webkit-slider-runnable-track {

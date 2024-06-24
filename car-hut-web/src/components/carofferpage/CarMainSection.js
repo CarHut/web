@@ -8,7 +8,7 @@ import MoreInfo from './MoreInfo';
 import SellerInfo from './SellerInfo';
 import APIMethods from '../../api/APIMethods';
 
-function CarMainSection({ carId, carModel }) {
+function CarMainSection({ carId, carModel, stateType }) {
     const [car, setCar] = useState();
 
     const fetchCar = async () => {
@@ -34,7 +34,7 @@ function CarMainSection({ carId, carModel }) {
             {car === undefined ? <div/> : <ImportantData car={car}/>}
             <div className='car-main-section-split-wrapper'>
                 {car === undefined ? <div/> : <TechnicalData car={car}/>}
-                {car === undefined ? <div/> : <Features car={car}/>}
+                {car === undefined ? <div/> : <Features car={car} stateType={stateType}/>}
             </div>
             {car === undefined ? <div/>  : <MoreInfo car={car}/>}
             {car === undefined ? <div/> : <SellerInfo car={car}/>}

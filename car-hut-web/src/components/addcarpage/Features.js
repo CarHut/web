@@ -2,9 +2,7 @@ import '../../css/addcarpage/Features.css';
 import { useLocation, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import APIMethods from '../../api/APIMethods';
-import SellerInfo from '../carofferpage/SellerInfo';
 import RegularButton from '../maincomponents/RegularButton';
-import StateUtil from '../../utils/StateUtil';
 
 function Features() {
 

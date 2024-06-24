@@ -25,6 +25,8 @@ function EngineInfo() {
     const [cityFuelCons, setCityFuelCons] = useState('Not stated');
     const [highwayFuelCons, setHighwayFuelCons] = useState('Not stated');
     const [gears, setGears] = useState('Not stated');
+    
+    const [isStateVisible, setIsStateVisible] = useState(true);
 
     const comboBoxSizingWidth = {
         standardSize: "10vw",
@@ -307,43 +309,50 @@ function EngineInfo() {
                     {renderGears()}
                     {renderPowertrainTypes()}
                 </div>
-                <div className='add-car-engine-info-content-wrapper'>
-                    <div className='add-car-engine-info-column-wrapper'>
-                        <div className='add-car-engine-info-small-text-darker'>*Brand</div>
-                        <div className='add-car-engine-info-small-text-darker'>*Model</div>
-                        <div className='add-car-engine-info-small-text-darker'>Headline</div>
-                        <div className='add-car-engine-info-small-text-darker'>*Mileage</div>
-                        <div className='add-car-engine-info-small-text-darker'>*Registration</div>
-                        <div className='add-car-engine-info-small-text-darker'>*Price</div>
-                        <div className='add-car-engine-info-small-text-darker'>*Address</div>
-                        <div className='add-car-engine-info-small-text-darker'>*Engine power</div>
-                        <div className='add-car-engine-info-small-text-darker'>Displacement</div>
-                        <div className='add-car-engine-info-small-text-darker'>*Fuel</div>
-                        <div className='add-car-engine-info-small-text-darker'>Average fuel cons.</div>
-                        <div className='add-car-engine-info-small-text-darker'>City fuel cons.</div>
-                        <div className='add-car-engine-info-small-text-darker'>Highway fuel cons.</div>
-                        <div className='add-car-engine-info-small-text-darker'>*Gearbox</div>
-                        <div className='add-car-engine-info-small-text-darker'>Gears</div>
-                        <div className='add-car-engine-info-small-text-darker'>*Powertrain</div>
+                <div className='add-car-main-info-content-current-state'>
+                    <div style={{alignItems: "center", display: "flex", flexDirection: "row", gap: "2vw"}}>
+                        <div className='current-state-text'>Current state</div>
+                        <img className='add-car-main-info-img' src={require('../../images/burger_menu.png')} onClick={() => setIsStateVisible(!isStateVisible)}/>
+                    </div>      
+                    <div className="add-car-line-container"/>
+                    <div className='add-car-engine-info-content-wrapper' style={isStateVisible ? { display: "flex", visibility: "visible" } : { display: "none", visibility: "hidden" }}>
+                        <div className='add-car-engine-info-column-wrapper'>
+                            <div className='add-car-engine-info-small-text-darker'>*Brand</div>
+                            <div className='add-car-engine-info-small-text-darker'>*Model</div>
+                            <div className='add-car-engine-info-small-text-darker'>Headline</div>
+                            <div className='add-car-engine-info-small-text-darker'>*Mileage</div>
+                            <div className='add-car-engine-info-small-text-darker'>*Registration</div>
+                            <div className='add-car-engine-info-small-text-darker'>*Price</div>
+                            <div className='add-car-engine-info-small-text-darker'>*Address</div>
+                            <div className='add-car-engine-info-small-text-darker'>*Engine power</div>
+                            <div className='add-car-engine-info-small-text-darker'>Displacement</div>
+                            <div className='add-car-engine-info-small-text-darker'>*Fuel</div>
+                            <div className='add-car-engine-info-small-text-darker'>Average fuel cons.</div>
+                            <div className='add-car-engine-info-small-text-darker'>City fuel cons.</div>
+                            <div className='add-car-engine-info-small-text-darker'>Highway fuel cons.</div>
+                            <div className='add-car-engine-info-small-text-darker'>*Gearbox</div>
+                            <div className='add-car-engine-info-small-text-darker'>Gears</div>
+                            <div className='add-car-engine-info-small-text-darker'>*Powertrain</div>
+                        </div>
+                        <div className='add-car-engine-info-column-wrapper'>
+                            <div className='add-car-engine-info-small-text'>{currentCarModel.brandId}</div>
+                            <div className='add-car-engine-info-small-text'>{currentCarModel.modelId}</div>
+                            <div className='add-car-engine-info-small-text'>{currentCarModel.header}</div>
+                            <div className='add-car-engine-info-small-text'>{currentCarModel.mileage} km</div>
+                            <div className='add-car-engine-info-small-text'>{currentCarModel.registration}</div>
+                            <div className='add-car-engine-info-small-text'>{currentCarModel.price} €</div>
+                            <div className='add-car-engine-info-small-text'>{currentCarModel.sellerAddress}</div>
+                            <div className='add-car-engine-info-small-text'>{enginePower} kW</div>
+                            <div className='add-car-engine-info-small-text'>{displacement} cm³</div>  
+                            <div className='add-car-engine-info-small-text'>{fuel}</div>   
+                            <div className='add-car-engine-info-small-text'>{avgFuelCons} l/100km</div>   
+                            <div className='add-car-engine-info-small-text'>{cityFuelCons} l/100km</div>   
+                            <div className='add-car-engine-info-small-text'>{highwayFuelCons} l/100km</div> 
+                            <div className='add-car-engine-info-small-text'>{gearbox}</div>  
+                            <div className='add-car-engine-info-small-text'>{gears}</div>  
+                            <div className='add-car-engine-info-small-text'>{powertrain}</div>            
+                        </div>        
                     </div>
-                    <div className='add-car-engine-info-column-wrapper'>
-                        <div className='add-car-engine-info-small-text'>{currentCarModel.brandId}</div>
-                        <div className='add-car-engine-info-small-text'>{currentCarModel.modelId}</div>
-                        <div className='add-car-engine-info-small-text'>{currentCarModel.header}</div>
-                        <div className='add-car-engine-info-small-text'>{currentCarModel.mileage} km</div>
-                        <div className='add-car-engine-info-small-text'>{currentCarModel.registration}</div>
-                        <div className='add-car-engine-info-small-text'>{currentCarModel.price} €</div>
-                        <div className='add-car-engine-info-small-text'>{currentCarModel.sellerAddress}</div>
-                        <div className='add-car-engine-info-small-text'>{enginePower} kW</div>
-                        <div className='add-car-engine-info-small-text'>{displacement} cm³</div>  
-                        <div className='add-car-engine-info-small-text'>{fuel}</div>   
-                        <div className='add-car-engine-info-small-text'>{avgFuelCons} l/100km</div>   
-                        <div className='add-car-engine-info-small-text'>{cityFuelCons} l/100km</div>   
-                        <div className='add-car-engine-info-small-text'>{highwayFuelCons} l/100km</div> 
-                        <div className='add-car-engine-info-small-text'>{gearbox}</div>  
-                        <div className='add-car-engine-info-small-text'>{gears}</div>  
-                        <div className='add-car-engine-info-small-text'>{powertrain}</div>            
-                    </div>        
                 </div>
             </div>
             <div className='add-car-main-info-small-text-darker'>* necessary to fill</div>

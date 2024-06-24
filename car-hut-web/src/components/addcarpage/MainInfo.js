@@ -6,8 +6,6 @@ import ComboBox from '../maincomponents/ComboBox';
 import RangeSlider from '../maincomponents/RangeSlider';
 import TextInputField from '../maincomponents/TextInputField';
 import RegularButton from '../maincomponents/RegularButton';
-import { validQueryParams } from 'react-admin';
-import StateUtil from '../../utils/StateUtil';
 
 
 function MainInfo() {
@@ -21,6 +19,8 @@ function MainInfo() {
     const [registration, setRegistration] = useState('Not set');
     const [price, setPrice] = useState('Not stated');
     const [sellerAddress, setSellerAddress] = useState('Not stated');
+
+    const [isStateVisible, setIsStateVisible] = useState(true);
 
     const comboBoxSizingWidth = {
         standardSize: "10vw",
@@ -302,25 +302,32 @@ function MainInfo() {
                     </div>
                     {renderAddressSection()}
                 </div>
-                <div className='add-car-main-info-content-wrapper'>
-                    <div className='add-car-main-info-column-wrapper'>
-                        <div className='add-car-main-info-small-text-darker'>*Brand</div>
-                        <div className='add-car-main-info-small-text-darker'>*Model</div>
-                        <div className='add-car-main-info-small-text-darker'>Headline</div>
-                        <div className='add-car-main-info-small-text-darker'>*Mileage</div>
-                        <div className='add-car-main-info-small-text-darker'>*Registration</div>
-                        <div className='add-car-main-info-small-text-darker'>*Price</div>
-                        <div className='add-car-main-info-small-text-darker'>*Address</div>
+                <div className='add-car-main-info-content-current-state'>
+                    <div style={{alignItems: "center", display: "flex", flexDirection: "row", gap: "2vw"}}>
+                        <div className='current-state-text'>Current state</div>
+                        <img className='add-car-main-info-img' src={require('../../images/burger_menu.png')} onClick={() => setIsStateVisible(!isStateVisible)}/>
                     </div>
-                    <div className='add-car-main-info-column-wrapper'>
-                        <div className='add-car-main-info-small-text'>{selectedBrand}</div>
-                        <div className='add-car-main-info-small-text'>{selectedModel}</div>
-                        <div className='add-car-main-info-small-text'>{header}</div>
-                        <div className='add-car-main-info-small-text'>{mileage} km</div>
-                        <div className='add-car-main-info-small-text'>{registration}</div>
-                        <div className='add-car-main-info-small-text'>{price} €</div>
-                        <div className='add-car-main-info-small-text'>{sellerAddress}</div>
-                    </div>        
+                    <div className="add-car-line-container"/>
+                    <div className='add-car-main-info-content-wrapper' style={isStateVisible ? { display: "flex", visibility: "visible" } : { display: "none", visibility: "hidden" }}>
+                        <div className='add-car-main-info-column-wrapper'>
+                            <div className='add-car-main-info-small-text-darker'>*Brand</div>
+                            <div className='add-car-main-info-small-text-darker'>*Model</div>
+                            <div className='add-car-main-info-small-text-darker'>Headline</div>
+                            <div className='add-car-main-info-small-text-darker'>*Mileage</div>
+                            <div className='add-car-main-info-small-text-darker'>*Registration</div>
+                            <div className='add-car-main-info-small-text-darker'>*Price</div>
+                            <div className='add-car-main-info-small-text-darker'>*Address</div>
+                        </div>
+                        <div className='add-car-main-info-column-wrapper'>
+                            <div className='add-car-main-info-small-text'>{selectedBrand}</div>
+                            <div className='add-car-main-info-small-text'>{selectedModel}</div>
+                            <div className='add-car-main-info-small-text'>{header}</div>
+                            <div className='add-car-main-info-small-text'>{mileage} km</div>
+                            <div className='add-car-main-info-small-text'>{registration}</div>
+                            <div className='add-car-main-info-small-text'>{price} €</div>
+                            <div className='add-car-main-info-small-text'>{sellerAddress}</div>
+                        </div>        
+                    </div>
                 </div>
             </div>
             <div className='add-car-main-info-small-text-darker'>* necessary to fill</div>

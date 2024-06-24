@@ -61,6 +61,16 @@
     width: 50%;
 }
 
+.technical-data-standard-view {
+    visibility: visible;
+    display: block;
+}
+
+.technical-data-mobile-view {
+    visibility: hidden;
+    display: none;
+}
+
 @media screen and (max-width: 1350px) {
     
     .technical-data-header {
@@ -77,6 +87,18 @@
 }
 
 @media screen and (max-width: 600px) {
+
+    .technical-data-content-body-entity-wrapper {
+        width: 100%;
+    }
+
+    .technical-data-mobile-view {
+        visibility: visible;
+        display: flex;
+        flex-direction: column;
+        gap: 2vh;
+    }
+
     .technical-data-body {
         margin-top: 5vw;
         width: 90%;
@@ -93,5 +115,10 @@
     
     .technical-data-content-text-value {
         font-size: 3vw;
+    }
+
+    .technical-data-standard-view {
+        visibility: hidden;
+        display: none;
     }
 }

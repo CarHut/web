@@ -113,18 +113,10 @@ select {
   padding: 0.5vw 0vw;
 }
 
-.extended-filters-dropdown-arrow {
-  margin-top: 1vw;
-  width: 0;
-  height: 0;
-  border-left: 15px solid transparent;
-  border-right: 15px solid transparent;
-  border-top: 30px solid #D9D9D9;
-  display: none;
-  visibility: hidden;
-  cursor: pointer;
+.extended-filters-dropdown-img {
+    visibility: hidden;
+    display: none;
 }
-
 
 @media screen and (max-width: 1350px) {
 
@@ -175,6 +167,9 @@ select {
 
   .search-list-extended-filters-header {
       font-size: 6vw;
+      display: flex;
+      flex-direction: row;
+      gap: 2vw;
   }
 
   .search-list-extended-filters-num-of-searches {
@@ -205,8 +200,10 @@ select {
     padding: 1.3vw 0vw;
   }
 
-  .extended-filters-dropdown-arrow {
-    margin-top: 5vw;
+  .extended-filters-dropdown-img {
+    width: 7vw;
+    height: auto;
+    object-fit: scale-down;
     visibility: visible;
     display: block;
   }

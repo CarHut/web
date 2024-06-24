@@ -18,11 +18,13 @@ function Chats({ socket }) {
 
     useEffect(() => {
         window.addEventListener("chats", () => {
-            
+            fetchChatsFromStorage();
         });
       
         return () => {
-          window.removeEventListener("chats", () => {});
+          window.removeEventListener("chats", () => {
+            fetchChatsFromStorage();
+          });
         };
     }, []);
 
@@ -31,7 +33,19 @@ function Chats({ socket }) {
     }, [chats]);
 
     const fetchChatsFromStorage = () => {
-        setChats(JSON.parse(localStorage.getItem('chats')));
+        const fetchedChats = JSON.parse(localStorage.getItem('chats'));
+
+        console.log(fetchedChats);
+
+        if (fetchedChats !== undefined && fetchedChats !== null) {
+            // Error on backend side
+            if (fetchedChats.status !== undefined) {
+                setChats([]);
+            } else {
+                setChats(fetchedChats);
+            }
+        }
+
         setLoading(false);
     }
 

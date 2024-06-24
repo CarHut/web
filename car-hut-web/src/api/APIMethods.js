@@ -56,16 +56,22 @@ const APIMethods = {
         return await response.json();
     },
     getUserDetailsInfo: async () => {
+        console.log('Bearer ' + localStorage.getItem('token'));
+
         const requestOptions = {
             method: 'POST',
             headers: { 
                 'Authorization': 'Bearer ' + localStorage.getItem('token'),
                 'Content-Type': 'application/json' 
             },
-            body: localStorage.getItem('username')
+            body: JSON.stringify({
+                username: localStorage.getItem('username')
+            }) 
         }
-        
+
+        console.log(requestOptions);
         const response = await fetch(Constants.baseAPIPath + 'auth/getUserDetailsInfo', requestOptions);
+        console.log(response);
         return await response.json();
     },
     resetPasswordSendEmail: async (email) => {
@@ -328,6 +334,10 @@ const APIMethods = {
 
         const response = await fetch(Constants.baseAPIPath + `carhut/savedSearches/removeSavedSearch?savedSearchId=${id}`, requestOption);
         return response.text();
+    },
+    getSellerRating: async (sellerId) => {
+        const response = await fetch(Constants.baseAPIPath + `rating/getSellerRating?sellerId=${sellerId}`);
+        return await response.json();
     }
 }
 

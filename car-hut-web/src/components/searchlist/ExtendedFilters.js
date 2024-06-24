@@ -59,6 +59,10 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange, l
         if (fetchedState.brandsAndModels !== undefined && fetchedState.brandsAndModels !== null) {
             setBrandsAndModels(fetchedState.brandsAndModels);
         }
+
+        if (window.innerWidth < 600) {
+            setVisibleFilters(false);
+        }
     }, []);
 
     useEffect(() => {
@@ -133,13 +137,14 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange, l
 
         renderedModels.push({ key: '-1', value: '', textValue: 'Select model' });
         addModels.map((model) => renderedModels.push(new Object({ key: model.id, value: model.model, textValue: model.model })));
-
         return (
             <div className='search-list-extended-filters-brandAndModel-section-content'>
                 {brandsAndModels.map((car, index) => {
-                    return (
-                        <div key={index} className='search-list-extended-filters-brandAndModel-entity'>{car.brand} {car.model} <div className='x' onClick={() => handleRemovalOfABrandsAndModelEntity(car.brand, car.model)}/></div>
-                    )
+                    if (car.brand !== "") {
+                        return (
+                            <div key={index} className='search-list-extended-filters-brandAndModel-entity'>{car.brand} {car.model} <div className='x' onClick={() => handleRemovalOfABrandsAndModelEntity(car.brand, car.model)}/></div>
+                        )
+                    }
                 })}
                 <RegularButton 
                     label={'Add +'} 
@@ -380,8 +385,10 @@ function ExtendedFilters({ fetchedState, resultsListLength, handleStateChange, l
         <div className='search-list-extended-filters-wrapper'>
             <div className='search-list-extended-filters-padding-wrapper'>
                 <div className='search-list-extended-filters-num-of-searches'>{!loadingResultsListLength ? resultsListLength + " cars" : "Loading cars"} </div>
-                <div className='search-list-extended-filters-header'>Filters</div>
-                <div className='extended-filters-dropdown-arrow' onClick={handleFiltersVisibility}/>
+                <div className='search-list-extended-filters-header'>
+                    Filters    
+                    <img className='extended-filters-dropdown-img' src={require('../../images/burger_menu.png')} onClick={handleFiltersVisibility}/>
+                </div>
                 <div className='search-list-extended-filters-section' style={visibleFilters === true ? {visibility: "visible", display: "block"} : {visibility: "hidden", display: "none"}}>
                     <div className='search-list-extended-filters-section-label'>Brands & models</div>
                     {renderBrandsAndModelsEntities()}
