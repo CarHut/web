@@ -1,53 +1,60 @@
+import React, { useEffect, useState } from 'react';
 import '../../css/maincomponents/Star.css';
 
-function Star({ width, height, color, rotation, onClickHandler }) {
-  const starStyle = {
-    position: 'relative',
-    display: 'block',
-    width: 0,
-    height: 0,
-    borderRight: `${width / 2}vw solid transparent`,
-    borderBottom: `${height / 2}vh solid ${color}`,
-    borderLeft: `${width / 2}vw solid transparent`,
-    transform: `rotate(${rotation}deg)`,
-  };
+const Star = ({ width = 50, height = 50, color = 'gold', rotation = 0, onClickHandler, hoverState = false }) => {
 
-  const beforeStyle = {
-    borderBottom: `${height / 2}vh solid ${color}`,
-    borderLeft: `${width / 6.5}vw solid transparent`,
-    borderRight: `${width / 6.5}vw solid transparent`,
-    position: 'absolute',
-    height: 0,
-    width: 0,
-    top: `-${height / 1.4}vh`,
-    left: `-${width / 2.1}vw`,
-    display: 'block',
-    content: '""',
-    transform: `rotate(-${rotation * 2}deg)`,
-  };
+  const [currentWidth, setCurrentWidth] = useState(0);
+  const [currentHeight, setCurrentHeight] = useState(0);
 
-  const afterStyle = {
-    position: 'absolute',
-    display: 'block',
-    top: `${height / 8}vh`,
-    left: `-${width / 2}vw`,
-    width: 0,
-    height: 0,
-    borderRight: `${width / 2}vw solid transparent`,
-    borderBottom: `${height / 2}vh solid ${color}`,
-    borderLeft: `${width / 2}vw solid transparent`,
-    transform: `rotate(-${rotation * 2}deg)`,
-    content: '""',
-  };
+  const handleResize = () => {
+      if (window.innerWidth <= 600) {
+          setCurrentWidth(width.smallSize);
+          setCurrentHeight(height.smallSize);
+      } else if (window.innerWidth <= 1350) {
+          setCurrentWidth(width.mediumSize);
+          setCurrentHeight(height.mediumSize);
+      } else {
+          setCurrentWidth(width.standardSize);
+          setCurrentHeight(height.standardSize);
+      }
+  }
+
+  useEffect(() => {
+      handleResize();
+      window.addEventListener('resize', handleResize);
+      return () => {
+          window.removeEventListener('resize', handleResize);
+      }
+  }, []);
+
+  const points = [
+    { x: 50, y: 0 },
+    { x: 61, y: 35 },
+    { x: 98, y: 35 },
+    { x: 68, y: 57 },
+    { x: 79, y: 91 },
+    { x: 50, y: 70 },
+    { x: 21, y: 91 },
+    { x: 32, y: 57 },
+    { x: 2, y: 35 },
+    { x: 39, y: 35 },
+  ]
+    .map(point => `${point.x},${point.y}`)
+    .join(' ');
 
   return (
-    <div className="star-container" onClick={onClickHandler}>
-      <div className="star" style={starStyle}>
-        <div style={beforeStyle}></div>
-        <div style={afterStyle}></div>
-      </div>
+    <div className="star-container-object" onClick={onClickHandler} style={hoverState ? {cursor: "pointer"} : {cursor: "default"}}>
+      <svg
+        className="star-object"
+        width={currentWidth}
+        height={currentHeight}
+        viewBox="0 0 100 100"
+        style={{ transform: `rotate(${rotation}deg)`, display: 'block' }}
+      >
+        <polygon points={points} fill={color} />
+      </svg>
     </div>
   );
-}
+};
 
 export default Star;

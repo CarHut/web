@@ -338,6 +338,24 @@ const APIMethods = {
     getSellerRating: async (sellerId) => {
         const response = await fetch(Constants.baseAPIPath + `rating/getSellerRating?sellerId=${sellerId}`);
         return await response.json();
+    },
+    giveSellerRating: async (userId, sellerId, rating) => {
+        
+        const requestOptions = {
+            method: "POST",
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                sellerId: sellerId,
+                userId: userId,
+                rating: rating
+            })
+        }
+
+        const response = await fetch(Constants.baseAPIPath + `rating/giveSellerRating`, requestOptions);
+        return response;
     }
 }
 

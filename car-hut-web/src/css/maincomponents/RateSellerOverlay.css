@@ -2,9 +2,9 @@
     position: inherit;
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 50%;
     height: 100%;
-    background-color: #000;
+    background-color: #313131;
     padding: 1vw;
     gap: 2vh;
 }
@@ -17,4 +17,66 @@
 .rating-row {
     display: flex;
     flex-direction: row;
+}
+
+.set-rating-error-text {
+    font-size: 1vw;
+    color: red;
+}
+
+.set-rating-success-text {
+    font-size: 1vw;
+    color: green;
+}
+
+@media screen and (max-width: 1350px) {
+    .rate-seller-overlay-body {
+        flex-direction: column;
+        width: 50%;
+        height: 100%;
+        margin-left: 5vw;
+        gap: 3vh;
+    }
+    
+    .rate-seller-header-text {
+        font-size: 2vw;
+        color: #fff;
+    }
+
+    
+    .set-rating-error-text {
+        font-size: 1.5vw;
+        color: red;
+    }
+    
+    .set-rating-success-text {
+        font-size: 1.5vw;
+        color: green;
+    }
+}
+
+@media screen and (max-width: 1350px) {
+    .rate-seller-overlay-body {
+        flex-direction: column;
+        width: 30%;
+        height: 100%;
+        margin-left: 1vw;
+        gap: 3vh;
+    }
+    
+    .rate-seller-header-text {
+        font-size: 4vw;
+        color: #fff;
+    }
+
+    
+    .set-rating-error-text {
+        font-size: 3vw;
+        color: red;
+    }
+    
+    .set-rating-success-text {
+        font-size: 3vw;
+        color: green;
+    }
 }

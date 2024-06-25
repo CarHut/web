@@ -58,46 +58,6 @@
     margin-left: 0.5em;
 }
 
-.star {
-    position: relative;
-    
-    display: inline-block;
-    width: 0;
-    height: 0;
-    
-    margin-left: .9vw;
-    margin-right: .9vw;
-    margin-bottom: 1.2vw;
-    
-    border-right:  .3vw solid transparent;
-    border-bottom: .7vw  solid #FC0;
-    border-left:   .3vw solid transparent;
-  
-    font-size: 1vw;
-    
-    &:before, &:after {
-      content: '';
-      
-      display: block;
-      width: 0;
-      height: 0;
-      
-      position: absolute;
-      top: .6vw;
-      left: -1vw;
-    
-      border-right:  1vw solid transparent;
-      border-bottom: .7vw  solid #FC0;
-      border-left:   1vw solid transparent;
-    
-      transform: rotate(-35deg);
-    }
-    
-    &:after {  
-      transform: rotate(35deg);
-    }
-  }
-
 .car-offer-main-info-price-status-label {
     font-size: 1vw;
     color: #a3a3a3;

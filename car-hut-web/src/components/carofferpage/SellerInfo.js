@@ -18,6 +18,18 @@ function SellerInfo({car}) {
     const [showSendMessageError, setShowSendMessageError] = useState(false);
     const [showRateSellerOverlay, setShowRateSellerOverlay] = useState(false);
 
+    const starWidthSizing = {
+        smallSize: "5vw",
+        mediumSize: "3vw",
+        standardSize: "2.2vw"
+    }; 
+
+    const starHeightSizing = {
+        smallSize: "5vw",
+        mediumSize: "3vw",
+        standardSize: "2.2vw"
+    };
+
     const fetchSellerRating = async () => {
         try {
             const rating = await APIMethods.getSellerRating(car.sellerId);
@@ -103,8 +115,8 @@ function SellerInfo({car}) {
                     >
                         <img className='seller-info-chat-img' src={require('../../images/userprofilepage/chats.png')}/>
                     </Link>   
-                    <Star width={"3vw"} height={"3vw"} color={"#fffff"} rotation={"0"} onClickHandler={(e) => { e.preventDefault(); setShowRateSellerOverlay(!showRateSellerOverlay); }}/>        
-                    {showRateSellerOverlay ? <RateSellerOverlay/> : <div/>}         
+                    <Star width={starWidthSizing} height={starHeightSizing} color={"gold"} rotation={"0"} hoverState={true} onClickHandler={(e) => { e.preventDefault(); setShowRateSellerOverlay(!showRateSellerOverlay); }}/>        
+                    {showRateSellerOverlay ? <RateSellerOverlay sellerId={car.sellerId} sellerRating={sellerRating}/> : <div/>}         
                     {showSendMessageError ? <div className='seller-info-error-text'>Cannot send message to yourself!</div> : <div/>}
                 </div>
                 <div className='seller-info-content-row-wrapper'>
