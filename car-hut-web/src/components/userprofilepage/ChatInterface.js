@@ -4,13 +4,14 @@ import '../../css/userprofilepage/ChatInterface.css';
 import { useEffect, useState } from 'react';
 import SocketAPI from '../../messaging/SocketAPI';
 
-function ChatInterface({ socket }) {
+function ChatInterface() {
 
     const [messages, setMessages] = useState([]);
     const [myId, setMyId] = useState('');
     const [otherUserId, setOtherUserId] = useState('');
     const [message, setMessage] = useState('');
     const [newMessage, setNewMessage] = useState();
+    const [socket, setSocket] = useState(null);
     const loc = useLocation();
     const queryParams = new URLSearchParams(loc.search);
     const otherUserUsername = queryParams.get('username');
@@ -45,11 +46,16 @@ function ChatInterface({ socket }) {
 
     useEffect(() => {
         setIds();
+        setSocketConnection()
     }, []);
 
     useEffect(() => {
         fetchMessages();
-    }, [myId, otherUserId, newMessage]);
+    }, [myId, otherUserId, newMessage, socket]);
+
+    const setSocketConnection = () => {
+        setSocket(SocketAPI.connectToSocket(localStorage.getItem('username')));
+    }
 
     const setIds = async () => {
         try {

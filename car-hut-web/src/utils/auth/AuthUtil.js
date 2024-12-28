@@ -19,7 +19,7 @@ const AuthUtil = {
             if (response.status !== 200) {
                 return false;
             }
-            
+        
             const token = (await response.text()).valueOf();
             localStorage.setItem('token', token);
             localStorage.setItem('username', username);
@@ -52,9 +52,10 @@ const AuthUtil = {
     },
     oauth2GoogleLogin: async (code) => {
         const response = await fetch(Constants.baseAPIPath + `auth/getGoogleToken?code=${code}`);
+        console.log(response);
         const token = await response.json();
         localStorage.setItem("token", token.token);
-        localStorage.setItem("username", token.username)
+        localStorage.setItem("username", token.username);
         window.location.replace(Constants.webAddress + 'mainPage');
     },
     initiateOauth2GoogleLogin: async () => {

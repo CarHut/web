@@ -10,7 +10,7 @@
 }
 
 .rate-seller-header-text {
-    font-size: 1vw;
+    font-size: 1.5vw;
     color: #fff;
 }
 
@@ -55,7 +55,7 @@
     }
 }
 
-@media screen and (max-width: 1350px) {
+@media screen and (max-width: 600px) {
     .rate-seller-overlay-body {
         flex-direction: column;
         width: 30%;

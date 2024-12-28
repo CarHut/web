@@ -1,0 +1,23 @@
+.params-body {
+    display: flex;
+}
+
+.params-column {
+    display: block;
+    height: 100%;
+}
+
+.params-date-range-row {
+    display: flex;
+}
+
+.calendar-object {
+    margin: 0vw 2vw;
+}
+
+.calendar-label {
+    color: #fff;
+    font-size: 1vw;
+    padding-bottom: 0.4vw;
+    margin: 0vw 2vw;
+}

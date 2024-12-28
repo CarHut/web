@@ -10,7 +10,7 @@ function MainWrapper({ socket }) {
             </div>
             <div className='user-page-vertical-line-container'/>
             <div className='user-page-right-wrapper'>
-                <ProfileContent socket={socket}/>
+                <ProfileContent/>
             </div>
         </div>
     );

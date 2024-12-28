@@ -77,7 +77,7 @@ function SellerInfo({car}) {
         return `/userProfile/chats/with?username=${sellerUsername}`;
     }
 
-    const handleChatAccessibility = () => {
+    const handleChatAccessibility = async () => {
         // User isn't logged in
         if (localStorage.getItem('username') === null) {  
             setCanAccessChat(false);
@@ -99,8 +99,11 @@ function SellerInfo({car}) {
         fetchSellerEmail();
         fetchSellerUsername();
         fetchSellerRating();
-        handleChatAccessibility();
     }, []);
+
+    useEffect(() => {
+        handleChatAccessibility();
+    }, [sellerUsername]);
 
     return (
         <div className='seller-info-body'>
@@ -109,12 +112,12 @@ function SellerInfo({car}) {
             <div className='seller-info-content-body'>
                 <div className='seller-info-content-header-wrapper'>
                     <div className='seller-info-content-body-name-text'>{sellerFullName}</div>
-                    <Link
+                    <a
                         style={{ visibility: canAccessChat ? "visible" : "hidden" }}
-                        to={pickRoute()}
+                        href={pickRoute()}
                     >
                         <img className='seller-info-chat-img' src={require('../../images/userprofilepage/chats.png')}/>
-                    </Link>   
+                    </a>   
                     <Star width={starWidthSizing} height={starHeightSizing} color={"gold"} rotation={"0"} hoverState={true} onClickHandler={(e) => { e.preventDefault(); setShowRateSellerOverlay(!showRateSellerOverlay); }}/>        
                     {showRateSellerOverlay ? <RateSellerOverlay sellerId={car.sellerId} sellerRating={sellerRating}/> : <div/>}         
                     {showSendMessageError ? <div className='seller-info-error-text'>Cannot send message to yourself!</div> : <div/>}

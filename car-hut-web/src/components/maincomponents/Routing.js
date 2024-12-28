@@ -10,6 +10,7 @@ import AddCarPage from "../../pages/AddCarPage";
 import CheckEmailPage from "../loginregisterpage/CheckEmailPage";
 import DefaultPage from "../../pages/DefaultPage";
 import SuccessfulVerificationPage from "../loginregisterpage/SuccessfulVerificationPage";
+import ComparePage from "../../pages/ComparePage";
 
 function Routing() {
 
@@ -38,6 +39,7 @@ function Routing() {
           <Route path='/userProfile/savedSearches' element={<UserProfilePage/>}/>
           <Route path='/userProfile/chats' element={<UserProfilePage/>}/>
           <Route path='/userProfile/chats/with' element={<UserProfilePage/>}/>
+          <Route path='/compare' element={<ComparePage/>}/>
         </Routes>
     );
 }

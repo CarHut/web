@@ -230,15 +230,15 @@ function FilterSearch() {
         const searchParams = new URLSearchParams(flattenedState).toString();
 
         return (
-            <Link
-                to={`/searchList?${searchParams}`}
+            <a
+                href={`/searchList?${searchParams}`}
             >
                 <RegularButton 
                     label={searchedCarsNumber !== null && !loadingSearchedCarsNumber ? (searchedCarsNumber + " cars") : ("Loading cars")} 
                     buttonWidth={regularButtonSizingWidth}
                     buttonHeight={regularButtonSizingHeight}
                 />
-            </Link>
+            </a>
         );
     }
 

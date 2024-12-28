@@ -3,17 +3,19 @@ import '../../css/userprofilepage/Chats.css';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import LoadingCircle from '../maincomponents/LoadingCircle';
+import SocketAPI from '../../messaging/SocketAPI';
 
-function Chats({ socket }) {
+function Chats() {
 
     const [chats, setChats] = useState([]);
     const [usernames, setUsernames] = useState([]);
+    const [socket, setSocket] = useState(null);
 
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
+        setSocketConnection();
         setLoading(true);
-        fetchChatsFromStorage();
     }, []);
 
     useEffect(() => {
@@ -28,9 +30,17 @@ function Chats({ socket }) {
         };
     }, []);
 
+    useEffect(() => {
+        fetchChatsFromStorage();
+    }, [socket])
+
     useEffect(() => { 
         setUsernamesForChats();
     }, [chats]);
+
+    const setSocketConnection = () => {
+        setSocket(SocketAPI.connectToSocket(localStorage.getItem('username')));
+    }
 
     const fetchChatsFromStorage = () => {
         const fetchedChats = JSON.parse(localStorage.getItem('chats'));
@@ -60,7 +70,6 @@ function Chats({ socket }) {
                 role: myId === chats[i].senderId ? 'recipient' : 'sender'
             });
         }
-
         setUsernames(usernameArray);
     }
 

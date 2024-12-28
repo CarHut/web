@@ -6,10 +6,16 @@ import MyListings from './MyListings';
 import SavedSearches from './SavedSearches';
 import Chats from './Chats';
 import ChatInterface from './ChatInterface';
+import { useEffect } from 'react';
+import SocketAPI from '../../messaging/SocketAPI';
 
-function ProfileContent({ socket }) {
+function ProfileContent() {
 
     const location = useLocation();
+
+    useEffect(() => {
+        SocketAPI.connectToSocket(localStorage.getItem('username'));
+    }, []);
 
     const renderProfileContentByLocation = () => {
         if (location.pathname === '/userProfile/account') {
@@ -24,9 +30,9 @@ function ProfileContent({ socket }) {
         else if (location.pathname === '/userProfile/savedSearches') {
             return <SavedSearches/>;
         } else if (location.pathname === '/userProfile/chats') {
-            return <Chats socket={socket}/>;
+            return <Chats/>;
         } else if (location.pathname === '/userProfile/chats/with') {
-            return <ChatInterface socket={socket}/>;
+            return <ChatInterface/>;
         }
 
         return <div/>;

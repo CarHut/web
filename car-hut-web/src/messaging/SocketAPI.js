@@ -2,7 +2,7 @@ import Constants from "../constants/Constants";
 
 const SocketAPI = {
     connectToSocket: (username) => {
-        const socket = new WebSocket(Constants.socketAddress + `?username=${username}`);
+        const socket = new WebSocket(Constants.socketAddress + `?username=${encodeURI(username)}`);
         socket.onopen = async () => {
             console.log('Connected to websocket server.');
             const newestChats = await SocketAPI.fetchChats(localStorage.getItem('username'));
@@ -37,7 +37,7 @@ const SocketAPI = {
         const chatsJson = await response.json();
         return chatsJson;
     },
-    fetchMessagesWithUser: async (myUserId, otherUserId) => {
+    fetchMessagesWithUser: async (myUserId, otherUsername) => {
         const requestOptions = {
             method: 'POST',
             headers: {
@@ -45,7 +45,7 @@ const SocketAPI = {
             },
             body: JSON.stringify({
                 senderId: myUserId,
-                recipientId: otherUserId
+                recipientUsername: otherUsername
             })
         };
 

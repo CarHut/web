@@ -44,27 +44,27 @@ function Header() {
 
     const renderLogo = () => {
         return (
-            <Link 
+            <a 
                 className='logo'
-                to={"/mainPage"}
+                href={"/mainPage"}
                 style={{"textDecoration": "none"}}
             >
                 <img className='carhut-img' src={require('../../images/carhut_logo.png')}/>
                 <h1>CarHut</h1>
-            </Link>
+            </a>
         );
     }
 
     const renderStandardLogin = () => {
         return (
-            <Link 
+            <a 
                 className='login-entity'
-                to={"/login"} 
+                href={"/login"} 
                 style={{"textDecoration": "none"}}  
             >
                 <div className='header-text-content'>Login</div>
                 <img className='login-img' src={require('../../images/mainpage/login.png')}/>
-            </Link> 
+            </a> 
         );
     }
 
@@ -76,13 +76,13 @@ function Header() {
                     <img className='login-img' src={require('../../images/mainpage/login.png')}/>
                 </div>
                 <div className='logged-user-dropdown-menu-wrapper'>
-                    <Link
+                    <a
                         className='dropdown-menu-text'
-                        to={'/userProfile/account'}
+                        href={'/userProfile/account'}
                         style={{"textDecoration": "none"}}
                     >
                         Profile
-                    </Link>
+                    </a>
                     <a href={`${Constants.webAddress}mainPage`} className='dropdown-menu-text' onClick={(e) => AuthUtil.logout(e)}>Logout</a>
                 </div>
             </div>
@@ -99,13 +99,13 @@ function Header() {
                                 {renderLogo()}
                             </div>
                             <div className='burger-menu-content'>
-                                <Link
+                                <a
                                     className='burger-menu-text'
-                                    to={renderRoutingToAddOffer()}
+                                    href={renderRoutingToAddOffer()}
                                     onClick={() => setIsBurgerMenuVisible(false)}
                                 >
                                     Add offer
-                                </Link>
+                                </a>
                                 <div className='burger-menu-line'/>                        
                             </div>
                         </div>
@@ -120,12 +120,18 @@ function Header() {
         return (
             <header>
                 {renderLogo()}
-                <Link
+                <a
                     className='header-tab'
-                    to={renderRoutingToAddOffer()}
+                    href={renderRoutingToAddOffer()}
                 >
                     Add offer
-                </Link>
+                </a>
+                <a
+                    className='header-tab'
+                    href='/compare'
+                >
+                    Compare
+                </a>
                 {localStorage.getItem('token') === null && localStorage.getItem('username') === null 
                     ?   renderStandardLogin()
                     :   renderLoggedUser()

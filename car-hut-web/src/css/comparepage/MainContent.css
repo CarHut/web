@@ -1,0 +1,12 @@
+.main-content-bg {
+    width: 100%;
+    background-color: #313131;
+    align-content: center;
+}
+
+.main-content-body {
+    background-color: #181818;
+    margin: 2vw 20vw;
+    padding: 1vw 3vw;
+    display: block;
+}

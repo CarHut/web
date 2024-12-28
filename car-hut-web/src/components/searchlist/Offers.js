@@ -126,8 +126,8 @@ function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength, setL
             const imageSrc = imagesForDisplayedCars[index] === 'data:image/png;base64,undefined' ? require('../../images/carhut_logo.png') : imagesForDisplayedCars[index];
 
             offerElements.push(
-                <Link
-                    to={`/carOffer?carId=${car.id}`}
+                <a
+                    href={`/carOffer?carId=${car.id}`}
                     style={{ textDecoration: 'none' }}
                     key={index}
                 >
@@ -167,7 +167,7 @@ function Offers({offersPerPage, sortBy, fetchedState, setResultsListLength, setL
                         </div>
                     </div>
                     <div className='offers-line-separator' />
-                </Link>
+                </a>
             );
         }
     

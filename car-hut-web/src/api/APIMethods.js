@@ -32,16 +32,11 @@ const APIMethods = {
         return data;
     },
     getModelsByBrandName: async (brandName) => {
-        const response = await fetch(Constants.baseAPIPath + `carhut/getModelsByBrandName?brandName=${brandName}`);
+        const response = await fetch(Constants.proxyBasePath + `/carhut-api/get-models-by-brand-name?brand-name=${brandName}`);
         return await response.json();
     },
     getAllBrands: async () => {
-        const response = await fetch(Constants.baseAPIPath + 'carhut/getAllBrands');
-        const data  = await response.json();
-        return data;
-    },
-    getModelsByBrand: async (selectedBrand) => {
-        const response = await fetch(Constants.baseAPIPath + `carhut/getModelsByBrand/${selectedBrand}`);
+        const response = await fetch(Constants.proxyBasePath + '/carhut-api/get-all-brands');
         const data  = await response.json();
         return data;
     },
@@ -65,7 +60,12 @@ const APIMethods = {
                 'Content-Type': 'application/json' 
             },
             body: JSON.stringify({
-                username: localStorage.getItem('username')
+                authenticationPrincipal: {
+                    username: localStorage.getItem('username')
+                },
+                dto: {
+                    username: localStorage.getItem('username')
+                }
             }) 
         }
 
@@ -144,7 +144,7 @@ const APIMethods = {
         return data;
     },
     getFuelTypes: async () => {
-        const response = await fetch(Constants.baseAPIPath + 'carhut/getFuelTypes');
+        const response = await fetch(Constants.proxyBasePath + '/carhut-api/get-fuel-types');
         const data = await response.json();
         return data;
     },
@@ -248,7 +248,8 @@ const APIMethods = {
     },
     getUsernameByUserId: async (userId) => {
         const response = await fetch(Constants.baseAPIPath + `carhut/getUsernameByUserId?userId=${userId}`);
-        return await response.text();
+        const dummy = await response.text();
+        return dummy;
     },
     getFirstNameAndSurnameByUserId: async (userId) => {
         const response = await fetch(Constants.baseAPIPath + `carhut/getFirstNameAndSurnameByUserId?userId=${userId}`);
