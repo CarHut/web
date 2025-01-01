@@ -1,6 +1,17 @@
 import Constants from '../constants/Constants.js';
 
 const APIMethods = {
+    getPriceComparisonData: async (filters, showMedian = false, showPriceRange = false) => {
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(filters)
+        };
+        const response = await fetch(Constants.proxyBasePath + `/carhut-api/get-price-comparison-data?show-median=${showMedian}&show-price-range=${showPriceRange}`, requestOptions);
+        return response;
+    },
     addCarToSavedByUser: async (id, userId, carId) => {
         const requestOptions = {
             method: 'POST',
