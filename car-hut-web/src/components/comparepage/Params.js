@@ -7,6 +7,7 @@ import { Bar, Line } from 'react-chartjs-2';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { v4 as uuidv4 } from 'uuid';
+import { number } from 'react-admin';
 
 const Params = () => {
 
@@ -89,7 +90,7 @@ const Params = () => {
             dateRangeTo:        dateTo,
             numOfLabels:        numberOfLabels
         };
-        const response = await APIMethods.getPriceComparisonData(filters, true, true);
+        const response = await APIMethods.getPriceComparisonData(filters, true, true, true);
         const data = await response.json();
         console.log(data);
         setDataRaw(data.responseBody);
@@ -127,7 +128,7 @@ const Params = () => {
 
     const onPickedBrand = (e) => {
         try {
-            setPickedBrand(e.target.value);
+            setPickedBrand(e.target.key);
         } catch (error) {
             console.log('Cannot set picked brand. Error: ' + error);
         }
@@ -135,7 +136,7 @@ const Params = () => {
 
     const onPickedModel = (e) => {
         try {
-            setPickedModel(e.target.value);
+            setPickedModel(e.target.key);
         } catch (error) {
             console.log('Cannot set picked model. Error: ' + error);
         }
@@ -248,7 +249,7 @@ const Params = () => {
         const dataJson = JSON.parse(dataRaw);
         console.log(dataJson)
         if (dataJson !== null) {
-            if (dataJson.median !== null) {
+            if (dataJson.median !== null && dataJson.median !== undefined) {
                 const prepData = {
                     labels: dataJson.median.labels,
                     datasets: [
@@ -291,7 +292,7 @@ const Params = () => {
     const minMaxGraph = () => {
         const dataJson = JSON.parse(dataRaw);
         if (dataJson !== null) {
-            if (dataJson.minMax !== null) {
+            if (dataJson.minMax !== null && dataJson.minMax !== undefined) {
                 const prepData = {
                     labels: dataJson.minMax.labels,
                     datasets: [
@@ -339,6 +340,70 @@ const Params = () => {
         }
     }
 
+    const priceDistributionGraph = () => {
+        const dataJson = JSON.parse(dataRaw);
+        if (dataJson !== null) {
+            if (dataJson.priceDistribution !== null && dataJson.priceDistribution !== undefined) {
+                const prepData = {
+                    labels: dataJson.priceDistribution.labels,
+                    datasets: [
+                        // low range
+                        {
+                            label: dataJson.priceDistribution.graphLabels[0],
+                            data: dataJson.priceDistribution.priceDistributionData.map(priceRange => priceRange[0]),
+                            backgroundColor: '#008000'
+                        },
+                        // mid range
+                        {
+                            label: dataJson.priceDistribution.graphLabels[1],
+                            data: dataJson.priceDistribution.priceDistributionData.map(priceRange => priceRange[1]),
+                            backgroundColor: '#FFDE21'
+                        },
+                        // high range
+                        {
+                            label: dataJson.priceDistribution.graphLabels[2],
+                            data: dataJson.priceDistribution.priceDistributionData.map(priceRange => priceRange[2]),
+                            backgroundColor: '#FF0000'
+                        },
+                    ]
+                }
+        
+                const options = {
+                    plugins: {
+                        customCanvasBackgroundColor: {
+                          color: '#313131',
+                        }
+                    },
+                    responsive: true,
+                    scales: {
+                        x: {
+                            stacked: true,
+                        },
+                        y: {
+                            stacked: true
+                        }
+                    }
+                }
+    
+                const plugin = {
+                    id: 'customCanvasBackgroundColor',
+                    beforeDraw: (chart, args, options) => {
+                        const {ctx} = chart;
+                        ctx.save();
+                        ctx.globalCompositeOperation = 'destination-over';
+                        ctx.fillStyle = options.color || '#fff';
+                        ctx.fillRect(0, 0, chart.width, chart.height);
+                        ctx.restore();
+                    }
+                };
+    
+                return ( 
+                    <Bar data={prepData} options={options} plugins={[plugin]}/>
+                );
+            }
+        }
+    }
+
     const onPickedNumberOfLabels = (e) => {
         setNumberOfLabels(e.target.value);
     }
@@ -346,20 +411,20 @@ const Params = () => {
     return (
         <div className="params-body">
             <div className='params-column'>    
-                <ComboBox label={"Number of labels"} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={labelsCount} onChangeHandler={(e) => onPickedNumberOfLabels(e)}/>
-                <ComboBox label={"Price from"} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={price} onChangeHandler={(e) => onPickedPriceFrom(e)}/>
-                <ComboBox label={"Price to"} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={price} onChangeHandler={(e) => onPickedPriceTo(e)}/>
-                <ComboBox label={"Brand"} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={brands} onChangeHandler={(e) => onPickedBrand(e)}/>
-                <ComboBox label={"Model"} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={models} onChangeHandler={(e) => onPickedModel(e)}/>
-                <ComboBox label={"Fuel"} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={fuelTypes} onChangeHandler={(e) => onPickedFuelType(e)}/>
-                <ComboBox label={"Year from"} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={years} onChangeHandler={(e) => onPickedYearFrom(e)}/>
-                <ComboBox label={"Year to"} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={years} onChangeHandler={(e) => onPickedYearTo(e)}/>    
-                <ComboBox label={"Displacement from"} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={displacement} onChangeHandler={(e) => onPickedDisFrom(e)}/>
-                <ComboBox label={"Displacement to"} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={displacement} onChangeHandler={(e) => onPickedDisTo(e)}/>    
-                <ComboBox label={"Mileage from"} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={mileage} onChangeHandler={(e) => onPickedMilFrom(e)}/>
-                <ComboBox label={"Mileage to"} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={mileage} onChangeHandler={(e) => onPickedMilTo(e)}/>       
-                <ComboBox label={"Power from"} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={power} onChangeHandler={(e) => onPickedPowerFrom(e)}/>
-                <ComboBox label={"Power to"} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={power} onChangeHandler={(e) => onPickedPowerTo(e)}/>   
+                <ComboBox label={"Number of labels"} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={labelsCount} selectedValue={numberOfLabels} onChangeHandler={(e) => onPickedNumberOfLabels(e)}/>
+                <ComboBox label={"Price from"} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={price} selectedValue={pickedPriceFrom} onChangeHandler={(e) => onPickedPriceFrom(e)}/>
+                <ComboBox label={"Price to"} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={price} selectedValue={pickedPriceTo} onChangeHandler={(e) => onPickedPriceTo(e)}/>
+                <ComboBox label={"Brand"} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={brands} selectedValue={pickedBrand} onChangeHandler={(e) => onPickedBrand(e)}/>
+                <ComboBox label={"Model"} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={models} selectedValue={pickedModel} onChangeHandler={(e) => onPickedModel(e)}/>
+                <ComboBox label={"Fuel"} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={fuelTypes} selectedValue={pickedFuelType} onChangeHandler={(e) => onPickedFuelType(e)}/>
+                <ComboBox label={"Year from"} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={years} selectedValue={pickedYearFrom} onChangeHandler={(e) => onPickedYearFrom(e)}/>
+                <ComboBox label={"Year to"} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={years} selectedValue={pickedYearTo} onChangeHandler={(e) => onPickedYearTo(e)}/>    
+                <ComboBox label={"Displacement from"} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={displacement} selectedValue={pickedDisFrom} onChangeHandler={(e) => onPickedDisFrom(e)}/>
+                <ComboBox label={"Displacement to"} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={displacement} selectedValue={pickedDisTo} onChangeHandler={(e) => onPickedDisTo(e)}/>    
+                <ComboBox label={"Mileage from"} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={mileage} selectedValue={pickedMilFrom} onChangeHandler={(e) => onPickedMilFrom(e)}/>
+                <ComboBox label={"Mileage to"} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={mileage} selectedValue={pickedMilTo} onChangeHandler={(e) => onPickedMilTo(e)}/>       
+                <ComboBox label={"Power from"} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={power} selectedValue={pickedPowerFrom} onChangeHandler={(e) => onPickedPowerFrom(e)}/>
+                <ComboBox label={"Power to"} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={power} selectedValue={pickedPowerTo} onChangeHandler={(e) => onPickedPowerTo(e)}/>   
             </div>
             <div className='params-column'>    
                 <div className='calendar-label'>Date range</div>
@@ -369,7 +434,8 @@ const Params = () => {
                 </div>
                 <div className='graphs-column'>
                     <div className='graph-wrapper'>{medianGraph()}</div>
-                    <div className='graph-wrapper'>{minMaxGraph()}</div>                    
+                    <div className='graph-wrapper'>{minMaxGraph()}</div>     
+                    <div className='graph-wrapper'>{priceDistributionGraph()}</div>               
                 </div>
             </div>
         </div>

@@ -22,7 +22,7 @@ import '../../css/maincomponents/ComboBox.css';
     onChangeHandler - format: (e) => your-handler-function-here(params...)
 
 */}
-function ComboBox({ label, width, height, optionValues, onChangeHandler }) {
+function ComboBox({ label, width, height, optionValues, selectedValue, onChangeHandler }) {
     
     const [currentWidth, setCurrentWidth] = useState(0);
     const [currentHeight, setCurrentHeight] = useState(0);
@@ -31,9 +31,15 @@ function ComboBox({ label, width, height, optionValues, onChangeHandler }) {
         const options = [];
 
         optionValues.map((optionValue, idx) => {
-            options.push(
-                <option id={idx} key={optionValue.key} value={optionValue.value}>{optionValue.textValue}</option>
-            );
+            if (optionValue.value == selectedValue) {
+                options.push(
+                    <option id={idx} key={optionValue.key} value={optionValue.value} selected={true}>{optionValue.textValue}</option>
+                );
+            } else {
+                options.push(
+                    <option id={idx} key={optionValue.key} value={optionValue.value}>{optionValue.textValue}</option>
+                );
+            }
         });
 
         return options;
