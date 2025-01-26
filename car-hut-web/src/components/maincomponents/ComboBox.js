@@ -33,11 +33,11 @@ function ComboBox({ label, width, height, optionValues, selectedValue, onChangeH
         optionValues.map((optionValue, idx) => {
             if (optionValue.value == selectedValue) {
                 options.push(
-                    <option id={idx} key={optionValue.key} value={optionValue.value} selected={true}>{optionValue.textValue}</option>
+                    <option id={optionValue.key} key={optionValue.key} value={optionValue.value} selected={true}>{optionValue.textValue}</option>
                 );
             } else {
                 options.push(
-                    <option id={idx} key={optionValue.key} value={optionValue.value}>{optionValue.textValue}</option>
+                    <option id={optionValue.key} key={optionValue.key} value={optionValue.value}>{optionValue.textValue}</option>
                 );
             }
         });

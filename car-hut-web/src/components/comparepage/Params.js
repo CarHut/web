@@ -2,14 +2,12 @@ import '../../css/comparepage/Params.css';
 import { useEffect, useState } from "react";
 import APIMethods from "../../api/APIMethods";
 import ComboBox from "../maincomponents/ComboBox";
-import { Chart } from 'chart.js/auto';
-import { Bar, Line } from 'react-chartjs-2';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { v4 as uuidv4 } from 'uuid';
-import { number } from 'react-admin';
+import Offers from './Offers';
 
-const Params = () => {
+const Params = ({ setRawGraphData, graphChangeContent }) => {
 
     const [brands, setBrands] = useState([]);
     const [pickedBrand, setPickedBrand] = useState(null);
@@ -27,10 +25,28 @@ const Params = () => {
     const [pickedPowerTo, setPickedPowerTo] = useState(null);
     const [pickedPriceFrom, setPickedPriceFrom] = useState(null);
     const [pickedPriceTo, setPickedPriceTo] = useState(null);
-    const [dataRaw, setDataRaw] = useState(null);
     const [dateFrom, setDateFrom] = useState(new Date());
     const [dateTo, setDateTo] = useState(new Date());
     const [numberOfLabels, setNumberOfLabels] = useState(null);
+    const [dateFromShownOffers, setDateFromShownOffers] = useState(new Date());
+    const [dateToShownOffers, setDateToShownOffers] = useState(new Date());
+    const [filters, setFilters] = useState({
+       brandId: null,
+       modelId: null,
+       fuelType: null,
+       yearFrom: null,
+       yearTo: null,
+       disFrom: null,
+       disTo: null,
+       milFrom: null,
+       milTo: null,
+       powerFrom: null,
+       powerTo: null,
+       priceFrom: null,
+       priceTo: null,
+       dateFrom: null,
+       dateTo: null,
+    });
 
     const years = [];
     [...new Array(2025-1960+1)].map((_,i) => i+1960).reverse().map((year, idx) =>  years.push({key: uuidv4(), value: year, textValue: year}));
@@ -72,6 +88,10 @@ const Params = () => {
         pickedPriceFrom, pickedPriceTo, dateFrom, dateTo, numberOfLabels]);
 
     const fetchCurrentData = async () => {
+        const dateFromInc = new Date(dateFrom.toString());
+        const dateToInc = new Date(dateTo.toString());
+        dateFromInc.setDate(dateFromInc.getDate() + 1);
+        dateToInc.setDate(dateToInc.getDate() + 1);
         const filters = {
             priceFrom:          pickedPriceFrom,
             priceTo:            pickedPriceTo,
@@ -86,14 +106,13 @@ const Params = () => {
             mileageTo:          pickedMilTo,
             powerFrom:          pickedPowerFrom,
             powerTo:            pickedPowerTo,
-            dateRangeFrom:      dateFrom,
-            dateRangeTo:        dateTo,
+            dateRangeFrom:      dateFromInc,
+            dateRangeTo:        dateToInc,
             numOfLabels:        numberOfLabels
         };
         const response = await APIMethods.getPriceComparisonData(filters, true, true, true);
         const data = await response.json();
-        console.log(data);
-        setDataRaw(data.responseBody);
+        setRawGraphData(data.responseBody);
     }
 
     const fetchFuelTypes = async () => {
@@ -126,17 +145,25 @@ const Params = () => {
         }
     }
 
-    const onPickedBrand = (e) => {
+    const onPickedBrand = async (e) => {
         try {
-            setPickedBrand(e.target.key);
+            const brandId = await APIMethods.getBrandIdFromBrandName(e.currentTarget.value);
+            setPickedBrand(brandId.responseBody);
+            const tempFilters = { ...filters };
+            tempFilters.brandId = brandId.responseBody;
+            setFilters(tempFilters);
         } catch (error) {
             console.log('Cannot set picked brand. Error: ' + error);
         }
     }
 
-    const onPickedModel = (e) => {
+    const onPickedModel = async (e) => {
         try {
-            setPickedModel(e.target.key);
+            const modelId = await APIMethods.getModelIdByModelName(e.currentTarget.value, pickedBrand);
+            setPickedModel(modelId.responseBody);
+            const tempFilters = { ...filters };
+            tempFilters.modelId = modelId.responseBody;
+            setFilters(tempFilters);
         } catch (error) {
             console.log('Cannot set picked model. Error: ' + error);
         }
@@ -144,7 +171,7 @@ const Params = () => {
 
     const fetchModels = async () => {
         try {
-            const data = await APIMethods.getModelsByBrandName(pickedBrand);
+            const data = await APIMethods.getModelsByBrandId(pickedBrand);
             const responseBody = data.responseBody;
             const json = JSON.parse(responseBody);
             const mappedModels = [];
@@ -160,6 +187,9 @@ const Params = () => {
     const onPickedFuelType = (e) => {
         try {
             setPickedFuelType(e.target.value);
+            const tempFilters = { ...filters };
+            tempFilters.fuelType = e.target.value;
+            setFilters(tempFilters);
         } catch (error) { 
             console.log(`Cannot pick fuel type. Error: ${error}`);
         }
@@ -168,6 +198,9 @@ const Params = () => {
     const onPickedYearFrom = (e) => {
         try {
             setPickedYearFrom(e.target.value);
+            const tempFilters = { ...filters };
+            tempFilters.yearFrom = e.target.value;
+            setFilters(tempFilters);
         } catch (error) {
             console.log(`Cannot pick year from. Error ${error}`);
         }
@@ -176,6 +209,9 @@ const Params = () => {
     const onPickedYearTo = (e) => {
         try {
             setPickedYearTo(e.target.value);
+            const tempFilters = { ...filters };
+            tempFilters.yearTo = e.target.value;
+            setFilters(tempFilters);
         } catch (error) {
             console.log(`Cannot pick year to. Error ${error}`);
         }
@@ -184,6 +220,9 @@ const Params = () => {
     const onPickedDisFrom = (e) => {
         try {
             setPickedDisFrom(e.target.value);
+            const tempFilters = { ...filters };
+            tempFilters.disFrom = e.target.value;
+            setFilters(tempFilters);
         } catch (error) {
             console.log(`Cannot pick displacement from. Error ${error}`);
         }
@@ -192,6 +231,9 @@ const Params = () => {
     const onPickedDisTo = (e) => {
         try {
             setPickedDisTo(e.target.value);
+            const tempFilters = { ...filters };
+            tempFilters.disTo = e.target.value;
+            setFilters(tempFilters);
         } catch (error) {
             console.log(`Cannot pick displacement to. Error ${error}`);
         }
@@ -200,6 +242,9 @@ const Params = () => {
     const onPickedMilFrom = (e) => {
         try {
             setPickedMilFrom(e.target.value);
+            const tempFilters = { ...filters };
+            tempFilters.milFrom = e.target.value;
+            setFilters(tempFilters);
         } catch (error) {
             console.log(`Cannot pick mileage from. Error ${error}`);
         }
@@ -208,6 +253,9 @@ const Params = () => {
     const onPickedMilTo = (e) => {
         try {
             setPickedMilTo(e.target.value);
+            const tempFilters = { ...filters };
+            tempFilters.brandId = e.target.value;
+            setFilters(tempFilters);
         } catch (error) {
             console.log(`Cannot pick mileage to. Error ${error}`);
         }
@@ -216,6 +264,9 @@ const Params = () => {
     const onPickedPowerFrom = (e) => {
         try {
             setPickedPowerFrom(e.target.value);
+            const tempFilters = { ...filters };
+            tempFilters.powerFrom = e.target.value;
+            setFilters(tempFilters);
         } catch (error) {
             console.log(`Cannot pick power from. Error ${error}`);
         }
@@ -224,6 +275,9 @@ const Params = () => {
     const onPickedPowerTo = (e) => {
         try {
             setPickedPowerTo(e.target.value);
+            const tempFilters = { ...filters };
+            tempFilters.powerTo = e.target.value;
+            setFilters(tempFilters);
         } catch (error) {
             console.log(`Cannot pick power to. Error ${error}`);
         }
@@ -232,6 +286,9 @@ const Params = () => {
     const onPickedPriceFrom = (e) => {
         try {
             setPickedPriceFrom(e.target.value);
+            const tempFilters = { ...filters };
+            tempFilters.priceFrom = e.target.value;
+            setFilters(tempFilters);
         } catch (error) {
             console.log(`Cannot pick price from. Error ${error}`);
         }
@@ -240,172 +297,40 @@ const Params = () => {
     const onPickedPriceTo = (e) => {
         try {
             setPickedPriceTo(e.target.value);
+            const tempFilters = { ...filters };
+            tempFilters.priceTo = e.target.value;
+            setFilters(tempFilters);
         } catch (error) {
             console.log(`Cannot pick price to. Error ${error}`);
         }
     }
 
-    const medianGraph = () => {
-        const dataJson = JSON.parse(dataRaw);
-        console.log(dataJson)
-        if (dataJson !== null) {
-            if (dataJson.median !== null && dataJson.median !== undefined) {
-                const prepData = {
-                    labels: dataJson.median.labels,
-                    datasets: [
-                        {
-                          label: dataJson.median.graphLabel,
-                          data: dataJson.median.medianPrices,
-                          fill: false,
-                          tension: 0.3,
-                        },
-                    ]
-                }
-        
-                const options = {
-                    plugins: {
-                        customCanvasBackgroundColor: {
-                          color: '#313131',
-                        }
-                    }
-                }
-    
-                const plugin = {
-                    id: 'customCanvasBackgroundColor',
-                    beforeDraw: (chart, args, options) => {
-                        const {ctx} = chart;
-                        ctx.save();
-                        ctx.globalCompositeOperation = 'destination-over';
-                        ctx.fillStyle = options.color || '#fff';
-                        ctx.fillRect(0, 0, chart.width, chart.height);
-                        ctx.restore();
-                    }
-                };
-    
-                return ( 
-                    <Line data={prepData} color='#fff' options={options} plugins={[plugin]}/>
-                );
-            }
-        }
-    }
-
-    const minMaxGraph = () => {
-        const dataJson = JSON.parse(dataRaw);
-        if (dataJson !== null) {
-            if (dataJson.minMax !== null && dataJson.minMax !== undefined) {
-                const prepData = {
-                    labels: dataJson.minMax.labels,
-                    datasets: [
-                        // min
-                        {
-                          label: 'Min',
-                          data: dataJson.minMax.minMaxData.map(priceRange => priceRange[0]),
-                          fill: false,
-                          tension: 0.3,
-                        },
-                        // max
-                        {
-                            label: 'Max',
-                            data: dataJson.minMax.minMaxData.map(priceRange => priceRange[1]),
-                            fill: false,
-                            tension: 0.3,
-                        }
-                    ]
-                }
-        
-                const options = {
-                    plugins: {
-                        customCanvasBackgroundColor: {
-                          color: '#313131',
-                        }
-                    }
-                }
-    
-                const plugin = {
-                    id: 'customCanvasBackgroundColor',
-                    beforeDraw: (chart, args, options) => {
-                        const {ctx} = chart;
-                        ctx.save();
-                        ctx.globalCompositeOperation = 'destination-over';
-                        ctx.fillStyle = options.color || '#fff';
-                        ctx.fillRect(0, 0, chart.width, chart.height);
-                        ctx.restore();
-                    }
-                };
-    
-                return ( 
-                    <Line data={prepData} options={options} plugins={[plugin]}/>
-                );
-            }
-        }
-    }
-
-    const priceDistributionGraph = () => {
-        const dataJson = JSON.parse(dataRaw);
-        if (dataJson !== null) {
-            if (dataJson.priceDistribution !== null && dataJson.priceDistribution !== undefined) {
-                const prepData = {
-                    labels: dataJson.priceDistribution.labels,
-                    datasets: [
-                        // low range
-                        {
-                            label: dataJson.priceDistribution.graphLabels[0],
-                            data: dataJson.priceDistribution.priceDistributionData.map(priceRange => priceRange[0]),
-                            backgroundColor: '#008000'
-                        },
-                        // mid range
-                        {
-                            label: dataJson.priceDistribution.graphLabels[1],
-                            data: dataJson.priceDistribution.priceDistributionData.map(priceRange => priceRange[1]),
-                            backgroundColor: '#FFDE21'
-                        },
-                        // high range
-                        {
-                            label: dataJson.priceDistribution.graphLabels[2],
-                            data: dataJson.priceDistribution.priceDistributionData.map(priceRange => priceRange[2]),
-                            backgroundColor: '#FF0000'
-                        },
-                    ]
-                }
-        
-                const options = {
-                    plugins: {
-                        customCanvasBackgroundColor: {
-                          color: '#313131',
-                        }
-                    },
-                    responsive: true,
-                    scales: {
-                        x: {
-                            stacked: true,
-                        },
-                        y: {
-                            stacked: true
-                        }
-                    }
-                }
-    
-                const plugin = {
-                    id: 'customCanvasBackgroundColor',
-                    beforeDraw: (chart, args, options) => {
-                        const {ctx} = chart;
-                        ctx.save();
-                        ctx.globalCompositeOperation = 'destination-over';
-                        ctx.fillStyle = options.color || '#fff';
-                        ctx.fillRect(0, 0, chart.width, chart.height);
-                        ctx.restore();
-                    }
-                };
-    
-                return ( 
-                    <Bar data={prepData} options={options} plugins={[plugin]}/>
-                );
-            }
-        }
-    }
-
     const onPickedNumberOfLabels = (e) => {
         setNumberOfLabels(e.target.value);
+    }
+
+    const onPickedDateFrom = (dateValue) => {
+        try {
+            setDateFrom(dateValue);
+            setDateFromShownOffers(dateValue);
+            const tempFilters = { ...filters };
+            tempFilters.dateFrom = dateValue;
+            setFilters(tempFilters);
+        } catch (e) {
+            console.log('Cannot set date from. Try again. Error: ' + e);
+        }
+    }
+
+    const onPickedDateTo = (dateValue) => {
+        try {
+            setDateTo(dateValue);
+            setDateToShownOffers(dateValue);
+            const tempFilters = { ...filters };
+            tempFilters.dateTo = dateValue;
+            setFilters(tempFilters);
+        } catch (e) {
+            console.log('Cannot set date to. Try again. Error: ' + e);
+        }
     }
 
     return (
@@ -429,14 +354,11 @@ const Params = () => {
             <div className='params-column'>    
                 <div className='calendar-label'>Date range</div>
                 <div className='params-date-range-row'>
-                    <Calendar className={'calendar-object'} onChange={setDateFrom} value={dateFrom}/>
-                    <Calendar className={'calendar-object'} onChange={setDateTo} value={dateTo}/>
+                    <Calendar className={'calendar-object'} onChange={(value, event) => onPickedDateFrom(value)} value={dateFrom}/>
+                    <Calendar className={'calendar-object'} onChange={(value, event) => onPickedDateTo(value)} value={dateTo}/>
                 </div>
-                <div className='graphs-column'>
-                    <div className='graph-wrapper'>{medianGraph()}</div>
-                    <div className='graph-wrapper'>{minMaxGraph()}</div>     
-                    <div className='graph-wrapper'>{priceDistributionGraph()}</div>               
-                </div>
+                <div className='date-range-label'>Range: {dateFromShownOffers.toLocaleDateString()} - {dateToShownOffers.toLocaleDateString()}</div>
+                <Offers graphChangeContent={graphChangeContent} filters={filters}/>
             </div>
         </div>
     );

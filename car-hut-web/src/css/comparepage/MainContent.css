@@ -6,7 +6,17 @@
 
 .main-content-body {
     background-color: #181818;
-    margin: 2vw 20vw;
+    margin: 2vw 4vw;
     padding: 1vw 3vw;
+    display: flex;
+}
+
+.left-params-content {
+    display: block;
+    width: 70%;
+}
+
+.right-graphs-content {
+    width: 30%;
     display: block;
 }
