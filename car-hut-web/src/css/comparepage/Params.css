@@ -37,3 +37,8 @@
     padding-bottom: 0.4vw;
     margin: 2vw 2vw;
 }
+
+.date-range-and-num-of-offers-wrapper {
+    display: flex;
+    justify-content: space-between;
+}

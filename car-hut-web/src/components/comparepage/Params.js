@@ -47,6 +47,7 @@ const Params = ({ setRawGraphData, graphChangeContent }) => {
        dateFrom: null,
        dateTo: null,
     });
+    const [numOfOffers, setNumOfOffers] = useState(0);
 
     const years = [];
     [...new Array(2025-1960+1)].map((_,i) => i+1960).reverse().map((year, idx) =>  years.push({key: uuidv4(), value: year, textValue: year}));
@@ -55,7 +56,7 @@ const Params = ({ setRawGraphData, graphChangeContent }) => {
     const mileage = [];
     [...new Array(10)].map((_,i) => i*50000).map((mil, idx) =>  mileage.push({key: uuidv4(), value: mil, textValue: `${mil} km`}));
     const power = [];
-    [...new Array(15)].map((_,i) => i*50).map((pow, idx) =>  power.push({key: uuidv4(), value: pow, textValue: `${pow} PS`}));
+    [...new Array(15)].map((_,i) => i*50).map((pow, idx) =>  power.push({key: uuidv4(), value: pow, textValue: `${pow} kW`}));
     const price = [];
     [...new Array(40)].map((_,i) => i*5000).map((pri, idx) =>  price.push({key: uuidv4(), value: pri, textValue: `${pri} €`}));
     const labelsCount = [];
@@ -84,6 +85,7 @@ const Params = ({ setRawGraphData, graphChangeContent }) => {
 
     useEffect(() => {
         fetchCurrentData();
+        fetchNumberOfOffers();
     }, [pickedBrand, pickedModel, pickedFuelType, pickedYearFrom, pickedYearTo, pickedDisFrom, pickedDisTo, pickedMilFrom, pickedMilTo, pickedPowerFrom, pickedPowerTo, 
         pickedPriceFrom, pickedPriceTo, dateFrom, dateTo, numberOfLabels]);
 
@@ -333,6 +335,38 @@ const Params = ({ setRawGraphData, graphChangeContent }) => {
         }
     }
 
+    const fetchNumberOfOffers = async () => {
+        const offersFilterModel = {
+            brandId: filters.brandId,
+            modelId: filters.modelId,
+            priceFrom: filters.priceFrom,
+            priceTo: filters.priceTo,
+            mileageFrom: filters.milFrom,
+            mileageTo: filters.milTo,
+            yearFrom: filters.yearFrom,
+            yearTo: filters.yearTo,
+            location: null,
+            fuel: filters.fuelType,
+            powerFrom: filters.powerFrom,
+            powerTo: filters.powerTo,
+            displacementFrom: filters.disFrom,
+            displacementTo: filters.disTo,
+            gearbox: filters.gearbox,
+            models: [],
+            bodyTypes: [],
+            dateFrom: filters.dateFrom,
+            dateTo: filters.dateTo
+        }
+
+        try {
+            const response = await APIMethods.getNumberOfFilteredCars(offersFilterModel);
+            console.log(response);
+            setNumOfOffers(response.responseBody);
+        } catch (e) {
+            console.log('Cannot fetch number of filtered out offers.');
+        }
+    }
+
     return (
         <div className="params-body">
             <div className='params-column'>    
@@ -357,8 +391,11 @@ const Params = ({ setRawGraphData, graphChangeContent }) => {
                     <Calendar className={'calendar-object'} onChange={(value, event) => onPickedDateFrom(value)} value={dateFrom}/>
                     <Calendar className={'calendar-object'} onChange={(value, event) => onPickedDateTo(value)} value={dateTo}/>
                 </div>
-                <div className='date-range-label'>Range: {dateFromShownOffers.toLocaleDateString()} - {dateToShownOffers.toLocaleDateString()}</div>
-                <Offers graphChangeContent={graphChangeContent} filters={filters}/>
+                <div className='date-range-and-num-of-offers-wrapper'>
+                    <div className='date-range-label'>Range: {dateFromShownOffers.toLocaleDateString()} - {dateToShownOffers.toLocaleDateString()}</div>
+                    <div className='date-range-label'>{numOfOffers} offers</div>
+                </div>
+                <Offers graphChangeContent={graphChangeContent} filters={filters} numOfOffers={numOfOffers}/>
             </div>
         </div>
     );
