@@ -109,9 +109,9 @@ function Graphs({ rawGraphData, setGraphChangeContent }) {
                     onClick: (_, element) => {
                         if (element.length > 0) {
                             setGraphChangeContent({
-                                type: 'median',
+                                type: 'minmax',
                                 value: element[0].element.$context.raw,
-                                valType: element[0].dataIndex === 0 ? 'min' : 'max'
+                                valType: element[0].datasetIndex === 0 ? 'min' : 'max'
                             });
                         }
                     }

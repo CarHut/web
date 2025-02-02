@@ -1,6 +1,26 @@
 import Constants from '../constants/Constants.js';
 
 const APIMethods = {
+    getOffersForMinMaxPoint: async (minmaxVal, minmaxValType, offersFilterModel, offersPerPage, currentPage) => {
+        const response = await fetch(Constants.proxyBasePath + `/carhut-api/get-offers-for-minmax-point?minmax-val=${minmaxVal}&minmax-val-type=${minmaxValType}&offers-per-page=${offersPerPage}&current-page=${currentPage}`, {
+            method: 'POST',
+            body: JSON.stringify(offersFilterModel),
+            headers: {
+               'Content-Type': 'application/json'
+            }
+        });
+        return await response.json();
+    },
+    getOffersForMedianPoint: async (medianVal, offersFilterModel, offersPerPage, currentPage) => {
+        const response = await fetch(Constants.proxyBasePath + `/carhut-api/get-offers-for-median-point?median-val=${medianVal}&offers-per-page=${offersPerPage}&current-page=${currentPage}`, {
+            method: 'POST',
+            body: JSON.stringify(offersFilterModel),
+            headers: {
+               'Content-Type': 'application/json'
+            }
+        });
+        return await response.json();
+    },
     getImageByOfferId: async (offerId) => {
         const response = await fetch(Constants.proxyBasePath + `/image-service/get-image-by-offer-id?offer-id=${offerId}`);
         return await response.json();
@@ -61,7 +81,6 @@ const APIMethods = {
         return data;
     },
     getOffersWithFilters: async (offersFilterModel, sortBy, sortOrder, offersPerPage, currentPage) => {
-        console.log(offersPerPage);
         const response = await fetch(Constants.proxyBasePath + `/carhut-api/get-offers-with-filters?sort-by=${sortBy}&sort-order=${sortOrder}&offers-per-page=${offersPerPage}&current-page=${currentPage}`, {
             method: 'POST',
             body: JSON.stringify(offersFilterModel),

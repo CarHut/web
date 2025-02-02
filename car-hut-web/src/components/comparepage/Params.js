@@ -360,7 +360,6 @@ const Params = ({ setRawGraphData, graphChangeContent }) => {
 
         try {
             const response = await APIMethods.getNumberOfFilteredCars(offersFilterModel);
-            console.log(response);
             setNumOfOffers(response.responseBody);
         } catch (e) {
             console.log('Cannot fetch number of filtered out offers.');

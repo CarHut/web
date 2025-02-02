@@ -11,20 +11,107 @@ function Offers({ graphChangeContent, filters, numOfOffers }) {
     const [pages, setPages] = useState(1);
 
     useEffect(() => {
-        
+        if (graphChangeContent !== null && graphChangeContent !== undefined) {
+            if (graphChangeContent.type === 'median') {
+                fetchOffersForMedianPoint(graphChangeContent.value);
+            } else if (graphChangeContent.type === 'minmax') {
+                fetchOffersForMinMaxPoint(graphChangeContent.value, graphChangeContent.valType);
+            }
+        }
     }, [graphChangeContent]);
 
     useEffect(() => {
         fetchOffersWithFilters();
-    }, [filters, currentPage]);
+    }, [filters]);
 
     useEffect(() => {
+        if (graphChangeContent === null || graphChangeContent === undefined) {
+            fetchOffersWithFilters();
+        } else {
+            pickAndFetchOffersWithGraphData();
+        }
+    }, [currentPage]);
+
+    useEffect(() => {
+        console.log(offers);
         fetchImagesForOffers();
     }, [offers]);
 
     useEffect(() => {
         setPages(Math.ceil(numOfOffers / 10));
     }, [numOfOffers])
+
+    const pickAndFetchOffersWithGraphData = () => {
+        if (graphChangeContent === null || graphChangeContent === undefined) {
+            return;
+        }
+
+        if (graphChangeContent.type === 'median') {
+            fetchOffersForMedianPoint(graphChangeContent.value);
+        } else if (graphChangeContent.type === 'minmax') {
+            fetchOffersForMinMaxPoint(graphChangeContent.value, graphChangeContent.valType);
+        }
+    }
+
+    const fetchOffersForMinMaxPoint = async (minmaxVal, minmaxValType) => {
+        const offersFilterModel = {
+            brandId: filters.brandId,
+            modelId: filters.modelId,
+            priceFrom: filters.priceFrom,
+            priceTo: filters.priceTo,
+            mileageFrom: filters.milFrom,
+            mileageTo: filters.milTo,
+            yearFrom: filters.yearFrom,
+            yearTo: filters.yearTo,
+            location: null,
+            fuel: filters.fuelType,
+            powerFrom: filters.powerFrom,
+            powerTo: filters.powerTo,
+            displacementFrom: filters.disFrom,
+            displacementTo: filters.disTo,
+            gearbox: filters.gearbox,
+            models: [],
+            bodyTypes: [],
+            dateFrom: filters.dateFrom,
+            dateTo: filters.dateTo
+        }
+        const offersResponse = await APIMethods.getOffersForMinMaxPoint(minmaxVal, minmaxValType, offersFilterModel, 10, currentPage);
+        if (offersResponse.statusCode !== 200) {
+            return;
+        }
+        const offers = JSON.parse(offersResponse.responseBody);
+        setOffers(offers);
+    }
+
+    const fetchOffersForMedianPoint = async (medianVal) => {
+        const offersFilterModel = {
+            brandId: filters.brandId,
+            modelId: filters.modelId,
+            priceFrom: filters.priceFrom,
+            priceTo: filters.priceTo,
+            mileageFrom: filters.milFrom,
+            mileageTo: filters.milTo,
+            yearFrom: filters.yearFrom,
+            yearTo: filters.yearTo,
+            location: null,
+            fuel: filters.fuelType,
+            powerFrom: filters.powerFrom,
+            powerTo: filters.powerTo,
+            displacementFrom: filters.disFrom,
+            displacementTo: filters.disTo,
+            gearbox: filters.gearbox,
+            models: [],
+            bodyTypes: [],
+            dateFrom: filters.dateFrom,
+            dateTo: filters.dateTo
+        }
+        const offersResponse = await APIMethods.getOffersForMedianPoint(medianVal, offersFilterModel, 10, currentPage);
+        if (offersResponse.statusCode !== 200) {
+            return;
+        }
+        const offers = JSON.parse(offersResponse.responseBody);
+        setOffers(offers);
+    }
 
     const fetchImagesForOffers = async () => {
         const imagesTemp = [];
@@ -128,7 +215,6 @@ function Offers({ graphChangeContent, filters, numOfOffers }) {
     }
 
     const generatePageNumbers = () => {
-        console.log(pages)
         const startIdx = currentPage < 3 ? 1 : currentPage > pages - 2 ? pages - 4 : currentPage - 2;
         const pageNumbersArr = [];
         for (let i = startIdx; i < startIdx + 5; i++) {
