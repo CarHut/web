@@ -25,7 +25,7 @@ const APIMethods = {
         const response = await fetch(Constants.proxyBasePath + `/image-service/get-image-by-offer-id?offer-id=${offerId}`);
         return await response.json();
     },
-    getPriceComparisonData: async (filters, showMedian = false, showPriceRange = false, showPriceDistribution = false) => {
+    getPriceComparisonData: async (filters, showMedian = false, showPriceRange = false, showPriceDistribution = false, showPriceFluctuation = false) => {
         const requestOptions = {
             method: 'POST',
             headers: {
@@ -33,7 +33,7 @@ const APIMethods = {
             },
             body: JSON.stringify(filters)
         };
-        const response = await fetch(Constants.proxyBasePath + `/carhut-api/get-price-comparison-data?show-median=${showMedian}&show-price-range=${showPriceRange}&show-price-distribution=${showPriceDistribution}`, requestOptions);
+        const response = await fetch(Constants.proxyBasePath + `/carhut-api/get-price-comparison-data?show-median=${showMedian}&show-price-range=${showPriceRange}&show-price-distribution=${showPriceDistribution}&show-price-fluctuation=${showPriceFluctuation}`, requestOptions);
         return response;
     },
     addCarToSavedByUser: async (id, userId, carId) => {

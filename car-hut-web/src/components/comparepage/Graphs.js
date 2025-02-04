@@ -1,5 +1,6 @@
 import { Bar, Line } from "react-chartjs-2";
-import { Chart } from 'chart.js/auto';
+import { Chart, Legend, scales } from 'chart.js/auto';
+import { createPath } from "react-router-dom";
 
 /**
  * setGraphChangeContent structure:
@@ -37,6 +38,10 @@ function Graphs({ rawGraphData, setGraphChangeContent }) {
                     plugins: {
                         customCanvasBackgroundColor: {
                           color: '#313131',
+                        },
+                        title: {
+                            display: true,
+                            text: "Median prices"
                         }
                     },
                     interaction: {
@@ -104,6 +109,10 @@ function Graphs({ rawGraphData, setGraphChangeContent }) {
                     plugins: {
                         customCanvasBackgroundColor: {
                           color: '#313131',
+                        },
+                        title: {
+                            display: true,
+                            text: "MinMax prices"
                         }
                     },
                     onClick: (_, element) => {
@@ -173,6 +182,10 @@ function Graphs({ rawGraphData, setGraphChangeContent }) {
                     plugins: {
                         customCanvasBackgroundColor: {
                           color: '#313131',
+                        },
+                        title: {
+                            display: true,
+                            text: "Price distribution"
                         }
                     },
                     responsive: true,
@@ -213,11 +226,91 @@ function Graphs({ rawGraphData, setGraphChangeContent }) {
         }
     }
 
+    const priceFluctuationGraph = () => {
+        if (rawGraphData === null || rawGraphData === undefined) {
+            return (
+                <div/>
+            );
+        }
+        const dataJson = JSON.parse(rawGraphData);
+        if (dataJson !== null) {
+            if (dataJson.priceFluctuation !== null && dataJson.priceFluctuation !== undefined) {
+                const data = {
+                    labels: dataJson.priceFluctuation.labels,
+                    datasets: [{
+                        label: "Price fluctuation",
+                        data: 
+                            dataJson.priceFluctuation.priceFluctuationData.map((col, idx) => {
+                                return {
+                                    x: dataJson.priceFluctuation.labels[idx],
+                                    o: col.priceFrom,
+                                    c: col.priceTo,
+                                    p: col.percentage,
+                                    s: [col.priceFrom, col.priceTo]
+                                }
+                            }),
+                            backgroundColor: (ctx) => {
+                                if (ctx.raw.p < 0.0) {
+                                    return 'rgb(255, 0, 0)';
+                                } else {
+                                    return 'rgb(60, 179, 113)';
+                                }
+                            }
+                    }],
+                };
+
+                const options = {
+                    plugins: {
+                        customCanvasBackgroundColor: {
+                          color: '#313131',
+                        },
+                        title: {
+                            display: true,
+                            text: "Price fluctuation"
+                        },
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: (ctx) => {
+                                    return `${ctx.raw.p}%   |   From:  ${ctx.raw.o}€   |   To:  ${ctx.raw.c}€`;
+                                }
+                            }
+                        }
+                    },
+                    responsive: true,
+                    parsing: {
+                        xAxisKey: 'x',
+                        yAxisKey: 's'
+                    }
+                }
+
+                const plugin = {
+                    id: 'customCanvasBackgroundColor',
+                    beforeDraw: (chart, args, options) => {
+                        const {ctx} = chart;
+                        ctx.save();
+                        ctx.globalCompositeOperation = 'destination-over';
+                        ctx.fillStyle = options.color || '#fff';
+                        ctx.fillRect(0, 0, chart.width, chart.height);
+                        ctx.restore();
+                    }
+                };
+                
+                return ( 
+                    <Bar data={data} options={options} plugins={[plugin]}/>
+                );
+            }
+        }
+    }
+
     return (
         <div className='graphs-column'>
             <div className='graph-wrapper'>{medianGraph()}</div>
             <div className='graph-wrapper'>{minMaxGraph()}</div>     
-            <div className='graph-wrapper'>{priceDistributionGraph()}</div>               
+            <div className='graph-wrapper'>{priceDistributionGraph()}</div> 
+            <div className="graph-wrapper">{priceFluctuationGraph()}</div>              
         </div>
     )
 

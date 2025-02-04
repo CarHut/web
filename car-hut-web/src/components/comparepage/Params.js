@@ -112,8 +112,9 @@ const Params = ({ setRawGraphData, graphChangeContent }) => {
             dateRangeTo:        dateToInc,
             numOfLabels:        numberOfLabels
         };
-        const response = await APIMethods.getPriceComparisonData(filters, true, true, true);
+        const response = await APIMethods.getPriceComparisonData(filters, true, true, true, true);
         const data = await response.json();
+        console.log(data);
         setRawGraphData(data.responseBody);
     }
 
