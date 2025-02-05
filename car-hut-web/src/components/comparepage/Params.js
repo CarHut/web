@@ -7,7 +7,7 @@ import 'react-calendar/dist/Calendar.css';
 import { v4 as uuidv4 } from 'uuid';
 import Offers from './Offers';
 
-const Params = ({ setRawGraphData, graphChangeContent }) => {
+const Params = ({ setRawGraphData, graphChangeContent, overlayActive }) => {
 
     const [brands, setBrands] = useState([]);
     const [pickedBrand, setPickedBrand] = useState(null);
@@ -385,18 +385,20 @@ const Params = ({ setRawGraphData, graphChangeContent }) => {
                 <ComboBox label={"Power from"} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={power} selectedValue={pickedPowerFrom} onChangeHandler={(e) => onPickedPowerFrom(e)}/>
                 <ComboBox label={"Power to"} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={power} selectedValue={pickedPowerTo} onChangeHandler={(e) => onPickedPowerTo(e)}/>   
             </div>
-            <div className='params-column'>    
-                <div className='calendar-label'>Date range</div>
-                <div className='params-date-range-row'>
-                    <Calendar className={'calendar-object'} onChange={(value, event) => onPickedDateFrom(value)} value={dateFrom}/>
-                    <Calendar className={'calendar-object'} onChange={(value, event) => onPickedDateTo(value)} value={dateTo}/>
-                </div>
-                <div className='date-range-and-num-of-offers-wrapper'>
-                    <div className='date-range-label'>Range: {dateFromShownOffers.toLocaleDateString()} - {dateToShownOffers.toLocaleDateString()}</div>
-                    <div className='date-range-label'>{numOfOffers} offers</div>
-                </div>
-                <Offers graphChangeContent={graphChangeContent} filters={filters} numOfOffers={numOfOffers}/>
-            </div>
+            {overlayActive === true ? <div/> 
+                :   <div className='params-column'>    
+                        <div className='calendar-label'>Date range</div>
+                        <div className='params-date-range-row'>
+                            <Calendar className={'calendar-object'} onChange={(value, event) => onPickedDateFrom(value)} value={dateFrom}/>
+                            <Calendar className={'calendar-object'} onChange={(value, event) => onPickedDateTo(value)} value={dateTo}/>
+                        </div>
+                        <div className='date-range-and-num-of-offers-wrapper'>
+                            <div className='date-range-label'>Range: {dateFromShownOffers.toLocaleDateString()} - {dateToShownOffers.toLocaleDateString()}</div>
+                            <div className='date-range-label'>{numOfOffers} offers</div>
+                        </div>
+                        <Offers graphChangeContent={graphChangeContent} filters={filters} numOfOffers={numOfOffers}/>
+                    </div> 
+            }
         </div>
     );
 }

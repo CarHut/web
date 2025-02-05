@@ -1,6 +1,8 @@
 import { Bar, Line } from "react-chartjs-2";
 import { Chart, Legend, scales } from 'chart.js/auto';
 import { createPath } from "react-router-dom";
+import '../../css/comparepage/Graphs.css';
+import { use, useState } from "react";
 
 /**
  * setGraphChangeContent structure:
@@ -12,7 +14,13 @@ import { createPath } from "react-router-dom";
  * } 
  * 
 **/ 
-function Graphs({ rawGraphData, setGraphChangeContent }) {
+function Graphs({ rawGraphData, setGraphChangeContent, setOverlayActive }) {
+    const [isGraphOverlayActive, setIsGraphOverlayActive] = useState(false);
+    const [isMedianGraphActive, setIsMedianGraphActive] = useState(true);
+    const [isMinMaxGraphActive, setIsMinMaxGraphActive] = useState(true);
+    const [isPriceDistributionGraphActive, setIsPriceDistributionGraphActive] = useState(true);
+    const [isPriceFluctuationGraphActive, setIsPriceFluctuationGraphActive] = useState(true);
+
     const medianGraph = () => {
         if (rawGraphData === null || rawGraphData === undefined) {
             return (
@@ -250,6 +258,9 @@ function Graphs({ rawGraphData, setGraphChangeContent }) {
                                 }
                             }),
                             backgroundColor: (ctx) => {
+                                if (ctx.raw === null || ctx.raw === undefined) {
+                                    return '';
+                                }
                                 if (ctx.raw.p < 0.0) {
                                     return 'rgb(255, 0, 0)';
                                 } else {
@@ -274,6 +285,9 @@ function Graphs({ rawGraphData, setGraphChangeContent }) {
                         tooltip: {
                             callbacks: {
                                 label: (ctx) => {
+                                    if (ctx === null) {
+                                        return '';
+                                    }
                                     return `${ctx.raw.p}%   |   From:  ${ctx.raw.o}€   |   To:  ${ctx.raw.c}€`;
                                 }
                             }
@@ -305,12 +319,81 @@ function Graphs({ rawGraphData, setGraphChangeContent }) {
         }
     }
 
+    const changeGraphOverlayStatus = () => {
+        if (isGraphOverlayActive === true) {
+            setIsGraphOverlayActive(false);
+            setIsMedianGraphActive(true);
+            setIsMinMaxGraphActive(true);
+            setIsPriceDistributionGraphActive(true);
+            setIsPriceFluctuationGraphActive(true);
+            setOverlayActive(false);
+        } else {
+            setIsGraphOverlayActive(true);
+            setOverlayActive(true);
+        }
+    }
+
+    const showMedianGraph = () => {
+        if (isMedianGraphActive === true) {
+            setIsMedianGraphActive(false);
+        } else {
+            setIsMedianGraphActive(true);
+        }
+    }
+
+    const showMinMaxGraph = () => {
+        if (isMinMaxGraphActive === true) {
+            setIsMinMaxGraphActive(false);
+        } else {
+            setIsMinMaxGraphActive(true);
+        }
+    }
+
+    const showPriceDistributionGraph = () => {
+        if (isPriceDistributionGraphActive === true) {
+            setIsPriceDistributionGraphActive(false);
+        } else {
+            setIsPriceDistributionGraphActive(true);
+        }
+    }
+
+    const showPriceFluctuationGraph = () => {
+        if (isPriceFluctuationGraphActive === true) {
+            setIsPriceFluctuationGraphActive(false);
+        } else {
+            setIsPriceFluctuationGraphActive(true);
+        }
+    }
+
+    const areMultipleChartsActiveInOverlay = () => {
+        return (isMedianGraphActive + isMinMaxGraphActive + isPriceDistributionGraphActive + isPriceFluctuationGraphActive) > 1;
+    }
+
     return (
-        <div className='graphs-column'>
-            <div className='graph-wrapper'>{medianGraph()}</div>
-            <div className='graph-wrapper'>{minMaxGraph()}</div>     
-            <div className='graph-wrapper'>{priceDistributionGraph()}</div> 
-            <div className="graph-wrapper">{priceFluctuationGraph()}</div>              
+        <div className={isGraphOverlayActive === false ? 'graphs-column' : areMultipleChartsActiveInOverlay() === false ? 'graphs-overlay' : 'graphs-overlay flex'}>
+            <button onClick={changeGraphOverlayStatus} className="graph-overlay-button">{isGraphOverlayActive === true ? ">>> Close graph overlay" : "<<< Open graph overlay"}</button>
+            {isGraphOverlayActive === true 
+                ? 
+                    <div className="graphs-overlay-navbar">
+                        <button onClick={showMedianGraph} className={isMedianGraphActive === true ? "graphs-overlay-navbar-button active" : "graphs-overlay-navbar-button"}>Median graph</button>
+                        <button onClick={showMinMaxGraph} className={isMinMaxGraphActive == true ? "graphs-overlay-navbar-button active" : "graphs-overlay-navbar-button"}>MinMax graph</button>
+                        <button onClick={showPriceDistributionGraph} className={isPriceDistributionGraphActive == true ? "graphs-overlay-navbar-button active" : "graphs-overlay-navbar-button"}>Price distribution graph</button>
+                        <button onClick={showPriceFluctuationGraph} className={isPriceFluctuationGraphActive == true ? "graphs-overlay-navbar-button active" : "graphs-overlay-navbar-button"}>Price fluctuation graph</button>
+                    </div> 
+                :   <div/>
+            }
+            {isMedianGraphActive === false ? <div/> 
+                : <div className={isGraphOverlayActive === true && areMultipleChartsActiveInOverlay() === false ? "overlay-graph-wrapper" : "graph-wrapper"}>{medianGraph()}</div>
+            }
+            {isMinMaxGraphActive === false ? <div/> 
+                : <div className={isGraphOverlayActive === true && areMultipleChartsActiveInOverlay() === false ? "overlay-graph-wrapper" : "graph-wrapper"}>{minMaxGraph()}</div>
+            }
+            {isPriceDistributionGraphActive === false ? <div/> 
+                : <div className={isGraphOverlayActive === true && areMultipleChartsActiveInOverlay() === false ? "overlay-graph-wrapper" : "graph-wrapper"}>{priceDistributionGraph()}</div>
+            }
+            {isPriceFluctuationGraphActive === false ? <div/>
+                : <div className={isGraphOverlayActive === true && areMultipleChartsActiveInOverlay() === false ? "overlay-graph-wrapper" : "graph-wrapper"}>{priceFluctuationGraph()}</div>
+            }
         </div>
     )
 
