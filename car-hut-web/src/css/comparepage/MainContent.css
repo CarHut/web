@@ -21,3 +21,12 @@
     position: absolute;
     right: 0px;
 }
+
+.right-graphs-content.graph-overlay {
+    width: 80%;
+    padding: 0px 60px 0px 0px;
+}
+
+.left-params-content.graph-overlay {
+    width: 10%;
+}

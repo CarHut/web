@@ -1,8 +1,62 @@
 .graphs-column {
     display: block;
-    align-items: ;
+    align-items: right;
 }
 
 .graph-wrapper {
-    margin: 2vw 3vw;
+    height: 250px;
+    width: 500px;
+}
+
+.graph-overlay-button {
+    background-color: #313131;
+    color: #fff;
+    font-size: 1vw;
+    border: none;
+    padding: 10px;
+}
+
+.graph-overlay-button:hover {
+    cursor: pointer;
+}
+
+.graphs-overlay {
+    position: relative;
+}
+
+.graphs-overlay.flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.graphs-overlay-navbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 30px 0px;
+}
+
+.graphs-overlay-navbar-button {
+    font-size: 20px;
+    color: #fff;
+    background-color: #181818;
+    border: none;
+}
+
+.graphs-overlay-navbar-button.active {
+    font-size: 20px;
+    color: #fff;
+    background-color: #313131;
+    padding: 10px;
+    border: none;
+}
+
+.graphs-overlay-navbar-button:hover {
+    cursor: pointer;
+}
+
+.overlay-graph-wrapper {
+    width: 80%;
+    margin: auto;
 }
