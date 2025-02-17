@@ -20,6 +20,7 @@ function Graphs({ rawGraphData, setGraphChangeContent, setOverlayActive }) {
     const [isMinMaxGraphActive, setIsMinMaxGraphActive] = useState(true);
     const [isPriceDistributionGraphActive, setIsPriceDistributionGraphActive] = useState(true);
     const [isPriceFluctuationGraphActive, setIsPriceFluctuationGraphActive] = useState(true);
+    const [isOffersVolumeGraphActive, setIsOffersVolumeGraphActive] = useState(true);
 
     const medianGraph = () => {
         if (rawGraphData === null || rawGraphData === undefined) {
@@ -319,6 +320,98 @@ function Graphs({ rawGraphData, setGraphChangeContent, setOverlayActive }) {
         }
     }
 
+    const offersVolumeGraph = () => {
+        if (rawGraphData === null || rawGraphData === undefined) {
+            return (
+                <div/>
+            );
+        }
+        const dataJson = JSON.parse(rawGraphData);
+        if (dataJson !== null) {
+            if (dataJson.offersVolume !== null && dataJson.offersVolume !== undefined) {
+                const maxVolume = Math.max(...dataJson.offersVolume.offerVolumes.map(v => v.volume));
+                const highThreshold = maxVolume * 0.75;
+                const lowThreshold = maxVolume * 0.25;
+
+                // Define colors for categories
+                const colorMapping = {
+                    "Top volume": "#008000",
+                    "Standard volume": "#ba8e23",
+                    "Low volume": "#FF0000"
+                };
+
+                // Function to categorize a volume
+                function getVolumeCategory(volume) {
+                    if (volume >= highThreshold) return "Top volume";
+                    if (volume <= lowThreshold) return "Low volume";
+                    return "Standard volume";
+                }
+
+                // Initialize grouped data with empty arrays for each label
+                const groupedData = {
+                    "Top volume": new Array(dataJson.offersVolume.labels.length).fill(null),
+                    "Standard volume": new Array(dataJson.offersVolume.labels.length).fill(null),
+                    "Low volume": new Array(dataJson.offersVolume.labels.length).fill(null)
+                };
+
+                // Assign volumes to correct positions
+                dataJson.offersVolume.offerVolumes.forEach((volumeData, index) => {
+                    const category = getVolumeCategory(volumeData.volume);
+                    groupedData[category][index] = volumeData.volume; // Place the value at the correct index
+                });
+
+                // Final dataset ensuring alignment with labels
+                const datasets = Object.keys(groupedData).map(category => ({
+                    label: category,
+                    data: groupedData[category], // Values aligned with labels
+                    backgroundColor: colorMapping[category]
+                }));
+
+                const prepData = {
+                    labels: dataJson.offersVolume.labels, // Ensure labels match the dataset
+                    datasets: datasets
+                };
+        
+                const options = {
+                    plugins: {
+                        customCanvasBackgroundColor: {
+                          color: '#313131',
+                        },
+                        title: {
+                            display: true,
+                            text: "Offers volume"
+                        }
+                    },
+                    responsive: true,
+                    scales: {
+                        x: {
+                            stacked: true,
+                        },
+                        y: {
+                            stacked: true
+                        }
+                    },
+                }
+    
+                const plugin = {
+                    id: 'customCanvasBackgroundColor',
+                    beforeDraw: (chart, args, options) => {
+                        const {ctx} = chart;
+                        ctx.save();
+                        ctx.globalCompositeOperation = 'destination-over';
+                        ctx.fillStyle = options.color || '#fff';
+                        ctx.fillRect(0, 0, chart.width, chart.height);
+                        ctx.restore();
+                    }
+                };
+    
+                return ( 
+                    <Bar data={prepData} options={options} plugins={[plugin]}/>
+                );
+            }
+        }
+    }
+
     const changeGraphOverlayStatus = () => {
         if (isGraphOverlayActive === true) {
             setIsGraphOverlayActive(false);
@@ -326,6 +419,7 @@ function Graphs({ rawGraphData, setGraphChangeContent, setOverlayActive }) {
             setIsMinMaxGraphActive(true);
             setIsPriceDistributionGraphActive(true);
             setIsPriceFluctuationGraphActive(true);
+            setIsOffersVolumeGraphActive(true);
             setOverlayActive(false);
         } else {
             setIsGraphOverlayActive(true);
@@ -365,6 +459,14 @@ function Graphs({ rawGraphData, setGraphChangeContent, setOverlayActive }) {
         }
     }
 
+    const showOffersVolumeGraph = () => {
+        if (isOffersVolumeGraphActive === true) {
+            setIsOffersVolumeGraphActive(false);
+        } else {
+            setIsOffersVolumeGraphActive(true);
+        }
+    }
+
     const areMultipleChartsActiveInOverlay = () => {
         return (isMedianGraphActive + isMinMaxGraphActive + isPriceDistributionGraphActive + isPriceFluctuationGraphActive) > 1;
     }
@@ -379,6 +481,7 @@ function Graphs({ rawGraphData, setGraphChangeContent, setOverlayActive }) {
                         <button onClick={showMinMaxGraph} className={isMinMaxGraphActive == true ? "graphs-overlay-navbar-button active" : "graphs-overlay-navbar-button"}>MinMax graph</button>
                         <button onClick={showPriceDistributionGraph} className={isPriceDistributionGraphActive == true ? "graphs-overlay-navbar-button active" : "graphs-overlay-navbar-button"}>Price distribution graph</button>
                         <button onClick={showPriceFluctuationGraph} className={isPriceFluctuationGraphActive == true ? "graphs-overlay-navbar-button active" : "graphs-overlay-navbar-button"}>Price fluctuation graph</button>
+                        <button onClick={showOffersVolumeGraph} className={isOffersVolumeGraphActive == true ? "graphs-overlay-navbar-button active" : "graphs-overlay-navbar-button"}>Offers volume graph</button>
                     </div> 
                 :   <div/>
             }
@@ -393,6 +496,9 @@ function Graphs({ rawGraphData, setGraphChangeContent, setOverlayActive }) {
             }
             {isPriceFluctuationGraphActive === false ? <div/>
                 : <div className={isGraphOverlayActive === true && areMultipleChartsActiveInOverlay() === false ? "overlay-graph-wrapper" : "graph-wrapper"}>{priceFluctuationGraph()}</div>
+            }
+            {isOffersVolumeGraphActive === false ? <div/>
+                : <div className={isGraphOverlayActive === true && areMultipleChartsActiveInOverlay() === false ? "overlay-graph-wrapper" : "graph-wrapper"}>{offersVolumeGraph()}</div>
             }
         </div>
     )
