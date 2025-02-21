@@ -20,13 +20,14 @@ jobs:
           submodules: true
           lfs: false
 
-      - name: Use Node.js 16 (Fix OpenSSL Issue)
+      - name: Use Node.js 16
         uses: actions/setup-node@v3
         with:
           node-version: 16
 
       - name: Install Dependencies
         run: npm install
+        working-directory: ./car-hut-web
 
       - name: Set OpenSSL Legacy Provider
         run: echo "NODE_OPTIONS=--openssl-legacy-provider" >> $GITHUB_ENV
