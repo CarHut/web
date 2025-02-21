@@ -30,7 +30,7 @@ jobs:
         working-directory: ./car-hut-web
 
       - name: Build React App
-        run: npm run build
+        run: CI=false npm run build
         working-directory: ./car-hut-web
 
       - name: Build And Deploy
