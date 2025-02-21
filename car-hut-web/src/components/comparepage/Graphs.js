@@ -1,6 +1,8 @@
 import { Bar, Line } from "react-chartjs-2";
 import { Chart, Legend, scales } from 'chart.js/auto';
 import { createPath } from "react-router-dom";
+import '../../css/comparepage/Graphs.css';
+import { use, useState } from "react";
 
 /**
  * setGraphChangeContent structure:
@@ -12,7 +14,14 @@ import { createPath } from "react-router-dom";
  * } 
  * 
 **/ 
-function Graphs({ rawGraphData, setGraphChangeContent }) {
+function Graphs({ rawGraphData, setGraphChangeContent, setOverlayActive }) {
+    const [isGraphOverlayActive, setIsGraphOverlayActive] = useState(false);
+    const [isMedianGraphActive, setIsMedianGraphActive] = useState(true);
+    const [isMinMaxGraphActive, setIsMinMaxGraphActive] = useState(true);
+    const [isPriceDistributionGraphActive, setIsPriceDistributionGraphActive] = useState(true);
+    const [isPriceFluctuationGraphActive, setIsPriceFluctuationGraphActive] = useState(true);
+    const [isOffersVolumeGraphActive, setIsOffersVolumeGraphActive] = useState(true);
+
     const medianGraph = () => {
         if (rawGraphData === null || rawGraphData === undefined) {
             return (
@@ -250,6 +259,9 @@ function Graphs({ rawGraphData, setGraphChangeContent }) {
                                 }
                             }),
                             backgroundColor: (ctx) => {
+                                if (ctx.raw === null || ctx.raw === undefined) {
+                                    return '';
+                                }
                                 if (ctx.raw.p < 0.0) {
                                     return 'rgb(255, 0, 0)';
                                 } else {
@@ -274,6 +286,9 @@ function Graphs({ rawGraphData, setGraphChangeContent }) {
                         tooltip: {
                             callbacks: {
                                 label: (ctx) => {
+                                    if (ctx === null) {
+                                        return '';
+                                    }
                                     return `${ctx.raw.p}%   |   From:  ${ctx.raw.o}€   |   To:  ${ctx.raw.c}€`;
                                 }
                             }
@@ -305,12 +320,186 @@ function Graphs({ rawGraphData, setGraphChangeContent }) {
         }
     }
 
+    const offersVolumeGraph = () => {
+        if (rawGraphData === null || rawGraphData === undefined) {
+            return (
+                <div/>
+            );
+        }
+        const dataJson = JSON.parse(rawGraphData);
+        if (dataJson !== null) {
+            if (dataJson.offersVolume !== null && dataJson.offersVolume !== undefined) {
+                const maxVolume = Math.max(...dataJson.offersVolume.offerVolumes.map(v => v.volume));
+                const highThreshold = maxVolume * 0.75;
+                const lowThreshold = maxVolume * 0.25;
+
+                // Define colors for categories
+                const colorMapping = {
+                    "Top volume": "#008000",
+                    "Standard volume": "#ba8e23",
+                    "Low volume": "#FF0000"
+                };
+
+                // Function to categorize a volume
+                function getVolumeCategory(volume) {
+                    if (volume >= highThreshold) return "Top volume";
+                    if (volume <= lowThreshold) return "Low volume";
+                    return "Standard volume";
+                }
+
+                // Initialize grouped data with empty arrays for each label
+                const groupedData = {
+                    "Top volume": new Array(dataJson.offersVolume.labels.length).fill(null),
+                    "Standard volume": new Array(dataJson.offersVolume.labels.length).fill(null),
+                    "Low volume": new Array(dataJson.offersVolume.labels.length).fill(null)
+                };
+
+                // Assign volumes to correct positions
+                dataJson.offersVolume.offerVolumes.forEach((volumeData, index) => {
+                    const category = getVolumeCategory(volumeData.volume);
+                    groupedData[category][index] = volumeData.volume; // Place the value at the correct index
+                });
+
+                // Final dataset ensuring alignment with labels
+                const datasets = Object.keys(groupedData).map(category => ({
+                    label: category,
+                    data: groupedData[category], // Values aligned with labels
+                    backgroundColor: colorMapping[category]
+                }));
+
+                const prepData = {
+                    labels: dataJson.offersVolume.labels, // Ensure labels match the dataset
+                    datasets: datasets
+                };
+        
+                const options = {
+                    plugins: {
+                        customCanvasBackgroundColor: {
+                          color: '#313131',
+                        },
+                        title: {
+                            display: true,
+                            text: "Offers volume"
+                        }
+                    },
+                    responsive: true,
+                    scales: {
+                        x: {
+                            stacked: true,
+                        },
+                        y: {
+                            stacked: true
+                        }
+                    },
+                }
+    
+                const plugin = {
+                    id: 'customCanvasBackgroundColor',
+                    beforeDraw: (chart, args, options) => {
+                        const {ctx} = chart;
+                        ctx.save();
+                        ctx.globalCompositeOperation = 'destination-over';
+                        ctx.fillStyle = options.color || '#fff';
+                        ctx.fillRect(0, 0, chart.width, chart.height);
+                        ctx.restore();
+                    }
+                };
+    
+                return ( 
+                    <Bar data={prepData} options={options} plugins={[plugin]}/>
+                );
+            }
+        }
+    }
+
+    const changeGraphOverlayStatus = () => {
+        if (isGraphOverlayActive === true) {
+            setIsGraphOverlayActive(false);
+            setIsMedianGraphActive(true);
+            setIsMinMaxGraphActive(true);
+            setIsPriceDistributionGraphActive(true);
+            setIsPriceFluctuationGraphActive(true);
+            setIsOffersVolumeGraphActive(true);
+            setOverlayActive(false);
+        } else {
+            setIsGraphOverlayActive(true);
+            setOverlayActive(true);
+        }
+    }
+
+    const showMedianGraph = () => {
+        if (isMedianGraphActive === true) {
+            setIsMedianGraphActive(false);
+        } else {
+            setIsMedianGraphActive(true);
+        }
+    }
+
+    const showMinMaxGraph = () => {
+        if (isMinMaxGraphActive === true) {
+            setIsMinMaxGraphActive(false);
+        } else {
+            setIsMinMaxGraphActive(true);
+        }
+    }
+
+    const showPriceDistributionGraph = () => {
+        if (isPriceDistributionGraphActive === true) {
+            setIsPriceDistributionGraphActive(false);
+        } else {
+            setIsPriceDistributionGraphActive(true);
+        }
+    }
+
+    const showPriceFluctuationGraph = () => {
+        if (isPriceFluctuationGraphActive === true) {
+            setIsPriceFluctuationGraphActive(false);
+        } else {
+            setIsPriceFluctuationGraphActive(true);
+        }
+    }
+
+    const showOffersVolumeGraph = () => {
+        if (isOffersVolumeGraphActive === true) {
+            setIsOffersVolumeGraphActive(false);
+        } else {
+            setIsOffersVolumeGraphActive(true);
+        }
+    }
+
+    const areMultipleChartsActiveInOverlay = () => {
+        return (isMedianGraphActive + isMinMaxGraphActive + isPriceDistributionGraphActive + isPriceFluctuationGraphActive) > 1;
+    }
+
     return (
-        <div className='graphs-column'>
-            <div className='graph-wrapper'>{medianGraph()}</div>
-            <div className='graph-wrapper'>{minMaxGraph()}</div>     
-            <div className='graph-wrapper'>{priceDistributionGraph()}</div> 
-            <div className="graph-wrapper">{priceFluctuationGraph()}</div>              
+        <div className={isGraphOverlayActive === false ? 'graphs-column' : areMultipleChartsActiveInOverlay() === false ? 'graphs-overlay' : 'graphs-overlay flex'}>
+            <button onClick={changeGraphOverlayStatus} className="graph-overlay-button">{isGraphOverlayActive === true ? ">>> Close graph overlay" : "<<< Open graph overlay"}</button>
+            {isGraphOverlayActive === true 
+                ? 
+                    <div className="graphs-overlay-navbar">
+                        <button onClick={showMedianGraph} className={isMedianGraphActive === true ? "graphs-overlay-navbar-button active" : "graphs-overlay-navbar-button"}>Median graph</button>
+                        <button onClick={showMinMaxGraph} className={isMinMaxGraphActive == true ? "graphs-overlay-navbar-button active" : "graphs-overlay-navbar-button"}>MinMax graph</button>
+                        <button onClick={showPriceDistributionGraph} className={isPriceDistributionGraphActive == true ? "graphs-overlay-navbar-button active" : "graphs-overlay-navbar-button"}>Price distribution graph</button>
+                        <button onClick={showPriceFluctuationGraph} className={isPriceFluctuationGraphActive == true ? "graphs-overlay-navbar-button active" : "graphs-overlay-navbar-button"}>Price fluctuation graph</button>
+                        <button onClick={showOffersVolumeGraph} className={isOffersVolumeGraphActive == true ? "graphs-overlay-navbar-button active" : "graphs-overlay-navbar-button"}>Offers volume graph</button>
+                    </div> 
+                :   <div/>
+            }
+            {isMedianGraphActive === false ? <div/> 
+                : <div className={isGraphOverlayActive === true && areMultipleChartsActiveInOverlay() === false ? "overlay-graph-wrapper" : "graph-wrapper"}>{medianGraph()}</div>
+            }
+            {isMinMaxGraphActive === false ? <div/> 
+                : <div className={isGraphOverlayActive === true && areMultipleChartsActiveInOverlay() === false ? "overlay-graph-wrapper" : "graph-wrapper"}>{minMaxGraph()}</div>
+            }
+            {isPriceDistributionGraphActive === false ? <div/> 
+                : <div className={isGraphOverlayActive === true && areMultipleChartsActiveInOverlay() === false ? "overlay-graph-wrapper" : "graph-wrapper"}>{priceDistributionGraph()}</div>
+            }
+            {isPriceFluctuationGraphActive === false ? <div/>
+                : <div className={isGraphOverlayActive === true && areMultipleChartsActiveInOverlay() === false ? "overlay-graph-wrapper" : "graph-wrapper"}>{priceFluctuationGraph()}</div>
+            }
+            {isOffersVolumeGraphActive === false ? <div/>
+                : <div className={isGraphOverlayActive === true && areMultipleChartsActiveInOverlay() === false ? "overlay-graph-wrapper" : "graph-wrapper"}>{offersVolumeGraph()}</div>
+            }
         </div>
     )
 
