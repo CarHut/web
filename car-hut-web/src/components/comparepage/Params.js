@@ -62,17 +62,9 @@ const Params = ({ setRawGraphData, graphChangeContent, overlayActive }) => {
     const labelsCount = [];
     [...new Array(15)].map((_,i) => i + 1).map((lbl, idx) =>  labelsCount.push({key: uuidv4(), value: lbl, textValue: `${lbl}`})); 
 
-    const comboBoxSizingWidth = {
-        standardSize: "10vw",
-        mediumSize:   "20vw",
-        smallSize:    "40vw"
-    };
-
-    const comboBoxSizingHeight = {
-        standardSize: "2vw",
-        mediumSize:   "4vw",
-        smallSize:    "7vw"
-    }
+    const comboBoxWidth = "200px";
+    const comboBoxHeight = "40px";
+    const comboBoxFontSize = "16px";
 
     useEffect(() => {
         fetchBrands();
@@ -370,27 +362,27 @@ const Params = ({ setRawGraphData, graphChangeContent, overlayActive }) => {
     return (
         <div className="params-body">
             <div className='params-column'>    
-                <ComboBox label={"Number of labels"} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={labelsCount} selectedValue={numberOfLabels} onChangeHandler={(e) => onPickedNumberOfLabels(e)}/>
-                <ComboBox label={"Price from"} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={price} selectedValue={pickedPriceFrom} onChangeHandler={(e) => onPickedPriceFrom(e)}/>
-                <ComboBox label={"Price to"} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={price} selectedValue={pickedPriceTo} onChangeHandler={(e) => onPickedPriceTo(e)}/>
-                <ComboBox label={"Brand"} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={brands} selectedValue={pickedBrand} onChangeHandler={(e) => onPickedBrand(e)}/>
-                <ComboBox label={"Model"} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={models} selectedValue={pickedModel} onChangeHandler={(e) => onPickedModel(e)}/>
-                <ComboBox label={"Fuel"} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={fuelTypes} selectedValue={pickedFuelType} onChangeHandler={(e) => onPickedFuelType(e)}/>
-                <ComboBox label={"Year from"} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={years} selectedValue={pickedYearFrom} onChangeHandler={(e) => onPickedYearFrom(e)}/>
-                <ComboBox label={"Year to"} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={years} selectedValue={pickedYearTo} onChangeHandler={(e) => onPickedYearTo(e)}/>    
-                <ComboBox label={"Displacement from"} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={displacement} selectedValue={pickedDisFrom} onChangeHandler={(e) => onPickedDisFrom(e)}/>
-                <ComboBox label={"Displacement to"} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={displacement} selectedValue={pickedDisTo} onChangeHandler={(e) => onPickedDisTo(e)}/>    
-                <ComboBox label={"Mileage from"} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={mileage} selectedValue={pickedMilFrom} onChangeHandler={(e) => onPickedMilFrom(e)}/>
-                <ComboBox label={"Mileage to"} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={mileage} selectedValue={pickedMilTo} onChangeHandler={(e) => onPickedMilTo(e)}/>       
-                <ComboBox label={"Power from"} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={power} selectedValue={pickedPowerFrom} onChangeHandler={(e) => onPickedPowerFrom(e)}/>
-                <ComboBox label={"Power to"} width={comboBoxSizingWidth} height={comboBoxSizingHeight} optionValues={power} selectedValue={pickedPowerTo} onChangeHandler={(e) => onPickedPowerTo(e)}/>   
+                <ComboBox label={"Number of labels"} fontSize={comboBoxFontSize} width={comboBoxWidth} height={comboBoxHeight} optionValues={labelsCount} selectedValue={numberOfLabels} onChangeHandler={(e) => onPickedNumberOfLabels(e)}/>
+                <ComboBox label={"Price from"} fontSize={comboBoxFontSize} width={comboBoxWidth} height={comboBoxHeight} optionValues={price} selectedValue={pickedPriceFrom} onChangeHandler={(e) => onPickedPriceFrom(e)}/>
+                <ComboBox label={"Price to"} fontSize={comboBoxFontSize} width={comboBoxWidth} height={comboBoxHeight} optionValues={price} selectedValue={pickedPriceTo} onChangeHandler={(e) => onPickedPriceTo(e)}/>
+                <ComboBox label={"Brand"} fontSize={comboBoxFontSize} width={comboBoxWidth} height={comboBoxHeight} optionValues={brands} selectedValue={pickedBrand} onChangeHandler={(e) => onPickedBrand(e)}/>
+                <ComboBox label={"Model"} fontSize={comboBoxFontSize} width={comboBoxWidth} height={comboBoxHeight} optionValues={models} selectedValue={pickedModel} onChangeHandler={(e) => onPickedModel(e)}/>
+                <ComboBox label={"Fuel"} fontSize={comboBoxFontSize} width={comboBoxWidth} height={comboBoxHeight} optionValues={fuelTypes} selectedValue={pickedFuelType} onChangeHandler={(e) => onPickedFuelType(e)}/>
+                <ComboBox label={"Year from"} fontSize={comboBoxFontSize} width={comboBoxWidth} height={comboBoxHeight} optionValues={years} selectedValue={pickedYearFrom} onChangeHandler={(e) => onPickedYearFrom(e)}/>
+                <ComboBox label={"Year to"} fontSize={comboBoxFontSize} width={comboBoxWidth} height={comboBoxHeight} optionValues={years} selectedValue={pickedYearTo} onChangeHandler={(e) => onPickedYearTo(e)}/>    
+                <ComboBox label={"Displacement from"} fontSize={comboBoxFontSize} width={comboBoxWidth} height={comboBoxHeight} optionValues={displacement} selectedValue={pickedDisFrom} onChangeHandler={(e) => onPickedDisFrom(e)}/>
+                <ComboBox label={"Displacement to"} fontSize={comboBoxFontSize} width={comboBoxWidth} height={comboBoxHeight} optionValues={displacement} selectedValue={pickedDisTo} onChangeHandler={(e) => onPickedDisTo(e)}/>    
+                <ComboBox label={"Mileage from"} fontSize={comboBoxFontSize} width={comboBoxWidth} height={comboBoxHeight} optionValues={mileage} selectedValue={pickedMilFrom} onChangeHandler={(e) => onPickedMilFrom(e)}/>
+                <ComboBox label={"Mileage to"} fontSize={comboBoxFontSize} width={comboBoxWidth} height={comboBoxHeight} optionValues={mileage} selectedValue={pickedMilTo} onChangeHandler={(e) => onPickedMilTo(e)}/>       
+                <ComboBox label={"Power from"} fontSize={comboBoxFontSize} width={comboBoxWidth} height={comboBoxHeight} optionValues={power} selectedValue={pickedPowerFrom} onChangeHandler={(e) => onPickedPowerFrom(e)}/>
+                <ComboBox label={"Power to"} fontSize={comboBoxFontSize} width={comboBoxWidth} height={comboBoxHeight} optionValues={power} selectedValue={pickedPowerTo} onChangeHandler={(e) => onPickedPowerTo(e)}/>   
             </div>
             {overlayActive === true ? <div/> 
                 :   <div className='params-column'>    
                         <div className='calendar-label'>Date range</div>
                         <div className='params-date-range-row'>
-                            <Calendar className={'calendar-object'} onChange={(value, event) => onPickedDateFrom(value)} value={dateFrom}/>
-                            <Calendar className={'calendar-object'} onChange={(value, event) => onPickedDateTo(value)} value={dateTo}/>
+                            <div className={"calendar"}><Calendar onChange={(value, event) => onPickedDateFrom(value)} value={dateFrom}/></div>
+                            <div className={"calendar"}><Calendar onChange={(value, event) => onPickedDateTo(value)} value={dateTo}/></div>
                         </div>
                         <div className='date-range-and-num-of-offers-wrapper'>
                             <div className='date-range-label'>Range: {dateFromShownOffers.toLocaleDateString()} - {dateToShownOffers.toLocaleDateString()}</div>

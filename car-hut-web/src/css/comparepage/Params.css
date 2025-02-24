@@ -11,31 +11,30 @@
     display: flex;
 }
 
-.calendar-object {
-    margin: 0vw 2vw;
+.calendar {
+    margin: 20px 40px;
+    width: 300px;
 }
 
 .calendar-label {
     color: #fff;
-    font-size: 1vw;
-    padding-bottom: 0.4vw;
-    margin: 0vw 2vw;
+    font-size: 24px;
+    margin: 0px 40px;
 }
 
 .graphs-column {
     display: block;
-    margin: 2vw;
+    margin: 40px;
 }
 
 .graph-wrapper {
-    margin: 2vw 0vw;
+    margin: 40px 0px;
 }
 
 .date-range-label {
     color: #fff;
-    font-size: 2vw;
-    padding-bottom: 0.4vw;
-    margin: 2vw 2vw;
+    font-size: 24px;
+    margin: 20px 40px;
 }
 
 .date-range-and-num-of-offers-wrapper {

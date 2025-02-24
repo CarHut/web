@@ -197,6 +197,7 @@ function Offers({ graphChangeContent, filters, numOfOffers }) {
                     </div>
                     <div className="offer-right-wrapper">
                     <LazyLoadImage
+                        className='offer-img-miniature'
                         alt={offer.id}
                         height={"200px"}
                         src={images.length > 0 && images !== null && images !== undefined ? images.filter((img) => img.offerId === offer.id).length !== 0 ? images.filter((img) => img.offerId === offer.id)[0].img : require('../../images/carhut_logo.png') : require('../../images/carhut_logo.png')}

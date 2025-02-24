@@ -1,14 +1,14 @@
 .offers {
-    width: 100%;
     display: block;
-    margin: 2vh 2vw;
+    margin: 15px 40px;
 }
 
 .offer-wrapper {
     display: flex;   
     background-color: #313131;
-    padding: 2vw;
-    margin: 2vh 0vw
+    padding: 40px;
+    margin: 20px 0px;
+    width: 80%;
 }
 
 .offer-left-wrapper {
@@ -24,14 +24,14 @@
 }
 
 .offer-header {
-    font-size: 1vw;
+    font-size: 20px;
     color: #fff;
 }
 
 .offer-params {
     display: flex;
     width: 100%;
-    margin-top: 1vh;
+    margin-top: 10px;
 }
 
 .offer-params-column {
@@ -40,33 +40,32 @@
 }
 
 .offer-params-row {
-    font-size: 0.8vw;
+    font-size: 16px;
     color: #a3a3a3;
 }
 
 .offer-img-miniature {
-    position: relative;
-    height: 30vh;
-    width: auto;
     object-fit: scale-down;
+    max-width: 80%;
 }
 
 .offer-price-label {
-    font-size: 2vw;
+    margin-top: 10px;
+    font-size: 40px;
     color: #fff;
 }
 
 .page-numbers-wrapper {
     justify-content: center;
     display: flex;
-    margin: 2vh 2vw;
+    margin: 20pxh 40px;
 }
 
 .page-number-wrapper {
     background-color: #313131;
-    font-size: 1vw;
-    margin: 0vw 1vw;
-    padding: 1vh 1vw;
+    font-size: 20px;
+    margin: 0px 20px;
+    padding: 10px 20px;
     color: #fff;
 }
 
